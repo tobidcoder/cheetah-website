@@ -50,6 +50,7 @@ export function Footer() {
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text<"a">
+        style={{ display: "flex", justifyContent: "center" }}
         key={index}
         className={classes.link}
         component="a"
@@ -63,7 +64,12 @@ export function Footer() {
     return (
       <GridCol span={{ base: 6, md: 4 }} key={group.title}>
         <div className={classes.wrapper}>
-          <Text className={classes.title}>{group.title}</Text>
+          <Text
+            style={{ display: "flex", justifyContent: "center" }}
+            className={classes.title}
+          >
+            {group.title}
+          </Text>
           {links}
         </div>
       </GridCol>
@@ -84,7 +90,13 @@ export function Footer() {
             Build fully functional accessible web applications faster than ever
           </Text>
         </div>
-        <Grid className={classes.groups}>{groups}</Grid>
+        <Grid
+          mt={{ base: "md", md: 0 }}
+          justify="center"
+          className={classes.groups}
+        >
+          {groups}
+        </Grid>
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">

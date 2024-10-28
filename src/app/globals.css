@@ -27,6 +27,10 @@ WHITE: #FDFDFD */
   background-color: #052315 !important;
   color: #fdfdfd !important;
 }
+.light-button {
+  background-color: #fdfdfd !important;
+  color: #052315 !important;
+}
 
 .text {
   background-color: #546d62;

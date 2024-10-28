@@ -2,6 +2,7 @@
 import { Features } from "@/components/Features";
 import { Feedback } from "@/components/Feedback";
 import { Footer } from "@/components/Footer";
+import { GetStarted } from "@/components/GetStarted";
 import { Introduction } from "@/components/Introduction";
 import { Paper, Container } from "@mantine/core";
 
@@ -58,6 +59,7 @@ export default function HomePage() {
         </Grid>
       </Paper> */}
       </Container>
+      <GetStarted />
       <Footer />
     </>
   );
