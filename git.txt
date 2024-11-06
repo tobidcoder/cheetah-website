@@ -1,0 +1,5 @@
+git add .
+git commit -m "update"
+git pull
+git push
+git push git@github.com:Cheetah-HQ/website.git
