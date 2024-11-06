@@ -1,29 +1,29 @@
 .card {
-    position: relative;
-    background-color: var(--mantine-color-body);
+  position: relative;
+  background-color: #fdfdfd;
+}
+
+.rating {
+  position: absolute;
+  top: var(--mantine-spacing-xs);
+  right: rem(12px);
+  pointer-events: none;
+}
+
+.title {
+  display: block;
+  margin-top: var(--mantine-spacing-md);
+  margin-bottom: rem(5px);
+}
+
+.action {
+  background-color: #052315;
+
+  @mixin hover {
+    background-color: #fdfdfd;
   }
-  
-  .rating {
-    position: absolute;
-    top: var(--mantine-spacing-xs);
-    right: rem(12px);
-    pointer-events: none;
-  }
-  
-  .title {
-    display: block;
-    margin-top: var(--mantine-spacing-md);
-    margin-bottom: rem(5px);
-  }
-  
-  .action {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
-  
-    @mixin hover {
-      background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
-    }
-  }
-  
-  .footer {
-    margin-top: var(--mantine-spacing-md);
-  }
+}
+
+.footer {
+  margin-top: var(--mantine-spacing-md);
+}

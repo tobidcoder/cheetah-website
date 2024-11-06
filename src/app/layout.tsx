@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "./globals.css";
@@ -7,6 +8,7 @@ import "@mantine/carousel/styles.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -41,6 +43,7 @@ export default function RootLayout({
         <MantineProvider>
           <Header />
           {children}
+          <Footer />
         </MantineProvider>
       </body>
     </html>

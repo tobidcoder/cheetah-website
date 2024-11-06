@@ -10,8 +10,8 @@ export function Introduction() {
       <Dots className={classes.dots} style={{ left: 0, top: 140 }} />
       <Dots className={classes.dots} style={{ right: 0, top: 60 }} /> */}
 
-      <Container size={"sm"} className={classes.inner}>
-        <Title className={classes.title}>
+      <Container size={"md"} className={classes.inner}>
+        <Title className={classes.introTitle}>
           The Simple, Secure, and Scalable Way to{" "}
           <Text component="span" className={classes.highlight} inherit>
             Run Your Business
@@ -30,7 +30,7 @@ export function Introduction() {
             Get Started
           </Button>
           <Button
-            className={classes.control}
+            className={"secondary-button"}
             size="lg"
             variant="default"
             color="gray"

@@ -1,0 +1,26 @@
+.card {
+  background-color: #fdfdfd;
+}
+
+.title {
+  font-weight: bold;
+
+  line-height: 1.2;
+}
+
+.body {
+  padding: var(--mantine-spacing-md);
+}
+.card {
+  background-color: #fdfdfd;
+}
+
+.title {
+  font-weight: bold;
+
+  line-height: 1.2;
+}
+
+.body {
+  padding: var(--mantine-spacing-md);
+}

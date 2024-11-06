@@ -1,11 +1,11 @@
 import { Carousel } from "@mantine/carousel";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 import {
   Paper,
   Text,
   Title,
   Button,
-  useMantineTheme,
+  // useMantineTheme,
   rem,
   Container,
   Grid,
@@ -84,8 +84,8 @@ const data = [
 ];
 
 export function Feedback() {
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  // const theme = useMantineTheme();
+  // const mobile = useMediaQuery(`(max-width: ${"48em"})`);
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title}>
       <Card {...item} />
@@ -113,7 +113,7 @@ export function Feedback() {
             slideSize={{ base: "100%" }}
             slideGap={{ base: rem(2), sm: "xl" }}
             align="start"
-            slidesToScroll={mobile ? 1 : 1}
+            slidesToScroll={1}
           >
             {slides}
           </Carousel>
@@ -123,7 +123,7 @@ export function Feedback() {
             slideSize={{ base: "100%" }}
             slideGap={{ base: rem(2), sm: "xl" }}
             align="start"
-            slidesToScroll={mobile ? 1 : 1}
+            slidesToScroll={1}
           >
             {slides}
           </Carousel>
@@ -133,7 +133,7 @@ export function Feedback() {
             slideSize={{ base: "100%" }}
             slideGap={{ base: rem(2), sm: "xl" }}
             align="start"
-            slidesToScroll={mobile ? 1 : 1}
+            slidesToScroll={1}
           >
             {slides}
           </Carousel>
@@ -143,7 +143,7 @@ export function Feedback() {
             slideSize={{ base: "100%" }}
             slideGap={{ base: rem(2), sm: "xl" }}
             align="start"
-            slidesToScroll={mobile ? 1 : 1}
+            slidesToScroll={1}
           >
             {slides}
           </Carousel>
