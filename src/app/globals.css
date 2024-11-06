@@ -18,6 +18,8 @@ body {
   /* font-family: ; */
 }
 
+
+
 /* PRIMARY: #052315
 SECONDARY: #B2D93B
 TERTIARY: #546D62
@@ -26,7 +28,17 @@ WHITE: #FDFDFD */
 .primary-button {
   background-color: #052315 !important;
   color: #fdfdfd !important;
+  border: 1px solid #052315 !important;
 }
+
+.primary-button:active,
+.primary-button:hover,
+.primary-button:focus {
+  background-color: #fdfdfd !important;
+  color: #052315 !important;
+  border: 1px solid #052315 !important;
+}
+
 .light-button {
   background-color: #fdfdfd !important;
   color: #052315 !important;
