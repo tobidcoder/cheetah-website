@@ -29,11 +29,14 @@ export default function Page() {
   const [errors, setErrors] = useState<any>({});
   const [htmlElements, setHtmlElements] = useState<any>([]);
 
+  const baseUrl = process.env.BASE_URL;
+
   // Fetch categories when the page loads
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/categories"); // Replace with your endpoint
+        const response = await axios.get(`${baseUrl}/blog-categories`); // Replace with your endpoint
+        console.log("Categories:", response.data); 
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -78,7 +81,7 @@ export default function Page() {
     };
 
     try {
-      const response = await axios.post("/api/posts", formData); // Replace with your endpoint
+      const response = await axios.post(`${baseUrl}/blog`, formData); // Replace with your endpoint
       console.log("Form submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);

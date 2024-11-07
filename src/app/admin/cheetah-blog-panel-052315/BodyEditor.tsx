@@ -5,11 +5,11 @@ import { useEditor } from "@tiptap/react";
 import Highlight from "@tiptap/extension-highlight";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-import Image from '@tiptap/extension-image'
+// import Image from '@tiptap/extension-image'
 import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+// import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import "@mantine/tiptap/styles.css";
 import { useState, useEffect } from "react";
 import { Text } from "@mantine/core";
@@ -34,7 +34,7 @@ export function BodyEditor({ body, setBody }:any) {
       StarterKit,
       Underline,
       Link,
-      Image,
+      // Image,
       Superscript,
       // CodeBlockLowlight,
       SubScript,
