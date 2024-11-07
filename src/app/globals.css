@@ -26,6 +26,12 @@ body {
   /* font-family: ; */
 }
 
+.mantine-LoadingOverlay-loader{
+  color: #052315 !important;
+  /* background: #052315 !important; */
+
+}
+
 .mantine-Select-options,
 .text-primary {
   /* background-color: #546d62; */

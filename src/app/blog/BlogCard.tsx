@@ -17,7 +17,7 @@ import {
 import classes from "@/styles/BlogCard.module.css";
 import Link from "next/link";
 
-export function BlogCard() {
+export function BlogCard({blogs}:any) {
   const linkProps = {
     href: "https://mantine.dev",
     target: "_blank",
@@ -26,11 +26,14 @@ export function BlogCard() {
   //   const theme = useMantineTheme();
 
   return (
-    <SimpleGrid spacing="md" cols={{ lg: 3, md: 2, base: 1 }}>
-      <Link href="/post/this-is-a-post-slug" passHref>
+    <SimpleGrid mb='xl' spacing="md" cols={{ lg: 3, md: 2, base: 1 }}>
+      {blogs?
+      blogs.map((blog:any)=>(
+
+      <Link key={blog.id} href={`/post/${blog.slug}?i=${blog.id}`} passHref>
         <Card withBorder radius="md" className={classes.card}>
           <CardSection>
-            <Image src="https://i.imgur.com/Cij5vdL.png" height={180} />
+            <Image src={blog.image_url} height={180} />
           </CardSection>
 
           {/* <Badge className={classes.rating} variant="gradient" gradient={{ from: 'yellow', to: 'red' }}>
@@ -38,27 +41,23 @@ export function BlogCard() {
       </Badge> */}
 
           <Text className={classes.title} fw={500} component="a" {...linkProps}>
-            Resident Evil Village review
+          {blog.title}
           </Text>
 
           <Text fz="sm" c="dimmed" lineClamp={4}>
-            Resident Evil Village is a direct sequel to 2017’s Resident Evil 7,
-            but takes a very different direction to its predecessor, namely the
-            fact that this time round instead of fighting against various
-            mutated zombies, you’re now dealing with more occult enemies like
-            werewolves and vampires.
+          {blog.summary}
           </Text>
 
           <Group justify="space-between" className={classes.footer}>
             <Center>
               <Avatar
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
+                src={blog.created_by_profile_image}
                 size={24}
                 radius="xl"
                 mr="xs"
               />
               <Text fz="sm" inline>
-                Bill Wormeater
+                {blog.created_by}
               </Text>
             </Center>
 
@@ -79,6 +78,10 @@ export function BlogCard() {
           </Group>
         </Card>
       </Link>
+      ))
+      :
+      <Text>Loading...</Text>
+    }
     </SimpleGrid>
   );
 }

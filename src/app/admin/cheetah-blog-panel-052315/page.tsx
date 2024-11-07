@@ -14,20 +14,30 @@ import {
   Button,
   Group,
 } from "@mantine/core";
+import NewCategory from './NewCategory'
 
 export default function Page() {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [blogCategoryId, setBlogCategoryId] = useState<string | null>("");
+  const [blogCategoryId, setBlogCategoryId] = useState<string | null>("1");
   const [createdBy, setCreatedBy] = useState<string | null>("");
   const [team, setTeam] = useState<string | null>("");
   const [createdByPosition, setCreatedByPosition] = useState<string | null>("");
   const [createdByProfileImage, setCreatedByProfileImage] = useState("");
   const [summary, setSummary] = useState("");
   const [body, setBody] = useState<any>();
-  const [categories, setCategories] = useState([]);
-  const [errors, setErrors] = useState<any>({});
-  const [htmlElements, setHtmlElements] = useState<any>([]);
+  interface Category {
+    id: number;
+    name: string;
+  }
+
+  interface FormErrors {
+    [key: string]: string;
+  }
+
+  // Update state definition
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [errors, setErrors] = useState<FormErrors>({});  const [htmlElements, setHtmlElements] = useState<any>([]);
 
   const baseUrl = process.env.BASE_URL;
 
@@ -35,9 +45,9 @@ export default function Page() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/blog-categories`); // Replace with your endpoint
-        console.log("Categories:", response.data); 
-        setCategories(response.data);
+        const response = await axios.get(`http://127.0.0.1:8000/api/blog-categories`); // Replace with your endpoint
+        console.log("Categories:", response.data.data); 
+        setCategories(response.data.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -65,8 +75,8 @@ export default function Page() {
 
   // Handle form submission
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+    // e.preventDefault();
+    // if (!validateForm()) return;
 
     const formData = {
       title:title,
@@ -79,10 +89,19 @@ export default function Page() {
       summary:summary,
       body:body,
     };
-
+    console.log(formData)
     try {
-      const response = await axios.post(`${baseUrl}/blog`, formData); // Replace with your endpoint
+      const response = await axios.post(`http://127.0.0.1:8000/api/blogs`, formData); // Replace with your endpoint
       console.log("Form submitted successfully:", response.data);
+      setTitle('')
+      setImageUrl('')
+      setBlogCategoryId(0)
+      setCreatedBy('')
+      setTeam('')
+      setCreatedByPosition('')
+      // setCreatedByProfileImage('')
+      setSummary('')
+      setBody('')
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -129,14 +148,16 @@ export default function Page() {
           />
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
+        {Object.keys(categories).length == 0 ?
+      <NewCategory/>  :
         <Box>
           <Text>Blog Category</Text>
           <Select
             radius="lg"
             placeholder="Select Blog Category"
             size="lg"
-            data={categories.map((cat: any) => ({
-              value: cat.id,
+            data={categories?.map((cat: any) => ({
+              value: cat.id.toString(),
               label: cat.name,
             }))}
             value={blogCategoryId}
@@ -146,6 +167,7 @@ export default function Page() {
             <Text c="red">{errors.blogCategoryId}</Text>
           )}
         </Box>
+      }
         <Box>
           <Text>Created By</Text>
           <Select
@@ -157,6 +179,18 @@ export default function Page() {
             onChange={setCreatedBy}
           />
           {errors.createdBy && <Text c="red">{errors.createdBy}</Text>}
+        </Box>
+
+         <Box>
+          <Text>Creator's Image Url</Text>
+          <Input
+            value={createdByProfileImage}
+            onChange={(e) => setCreatedByProfileImage(e.target.value)}
+            size="lg"
+            radius="lg"
+            placeholder="Image Url"
+          />
+          {errors.createdByProfileImage && <Text c="red">{errors.createdByProfileImage}</Text>}
         </Box>
         <Box>
           <Text>Team</Text>
@@ -206,7 +240,7 @@ export default function Page() {
       {errors.body && <Text c="red">{errors.body}</Text>}
       
       <Group justify='center' my='xl'>
-      <Button size='lg' miw='100%' className="secondary-button" onClick={handleSubmit}>
+      <Button size='lg' miw='100%' className="secondary-button" onClick={(e)=>handleSubmit(e)}>
         Submit
       </Button>
 
