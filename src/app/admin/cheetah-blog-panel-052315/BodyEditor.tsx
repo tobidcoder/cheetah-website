@@ -5,9 +5,11 @@ import { useEditor } from "@tiptap/react";
 import Highlight from "@tiptap/extension-highlight";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
+import Image from '@tiptap/extension-image'
 import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import "@mantine/tiptap/styles.css";
 import { useState, useEffect } from "react";
 import { Text } from "@mantine/core";
@@ -32,7 +34,9 @@ export function BodyEditor({ body, setBody }:any) {
       StarterKit,
       Underline,
       Link,
+      Image,
       Superscript,
+      // CodeBlockLowlight,
       SubScript,
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
@@ -62,6 +66,7 @@ export function BodyEditor({ body, setBody }:any) {
             <RichTextEditor.ClearFormatting />
             <RichTextEditor.Highlight />
             <RichTextEditor.Code />
+            {/* <RichTextEditor.CodeBlockLowlight /> */}
           </RichTextEditor.ControlsGroup>
 
           <RichTextEditor.ControlsGroup>
@@ -69,6 +74,8 @@ export function BodyEditor({ body, setBody }:any) {
             <RichTextEditor.H2 />
             <RichTextEditor.H3 />
             <RichTextEditor.H4 />
+            <RichTextEditor.H5 />
+            <RichTextEditor.H6 />
           </RichTextEditor.ControlsGroup>
 
           <RichTextEditor.ControlsGroup>
@@ -83,6 +90,7 @@ export function BodyEditor({ body, setBody }:any) {
           <RichTextEditor.ControlsGroup>
             <RichTextEditor.Link />
             <RichTextEditor.Unlink />
+            {/* <RichTextEditor.Image /> */}
           </RichTextEditor.ControlsGroup>
 
           <RichTextEditor.ControlsGroup>

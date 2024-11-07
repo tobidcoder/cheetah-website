@@ -12,6 +12,7 @@ import {
   Textarea,
   Select,
   Button,
+  Group,
 } from "@mantine/core";
 
 export default function Page() {
@@ -23,9 +24,10 @@ export default function Page() {
   const [createdByPosition, setCreatedByPosition] = useState<string | null>("");
   const [createdByProfileImage, setCreatedByProfileImage] = useState("");
   const [summary, setSummary] = useState("");
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState<any>();
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState<any>({});
+  const [htmlElements, setHtmlElements] = useState<any>([]);
 
   // Fetch categories when the page loads
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function Page() {
     fetchCategories();
   }, []);
 
-  // Validate form fields
+  // Validate form fields 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
     if (!title) newErrors.title = "Title is required";
@@ -82,6 +84,22 @@ export default function Page() {
       console.error("Error submitting form:", error);
     }
   };
+
+  useEffect(() => {
+    
+
+    const parseHtml = (body:any) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(body, 'text/html');
+      const elements = Array.from(doc.body.childNodes).map((node:any, index) => {
+        return <div key={index} dangerouslySetInnerHTML={{ __html: node.outerHTML }} />;
+      });
+      setHtmlElements(elements);
+      console.log(elements);
+    };
+
+    parseHtml(body)
+  }, [body]);
 
   return (
     <Container size="md">
@@ -183,9 +201,20 @@ export default function Page() {
       {errors.summary && <Text c="red">{errors.summary}</Text>}
       <BodyEditor body={body} setBody={setBody} />
       {errors.body && <Text c="red">{errors.body}</Text>}
-      <Button className="primary-button" onClick={handleSubmit}>
+      
+      <Group justify='center' my='xl'>
+      <Button size='lg' miw='100%' className="secondary-button" onClick={handleSubmit}>
         Submit
       </Button>
+
+      </Group>
+      {/* <Box>
+        { body }
+      </Box> */}
+      <Box>
+        <div>  {htmlElements} </div>
+      </Box>
+      <hr/>
     </Container>
   );
 }
