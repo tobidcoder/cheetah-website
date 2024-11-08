@@ -1,6 +1,7 @@
 .card {
   position: relative;
-  background-color: #fdfdfd;
+  background-color: #052315;
+  color:'#fdfdfd'
 }
 
 .rating {
@@ -10,19 +11,20 @@
   pointer-events: none;
 }
 
-.title {
+/* .title {
   display: block;
+
   margin-top: var(--mantine-spacing-md);
   margin-bottom: rem(5px);
-}
+} */
 
-.action {
+/* .action {
   background-color: #052315;
 
   @mixin hover {
     background-color: #fdfdfd;
   }
-}
+} */
 
 .footer {
   margin-top: var(--mantine-spacing-md);

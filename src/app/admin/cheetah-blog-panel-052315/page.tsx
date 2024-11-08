@@ -37,7 +37,7 @@ export default function Page() {
 
   // Update state definition
   const [categories, setCategories] = useState<Category[]>([]);
-  const [errors, setErrors] = useState<FormErrors>({});  const [htmlElements, setHtmlElements] = useState<any>([]);
+  const [errors, setErrors] = useState<FormErrors>({});  
 
   const baseUrl = process.env.BASE_URL;
 
@@ -107,21 +107,7 @@ export default function Page() {
     }
   };
 
-  useEffect(() => {
-    
-
-    const parseHtml = (body:any) => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(body, 'text/html');
-      const elements = Array.from(doc.body.childNodes).map((node:any, index) => {
-        return <div key={index} dangerouslySetInnerHTML={{ __html: node.outerHTML }} />;
-      });
-      setHtmlElements(elements);
-      console.log(elements);
-    };
-
-    parseHtml(body)
-  }, [body]);
+  const newCat=(<NewCategory/>)
 
   return (
     <Container size="md">
@@ -152,7 +138,10 @@ export default function Page() {
       <NewCategory/>  :
         <Box>
           <Text>Blog Category</Text>
+          <Group></Group>
           <Select
+          rightSection={newCat}
+          rightSectionWidth={92}
             radius="lg"
             placeholder="Select Blog Category"
             size="lg"
@@ -182,7 +171,7 @@ export default function Page() {
         </Box>
 
          <Box>
-          <Text>Creator's Image Url</Text>
+          <Text>Creator&apos;s Image Url</Text>
           <Input
             value={createdByProfileImage}
             onChange={(e) => setCreatedByProfileImage(e.target.value)}
@@ -248,9 +237,7 @@ export default function Page() {
       {/* <Box>
         { body }
       </Box> */}
-      <Box>
-        <div>  {htmlElements} </div>
-      </Box>
+      
       <hr/>
     </Container>
   );

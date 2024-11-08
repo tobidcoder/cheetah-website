@@ -13,38 +13,37 @@ import {
   // rem,
   // Grid,
   SimpleGrid,
+  Badge,
+  LoadingOverlay,
 } from "@mantine/core";
 import classes from "@/styles/BlogCard.module.css";
 import Link from "next/link";
 
 export function BlogCard({blogs}:any) {
-  const linkProps = {
-    href: "https://mantine.dev",
-    target: "_blank",
-    rel: "noopener noreferrer",
-  };
-  //   const theme = useMantineTheme();
+  
 
   return (
-    <SimpleGrid mb='xl' spacing="md" cols={{ lg: 3, md: 2, base: 1 }}>
+    <SimpleGrid  mb='xl' spacing="xl" cols={{ lg: 3, md: 2, base: 1 }}>
       {blogs?
       blogs.map((blog:any)=>(
 
       <Link key={blog.id} href={`/post/${blog.slug}?i=${blog.id}`} passHref>
-        <Card withBorder radius="md" className={classes.card}>
+        <Card  radius="md" className={classes.card}>
           <CardSection>
-            <Image src={blog.image_url} height={180} />
+            <Image src={blog.image_url} height={180} alt="blog image" />
           </CardSection>
+          
+          <Text c='#fdfdfd' className='' fz='lg' my='lg'>{blog.blog_category.name}</Text>
 
           {/* <Badge className={classes.rating} variant="gradient" gradient={{ from: 'yellow', to: 'red' }}>
         outstanding
       </Badge> */}
 
-          <Text className={classes.title} fw={500} component="a" {...linkProps}>
+          <Text fz='h2' mb='lg' c='#fdfdfd' className={classes.title} fw={600} lineClamp={2}>
           {blog.title}
           </Text>
 
-          <Text fz="sm" c="dimmed" lineClamp={4}>
+          <Text c='#fdfdfd' fz="md"  lineClamp={4}>
           {blog.summary}
           </Text>
 
@@ -56,7 +55,7 @@ export function BlogCard({blogs}:any) {
                 radius="xl"
                 mr="xs"
               />
-              <Text fz="sm" inline>
+              <Text c='#fdfdfd' fz="sm" inline>
                 {blog.created_by}
               </Text>
             </Center>
@@ -80,7 +79,7 @@ export function BlogCard({blogs}:any) {
       </Link>
       ))
       :
-      <Text>Loading...</Text>
+      <LoadingOverlay loaderProps={{ color: '#052315' }} visible={true} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
     }
     </SimpleGrid>
   );

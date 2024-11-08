@@ -23,7 +23,7 @@ const data = [
     title: "About",
     links: [
       { label: "Features", link: "#" },
-      { label: "Pricing", link: "#" },
+      // { label: "Pricing", link: "#" },
       { label: "Support", link: "#" },
       { label: "Forums", link: "#" },
     ],

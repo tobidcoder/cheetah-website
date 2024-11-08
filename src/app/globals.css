@@ -26,6 +26,15 @@ body {
   /* font-family: ; */
 }
 
+.mantine-Drawer-header,
+.mantine-Drawer-body,
+.mantine-Drawer-close,
+.mantine-Drawer-root,
+.header-drawer{
+  color: #fdfdfd;
+  background-color:#052315 !important;
+}
+
 .mantine-LoadingOverlay-loader{
   color: #052315 !important;
   /* background: #052315 !important; */

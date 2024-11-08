@@ -42,56 +42,69 @@ export function CategoryTab() {
     fetchCategories();
   }, []);
 
+  const fetchCategoryBlogs = async (id:any) => {
+    setIsLoading(true)
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/get_category_blogs/${id}`); // Replace with your endpoint
+      console.log("blog-categories:", response.data.data.data); 
+      setCategoryBlogs(response.data.data.data);
+      setIsLoading(false)
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      setIsLoading(false)
+    }
+  };
+
   return (
-    <Box>
+    <Box my='xl'>
       {blogs ?
-      <Tabs mt="xl" variant="pills" radius="md" defaultValue="gallery">
-        <TabsList style={{ justifyContent: "center" }} pb="lg" mb="lg">
+      <Tabs py='xl' my="xl" variant="pills" radius="md" defaultValue="all">
+        <TabsList style={{ justifyContent: "center" }} pb="xl" mb="xl">
           <TabsTab
             className="primary-button"
-            value="gallery"
-            onClick={()=>alert('gooosd')}
+            value="all"
+            // onClick={()=>alert('gooosd')}
             leftSection={<IconPhoto style={iconStyle} />}
           >
             All
           </TabsTab>
-          <TabsTab
+          {categories&&
+          categories.map((category:any)=>(
+
+          <TabsTab key={category.id}
             className="primary-button"
-            value="gallery"
+            onClick={()=>fetchCategoryBlogs(category.id)}
+            value={category.name}
             leftSection={<IconPhoto style={iconStyle} />}
           >
-            Gallery
+           {category.name}
           </TabsTab>
-          <TabsTab
-            className="primary-button"
-            value="messages"
-            leftSection={<IconMessageCircle style={iconStyle} />}
-          >
-            Messages
-          </TabsTab>
-          <TabsTab
-            className="primary-button"
-            value="settings"
-            leftSection={<IconSettings style={iconStyle} />}
-          >
-            Settings
-          </TabsTab>
+          ))
+          }
+         
         </TabsList>
 
-        <TabsPanel value="gallery">
+        <TabsPanel value="all">
           <BlogCard blogs={blogs}/>
         </TabsPanel>
 
-        <TabsPanel value="messages">
+        {categories&&
+          categories.map((category:any)=>(
+
+        <TabsPanel key={category.id} value={category.name}>
           {
-            isLoading? <LoadingOverlay loaderProps={{ color: '#052315' }} visible={true} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} /> 
+            isLoading? <LoadingOverlay loaderProps={{ color: '#052315' }} visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} /> 
             :
             <BlogCard blogs={categoryBlogs}/>
 
           }
         </TabsPanel>
+          
+          ))}
 
-        <TabsPanel value="settings">Settings tab content</TabsPanel>
+
+
+        
       </Tabs> : <LoadingOverlay loaderProps={{ color: '#052315' }} visible={true} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} /> }
     </Box>
   )
