@@ -95,7 +95,7 @@ export default function Page() {
       console.log("Form submitted successfully:", response.data);
       setTitle('')
       setImageUrl('')
-      setBlogCategoryId(0)
+      setBlogCategoryId('')
       setCreatedBy('')
       setTeam('')
       setCreatedByPosition('')
@@ -107,7 +107,7 @@ export default function Page() {
     }
   };
 
-  const newCat=(<NewCategory/>)
+  // const newCat=(<NewCategory/>)
 
   return (
     <Container size="md">
@@ -134,34 +134,35 @@ export default function Page() {
           />
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
-        {Object.keys(categories).length == 0 ?
-      <NewCategory/>  :
-        <Box>
-          <Text>Blog Category</Text>
-          <Group></Group>
-          <Select
-          rightSection={newCat}
-          rightSectionWidth={92}
-            radius="lg"
-            placeholder="Select Blog Category"
-            size="lg"
-            data={categories?.map((cat: any) => ({
-              value: cat.id.toString(),
-              label: cat.name,
-            }))}
-            value={blogCategoryId}
-            onChange={setBlogCategoryId}
-          />
-          {errors.blogCategoryId && (
-            <Text c="red">{errors.blogCategoryId}</Text>
-          )}
-        </Box>
-      }
+        {Object.keys(categories).length == 0 ? (
+          <NewCategory />
+        ) : (
+          <Box>
+            <Text>Blog Category</Text>
+            <Group></Group>
+            <Select
+              radius="lg"
+              placeholder="Select Blog Category"
+              size="lg"
+              data={categories?.map((cat: any) => ({
+                value: cat.id.toString(),
+                label: cat.name,
+              }))}
+              value={blogCategoryId}
+              onChange={setBlogCategoryId}
+            />
+            {errors.blogCategoryId && (
+              <Text c="red">{errors.blogCategoryId}</Text>
+            )}
+            <Text>Or</Text>
+            <NewCategory />
+          </Box>
+        )}
         <Box>
           <Text>Created By</Text>
           <Select
             radius="lg"
-            placeholder='Created By'
+            placeholder="Created By"
             size="lg"
             data={["Rapheal Odejinmi", "Tobiloba Odejinmi", "Winifred"]}
             value={createdBy}
@@ -170,7 +171,7 @@ export default function Page() {
           {errors.createdBy && <Text c="red">{errors.createdBy}</Text>}
         </Box>
 
-         <Box>
+        <Box>
           <Text>Creator&apos;s Image Url</Text>
           <Input
             value={createdByProfileImage}
@@ -179,13 +180,15 @@ export default function Page() {
             radius="lg"
             placeholder="Image Url"
           />
-          {errors.createdByProfileImage && <Text c="red">{errors.createdByProfileImage}</Text>}
+          {errors.createdByProfileImage && (
+            <Text c="red">{errors.createdByProfileImage}</Text>
+          )}
         </Box>
         <Box>
           <Text>Team</Text>
           <Select
             radius="lg"
-             placeholder='Select Team'
+            placeholder="Select Team"
             size="lg"
             data={["Marketing Team", "Engineering Team"]}
             value={team}
@@ -197,7 +200,7 @@ export default function Page() {
           <Text>Position</Text>
           <Select
             radius="lg"
-            placeholder='Select Position'
+            placeholder="Select Position"
             size="lg"
             data={[
               "CEO & Co-Founder",
@@ -227,18 +230,22 @@ export default function Page() {
       {errors.summary && <Text c="red">{errors.summary}</Text>}
       <BodyEditor body={body} setBody={setBody} />
       {errors.body && <Text c="red">{errors.body}</Text>}
-      
-      <Group justify='center' my='xl'>
-      <Button size='lg' miw='100%' className="secondary-button" onClick={(e)=>handleSubmit(e)}>
-        Submit
-      </Button>
 
+      <Group justify="center" my="xl">
+        <Button
+          size="lg"
+          miw="100%"
+          className="secondary-button"
+          onClick={(e) => handleSubmit(e)}
+        >
+          Submit
+        </Button>
       </Group>
       {/* <Box>
         { body }
       </Box> */}
-      
-      <hr/>
+
+      <hr />
     </Container>
   );
 }

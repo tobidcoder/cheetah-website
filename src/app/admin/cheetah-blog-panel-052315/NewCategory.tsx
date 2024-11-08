@@ -56,7 +56,7 @@ export default function NewCategory() {
         <Button w='100%' className='primary-button' onClick={(e)=>handleSubmit(e)}>Submit</Button>
       </Modal>
 
-      <Button w='100%' className='primary-button' onClick={open}>New Category</Button>
+      <Button w='100%' className='primary-button' onClick={open}>Add New Category</Button>
     </>
   );
 }
