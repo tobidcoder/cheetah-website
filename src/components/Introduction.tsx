@@ -25,12 +25,13 @@ export function Introduction() {
           </Text>
         </Container>
 
-        <Box
-          ml={{ base: "0", lg: "lg" }}
-          mb={{ base: "lg", lg: "0" }}
-          className={classes.controls}
-        >
-          <Button m="lg" className={"primary-button"} size="lg">
+        <Box className={classes.controls}>
+          <Button
+            ml={{ base: "0", lg: "lg" }}
+            mb={{ base: "lg", lg: "0" }}
+            className={"primary-button"}
+            size="lg"
+          >
             Get Started
           </Button>
           <Button
