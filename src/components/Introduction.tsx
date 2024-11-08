@@ -4,7 +4,7 @@ import classes from "@/styles/Introduction.module.css";
 
 export function Introduction() {
   return (
-    <Container pb={0} className={classes.wrapper} size={"md"}>
+    <Container mt='xl' pb={0} className={classes.wrapper} size={"md"}>
       {/* <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
       <Dots className={classes.dots} style={{ left: 60, top: 0 }} />
       <Dots className={classes.dots} style={{ left: 0, top: 140 }} />

@@ -1,9 +1,4 @@
 
-.title {
-  font-weight: bold;
-
-  line-height: 1.2;
-}
 
 .body {
   padding: var(--mantine-spacing-md);
@@ -12,10 +7,14 @@
 
 .title {
   font-weight: bold;
-
+font-size: rem(50px) !important;
   line-height: 1.2;
 }
 
 .body {
   padding: var(--mantine-spacing-md);
+}
+.image {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }

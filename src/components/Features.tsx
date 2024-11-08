@@ -25,9 +25,9 @@ export function Features() {
       span: 5,
     },
     {
-      title: "Manage Customer",
+      title: "Manage Customers",
       description: "Centralize customer information and interactions.",
-      image: "/images/data.png",
+      image: "/images/customers.png",
       span: 4,
     },
     {
@@ -44,8 +44,8 @@ export function Features() {
     },
   ];
   return (
-    <Container mt={25} className={classes.wrapper} size={"xl"}>
-      <Container mb={"lg"} size={"sm"} className={classes.inner}>
+    <Container my={85} className={classes.wrapper} size={"xl"}>
+      <Container mb={"lg"} size={"md"} className={classes.inner}>
         <Title fw={"bold"} className={classes.title}>
           Exploring Features for Enhanced Success and Growth
         </Title>
@@ -58,18 +58,18 @@ export function Features() {
         </Container>
       </Container>
 
-      <Grid>
+      <Grid mb={60}>
         {features.map((feature, i) => (
-          <GridCol span={{ base: 12, md: 6, lg: feature.span }} key={i}>
-            <Card radius={15} bg={"#fafafa"}>
-              <Text fz={"xl"} fw={"bold"}>
+          <GridCol mb='xl' pb={0} span={{ base: 12, md: 6, lg: feature.span }} key={i}>
+            <Card pb={0} pe={0} radius={15} bg={"#fafafa"}>
+              <Text fz={"h2"} fw={"bold"}>
                 {feature.title}
               </Text>
               <Text fz={"sm"}>{feature.description}</Text>
               <Image
                 mt={"lg"}
-                maw={"250"}
-                mah={"250"}
+                // maw={"250"}
+                mah={"350"}
                 className={classes.image}
                 src={feature.image}
                 alt="Cheetah"
@@ -79,18 +79,24 @@ export function Features() {
         ))}
       </Grid>
 
-      <Container mb={"lg"} size={"sm"} className={classes.inner}>
+      <Container mb={"lg"} size={"md"} className={classes.inner}>
         <Title fw={"bold"} className={classes.title}>
           Tailored POS Solutions for Your Unique Store
         </Title>
 
+
         <Container p={0} size={600}>
-          <Text size="lg" className={classes.description}>
+          <Text size="xl" className={classes.description}>
             Cheetah is a sales management platform designed to help you grow
             your business with ease.
           </Text>
-        </Container>
-      </Container>
+          </Container>
+          </Container>
+          <Image
+        className={classes.image}
+        src={"/images/pos.png"}
+        alt="Cheetah POS"
+      />
     </Container>
   );
 }

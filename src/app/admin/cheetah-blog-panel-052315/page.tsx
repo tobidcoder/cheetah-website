@@ -111,13 +111,13 @@ export default function Page() {
 
   return (
     <Container size="md">
-      <SimpleGrid cols={{ base: 1, md: 2 }}>
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing='xl'>
         <Box>
           <Text>Title</Text>
           <Input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            size="lg"
+            size="xl"
             radius="lg"
             placeholder="Title"
           />
@@ -128,7 +128,7 @@ export default function Page() {
           <Input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            size="lg"
+            size="xl"
             radius="lg"
             placeholder="Image Url"
           />
@@ -143,7 +143,7 @@ export default function Page() {
             <Select
               radius="lg"
               placeholder="Select Blog Category"
-              size="lg"
+              size="xl"
               data={categories?.map((cat: any) => ({
                 value: cat.id.toString(),
                 label: cat.name,
@@ -154,7 +154,7 @@ export default function Page() {
             {errors.blogCategoryId && (
               <Text c="red">{errors.blogCategoryId}</Text>
             )}
-            <Text>Or</Text>
+            <Text ta='center' className="text-secondary" fz='lg' fw='600'>Or</Text>
             <NewCategory />
           </Box>
         )}
@@ -163,7 +163,7 @@ export default function Page() {
           <Select
             radius="lg"
             placeholder="Created By"
-            size="lg"
+            size="xl"
             data={["Rapheal Odejinmi", "Tobiloba Odejinmi", "Winifred"]}
             value={createdBy}
             onChange={setCreatedBy}
@@ -176,7 +176,7 @@ export default function Page() {
           <Input
             value={createdByProfileImage}
             onChange={(e) => setCreatedByProfileImage(e.target.value)}
-            size="lg"
+            size="xl"
             radius="lg"
             placeholder="Image Url"
           />
@@ -189,7 +189,7 @@ export default function Page() {
           <Select
             radius="lg"
             placeholder="Select Team"
-            size="lg"
+            size="xl"
             data={["Marketing Team", "Engineering Team"]}
             value={team}
             onChange={setTeam}
@@ -201,7 +201,7 @@ export default function Page() {
           <Select
             radius="lg"
             placeholder="Select Position"
-            size="lg"
+            size="xl"
             data={[
               "CEO & Co-Founder",
               "CTO & Co-Founder",
@@ -219,9 +219,10 @@ export default function Page() {
         </Box>
       </SimpleGrid>
       <Textarea
+      
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
-        size="md"
+        size="xl"
         radius="lg"
         label="Summary"
         withAsterisk
@@ -233,7 +234,7 @@ export default function Page() {
 
       <Group justify="center" my="xl">
         <Button
-          size="lg"
+          size="xl"
           miw="100%"
           className="secondary-button"
           onClick={(e) => handleSubmit(e)}

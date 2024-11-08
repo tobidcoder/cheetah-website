@@ -23,7 +23,7 @@
 .title {
   text-align: center;
   font-weight: 800;
-  font-size: rem(40px);
+  font-size: rem(60px);
   letter-spacing: -1px;
   color: #fdfdfd;
   margin-bottom: var(--mantine-spacing-xs);

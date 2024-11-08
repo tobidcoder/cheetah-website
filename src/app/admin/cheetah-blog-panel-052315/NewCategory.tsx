@@ -22,6 +22,7 @@ export default function NewCategory() {
     try {
       const response = await axios.post(`http://127.0.0.1:8000/api/blog-categories`, formData); // Replace with your endpoint
       console.log("Form submitted successfully:", response.data);
+      close();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -53,10 +54,12 @@ export default function NewCategory() {
           />
           {/* {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>} */}
         </Box>
-        <Button w='100%' className='primary-button' onClick={(e)=>handleSubmit(e)}>Submit</Button>
+        <Button radius={'lg'} size="xl"
+          miw="100%" className='primary-button' onClick={(e)=>handleSubmit(e)}>Submit</Button>
       </Modal>
 
-      <Button w='100%' className='primary-button' onClick={open}>Add New Category</Button>
+      <Button radius={'lg'} size="xl"
+          miw="100%" className='primary-button' onClick={open}>Add New Category</Button>
     </>
   );
 }

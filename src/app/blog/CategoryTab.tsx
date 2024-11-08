@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs, rem, TabsList, TabsPanel, TabsTab, Box, LoadingOverlay } from "@mantine/core";
+import { Tabs, rem, TabsList, TabsPanel, TabsTab, Box, LoadingOverlay, Loader, Group } from "@mantine/core";
 import {
   IconPhoto,
   IconMessageCircle,
@@ -57,7 +57,7 @@ export function CategoryTab() {
 
   return (
     <Box my='xl'>
-      {blogs ?
+      {blogs ? 
       <Tabs py='xl' my="xl" variant="pills" radius="md" defaultValue="all">
         <TabsList style={{ justifyContent: "center" }} pb="xl" mb="xl">
           <TabsTab
@@ -105,7 +105,10 @@ export function CategoryTab() {
 
 
         
-      </Tabs> : <LoadingOverlay loaderProps={{ color: '#052315' }} visible={true} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} /> }
+      </Tabs> : <Group justify="center">
+                  <Loader color="#b2d93b"/>
+                </Group> 
+       }
     </Box>
   )
 }
