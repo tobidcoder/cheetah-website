@@ -5,10 +5,12 @@ import {
   Title,
   Container,
   Box,
+  Avatar,
+  Group,
 } from "@mantine/core";
 import classes from "@/styles/Feedback.module.css";
 import introClasses from "@/styles/Introduction.module.css";
-import { IconStar } from "@tabler/icons-react";
+import { IconStar, IconStarFilled } from "@tabler/icons-react";
 
 
 
@@ -19,14 +21,34 @@ export function Feedback() {
   
 
   return (
-    <Container mb={"lg"} size={"md"} className={classes.inner}>
+    <Container my={130} size={"md"} className={classes.inner}>
       <Box>
         <Title my='xl' fz={60} order={1} ta={'center'}>What Our Customers Say</Title>
-        <Text my='xl' className='text-secondary' ta={'center'}><IconStar/> <IconStar/><IconStar/><IconStar/><IconStar/></Text>
-        <Text fs='italic' fz='lg' my='xl' ta={'center'}>&ldquo;Switching to an integrated inventory and POS system transformed our operations. 
+        <Text my='xl' className='text-secondary' ta={'center'}><IconStarFilled/> <IconStarFilled/><IconStarFilled/><IconStarFilled/><IconStarFilled/></Text>
+        <Container size='sm'>
+        <Text fs='italic' fz='xl' my='xl' ta={'center'}>&ldquo;Switching to an integrated inventory and POS system transformed our operations. 
           We enjoy real-time data, streamlined transactions, and improved customer satisfaction. 
           Highly recommend for any retail business!&rdquo; </Text>
-          <Text ta={'center'} fs='bold'>- Bassay Victoria, Khadash Shawarma & Smoothie</Text>
+          <Group style={{disply:'flex', justifyContent:'center'}} justify='center' wrap="nowrap" gap="xs">
+              <Group className={classes.user}  gap="xs" wrap="nowrap">
+                <Avatar
+                  size={60}
+                  src={'/images/victoria.png'}
+                />
+                <Box>
+
+                <Text fw='bold' size="md">Bassay Victoria</Text>
+                <Text size="md">Khadash Shawarma & Smoothie</Text>
+                </Box>
+              </Group>
+              <Avatar
+                  size={60}
+                  src={'/images/khadash.png'}
+                />
+          </Group>
+          {/* <Text ta={'center'} fs='bold'> </Text> */}
+
+        </Container>
       </Box>
      
       <Title fw={"bold"} ta={'center'} pt={64} className={classes.title}>

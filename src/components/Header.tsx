@@ -94,7 +94,7 @@ export function Header() {
   // ));
 
   return (
-    <Box pb={20}>
+    <Box mt={20} mb={80} pb={20}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
           {/* <MantineLogo size={30} /> */}

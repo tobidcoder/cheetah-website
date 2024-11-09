@@ -12,10 +12,10 @@ export function Introduction() {
  
       <Container size={"md"} className={classes.inner}>
         <Title className={classes.introTitle}>
-        100% FREE to sell anywhere easily, quickly, and seamlessly.{" "}
-          <Text component="span" className={classes.highlight} inherit>
+        FREE to sell anywhere easily, quickly, and seamlessly.
+          {/* <Text component="span" className={classes.highlight} inherit>
           
-          </Text>
+          </Text> */}
         </Title>
 
         <Container p={0} size={600}>

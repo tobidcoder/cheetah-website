@@ -44,8 +44,8 @@ export function Features() {
     },
   ];
   return (
-    <Container my={85} className={classes.wrapper} size={"xl"}>
-      <Container mb={"lg"} size={"md"} className={classes.inner}>
+    <Container my={120} className={classes.wrapper} size={"xl"}>
+      <Container my={80} size={"md"} className={classes.inner}>
         <Title fw={"bold"} className={classes.title}>
         Optimize your operations.
         </Title>
@@ -78,7 +78,7 @@ export function Features() {
         ))}
       </Grid>
 
-      <Container mb={"lg"} size={"md"} className={classes.inner}>
+      <Container my={100} size={"md"} className={classes.inner}>
         <Title fw={"bold"} className={classes.title}>
           Tailored POS Solutions for Your Unique Store
         </Title>

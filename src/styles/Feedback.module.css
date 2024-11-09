@@ -23,3 +23,8 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+.user{
+  padding-right:15px !important;
+  margin-right:5px;
+  border-right: rem(1px) solid #b2d93b;
+}
