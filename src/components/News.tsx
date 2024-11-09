@@ -1,32 +1,64 @@
-// import { IconBookmark, IconHeart, IconShare } from '@tabler/icons-react';
-import {
-  Card,
-  CardSection,
-  Image,
-  Text,
-  // ActionIcon,
-  // Badge,
-  Group,
-  Center,
-  Avatar,
-  // useMantineTheme,
-  // rem,
-  // Grid,
-  SimpleGrid,
-  Badge,
-  LoadingOverlay,
-} from "@mantine/core";
+'use client';
+
+import { Carousel } from '@mantine/carousel';
+import { useMediaQuery } from '@mantine/hooks';
+import { 
+    Paper, 
+    Text, 
+    Title, 
+    Button, 
+    useMantineTheme, 
+    Card,
+    CardSection,
+    Image,
+    Group,
+    Center,
+    Avatar,
+    Badge,
+    Loader,
+    LoadingOverlay, rem } from '@mantine/core';
 import classes from "@/styles/BlogCard.module.css";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import {fetch} from '@/app/api'
+// import classes from './CardsCarousel.module.css';
 
-export function BlogCard({blogs}:any) {
-  
+interface CardProps {
+  image: string;
+  title: string;
+  category: string;
+}
+
+export function News() {
+    const [blogs, setBlogs] = useState<any>()
+    useEffect(() => {
+        const fetchBlogs = async () => {
+          const data = await fetch('blogs');
+          setBlogs(data.data);
+        };
+    
+        fetchBlogs();
+      }, []);
+  const theme = useMantineTheme();
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+//   const slides = data.map((item) => (
+//     <Carousel.Slide key={item.title}>
+//       <Card {...item} />
+//     </Carousel.Slide>
+//   ));
+
   return (
-    <SimpleGrid  mb='xl' spacing="xl" cols={{ lg: 3, md: 2, base: 1 }}>
-      {blogs?
+    <Carousel
+      mt='xl'
+      slideSize={{ base: '100%', sm: '50%', lg:'33%' }}
+      slideGap={{ base: rem(2), sm: 'xl' }}
+      align="center"
+      slidesToScroll={mobile ? 1 : 2}
+    >
+      {blogs &&
       blogs.map((blog:any)=>(
-
-      <Link key={blog.id} href={`/post/${blog.slug}?i=${blog.id}`} passHref>
+        <Carousel.Slide key={blog.id}>
+      <Link href={`/post/${blog.slug}?i=${blog.id}`} passHref>
         <Card  radius="md" className={classes.card}>
           <CardSection>
             <Image src={blog.image_url} height={180} alt="blog image" />
@@ -76,10 +108,11 @@ export function BlogCard({blogs}:any) {
           </Group>
         </Card>
       </Link>
+      </Carousel.Slide>
       ))
-      :
-      <LoadingOverlay loaderProps={{ color: '#052315' }} visible={true} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+    //   :
+    //   <LoadingOverlay loaderProps={{ color: '#052315' }} visible={true} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
     }
-    </SimpleGrid>
+    </Carousel>
   );
 }

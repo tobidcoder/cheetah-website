@@ -4,25 +4,25 @@ import classes from "@/styles/GetStarted.module.css";
 export function GetStarted() {
   return (
     <div className={classes.wrapper}>
-      <Overlay color="#000" opacity={0.65} zIndex={1} />
+      <Overlay color="#000" opacity={0.9} zIndex={1} />
 
       <Container size="sm" className={classes.inner}>
         <Title className={classes.title}>
-          Let&apos;s start manage your business with Cheetah
+        Ready to start selling?
         </Title>
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Build more reliable software with AI companion. AI is also trained
-            to detect lazy developers who do nothing and just complain on
-            Twitter.
+          Set up is fast, secure, and FREE.
           </Text>
         </Container>
 
         <div className={classes.controls}>
-          <Button bd="" className="light-button" size="lg">
-            Get started
+        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <Button bd="" className="primary-button" size="lg">
+            Get started FREE
           </Button>
+        </a>
         </div>
       </Container>
     </div>

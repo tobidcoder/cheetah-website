@@ -56,6 +56,7 @@
 
 .description {
   text-align: center;
+  color: #fdfdfd;
 
   @media (max-width: 36em) {
     text-align: left;

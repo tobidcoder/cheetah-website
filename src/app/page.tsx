@@ -1,11 +1,11 @@
-"use client";
+
 import { Features } from "@/components/Features";
 import { Feedback } from "@/components/Feedback";
 // import { Footer } from "@/components/Footer";
 import { GetStarted } from "@/components/GetStarted";
 import { Introduction } from "@/components/Introduction";
 import { Paper, Container } from "@mantine/core";
-import {CategoryTab} from '@/app/blog/CategoryTab'
+import {News} from '@/components/News'
 
 export default function HomePage() {
   return (
@@ -17,7 +17,7 @@ export default function HomePage() {
 
         <Features />
         <Feedback />
-        <CategoryTab/>
+        <News/>
       </Container>
       <GetStarted />
     </>

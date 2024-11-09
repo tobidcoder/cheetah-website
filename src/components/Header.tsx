@@ -98,7 +98,9 @@ export function Header() {
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
           {/* <MantineLogo size={30} /> */}
+          <Link href="/" passHref>
           <Image w={150} src={"/images/favicon-light.png"} alt="logo" />
+          </Link>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link href="/" className={classes.link}>
@@ -111,8 +113,12 @@ export function Header() {
           </Group>
 
           <Group visibleFrom="sm">
+          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
             <Button className="secondary-button">Log in</Button>
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
             <Button className="primary-button">Sign up</Button>
+          </a>
           </Group>
 
           <Burger
@@ -150,8 +156,12 @@ export function Header() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
+          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
             <Button className="secondary-button">Log in</Button>
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
             <Button className="primary-button">Sign up</Button>
+          </a>
           </Group>
         </ScrollArea>
       </Drawer>

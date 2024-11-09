@@ -47,13 +47,12 @@ export function Features() {
     <Container my={85} className={classes.wrapper} size={"xl"}>
       <Container mb={"lg"} size={"md"} className={classes.inner}>
         <Title fw={"bold"} className={classes.title}>
-          Exploring Features for Enhanced Success and Growth
+        Optimize your operations.
         </Title>
 
         <Container p={0} size={600}>
           <Text size="lg" className={classes.description}>
-            Cheetah is a sales management platform designed to help you grow
-            your business with ease.
+          Manage and streamline operations across multiple locations, sales channels, and employees to improve efficiency and your bottom line.
           </Text>
         </Container>
       </Container>
@@ -86,9 +85,8 @@ export function Features() {
 
 
         <Container p={0} size={600}>
-          <Text size="xl" className={classes.description}>
-            Cheetah is a sales management platform designed to help you grow
-            your business with ease.
+          <Text size="xl" ta='center' className={classes.description}>
+          It&apos;s free to get started with Cheetah Point of Sale. There are no setup fees or monthly fees. 
           </Text>
           </Container>
           </Container>

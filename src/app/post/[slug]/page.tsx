@@ -29,34 +29,27 @@ import {
 import classes from "./Styles.module.css";
 import { useSearchParams } from 'next/navigation';
 import {useEffect,useState} from 'react'
-import axios from 'axios'
+import {fetch} from '@/app/api'
+
+
 
 
 export default function Page() {
   const shareUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.search}`;
-
-// Example usage
-// console.log(fullUrl);
 
   const param = useSearchParams();
   const i = param.get('i'); // Access slug and query parameter 'i'
   const [blog, setBlog] = useState<any>()
   const [body, setBody] = useState<any>();
   const [htmlElements, setHtmlElements] = useState<any>([]);
-  // const [shareUrl, setShareUrl] = useState('')
 
 
 
   useEffect(() => {
     const fetchBlog = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/blogs/${i}`); // Replace with your endpoint
-        console.log("blogs:", response.data.data); 
-        setBlog(response.data.data);
-        setBody(response.data.data.body)
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
+      const data = await fetch(`blogs/${i}`)
+        setBlog(data);
+        setBody(data.body)
     };
     // if(i!=undefined){
 
@@ -153,7 +146,7 @@ export default function Page() {
 
               <div className="Demo__some-network">
                 <TwitterShareButton
-                hashtags={["#cheetah", " #cheetahPos"," #pos", " #pointofsales"," #inventory"," #quickcommerce"," #grocerystore"," #store"," #cheetahinventory"," #cheetahpos"," #localmarket"]}
+                hashtags={["cheetah", "cheetahPos", "pos", "pointofsales", "inventory", "quickcommerce", "grocerystore", "store", "cheetahinventory", "cheetahpos", "localmarket"]}
                   url={shareUrl}
                   title={blog.title}
                   className="Demo__some-network__share-button"

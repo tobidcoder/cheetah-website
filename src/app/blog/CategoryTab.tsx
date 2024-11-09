@@ -8,7 +8,8 @@ import {
 } from "@tabler/icons-react";
 import { BlogCard } from "./BlogCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import {fetch} from '@/app/api'
+
 
 export function CategoryTab() {
   const iconStyle = { width: rem(12), height: rem(12) };
@@ -17,42 +18,29 @@ export function CategoryTab() {
   const [categoryBlogs, setCategoryBlogs] = useState<any>()
   const [isLoading, setIsLoading] = useState<any>(false)
 
-  const baseUrl = process.env.BASE_URL;
-
+  
   useEffect(() => {
     const fetchBlogs = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/blogs'); // Replace with your endpoint
-        console.log("blogs:", response.data.data.data); 
-        setBlogs(response.data.data.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
+      const data = await fetch('blogs');
+      setBlogs(data.data);
     };
+
     const fetchCategories = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/blog-categories'); // Replace with your endpoint
-        console.log("blog-categories:", response.data.data); 
-        setCategories(response.data.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
+      const data = await fetch('blog-categories');
+      // blog-categories
+        setCategories(data);
     };
+
     fetchBlogs();
     fetchCategories();
   }, []);
 
   const fetchCategoryBlogs = async (id:any) => {
     setIsLoading(true)
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/get_category_blogs/${id}`); // Replace with your endpoint
-      console.log("blog-categories:", response.data.data.data); 
-      setCategoryBlogs(response.data.data.data);
+    const data = await fetch(`get_category_blogs/${id}`)
+      setCategoryBlogs(data.data);
       setIsLoading(false)
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-      setIsLoading(false)
-    }
+    
   };
 
   return (
@@ -105,7 +93,8 @@ export function CategoryTab() {
 
 
         
-      </Tabs> : <Group justify="center">
+      </Tabs> : <Group justify="center
+      ">
                   <Loader color="#b2d93b"/>
                 </Group> 
        }

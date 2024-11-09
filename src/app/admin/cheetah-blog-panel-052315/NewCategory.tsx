@@ -2,7 +2,8 @@
 import {useState} from 'react'
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button,Box,Text,Input } from '@mantine/core';
-import axios from "axios";
+import {post} from '@/app/api'
+
 
 export default function NewCategory() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -13,19 +14,15 @@ export default function NewCategory() {
   const handleSubmit = async (e: any) => {
     // e.preventDefault();
     // if (!validateForm()) return;
-
+    
     const formData = {
       name:name,
       description:description,
     };
-
-    try {
-      const response = await axios.post(`http://127.0.0.1:8000/api/blog-categories`, formData); // Replace with your endpoint
-      console.log("Form submitted successfully:", response.data);
-      close();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+    
+    const data = await post('blog-categories', formData)
+    close();
+    
   };
 
 

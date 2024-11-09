@@ -12,16 +12,16 @@ export function Intro() {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Unlock{" "}
-          <Text component="span" className="text-secondary" inherit>
+          Learn how real businesses reach their goals with Cheetah.
+          {/* <Text component="span" className="text-secondary" inherit>
             peak sales
           </Text>{" "}
-          performance
+          performance */}
         </Title>
 
         <Container p={0} size={600}>
           <Text size="lg" c="dimmed" className={classes.description}>
-            Explore the must-have resources and tactics that are driving sales
+            Explore the must-have resources and tactics that are driving business
             success in today&apos;s competitive landscape.
           </Text>
         </Container>

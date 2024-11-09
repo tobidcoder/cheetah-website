@@ -3,7 +3,8 @@
   position: relative;
   padding-top: rem(180px);
   padding-bottom: rem(130px);
-  background-image: url(https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=980&q=80);
+  background-image: url(/images/pos.png);
+  /* background-image: url(https://entail.mayple.com/en-assets/mayple/6179a579f91da881be2c758b_morningbrewShVipPImS6kunsplash_5c8728bacb20daf02414ecbdf89e0418_2000-1699777146680.png); */
   background-size: cover;
   background-position: center;
 
@@ -20,11 +21,12 @@
 
 .title {
   font-weight: 800;
-  font-size: rem(40px);
+  font-size: rem(60px);
   letter-spacing: rem(-1px);
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
-  color: var(--mantine-color-white);
+  color: #fdfdfd;
+  /* color: #b2d93b; */
   margin-bottom: var(--mantine-spacing-xs);
   text-align: center;
   font-family: Greycliff CF, var(--mantine-font-family);
@@ -40,7 +42,7 @@
 }
 
 .description {
-  color: var(--mantine-color-gray-0);
+  color: #fdfdfd;
   text-align: center;
 
   @media (max-width: 36em) {

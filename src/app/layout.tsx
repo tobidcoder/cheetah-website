@@ -23,8 +23,8 @@ import { Footer } from "@/components/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "Cheetah",
-  description: "The Simple, Secure, and Scalable Way to Run Your Business",
+  title: "Cheetah: 100% FREE to sell anywhere easily, quickly, and seamlessly.",
+  description: "Custom-tailored product suites for suppermarket, pharmacy, restaurants, retail, and beauty businesses.",
 };
 
 export default function RootLayout({

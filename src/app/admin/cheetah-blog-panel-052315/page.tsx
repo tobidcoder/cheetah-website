@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { BodyEditor } from "./BodyEditor";
 import {
   Container,
@@ -15,6 +14,8 @@ import {
   Group,
 } from "@mantine/core";
 import NewCategory from './NewCategory'
+import {post, fetch} from '@/app/api'
+
 
 export default function Page() {
   const [title, setTitle] = useState("");
@@ -26,6 +27,7 @@ export default function Page() {
   const [createdByProfileImage, setCreatedByProfileImage] = useState("");
   const [summary, setSummary] = useState("");
   const [body, setBody] = useState<any>();
+
   interface Category {
     id: number;
     name: string;
@@ -39,19 +41,14 @@ export default function Page() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [errors, setErrors] = useState<FormErrors>({});  
 
-  const baseUrl = process.env.BASE_URL;
 
   // Fetch categories when the page loads
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/blog-categories`); // Replace with your endpoint
-        console.log("Categories:", response.data.data); 
-        setCategories(response.data.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
+      const data = await fetch('blog-categories')
+      setCategories(data);
     };
+
     fetchCategories();
   }, []);
 
@@ -90,10 +87,8 @@ export default function Page() {
       body:body,
     };
     console.log(formData)
-    try {
-      const response = await axios.post(`http://127.0.0.1:8000/api/blogs`, formData); // Replace with your endpoint
-      console.log("Form submitted successfully:", response.data);
-      setTitle('')
+    const data = await post('blogs', formData)
+    setTitle('')
       setImageUrl('')
       setBlogCategoryId('')
       setCreatedBy('')
@@ -102,9 +97,6 @@ export default function Page() {
       // setCreatedByProfileImage('')
       setSummary('')
       setBody('')
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
   };
 
   // const newCat=(<NewCategory/>)
