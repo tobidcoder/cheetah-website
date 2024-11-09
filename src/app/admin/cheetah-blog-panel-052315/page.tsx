@@ -156,7 +156,7 @@ export default function Page() {
             radius="lg"
             placeholder="Created By"
             size="xl"
-            data={["Rapheal Odejinmi", "Tobiloba Odejinmi", "Winifred"]}
+            data={["Rapheal Odejinmi", "Tobiloba Odejinmi", "Winifred Bello"]}
             value={createdBy}
             onChange={setCreatedBy}
           />
@@ -197,6 +197,7 @@ export default function Page() {
             data={[
               "CEO & Co-Founder",
               "CTO & Co-Founder",
+              "CEO",
               "CFO",
               "CMO",
               "COO",
