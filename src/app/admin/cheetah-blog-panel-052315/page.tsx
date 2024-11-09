@@ -126,7 +126,7 @@ export default function Page() {
           />
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
-        {Object.keys(categories).length == 0 ? (
+        {categories?.length == 0 ? (
           <NewCategory />
         ) : (
           <Box>
@@ -197,11 +197,27 @@ export default function Page() {
             data={[
               "CEO & Co-Founder",
               "CTO & Co-Founder",
+              "Product Manager",
+              "Head of Marketing",
+              "Head of Engineering",
+              "Head of Operations",
+              "Head of Design",
+              "Head of Product",
+              "Head of Sales",
+              "Head of Finance",
+              "Head of HR",
+              "Head of Legal",
+              "Head of Customer Success",
               "CEO",
+              "CTO",
               "CFO",
               "CMO",
               "COO",
               "CIO",
+              "CPO",
+              "CRO",
+              "CSO",
+              "CGO",
             ]}
             value={createdByPosition}
             onChange={setCreatedByPosition}

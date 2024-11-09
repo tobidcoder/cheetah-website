@@ -56,7 +56,7 @@ export function News() {
       slidesToScroll={mobile ? 1 : 2}
     >
       {blogs &&
-      blogs.map((blog:any)=>(
+      blogs?.map((blog:any)=>(
         <Carousel.Slide key={blog.id}>
       <Link href={`/post/${blog.slug}?i=${blog.id}`} passHref>
         <Card  radius="md" className={classes.card}>
