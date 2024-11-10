@@ -36,7 +36,7 @@ export function BlogsTable({refetch}:any) {
 //   const toggleAll = () =>
 //     setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.id)));
 
-  const rows = blogs?.map((item, i) => {
+  const rows = blogs?.map((item:any, i:number) => {
     const selected = selection.includes(item.id);
     return (
       <Table.Tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
