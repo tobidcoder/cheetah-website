@@ -33,7 +33,7 @@
 
   @media (max-width: 36em) {
     font-size: rem(28px);
-    text-align: left;
+    /* text-align: left; */
   }
 }
 
@@ -48,7 +48,7 @@
 
   @media (max-width: 36em) {
     font-size: rem(28px);
-    text-align: left;
+    /* text-align: left; */
   }
 }
 
@@ -61,7 +61,7 @@
   color: #fdfdfd;
 
   @media (max-width: 36em) {
-    text-align: left;
+    /* text-align: left; */
     font-size: var(--mantine-font-size-md);
   }
 }
@@ -73,6 +73,7 @@
 
   @media (max-width: 36em) {
     flex-direction: column;
+    justify-content: center;
   }
 }
 

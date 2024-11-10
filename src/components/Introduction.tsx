@@ -31,6 +31,7 @@ export function Introduction() {
             me={{ base: "0", lg: "lg" }}
             mb={{ base: "lg", lg: "0" }}
             className={"primary-button"}
+            w={{base:'100%'}}
             size="lg"
             radius="md"
           >
@@ -41,6 +42,7 @@ export function Introduction() {
           <Button
             // mb={{ lg: "xs" }}
             className={"secondary-button"}
+            w={{base:'100%'}}
             size="lg"
             variant="default"
             color="gray"

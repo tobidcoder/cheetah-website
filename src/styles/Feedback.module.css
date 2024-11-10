@@ -15,6 +15,10 @@
   line-height: 1.2;
   font-size: rem(60px);
   margin-top: var(--mantine-spacing-xs);
+  @media (max-width: 36em) {
+    font-size: rem(28px);
+    /* text-align: left; */
+  }
 }
 
 .category {

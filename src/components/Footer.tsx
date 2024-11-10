@@ -57,20 +57,18 @@ const data = [
 export function Footer() {
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
-      <Text<"a">
+      <a
         style={{ display: "flex", justifyContent: "center" }}
         key={index}
         className={classes.link}
-        component="a"
         href={link.link}
-        onClick={(event) => event.preventDefault()}
       >
         {link.label}
-      </Text>
+      </a>
     ));
 
     return (
-      <GridCol span={{ base: 6, md: 4 }} key={group.title}>
+      <GridCol style={{ display: "flex", justifyContent: "center" }} span={{ base: 12, md: 4 }} key={group.title}>
         <div className={classes.wrapper}>
           <Text
             style={{ display: "flex", justifyContent: "center" }}
@@ -103,6 +101,7 @@ export function Footer() {
         <Grid
           mt={{ base: "md", md: 0 }}
           justify="center"
+          style={{ display: "flex", justifyContent: "center" }}
           className={classes.groups}
         >
           {groups}

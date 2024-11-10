@@ -34,7 +34,7 @@ export function News() {
     useEffect(() => {
         const fetchBlogs = async () => {
           const data = await fetch('blogs');
-          setBlogs(data.data);
+          setBlogs(data?.data);
         };
     
         fetchBlogs();
