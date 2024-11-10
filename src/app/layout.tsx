@@ -24,7 +24,7 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Cheetah: FREE to sell anywhere easily, quickly, and seamlessly.",
-  description: "Custom-tailored product suites for suppermarket, pharmacy, restaurants, retail, and beauty businesses.",
+  description: "Custom-tailored product suites for suppermarket, pharmacy, restaurants, retails, and beauty businesses.",
 };
 
 export default function RootLayout({
