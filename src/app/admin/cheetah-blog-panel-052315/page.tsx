@@ -12,9 +12,12 @@ import {
   Select,
   Button,
   Group,
+  Image,
+  Avatar,
 } from "@mantine/core";
 import NewCategory from './NewCategory'
 import {post, fetch} from '@/app/api'
+import {BlogsTable} from './BlogsTable'
 
 
 export default function Page() {
@@ -26,6 +29,7 @@ export default function Page() {
   const [createdByPosition, setCreatedByPosition] = useState<string | null>("");
   const [createdByProfileImage, setCreatedByProfileImage] = useState("");
   const [summary, setSummary] = useState("");
+  const [refetch, setRefetch] = useState(true);
   const [body, setBody] = useState<any>();
 
   interface Category {
@@ -51,6 +55,19 @@ export default function Page() {
 
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    if (createdBy == 'Rapheal Odejinmi') {
+      setCreatedByProfileImage('/images/rapheal.png')
+    }
+    if (createdBy == 'Tobiloba Odejinmi') {
+      setCreatedByProfileImage('/images/tobiloba.png')
+    }
+    if (createdBy == 'Winifred Bello') {
+      setCreatedByProfileImage('/images/winifred.png')
+    }
+
+  }, [createdBy]);
 
   // Validate form fields 
   const validateForm = () => {
@@ -87,7 +104,8 @@ export default function Page() {
       body:body,
     };
     console.log(formData)
-    const data = await post('blogs', formData)
+    const data = await post('blogs', formData);
+    setRefetch(!refetch)
     setTitle('')
       setImageUrl('')
       setBlogCategoryId('')
@@ -103,7 +121,7 @@ export default function Page() {
 
   return (
     <Container size="md">
-      <SimpleGrid cols={{ base: 1, md: 2 }} spacing='xl'>
+      <SimpleGrid style={{alignItems: 'center'}} cols={{ base: 1, md: 2 }} spacing='xl'>
         <Box>
           <Text>Title</Text>
           <Input
@@ -126,13 +144,12 @@ export default function Page() {
           />
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
-        {categories?.length == 0 ? (
-          <NewCategory />
-        ) : (
+        
           <Box>
             <Text>Blog Category</Text>
             <Group></Group>
             <Select
+            searchable
               radius="lg"
               placeholder="Select Blog Category"
               size="xl"
@@ -146,10 +163,11 @@ export default function Page() {
             {errors.blogCategoryId && (
               <Text c="red">{errors.blogCategoryId}</Text>
             )}
-            <Text ta='center' className="text-secondary" fz='lg' fw='600'>Or</Text>
-            <NewCategory />
+            {/* <Text ta='center' className="text-secondary" fz='lg' fw='600'>Or</Text> */}
           </Box>
-        )}
+
+            <NewCategory />
+
         <Box>
           <Text>Created By</Text>
           <Select
@@ -163,19 +181,12 @@ export default function Page() {
           {errors.createdBy && <Text c="red">{errors.createdBy}</Text>}
         </Box>
 
-        <Box>
-          <Text>Creator&apos;s Image Url</Text>
-          <Input
-            value={createdByProfileImage}
-            onChange={(e) => setCreatedByProfileImage(e.target.value)}
-            size="xl"
-            radius="lg"
-            placeholder="Image Url"
+        <Group justify="center">
+          <Avatar
+            size={60}
+            src={createdByProfileImage}
           />
-          {errors.createdByProfileImage && (
-            <Text c="red">{errors.createdByProfileImage}</Text>
-          )}
-        </Box>
+        </Group>
         <Box>
           <Text>Team</Text>
           <Select
@@ -191,6 +202,7 @@ export default function Page() {
         <Box>
           <Text>Position</Text>
           <Select
+            searchable
             radius="lg"
             placeholder="Select Position"
             size="xl"
@@ -256,6 +268,8 @@ export default function Page() {
       </Box> */}
 
       <hr />
+
+      <BlogsTable refetch={refetch}/>
     </Container>
   );
 }

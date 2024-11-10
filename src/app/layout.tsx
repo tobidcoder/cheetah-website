@@ -23,7 +23,7 @@ import { Footer } from "@/components/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "Cheetah: 100% FREE to sell anywhere easily, quickly, and seamlessly.",
+  title: "Cheetah: FREE to sell anywhere easily, quickly, and seamlessly.",
   description: "Custom-tailored product suites for suppermarket, pharmacy, restaurants, retail, and beauty businesses.",
 };
 

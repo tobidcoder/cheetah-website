@@ -20,8 +20,9 @@ export default function NewCategory() {
       description:description,
     };
     
-    const data = await post('blog-categories', formData)
+    const data = await post('blog-categories', formData);
     close();
+    alert('Category added successfuly');
     
   };
 
