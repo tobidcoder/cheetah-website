@@ -18,7 +18,7 @@ export function GetStarted() {
         </Container>
 
         <div className={classes.controls}>
-        <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/#/register">
+        <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/">
           <Button bd="" className="secondary-button" size="lg">
             Get started FREE
           </Button>
