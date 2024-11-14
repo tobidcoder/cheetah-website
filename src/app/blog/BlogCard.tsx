@@ -29,7 +29,8 @@ export function BlogCard({blogs}:any) {
       <Link key={blog.id} href={`/post/${blog.slug}?i=${blog.id}`} passHref>
         <Card  radius="md" className={classes.card}>
           <CardSection>
-            <Image src={blog.image_url} height={180} alt="blog image" />
+            <img src={blog.image_url} height={180} alt="blog image" />
+            {/* <Image src={blog.image_url} height={180} alt="blog image" /> */}
           </CardSection>
           
           <Text c='#fdfdfd' className='' fz='lg' my='lg'>{blog.blog_category.name}</Text>

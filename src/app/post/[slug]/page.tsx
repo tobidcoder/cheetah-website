@@ -107,13 +107,21 @@ export default function Page() {
               </Group>
             </div>
           </Group>
-          <Image
+          <img
+            alt="image"
+            src={blog.image_url}
+            className={classes.image}
+            //   height={160}
+            style={{maxHeight:'250px'}}
+            // mah={250}
+          />
+          {/* <Image
             alt="image"
             src={blog.image_url}
             className={classes.image}
             //   height={160}
             mah={250}
-          />
+          /> */}
         </SimpleGrid>
       <Box my='xl'>
         <div>  {htmlElements} </div>
