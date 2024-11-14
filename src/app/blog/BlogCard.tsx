@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // import { IconBookmark, IconHeart, IconShare } from '@tabler/icons-react';
 import {
   Card,
