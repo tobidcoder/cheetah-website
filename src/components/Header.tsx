@@ -113,10 +113,10 @@ export function Header() {
           </Group>
 
           <Group visibleFrom="sm">
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/#/login">
             <Button className="secondary-button">Log in</Button>
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/#/register">
             <Button className="primary-button">Sign up</Button>
           </a>
           </Group>
@@ -156,10 +156,10 @@ export function Header() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/#/login">
             <Button className="secondary-button">Log in</Button>
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/#/register">
             <Button className="primary-button">Sign up</Button>
           </a>
           </Group>

@@ -14,6 +14,7 @@ import {
   Group,
   Image,
   Avatar,
+  FileInput,
 } from "@mantine/core";
 import NewCategory from './NewCategory'
 import {post, fetch} from '@/app/api'
@@ -31,6 +32,7 @@ export default function Page() {
   const [summary, setSummary] = useState("");
   const [refetch, setRefetch] = useState(true);
   const [body, setBody] = useState<any>();
+  const [imageValue, setImageValue] = useState<File | null>(null);
 
   interface Category {
     id: number;
@@ -134,14 +136,21 @@ export default function Page() {
           {errors.title && <Text c="red">{errors.title}</Text>}
         </Box>
         <Box>
-          <Text>Image Url</Text>
-          <Input
+          <Text>Upload Image</Text>
+          <FileInput
+          size="xl"
+            variant="filled"
+            
+            placeholder="Upload Image"
+            value={imageValue} onChange={setImageValue}
+          />
+          {/* <Input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             size="xl"
             radius="lg"
             placeholder="Image Url"
-          />
+          /> */}
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
         

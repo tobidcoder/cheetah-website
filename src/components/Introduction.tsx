@@ -26,7 +26,7 @@ export function Introduction() {
 
         <Box mb='xl' className={classes.controls}>
           {/* <a href="http://" target="_blank" rel="noopener noreferrer"></a> */}
-          <a style={{margin:"12px"}} target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a style={{margin:"12px"}} target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/#/register">
           <Button
             me={{ base: "0", lg: "lg" }}
             mb={{ base: "lg", lg: "0" }}
