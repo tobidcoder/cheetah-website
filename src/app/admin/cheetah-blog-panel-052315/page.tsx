@@ -15,6 +15,7 @@ import {
   Image,
   Avatar,
   FileInput,
+  LoadingOverlay,
 } from "@mantine/core";
 import NewCategory from './NewCategory'
 import {post, fetch} from '@/app/api'
@@ -33,6 +34,7 @@ export default function Page() {
   const [refetch, setRefetch] = useState(true);
   const [body, setBody] = useState<any>();
   const [imageValue, setImageValue] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false)
 
   interface Category {
     id: number;
@@ -92,8 +94,8 @@ export default function Page() {
   // Handle form submission
   const handleSubmit = async (e: any) => {
     // e.preventDefault();
-    // if (!validateForm()) return;
-
+    if (!validateForm()) return;
+    setLoading(true);
     const formData = {
       title:title,
       image_url: imageUrl,
@@ -108,6 +110,8 @@ export default function Page() {
     console.log(formData)
     const data = await post('blogs', formData);
     setRefetch(!refetch)
+    alert('Blog created successfully');
+    setLoading(false)
     setTitle('')
       setImageUrl('')
       setBlogCategoryId('')
@@ -123,6 +127,7 @@ export default function Page() {
 
   return (
     <Container size="md">
+      <LoadingOverlay visible={loading}  />
       <SimpleGrid style={{alignItems: 'center'}} cols={{ base: 1, md: 2 }} spacing='xl'>
         <Box>
           <Text>Title</Text>
