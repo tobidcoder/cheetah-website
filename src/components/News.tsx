@@ -52,8 +52,8 @@ export function News() {
   return (
     <Carousel
       mt="xl"
-      slideSize={{ base: "100%", sm: "50%", lg: "33%" }}
-      slideGap={{ base: rem(2), sm: "xl" }}
+      slideSize={{ base: "80%", sm: "50%", lg: "33%" }}
+      slideGap={{ base: 'sm', sm: "xl" }}
       align="center"
       slidesToScroll={mobile ? 1 : 2}
     >
