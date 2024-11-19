@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-/* eslint-disable @next/next/no-img-element */
-'use client';
-=======
 "use client";
->>>>>>> f90b8504cb7b113bec71ac8d9580755c9689ed81
 
 import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
@@ -62,19 +57,6 @@ export function News() {
       align="center"
       slidesToScroll={mobile ? 1 : 2}
     >
-<<<<<<< HEAD
-      {blogs &&
-      blogs?.map((blog:any)=>(
-        <Carousel.Slide key={blog.id}>
-      <Link href={`/post/${blog.slug}?i=${blog.id}`} passHref>
-        <Card  radius="md" className={classes.card}>
-          <CardSection>
-            {/* <img src={blog.image_url} height={180} alt="blog image" /> */}
-            <Image src={blog.image_url} height={180} alt="blog image" />
-          </CardSection>
-          
-          <Text c='#fdfdfd' className='' fz='lg' my='lg'>{blog.blog_category.name}</Text>
-=======
       {
         blogs &&
           blogs?.map((blog: any) => (
@@ -88,7 +70,6 @@ export function News() {
                   <Text c="#fdfdfd" className="" fz="lg" my="lg">
                     {blog.blog_category.name}
                   </Text>
->>>>>>> f90b8504cb7b113bec71ac8d9580755c9689ed81
 
                   {/* <Badge className={classes.rating} variant="gradient" gradient={{ from: 'yellow', to: 'red' }}>
         outstanding

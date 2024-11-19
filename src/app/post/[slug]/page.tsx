@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-/* eslint-disable @next/next/no-img-element */
-'use client'
-=======
 "use client";
->>>>>>> f90b8504cb7b113bec71ac8d9580755c9689ed81
 import {
   Image,
   Avatar,
@@ -108,36 +103,6 @@ export default function Page() {
                 <Text size="xs" c="dimmed">
                   Feb 6th
                 </Text> */}
-<<<<<<< HEAD
-              </Group>
-            </div>
-          </Group>
-          {/* <img
-            alt="image"
-            src={blog.image_url}
-            className={classes.image}
-            //   height={160}
-            style={{maxHeight:'250px'}}
-            // mah={250}
-          /> */}
-          <Image
-            alt="image"
-            src={blog.image_url}
-            className={classes.image}
-            //   height={160}
-            mah={250}
-          />
-        </SimpleGrid>
-      <Box my='xl'>
-        <div>  {htmlElements} </div>
-      </Box>
-
-      <Box my='xl' py='xl'>
-        <Text mb='lg'>Share this post</Text>
-        <Group>
-                <div className="Demo__some-network">
-                <FacebookShareButton title={blog.title} hashtag="#cheetah #cheetahPos #pos #pointofsales #inventory #quickcommerce #grocerystore #store #cheetahinventory #cheetahpos #localmarket" url={shareUrl} className="Demo__some-network__share-button">
-=======
                 </Group>
               </div>
             </Group>
@@ -163,7 +128,6 @@ export default function Page() {
                   url={shareUrl}
                   className="Demo__some-network__share-button"
                 >
->>>>>>> f90b8504cb7b113bec71ac8d9580755c9689ed81
                   <FacebookIcon size={32} round />
                 </FacebookShareButton>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BodyEditor } from "./BodyEditor";
 import {
   Container,
@@ -35,6 +35,8 @@ export default function Page() {
   const [body, setBody] = useState<any>();
   const [imageValue, setImageValue] = useState<File | null>(null);
   const [loading, setLoading] = useState(false)
+
+  let fileInput = React.createRef<HTMLInputElement>();
 
   interface Category {
     id: number;
@@ -124,27 +126,60 @@ export default function Page() {
   };
 
 
-  useEffect(() => {
+  // useEffect(() => {
    
-    const handleImageUpload = async () => {
-      // e.preventDefault();
-      // if (!validateForm()) return;
+  //   const handleImageUpload = async () => {
+  //     // e.preventDefault();
+  //     // if (!validateForm()) return;
   
-      const formData = {
-       //  title: title,
-        image: imageValue,
+  //     const formData = {
+  //      //  title: title,
+  //       image: imageValue,
        
-      };
-      console.log(imageValue);
-      const data = await post("upload_blog_image", formData);
-      console.log(data)
+  //     };
+  //     console.log(formData);
+  //     const data = await post("upload_blog_image", formData);
+  //     console.log(data)
      
-      setImageUrl("");
+  //     setImageUrl("");
       
-    };
-    handleImageUpload();
-  }, [imageValue])
+  //   };
+  //   handleImageUpload();
+  // }, [imageValue])
   
+
+  const handleImageUpload = async (e:any) => {
+    // e.preventDefault();
+    // if (!validateForm()) return;
+    e.preventDefault();
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            console.log(file)
+            const data = await post("upload_blog_image", file);
+            console.log(data)
+            if (file.type === 'image/jpeg' || file.type === 'image/png') {
+                setImageValue(file);
+                const fileReader = new FileReader();
+                fileReader.onloadend = () => {
+                    // setImagePreviewUrl(fileReader.result);
+                };
+                fileReader.readAsDataURL(file);
+                // setErrors('');
+            }
+        }
+
+    const formData = {
+     //  title: title,
+      image: imageValue,
+     
+    };
+    // console.log(formData);
+    // const data = await post("upload_blog_image", formData);
+    // console.log(data)
+   
+    // setImageUrl("");
+    
+  };
 
   // const newCat=(<NewCategory/>)
 
@@ -165,20 +200,28 @@ export default function Page() {
         </Box>
         <Box>
           <Text>Upload Image</Text>
-          {/* <FileInput
+          <input
+              className='upload-file'
+              // title={`${imageTitle ? imageTitle : placeholderText('globally.input.change-logo.tooltip')}`}
+              type='file'
+              accept='.png, .jpg, .jpeg'
+              onChange={(e) => handleImageUpload(e)}
+              ref={fileInput}
+          />
+          <FileInput
           size="xl"
             variant="filled"
             
             placeholder="Upload Image"
             value={imageValue} onChange={setImageValue}
-          /> */}
-          <Input
+          />
+          {/* <Input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             size="xl"
             radius="lg"
             placeholder="Image Url"
-          />
+          /> */}
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
         
