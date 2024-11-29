@@ -95,7 +95,7 @@ export function Footer() {
           />
           </Link>
           <Text size="xs" c="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+          Custom-tailored product suites for <b>suppermarket, pharmacy, restaurants, retail, and beauty</b> businesses.
           </Text>
         </div>
         <Grid
