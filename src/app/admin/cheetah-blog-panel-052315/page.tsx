@@ -165,20 +165,20 @@ export default function Page() {
         </Box>
         <Box>
           <Text>Upload Image</Text>
-          <FileInput
+          {/* <FileInput
           size="xl"
             variant="filled"
             
             placeholder="Upload Image"
             value={imageValue} onChange={setImageValue}
-          />
-          {/* <Input
+          /> */}
+          <Input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             size="xl"
             radius="lg"
             placeholder="Image Url"
-          /> */}
+          />
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
         
