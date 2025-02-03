@@ -26,3 +26,16 @@ export const fetch = async (endpoint:any) => {
     return null;
     }
   };
+
+  export const upload = async (endpoint: any, formData: any) => {
+    try {
+      const response = await axios.post(`${endpoint}`, formData); // Replace with your endpoint
+      //   console.log("Form submitted successfully:", response.data);
+      alert(response.data?.message);
+      return response.data;
+    } catch (error) {
+      // alert("An error occurred");
+      //   console.error("Error submitting form:", error);
+      return null;
+    }
+  };
