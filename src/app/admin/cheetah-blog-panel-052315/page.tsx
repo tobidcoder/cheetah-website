@@ -104,7 +104,8 @@ export default function Page() {
       summary: summary,
       body: body,
     };
-    console.log(formData);
+    // console.log(formData);
+    
     const data = await post("blogs", formData);
     setRefetch(!refetch);
 
@@ -130,7 +131,7 @@ export default function Page() {
         "https://app.usecheetah.com/api/upload_blog_image",
         formData
       );
-      console.log(response.data);
+      // console.log(response.data);
       setImageUrl(response.data);
       return response.data;
     };
@@ -300,7 +301,7 @@ export default function Page() {
           className="secondary-button"
           onClick={(e) => handleSubmit(e)}
         >
-          Submit
+          {loading?'Loading...':'Submit'}
         </Button>
       </Group>
       {/* <Box>
