@@ -21,6 +21,7 @@ import NewCategory from "./NewCategory";
 import { post, fetch, upload } from "@/app/api";
 import { BlogsTable } from "./BlogsTable";
 
+
 export default function Page() {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -104,7 +105,8 @@ export default function Page() {
       summary: summary,
       body: body,
     };
-    console.log(formData);
+    // console.log(formData);
+    
     const data = await post("blogs", formData);
     setRefetch(!refetch);
 
@@ -130,7 +132,7 @@ export default function Page() {
         "https://app.usecheetah.com/api/upload_blog_image",
         formData
       );
-      console.log(response.data);
+      // console.log(response.data);
       setImageUrl(response.data);
       return response.data;
     };
@@ -295,12 +297,13 @@ export default function Page() {
 
       <Group justify="center" my="xl">
         <Button
+        disabled={loading}
           size="xl"
           miw="100%"
           className="secondary-button"
           onClick={(e) => handleSubmit(e)}
         >
-          Submit
+          {loading?'Loading...':'Submit'}
         </Button>
       </Group>
       {/* <Box>
