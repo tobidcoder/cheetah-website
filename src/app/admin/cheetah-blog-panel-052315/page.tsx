@@ -296,6 +296,7 @@ export default function Page() {
 
       <Group justify="center" my="xl">
         <Button
+        disabled={loading}
           size="xl"
           miw="100%"
           className="secondary-button"
