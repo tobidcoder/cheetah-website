@@ -21,6 +21,7 @@ import NewCategory from "./NewCategory";
 import { post, fetch, upload } from "@/app/api";
 import { BlogsTable } from "./BlogsTable";
 
+
 export default function Page() {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
