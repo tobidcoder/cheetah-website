@@ -21,7 +21,6 @@ import NewCategory from "./NewCategory";
 import { post, fetch, upload } from "@/app/api";
 import { BlogsTable } from "./BlogsTable";
 
-
 export default function Page() {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -106,7 +105,7 @@ export default function Page() {
       body: body,
     };
     // console.log(formData);
-    
+
     const data = await post("blogs", formData);
     setRefetch(!refetch);
 
@@ -297,13 +296,13 @@ export default function Page() {
 
       <Group justify="center" my="xl">
         <Button
-        disabled={loading}
+          disabled={loading}
           size="xl"
           miw="100%"
           className="secondary-button"
           onClick={(e) => handleSubmit(e)}
         >
-          {loading?'Loading...':'Submit'}
+          {loading ? "Loading..." : "Submit"}
         </Button>
       </Group>
       {/* <Box>
