@@ -92,3 +92,14 @@
     }
   }
 }
+
+.playButton {
+  position: absolute; 
+  bottom: 25%; 
+  left: 45%;
+
+  @media (max-width: 36em) {
+    bottom: 28px; 
+  left: 40%;
+  }
+}

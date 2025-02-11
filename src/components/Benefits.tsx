@@ -98,7 +98,7 @@ export function Benefits() {
         {benefits}
       </SimpleGrid>
 
-      <Grid  mt={60}>
+      <Grid  mt={150}>
         {features.map((feature, i) => (
           <GridCol
             mb="xl"
