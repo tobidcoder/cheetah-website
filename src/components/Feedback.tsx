@@ -23,7 +23,7 @@ export function Feedback() {
   return (
     <Container my={130} size={"md"} className={classes.inner}>
       <Box>
-        <Title my='xl' fz={60} order={1} ta={'center'}>What Our Customers Say</Title>
+        <Title my='xl' order={1} ta={'center'} className={classes.title}>What Our Customers Say</Title>
         <Text my='xl' className='text-secondary' ta={'center'}><IconStarFilled/> <IconStarFilled/><IconStarFilled/><IconStarFilled/><IconStarFilled/></Text>
         <Container size='sm'>
         <Text fs='italic' fz='xl' my='xl' ta={'center'}>&ldquo;Switching to an integrated inventory and POS system transformed our operations. 

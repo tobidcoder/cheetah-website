@@ -13,7 +13,6 @@
     padding-bottom: rem(50px);
   }
 }
-
 .inner {
   position: relative;
   z-index: 1;
@@ -33,7 +32,7 @@
 
   @media (max-width: 36em) {
     font-size: rem(28px);
-    text-align: left;
+    /* text-align: left; */
   }
 }
 
@@ -47,7 +46,7 @@
 
   @media (max-width: 36em) {
     font-size: var(--mantine-font-size-md);
-    text-align: left;
+    /* text-align: left; */
   }
 }
 
@@ -58,9 +57,9 @@
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
 
-  @media (max-width: 36em) {
+  /* @media (max-width: 36em) {
     flex-direction: column;
-  }
+  } */
 }
 
 .control {

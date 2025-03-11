@@ -1,0 +1,69 @@
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.glowMe,
+.glowAll {
+  opacity: 0;
+  transition: opacity 300ms linear 0s;
+}
+.svg {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  width: 120px;
+  height: 120px;
+  background-color: rgb(178, 217, 59, 0.5);
+  border-radius: 20px;
+  cursor: pointer;
+ 
+   animation: jump 0.5s ease-in-out infinite;
+}
+.svg:hover .glowMe {
+  opacity: 0.5;
+}
+.svg:hover .glowAll {
+  opacity: 1;
+}
+.buttonTop {
+  fill: #052315;
+  transition: fill 300ms linear 0s;
+}
+.svg:hover .buttonTop {
+  fill: #0a3b23;
+}
+.buplayside {
+  fill: #0f4e2d;
+  transition: fill 300ms linear 0s;
+}
+.buttonSides {
+  fill: #0f4e2d;
+  transition: fill 300ms linear 0s;
+}
+.svg:hover .buttonSides .buplayside {
+  fill: #146038;
+}
+.svg:focus {
+  outline: none;
+}
+.svg:focus .buttonTop,
+.svg:focus .playSides .buplayside {
+  stroke: white;
+  stroke-width: 2px;
+}
+.svg:focus .playSides .buplayside {
+  stroke-width: 1px;
+}
+.svg:active .buttonTop {
+  fill: #1a7548;
+}
+
+/* .svg:nth-of-type(1) {
+  transform: translate(37%, -35%);
+}
+.svg:nth-of-type(3) {
+  transform: translate(-37%, 35%);
+} */

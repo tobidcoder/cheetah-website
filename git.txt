@@ -2,4 +2,5 @@ git add .
 git commit -m "update"
 git pull
 git push
+git pull git@github.com:Cheetah-HQ/website.git
 git push git@github.com:Cheetah-HQ/website.git

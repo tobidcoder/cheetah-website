@@ -94,7 +94,7 @@ export function Header() {
   // ));
 
   return (
-    <Box mt={20} mb={80} pb={20}>
+    <Box mt={20} mb={35} pb={20}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
           {/* <MantineLogo size={30} /> */}
@@ -113,10 +113,10 @@ export function Header() {
           </Group>
 
           <Group visibleFrom="sm">
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/">
             <Button className="secondary-button">Log in</Button>
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/">
             <Button className="primary-button">Sign up</Button>
           </a>
           </Group>
@@ -156,10 +156,10 @@ export function Header() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/">
             <Button className="secondary-button">Log in</Button>
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+          <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/">
             <Button className="primary-button">Sign up</Button>
           </a>
           </Group>

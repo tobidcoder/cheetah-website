@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // import { IconBookmark, IconHeart, IconShare } from '@tabler/icons-react';
 import {
   Card,
@@ -29,7 +30,7 @@ export function BlogCard({blogs}:any) {
       <Link key={blog.id} href={`/post/${blog.slug}?i=${blog.id}`} passHref>
         <Card  radius="md" className={classes.card}>
           <CardSection>
-            <Image src={blog.image_url} height={180} alt="blog image" />
+            <Image src={blog.image_url}  alt="blog image" />
           </CardSection>
           
           <Text c='#fdfdfd' className='' fz='lg' my='lg'>{blog.blog_category.name}</Text>

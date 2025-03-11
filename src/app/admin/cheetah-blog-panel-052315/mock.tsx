@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BodyEditor } from "./BodyEditor";
 import {
   Container,
@@ -17,9 +17,10 @@ import {
   FileInput,
   LoadingOverlay,
 } from "@mantine/core";
-import NewCategory from "./NewCategory";
-import { post, fetch, upload } from "@/app/api";
-import { BlogsTable } from "./BlogsTable";
+import NewCategory from './NewCategory'
+import {post, fetch} from '@/app/api'
+import {BlogsTable} from './BlogsTable'
+
 
 export default function Page() {
   const [title, setTitle] = useState("");
@@ -33,7 +34,9 @@ export default function Page() {
   const [refetch, setRefetch] = useState(true);
   const [body, setBody] = useState<any>();
   const [imageValue, setImageValue] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
+
+  let fileInput = React.createRef<HTMLInputElement>();
 
   interface Category {
     id: number;
@@ -46,12 +49,13 @@ export default function Page() {
 
   // Update state definition
   const [categories, setCategories] = useState<Category[]>([]);
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<FormErrors>({});  
+
 
   // Fetch categories when the page loads
   useEffect(() => {
     const fetchCategories = async () => {
-      const data = await fetch("blog-categories");
+      const data = await fetch('blog-categories')
       setCategories(data);
     };
 
@@ -59,18 +63,19 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (createdBy == "Rapheal Odejinmi") {
-      setCreatedByProfileImage("/images/rapheal.png");
+    if (createdBy == 'Rapheal Odejinmi') {
+      setCreatedByProfileImage('/images/rapheal.png')
     }
-    if (createdBy == "Tobiloba Odejinmi") {
-      setCreatedByProfileImage("/images/tobiloba.png");
+    if (createdBy == 'Tobiloba Odejinmi') {
+      setCreatedByProfileImage('/images/tobiloba.png')
     }
-    if (createdBy == "Winifred Bello") {
-      setCreatedByProfileImage("/images/winifred.png");
+    if (createdBy == 'Winifred Bello') {
+      setCreatedByProfileImage('/images/winifred.png')
     }
+
   }, [createdBy]);
 
-  // Validate form fields
+  // Validate form fields 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
     if (!title) newErrors.title = "Title is required";
@@ -94,73 +99,94 @@ export default function Page() {
     if (!validateForm()) return;
     setLoading(true);
     const formData = {
-      title: title,
+      title:title,
       image_url: imageUrl,
       blog_category_id: blogCategoryId,
       created_by: createdBy,
-      team: team,
+      team :team,
       created_by_position: createdByPosition,
       created_by_profile_image: createdByProfileImage,
-      summary: summary,
-      body: body,
+      summary:summary,
+      body:body,
     };
-    // console.log(formData);
-
-    const data = await post("blogs", formData);
-    setRefetch(!refetch);
-
-    setLoading(false);
-    // setTitle("");
-    // setImageUrl("");
-    // setBlogCategoryId("");
-    // setCreatedBy("");
-    // setTeam("");
-    // setCreatedByPosition("");
-    // // setCreatedByProfileImage('')
-    // setSummary("");
-    // setBody("");
+    console.log(formData)
+    const data = await post('blogs', formData);
+    setRefetch(!refetch)
+    alert('Blog created successfully');
+    setLoading(false)
+    setTitle('')
+      setImageUrl('')
+      setBlogCategoryId('')
+      setCreatedBy('')
+      setTeam('')
+      setCreatedByPosition('')
+      // setCreatedByProfileImage('')
+      setSummary('')
+      setBody('')
   };
 
-  useEffect(() => {
-    const uploadImage = async () => {
-      const formData = new FormData();
-      if (imageValue) {
-        formData.append("image", imageValue);
-      }
-      const response = await upload(
-        "https://app.usecheetah.com/api/upload_blog_image",
-        formData
-      );
-      // console.log(response.data);
-      setImageUrl(response.data);
-      return response.data;
+
+  // useEffect(() => {
+   
+  //   const handleImageUpload = async () => {
+  //     // e.preventDefault();
+  //     // if (!validateForm()) return;
+  
+  //     const formData = {
+  //      //  title: title,
+  //       image: imageValue,
+       
+  //     };
+  //     console.log(formData);
+  //     const data = await post("upload_blog_image", formData);
+  //     console.log(data)
+     
+  //     setImageUrl("");
+      
+  //   };
+  //   handleImageUpload();
+  // }, [imageValue])
+  
+
+  const handleImageUpload = async (e:any) => {
+    // e.preventDefault();
+    // if (!validateForm()) return;
+    e.preventDefault();
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            console.log(file)
+            const data = await post("upload_blog_image", file);
+            console.log(data)
+            if (file.type === 'image/jpeg' || file.type === 'image/png') {
+                setImageValue(file);
+                const fileReader = new FileReader();
+                fileReader.onloadend = () => {
+                    // setImagePreviewUrl(fileReader.result);
+                };
+                fileReader.readAsDataURL(file);
+                // setErrors('');
+            }
+        }
+
+    const formData = {
+     //  title: title,
+      image: imageValue,
+     
     };
-    // const handleImageUpload = async () => {
-    //   // e.preventDefault();
-    //   // if (!validateForm()) return;
-    //   const formData = {
-    //     //  title: title,
-    //     image: imageValue,
-    //   };
-    //   console.log(imageValue);
-    //   const data = await post("upload_blog_image", formData);
-    //   console.log(data);
-    //   setImageUrl("");
-    // };
-    uploadImage();
-    // handleImageUpload();
-  }, [imageValue]);
+    // console.log(formData);
+    // const data = await post("upload_blog_image", formData);
+    // console.log(data)
+   
+    // setImageUrl("");
+    
+  };
 
   // const newCat=(<NewCategory/>)
 
   return (
     <Container size="md">
-      <LoadingOverlay visible={loading} />
-      <SimpleGrid
-        style={{ alignItems: "center" }}
-        cols={{ base: 1, md: 2 }}
-        spacing="xl"
-      >
+      <LoadingOverlay visible={loading}  />
+      <SimpleGrid style={{alignItems: 'center'}} cols={{ base: 1, md: 2 }} spacing='xl'>
         <Box>
           <Text>Title</Text>
           <Input
@@ -174,44 +200,53 @@ export default function Page() {
         </Box>
         <Box>
           <Text>Upload Image</Text>
-          <Box style={{ display: "flex", alignItems: "center" }}>
-            <FileInput
-              w={"70%"}
-              mr={10}
-              size="xl"
-              variant="filled"
-              placeholder="Upload Image"
-              value={imageValue}
-              onChange={setImageValue}
-            />
-            <Avatar size={60} src={imageUrl} />
-          </Box>
-
+          <input
+              className='upload-file'
+              // title={`${imageTitle ? imageTitle : placeholderText('globally.input.change-logo.tooltip')}`}
+              type='file'
+              accept='.png, .jpg, .jpeg'
+              onChange={(e) => handleImageUpload(e)}
+              ref={fileInput}
+          />
+          <FileInput
+          size="xl"
+            variant="filled"
+            
+            placeholder="Upload Image"
+            value={imageValue} onChange={setImageValue}
+          />
+          {/* <Input
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            size="xl"
+            radius="lg"
+            placeholder="Image Url"
+          /> */}
           {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>}
         </Box>
-
-        <Box>
-          <Text>Blog Category</Text>
-          <Group></Group>
-          <Select
+        
+          <Box>
+            <Text>Blog Category</Text>
+            <Group></Group>
+            <Select
             searchable
-            radius="lg"
-            placeholder="Select Blog Category"
-            size="xl"
-            data={categories?.map((cat: any) => ({
-              value: cat.id.toString(),
-              label: cat.name,
-            }))}
-            value={blogCategoryId}
-            onChange={setBlogCategoryId}
-          />
-          {errors.blogCategoryId && (
-            <Text c="red">{errors.blogCategoryId}</Text>
-          )}
-          {/* <Text ta='center' className="text-secondary" fz='lg' fw='600'>Or</Text> */}
-        </Box>
+              radius="lg"
+              placeholder="Select Blog Category"
+              size="xl"
+              data={categories?.map((cat: any) => ({
+                value: cat.id.toString(),
+                label: cat.name,
+              }))}
+              value={blogCategoryId}
+              onChange={setBlogCategoryId}
+            />
+            {errors.blogCategoryId && (
+              <Text c="red">{errors.blogCategoryId}</Text>
+            )}
+            {/* <Text ta='center' className="text-secondary" fz='lg' fw='600'>Or</Text> */}
+          </Box>
 
-        <NewCategory />
+            <NewCategory />
 
         <Box>
           <Text>Created By</Text>
@@ -227,7 +262,10 @@ export default function Page() {
         </Box>
 
         <Group justify="center">
-          <Avatar size={60} src={createdByProfileImage} />
+          <Avatar
+            size={60}
+            src={createdByProfileImage}
+          />
         </Group>
         <Box>
           <Text>Team</Text>
@@ -282,6 +320,7 @@ export default function Page() {
         </Box>
       </SimpleGrid>
       <Textarea
+      
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
         size="xl"
@@ -296,13 +335,12 @@ export default function Page() {
 
       <Group justify="center" my="xl">
         <Button
-          disabled={loading}
           size="xl"
           miw="100%"
           className="secondary-button"
           onClick={(e) => handleSubmit(e)}
         >
-          {loading ? "Loading..." : "Submit"}
+          Submit
         </Button>
       </Group>
       {/* <Box>
@@ -311,7 +349,7 @@ export default function Page() {
 
       <hr />
 
-      <BlogsTable refetch={refetch} />
+      <BlogsTable refetch={refetch}/>
     </Container>
   );
 }

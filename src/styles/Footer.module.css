@@ -11,7 +11,7 @@
   max-width: rem(200px);
 
   @media (max-width: 48em) {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
@@ -33,6 +33,7 @@
   @media (max-width: 48em) {
     flex-direction: column;
     align-items: center;
+    
   }
 }
 

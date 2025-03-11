@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
 // import localFont from "next/font/local";
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -23,8 +24,8 @@ import { Footer } from "@/components/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "Cheetah: 100% FREE to sell anywhere easily, quickly, and seamlessly.",
-  description: "Custom-tailored product suites for suppermarket, pharmacy, restaurants, retail, and beauty businesses.",
+  title: "Cheetah: FREE to sell anywhere easily, quickly, and seamlessly.",
+  description: "Custom-tailored product suites for supermarket, pharmacy, restaurants, retails, and beauty businesses.",
 };
 
 export default function RootLayout({
@@ -41,6 +42,7 @@ export default function RootLayout({
       //  className={`${geistSans.variable} ${geistMono.variable}`}
       >
         <MantineProvider>
+          <NextTopLoader color="#b2d93b"/>
           <Header />
           {children}
           <Footer />

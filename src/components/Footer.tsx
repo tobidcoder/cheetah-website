@@ -20,6 +20,9 @@ import {
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from "@/styles/Footer.module.css";
 import Link from "next/link";
+import Script from 'next/script';
+import { useEffect } from 'react';
+
 
 const data = [
   // {
@@ -57,20 +60,18 @@ const data = [
 export function Footer() {
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
-      <Text<"a">
+      <a
         style={{ display: "flex", justifyContent: "center" }}
         key={index}
         className={classes.link}
-        component="a"
         href={link.link}
-        onClick={(event) => event.preventDefault()}
       >
         {link.label}
-      </Text>
+      </a>
     ));
 
     return (
-      <GridCol span={{ base: 6, md: 4 }} key={group.title}>
+      <GridCol style={{ display: "flex", justifyContent: "center" }} span={{ base: 12, md: 4 }} key={group.title}>
         <div className={classes.wrapper}>
           <Text
             style={{ display: "flex", justifyContent: "center" }}
@@ -84,7 +85,21 @@ export function Footer() {
     );
   });
 
+  useEffect(() => {
+    // Initialize Calendly widget after the script has loaded
+    if ((window as any).Calendly) {
+      (window as any).Calendly.initBadgeWidget({
+        url: 'https://calendly.com/cheetahdemo/30min',
+        text: 'Schedule time with ',
+        color: '#052315',
+        textColor: '#ffffff'
+      });
+    }
+  }, []);
+
+
   return (
+    <>
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
@@ -97,12 +112,13 @@ export function Footer() {
           />
           </Link>
           <Text size="xs" c="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+          Custom-tailored product suites for <b>supermarket, pharmacy, restaurants, retail, and beauty</b> businesses.
           </Text>
         </div>
         <Grid
           mt={{ base: "md", md: 0 }}
           justify="center"
+          style={{ display: "flex", justifyContent: "center" }}
           className={classes.groups}
         >
           {groups}
@@ -166,5 +182,27 @@ export function Footer() {
         </Group>
       </Container>
     </footer>
+
+    <link 
+        href="https://assets.calendly.com/assets/external/widget.css" 
+        rel="stylesheet"
+      />
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          if ((window as any).Calendly) {
+            (window as any).Calendly.initBadgeWidget({
+              url: 'https://calendly.com/cheetahdemo/30min',
+              text: 'Schedule time with Us ',
+              color: '#ffffff',
+              textColor: '#052315',
+              borderRadius: '10px',
+              borderColor: '#052315',
+            });
+          }
+        }}
+      />
+    </>
   );
 }

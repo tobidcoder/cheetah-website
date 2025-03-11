@@ -18,8 +18,8 @@ export function GetStarted() {
         </Container>
 
         <div className={classes.controls}>
-        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
-          <Button bd="" className="primary-button" size="lg">
+        <a target="_blank" rel="noopener noreferrer" href="https://app.usecheetah.com/">
+          <Button bd="" className="secondary-button" size="lg">
             Get started FREE
           </Button>
         </a>
