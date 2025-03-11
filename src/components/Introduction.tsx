@@ -33,7 +33,7 @@ export function Introduction() {
         <Container p={0} size={600}>
           <Text size="lg" c="#052315" ta="center" className={classes.desc}>
             Custom-tailored product suites for{" "}
-            <b>suppermarket, pharmacy, restaurants, retail, and beauty</b>{" "}
+            <b>supermarket, pharmacy, restaurants, retail, and beauty</b>{" "}
             businesses.
           </Text>
         </Container>
@@ -82,7 +82,7 @@ export function Introduction() {
 
       <Modal
         opened={opened}
-        mih={"80dvh"}
+        // mih={"80dvh"}
         // bg='blue'
         size="xl"
         // style={{ color: "blue" }}
