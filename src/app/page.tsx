@@ -7,7 +7,11 @@ import { Paper, Container } from "@mantine/core";
 import { News } from "@/components/News";
 import { Benefits } from "../components/Benefits";
 
+
+
 export default function HomePage() {
+ 
+
   return (
     <>
       <Container size="xl" style={{ overflow: "hidden" }}>
@@ -20,6 +24,8 @@ export default function HomePage() {
         <News />
       </Container>
       <GetStarted />
+
+     
     </>
   );
 }

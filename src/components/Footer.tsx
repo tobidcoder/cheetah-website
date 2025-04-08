@@ -20,6 +20,9 @@ import {
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from "@/styles/Footer.module.css";
 import Link from "next/link";
+import Script from 'next/script';
+import { useEffect } from 'react';
+
 
 const data = [
   // {
@@ -82,7 +85,21 @@ export function Footer() {
     );
   });
 
+  useEffect(() => {
+    // Initialize Calendly widget after the script has loaded
+    if ((window as any).Calendly) {
+      (window as any).Calendly.initBadgeWidget({
+        url: 'https://calendly.com/cheetahdemo/30min',
+        text: 'Schedule time with ',
+        color: '#052315',
+        textColor: '#ffffff'
+      });
+    }
+  }, []);
+
+
   return (
+    <>
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
@@ -95,7 +112,7 @@ export function Footer() {
           />
           </Link>
           <Text size="xs" c="dimmed" className={classes.description}>
-          Custom-tailored product suites for <b>suppermarket, pharmacy, restaurants, retail, and beauty</b> businesses.
+          Custom-tailored product suites for <b>supermarket, pharmacy, restaurants, retail, and beauty</b> businesses.
           </Text>
         </div>
         <Grid
@@ -165,5 +182,27 @@ export function Footer() {
         </Group>
       </Container>
     </footer>
+
+    <link 
+        href="https://assets.calendly.com/assets/external/widget.css" 
+        rel="stylesheet"
+      />
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          if ((window as any).Calendly) {
+            (window as any).Calendly.initBadgeWidget({
+              url: 'https://calendly.com/cheetahdemo/30min',
+              text: 'Schedule time with Us ',
+              color: '#ffffff',
+              textColor: '#052315',
+              borderRadius: '10px',
+              borderColor: '#052315',
+            });
+          }
+        }}
+      />
+    </>
   );
 }
