@@ -34,17 +34,17 @@ export default function ConfirmationPage() {
             <Stack gap="md" className="w-full">
               <Card withBorder>
                 <Text fw={700} mb="md">
-                  What's Next?
+                  What&apos;s Next?
                 </Text>
                 <List size="sm" spacing="xs">
                   <List.Item>
-                    You'll receive an email confirmation shortly
+                    You&apos;ll receive an email confirmation shortly
                   </List.Item>
                   <List.Item>
                     Your order will be prepared by the market
                   </List.Item>
                   <List.Item>
-                    You'll be notified when your order is ready for pickup
+                    You&apos;ll be notified when your order is ready for pickup
                   </List.Item>
                   <List.Item>Estimated pickup time: 30-45 minutes</List.Item>
                 </List>

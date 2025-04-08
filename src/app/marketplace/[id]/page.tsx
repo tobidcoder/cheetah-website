@@ -238,7 +238,7 @@ export default function MarketDetailsPage() {
           searchQuery !== "" &&
           filteredItems.length === 0 && (
             <Text ta="center" fz="lg" fw={500} mt="xl">
-              No items found matching "{searchQuery}"
+              No items found matching &apos;{searchQuery}&apos;
             </Text>
           )}
 
