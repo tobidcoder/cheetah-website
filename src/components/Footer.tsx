@@ -21,6 +21,8 @@ const footerLinks: Record<string, FooterLink[]> = {
   Company: [
     { label: "About Us", href: "/#about" },
     { label: "Book a Demo", href: "https://calendly.com/cheetahdemo/30min", external: true },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
     { label: "Contact", href: "mailto:hello@usecheetah.com", external: true },
   ],
   Social: [
@@ -85,11 +87,12 @@ export function Footer() {
   return (
     <>
       <footer
+        className="section-padding"
         style={{
           borderTop: "1px solid rgba(178,217,59,0.1)",
-          padding: "80px 24px 0",
           position: "relative",
           overflow: "hidden",
+          paddingBottom: "0",
         }}
       >
         {/* Background glow */}
@@ -111,7 +114,7 @@ export function Footer() {
             maxWidth: "1200px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
             gap: "60px",
             marginBottom: "60px",
             position: "relative",
@@ -278,40 +281,43 @@ export function Footer() {
             © {new Date().getFullYear()} Cheetah HQ. All rights reserved.
           </p>
           <div style={{ display: "flex", gap: "24px" }}>
-            {["Privacy Policy", "Terms of Service"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                style={{
-                  fontSize: "13px",
-                  color: "rgba(253,253,253,0.3)",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "#b2d93b";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "rgba(253,253,253,0.3)";
-                }}
-              >
-                {item}
-              </a>
-            ))}
+            <Link
+              href="/privacy"
+              style={{
+                fontSize: "13px",
+                color: "rgba(253,253,253,0.3)",
+                transition: "color 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.color = "#b2d93b";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.color = "rgba(253,253,253,0.3)";
+              }}
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              style={{
+                fontSize: "13px",
+                color: "rgba(253,253,253,0.3)",
+                transition: "color 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.color = "#b2d93b";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.color = "rgba(253,253,253,0.3)";
+              }}
+            >
+              Terms of Service
+            </Link>
           </div>
         </div>
 
         <style>{`
-          @media (max-width: 900px) {
-            footer > div:first-of-type > div:first-child {
-              grid-template-columns: 1fr 1fr !important;
-            }
-          }
-          @media (max-width: 600px) {
-            footer > div:first-of-type > div:first-child {
-              grid-template-columns: 1fr !important;
-              gap: 40px !important;
-            }
-          }
+          /* Custom footer styles if needed */
         `}</style>
       </footer>
 

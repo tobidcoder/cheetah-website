@@ -47,8 +47,8 @@ const features = [
 export function Features() {
   return (
     <section
+      className="section-padding"
       style={{
-        padding: "100px 24px 120px",
         maxWidth: "1200px",
         margin: "0 auto",
         position: "relative",
@@ -63,7 +63,7 @@ export function Features() {
         <h2
           style={{
             fontFamily: "Syne, Inter, sans-serif",
-            fontSize: "clamp(34px, 5vw, 56px)",
+            fontSize: "clamp(32px, 5vw, 56px)",
             fontWeight: 800,
             letterSpacing: "-0.03em",
             lineHeight: 1.1,
@@ -99,11 +99,12 @@ export function Features() {
 
       {/* Bento-style Feature Grid */}
       <div
+        className="bento-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "20px",
-          marginBottom: "100px",
+          marginBottom: "80px",
         }}
       >
         {features.map((feature, i) => (
@@ -231,7 +232,7 @@ export function Features() {
             pointerEvents: "none",
           }}
         />
-        <div style={{ padding: "64px 40px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
+        <div style={{ padding: "clamp(40px, 8vw, 64px) 24px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
           <div className="section-tag" style={{ display: "inline-flex", marginBottom: "20px" }}>
             <span className="dot" />
             Point of Sale
@@ -239,37 +240,41 @@ export function Features() {
           <h2
             style={{
               fontFamily: "Syne, sans-serif",
-              fontSize: "clamp(30px, 4vw, 48px)",
+              fontSize: "clamp(26px, 4vw, 48px)",
               fontWeight: 800,
               color: "#fdfdfd",
               letterSpacing: "-0.03em",
               marginBottom: "16px",
+              lineHeight: 1.15,
             }}
           >
             Tailored POS for your unique store
           </h2>
           <p
             style={{
-              fontSize: "18px",
+              fontSize: "clamp(16px, 2vw, 18px)",
               color: "rgba(253,253,253,0.6)",
               maxWidth: "520px",
-              margin: "0 auto 48px",
+              margin: "0 auto 40px",
               lineHeight: 1.65,
             }}
           >
-            Free to get started with Cheetah Point of Sale. No setup fees, no monthly fees — ever.
+            Free to get started with Cheetah Point of Sale. No setup fees, Get started in minutes.
           </p>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginBottom: "56px", flexWrap: "wrap" }}>
-            <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
-              <button className="btn-primary" style={{ fontSize: "16px", padding: "15px 36px" }}>
+          <div 
+            className="mobile-stack"
+            style={{ display: "flex", gap: "16px", justifyContent: "center", marginBottom: "40px", flexWrap: "wrap" }}
+          >
+            <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/" className="mobile-full-width">
+              <button className="btn-primary" style={{ fontSize: "16px", padding: "15px 36px", width: "100%" }}>
                 Start for Free
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </button>
             </a>
-            <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
-              <button className="btn-secondary" style={{ fontSize: "16px", padding: "15px 36px" }}>
+            <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min" className="mobile-full-width">
+              <button className="btn-secondary" style={{ fontSize: "16px", padding: "15px 36px", width: "100%" }}>
                 Schedule Demo
               </button>
             </a>
@@ -289,14 +294,21 @@ export function Features() {
         </div>
       </div>
 
-      {/* Responsive override */}
+      {/* Responsive overrides */}
       <style>{`
-        @media (max-width: 768px) {
-          section > div:nth-child(3) {
+        @media (max-width: 900px) {
+          .bento-grid {
             grid-template-columns: 1fr !important;
           }
-          section > div:nth-child(3) > div {
-            grid-column: auto / span 1 !important;
+          .glass-card {
+            grid-column: auto !important;
+          }
+          .mobile-stack {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+          .mobile-full-width {
+            width: 100% !important;
           }
         }
       `}</style>

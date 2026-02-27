@@ -30,8 +30,8 @@ export function News() {
 
   return (
     <section
+      className="section-padding"
       style={{
-        padding: "80px 24px 100px",
         maxWidth: "1200px",
         margin: "0 auto",
         position: "relative",

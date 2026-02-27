@@ -115,8 +115,8 @@ export function SecuritySection() {
     return (
         <section
             ref={ref}
+            className="section-padding"
             style={{
-                padding: "100px 24px 120px",
                 position: "relative",
                 overflow: "hidden",
             }}
@@ -364,11 +364,12 @@ export function SecuritySection() {
 
                 {/* Emotional CTA panel */}
                 <div
+                    className="mobile-stack mobile-text-center"
                     style={{
                         borderRadius: "24px",
                         background: "linear-gradient(135deg, rgba(244,162,97,0.1) 0%, rgba(10,61,36,0.8) 100%)",
                         border: "1px solid rgba(244,162,97,0.25)",
-                        padding: "56px 48px",
+                        padding: "clamp(40px, 8vw, 64px) clamp(24px, 5vw, 56px)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
@@ -391,7 +392,7 @@ export function SecuritySection() {
                         }}
                     />
                     <div style={{ maxWidth: "560px", position: "relative", zIndex: 1 }}>
-                        <p style={{ fontSize: "13px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+                        <p style={{ fontSize: "13px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px", justifyContent: "inherit" }}>
                                 <IconShield size={14} color="#f4a261" /> Stop losing money to fraud today
                             </p>
                         <h3
@@ -411,8 +412,11 @@ export function SecuritySection() {
                             Don&apos;t wait for a major theft incident to realise you needed better controls. Start protecting your business right now — free.
                         </p>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "12px", position: "relative", zIndex: 1 }}>
-                        <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
+                    <div 
+                        className="mobile-full-width"
+                        style={{ display: "flex", flexDirection: "column", gap: "12px", position: "relative", zIndex: 1, minWidth: "200px" }}
+                    >
+                        <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/" className="mobile-full-width">
                             <button className="btn-primary" style={{ padding: "15px 36px", fontSize: "15px", width: "100%" }}>
                                 Protect My Business — Free
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -420,7 +424,7 @@ export function SecuritySection() {
                                 </svg>
                             </button>
                         </a>
-                        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+                        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min" className="mobile-full-width">
                             <button className="btn-secondary" style={{ padding: "15px 36px", fontSize: "15px", width: "100%" }}>
                                 Book a Security Demo
                             </button>

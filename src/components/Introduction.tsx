@@ -24,13 +24,14 @@ export function Introduction() {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          padding: "80px 24px 60px",
+          padding: "100px 20px 60px",
           overflow: "hidden",
         }}
-        className="grid-pattern"
+        className="grid-pattern section-padding"
       >
         {/* Background orbs */}
         <div
+          className="desktop-only"
           style={{
             position: "absolute",
             top: "15%",
@@ -47,8 +48,8 @@ export function Introduction() {
             position: "absolute",
             bottom: "10%",
             right: "5%",
-            width: "400px",
-            height: "400px",
+            width: "clamp(200px, 40vw, 400px)",
+            height: "clamp(200px, 40vw, 400px)",
             borderRadius: "50%",
             background: "radial-gradient(circle, rgba(10,61,36,0.6) 0%, transparent 70%)",
             pointerEvents: "none",
@@ -57,7 +58,7 @@ export function Introduction() {
 
         {/* Section tag */}
         <div
-          className="animate-fade-up"
+          className="animate-fade-up mobile-text-center"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -76,11 +77,11 @@ export function Introduction() {
           <h1
             style={{
               fontFamily: "Syne, Inter, sans-serif",
-              fontSize: "clamp(48px, 8vw, 88px)",
+              fontSize: "clamp(40px, 8vw, 88px)",
               fontWeight: 800,
               lineHeight: 1.05,
               letterSpacing: "-0.04em",
-              marginBottom: "28px",
+              marginBottom: "24px",
               color: "#fdfdfd",
             }}
           >
@@ -100,35 +101,42 @@ export function Introduction() {
           {/* Subheadline */}
           <p
             style={{
-              fontSize: "clamp(17px, 2.5vw, 21px)",
+              fontSize: "clamp(16px, 2.5vw, 21px)",
               color: "rgba(253,253,253,0.65)",
               lineHeight: 1.65,
               maxWidth: "620px",
-              marginBottom: "48px",
+              marginBottom: "40px",
               fontWeight: 400,
             }}
           >
             Custom-tailored inventory & POS solutions for{" "}
             <strong style={{ color: "#fdfdfd", fontWeight: 600 }}>
-              supermarkets, pharmacies, restaurants, retail,
+              supermarkets, pharmacies, restaurants, retail, and beauty
             </strong>{" "}
-            and beauty businesses — powered by AI.
+             businesses — powered by AI.
           </p>
 
           {/* CTA Buttons */}
           <div
+            className="mobile-stack"
             style={{
               display: "flex",
               gap: "14px",
               flexWrap: "wrap",
               justifyContent: "center",
               marginBottom: "64px",
+              width: "100%",
             }}
           >
-            <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
+            <a 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              href="https://back-office.usecheetah.com/"
+              className="mobile-full-width"
+            >
               <button
                 className="btn-primary"
-                style={{ fontSize: "16px", padding: "16px 36px" }}
+                style={{ fontSize: "16px", padding: "16px 36px", width: "100%" }}
               >
                 Get Started — It&apos;s Free
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -140,10 +148,11 @@ export function Introduction() {
               target="_blank"
               rel="noopener noreferrer"
               href="https://calendly.com/cheetahdemo/30min"
+              className="mobile-full-width"
             >
               <button
                 className="btn-secondary"
-                style={{ fontSize: "16px", padding: "16px 36px" }}
+                style={{ fontSize: "16px", padding: "16px 36px", width: "100%" }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -189,7 +198,7 @@ export function Introduction() {
         <div
           style={{
             display: "flex",
-            gap: "16px",
+            gap: "12px",
             flexWrap: "wrap",
             justifyContent: "center",
             marginBottom: "64px",
@@ -203,10 +212,10 @@ export function Introduction() {
               key={stat.value}
               className="glass-card"
               style={{
-                padding: "20px 32px",
+                padding: "16px 20px",
                 textAlign: "center",
                 flex: "1",
-                minWidth: "140px",
+                minWidth: "100px",
                 transition: "all 0.3s ease",
                 cursor: "default",
               }}

@@ -54,8 +54,8 @@ const featuresList = [
 export function Benefits() {
   return (
     <section
+      className="section-padding"
       style={{
-        padding: "120px 24px",
         maxWidth: "1200px",
         margin: "0 auto",
         position: "relative",
@@ -70,7 +70,7 @@ export function Benefits() {
         <h2
           style={{
             fontFamily: "Syne, Inter, sans-serif",
-            fontSize: "clamp(36px, 5vw, 60px)",
+            fontSize: "clamp(32px, 5vw, 60px)",
             fontWeight: 800,
             letterSpacing: "-0.03em",
             lineHeight: 1.1,
@@ -108,9 +108,9 @@ export function Benefits() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "20px",
-          marginBottom: "100px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+          gap: "16px",
+          marginBottom: "80px",
         }}
       >
         {stats.map((stat) => (
@@ -118,7 +118,7 @@ export function Benefits() {
             key={stat.label}
             className="glass-card"
             style={{
-              padding: "36px 28px",
+              padding: "28px 20px",
               transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
               cursor: "default",
               position: "relative",
@@ -151,9 +151,9 @@ export function Benefits() {
               }}
             />
             <div style={{
-              width: "44px",
-              height: "44px",
-              borderRadius: "12px",
+              width: "40px",
+              height: "40px",
+              borderRadius: "10px",
               background: `${stat.color}18`,
               border: `1px solid ${stat.color}30`,
               display: "flex",
@@ -164,7 +164,7 @@ export function Benefits() {
             }}>{stat.icon}</div>
             <div
               style={{
-                fontSize: "clamp(40px, 5vw, 56px)",
+                fontSize: "clamp(32px, 5vw, 56px)",
                 fontWeight: 800,
                 color: stat.color,
                 letterSpacing: "-0.04em",
@@ -177,7 +177,7 @@ export function Benefits() {
             </div>
             <div
               style={{
-                fontSize: "15px",
+                fontSize: "14px",
                 fontWeight: 700,
                 color: "#fdfdfd",
                 marginBottom: "8px",
@@ -187,7 +187,7 @@ export function Benefits() {
             </div>
             <div
               style={{
-                fontSize: "14px",
+                fontSize: "13px",
                 color: "rgba(253,253,253,0.5)",
                 lineHeight: 1.5,
               }}
@@ -199,13 +199,13 @@ export function Benefits() {
       </div>
 
       {/* Divider */}
-      <div className="gradient-divider" style={{ marginBottom: "100px" }} />
+      <div className="gradient-divider" style={{ marginBottom: "80px" }} />
 
       {/* Features Pair */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
         }}
       >

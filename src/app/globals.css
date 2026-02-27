@@ -79,6 +79,62 @@ body {
   background-color: #052315 !important;
 }
 
+/* =============================================
+   RESPONSIVE UTILITIES
+   ============================================= */
+
+@media (max-width: 768px) {
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+  
+  .mobile-text-center {
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .mobile-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mobile-hide {
+    display: none !important;
+  }
+
+  .mobile-padding-sm {
+    padding: 60px 20px !important;
+  }
+
+  .section-padding {
+    padding: 60px 20px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .section-padding {
+    padding: 120px 24px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-only {
+    display: block !important;
+  }
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: block !important;
+  }
+}
+
 .mantine-LoadingOverlay-loader {
   color: #b2d93b !important;
 }

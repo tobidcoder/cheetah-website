@@ -62,7 +62,11 @@ export function Header() {
             alt="Cheetah"
             width={130}
             height={36}
-            style={{ objectFit: "contain" }}
+            style={{ 
+              objectFit: "contain",
+              width: "clamp(100px, 12vw, 130px)",
+              height: "auto"
+            }}
           />
         </Link>
 

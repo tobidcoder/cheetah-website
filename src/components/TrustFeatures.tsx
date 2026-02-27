@@ -124,9 +124,10 @@ function PanelCard({ panel, index }: { panel: typeof panels[0]; index: number })
     return (
         <div
             ref={ref}
+            className="trust-panel-grid"
             style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
                 gap: "0",
                 borderRadius: "28px",
                 overflow: "hidden",
@@ -141,13 +142,13 @@ function PanelCard({ panel, index }: { panel: typeof panels[0]; index: number })
             {/* Text block */}
             <div
                 style={{
-                    padding: "56px 52px",
+                    padding: "clamp(32px, 5vw, 56px) clamp(24px, 5vw, 52px)",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
                     order: isEven ? 0 : 1,
-                    borderRight: isEven ? `1px solid ${panel.accent}18` : "none",
-                    borderLeft: isEven ? "none" : `1px solid ${panel.accent}18`,
+                    borderRight: "none",
+                    borderLeft: "none",
                 }}
             >
                 {/* Badge */}
@@ -280,7 +281,7 @@ function PanelCard({ panel, index }: { panel: typeof panels[0]; index: number })
             <div
                 style={{
                     background: `linear-gradient(135deg, ${panel.accent}08 0%, rgba(5,35,21,0.8) 100%)`,
-                    padding: "56px 48px",
+                    padding: "clamp(40px, 8vw, 64px) clamp(24px, 5vw, 48px)",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -413,8 +414,8 @@ function PanelCard({ panel, index }: { panel: typeof panels[0]; index: number })
 export function TrustFeatures() {
     return (
         <section
+            className="section-padding"
             style={{
-                padding: "120px 24px 80px",
                 maxWidth: "1200px",
                 margin: "0 auto",
             }}

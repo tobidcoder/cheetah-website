@@ -1,5 +1,6 @@
 import { Introduction } from "@/components/Introduction";
 import { TrustFeatures } from "@/components/TrustFeatures";
+import { BusinessControl } from "@/components/BusinessControl";
 import { SecuritySection } from "@/components/SecuritySection";
 import { Benefits } from "@/components/Benefits";
 import { Features } from "@/components/Features";
@@ -15,6 +16,9 @@ export default function HomePage() {
 
       {/* 2. Offline · Smart Sync · AES-256 · Cloud Backup */}
       <TrustFeatures />
+
+      {/* 2.5 Absolute Sovereignty & Business Control */}
+      <BusinessControl />
 
       {/* 3. Fraud Prevention & Real-time Security */}
       <SecuritySection />

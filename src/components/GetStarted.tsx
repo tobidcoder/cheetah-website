@@ -4,20 +4,21 @@ import { IconLock, IconZap, IconGlobe, IconSmartphone } from "@/components/Icons
 export function GetStarted() {
   return (
     <section
+      className="section-padding"
       style={{
-        padding: "0 24px 80px",
         position: "relative",
         overflow: "hidden",
       }}
     >
       <div
+        className="mobile-text-center"
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
           borderRadius: "32px",
           background: "linear-gradient(135deg, #052315 0%, #0a3d24 50%, #052315 100%)",
           border: "1px solid rgba(178,217,59,0.2)",
-          padding: "80px 48px",
+          padding: "clamp(60px, 10vw, 80px) clamp(24px, 5vw, 48px)",
           textAlign: "center",
           position: "relative",
           overflow: "hidden",
@@ -25,6 +26,7 @@ export function GetStarted() {
       >
         {/* Background glow orbs */}
         <div
+          className="desktop-only"
           style={{
             position: "absolute",
             top: "-100px",
@@ -70,7 +72,7 @@ export function GetStarted() {
           <h2
             style={{
               fontFamily: "Syne, Inter, sans-serif",
-              fontSize: "clamp(36px, 6vw, 68px)",
+              fontSize: "clamp(32px, 6vw, 68px)",
               fontWeight: 800,
               color: "#fdfdfd",
               letterSpacing: "-0.04em",
@@ -107,18 +109,25 @@ export function GetStarted() {
 
           {/* CTA Buttons */}
           <div
+            className="mobile-stack"
             style={{
               display: "flex",
               gap: "16px",
               justifyContent: "center",
               flexWrap: "wrap",
               marginBottom: "48px",
+              width: "100%",
             }}
           >
-            <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
+            <a 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              href="https://back-office.usecheetah.com/"
+              className="mobile-full-width"
+            >
               <button
                 className="btn-primary"
-                style={{ fontSize: "17px", padding: "18px 44px" }}
+                style={{ fontSize: "17px", padding: "18px 44px", width: "100%" }}
               >
                 Start for Free — No Card Needed
                 <svg
@@ -137,11 +146,14 @@ export function GetStarted() {
               target="_blank"
               rel="noopener noreferrer"
               href="https://calendly.com/cheetahdemo/30min"
+              className="mobile-full-width"
             >
               <button
+                className="mobile-full-width"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: "10px",
                   background: "rgba(253,253,253,0.08)",
                   border: "2px solid rgba(253,253,253,0.2)",
@@ -153,6 +165,7 @@ export function GetStarted() {
                   cursor: "pointer",
                   backdropFilter: "blur(10px)",
                   transition: "all 0.3s ease",
+                  width: "100%",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLButtonElement;
