@@ -40,7 +40,7 @@ export const fetch = async (endpoint:any) => {
       //   console.log("Form submitted successfully:", response.data);
       Swal.fire({
         title: "Success!",
-        text: response?.data?.message,
+        text: response?.data?.message || "03",
         icon: "success",
       });
       return response.data;

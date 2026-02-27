@@ -1,31 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
-// import localFont from "next/font/local";
 import "./globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
-// import "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap";
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+const theme = createTheme({
+  fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+  primaryColor: "green",
+  colors: {
+    green: [
+      "#f0fae6",
+      "#daf3b6",
+      "#c4eb86",
+      "#aee356",
+      "#b2d93b",
+      "#8fb22e",
+      "#6c8b21",
+      "#496414",
+      "#263d07",
+      "#031600",
+    ],
+  },
+});
 
 export const metadata: Metadata = {
-  title: "Cheetah: FREE to sell anywhere easily, quickly, and seamlessly.",
-  description: "Custom-tailored product suites for supermarket, pharmacy, restaurants, retails, and beauty businesses.",
+  title: "Cheetah — AI-Powered Retail Inventory & POS Platform",
+  description:
+    "Custom-tailored inventory and point-of-sale solutions for supermarkets, pharmacies, restaurants, retail, and beauty businesses. Start free today.",
+  keywords:
+    "retail POS, inventory management, AI forecasting, point of sale, supermarket software, pharmacy POS, restaurant POS Nigeria",
+  openGraph: {
+    title: "Cheetah — Sell smarter. Grow faster.",
+    description:
+      "AI-powered retail inventory optimization and POS platform for African businesses.",
+    type: "website",
+    url: "https://usecheetah.com",
+  },
 };
 
 export default function RootLayout({
@@ -34,15 +49,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ background: "#052315" }}>
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript forceColorScheme="dark" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      <body
-      //  className={`${geistSans.variable} ${geistMono.variable}`}
-      >
-        <MantineProvider>
-          <NextTopLoader color="#b2d93b"/>
+      <body style={{ background: "#052315", color: "#fdfdfd" }}>
+        <MantineProvider theme={theme} forceColorScheme="dark">
+          <NextTopLoader color="#b2d93b" shadow={false} />
           <Header />
           {children}
           <Footer />

@@ -128,7 +128,7 @@ export default function Page() {
         formData.append("image", imageValue);
       }
       const response = await upload(
-        "https://app.usecheetah.com/api/upload_blog_image",
+        "https://back-office.usecheetah.com/api/upload_blog_image",
         formData
       );
       // console.log(response.data);
