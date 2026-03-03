@@ -224,9 +224,9 @@ export function SecuritySection() {
                             }}
                         >
                             <div style={{ marginBottom: "12px", color: "#f4a261" }}>{item.icon}</div>
-                                <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: "8px" }}>
-                                    <IconSlash size={12} color="#f4a261" /> Problem
-                                </div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: "8px" }}>
+                                <IconSlash size={12} color="#f4a261" /> Problem
+                            </div>
                             <p
                                 style={{
                                     fontSize: "15px",
@@ -245,9 +245,9 @@ export function SecuritySection() {
                                     marginBottom: "16px",
                                 }}
                             />
-                                <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: "#b2d93b", letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: "8px" }}>
-                                    <IconShield size={12} color="#b2d93b" /> Cheetah&apos;s Fix
-                                </div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: "#b2d93b", letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: "8px" }}>
+                                <IconShield size={12} color="#b2d93b" /> Cheetah&apos;s Fix
+                            </div>
                             <p
                                 style={{
                                     fontSize: "14px",
@@ -259,6 +259,45 @@ export function SecuritySection() {
                             </p>
                         </div>
                     ))}
+                </div>
+
+                {/* Live Sales Audit Demo */}
+                <div style={{
+                    marginBottom: "80px",
+                    borderRadius: "24px",
+                    overflow: "hidden",
+                    border: "1px solid rgba(178,217,59,0.15)",
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateY(0)" : "translateY(20px)",
+                    transition: "all 0.8s ease 0.2s",
+                }}>
+                    <div style={{
+                        background: "rgba(10,61,36,0.6)",
+                        padding: "20px 24px",
+                        borderBottom: "1px solid rgba(178,217,59,0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                    }}>
+                        <div style={{ display: "flex", gap: "6px" }}>
+                            <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#ef4444" }} />
+                            <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#f59e0b" }} />
+                            <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#10b981" }} />
+                        </div>
+                        <span style={{ fontSize: "14px", color: "rgba(253,253,253,0.5)", fontWeight: 600 }}>
+                            Live Sales Audit Trail
+                        </span>
+                    </div>
+                    <img
+                        src="/images/sales-list.png"
+                        alt="Live sales monitoring list"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            display: "block",
+                        }}
+                    />
                 </div>
 
                 {/* Divider */}
@@ -393,8 +432,8 @@ export function SecuritySection() {
                     />
                     <div style={{ maxWidth: "560px", position: "relative", zIndex: 1 }}>
                         <p style={{ fontSize: "13px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px", justifyContent: "inherit" }}>
-                                <IconShield size={14} color="#f4a261" /> Stop losing money to fraud today
-                            </p>
+                            <IconShield size={14} color="#f4a261" /> Stop losing money to fraud today
+                        </p>
                         <h3
                             style={{
                                 fontFamily: "Syne, sans-serif",
@@ -412,7 +451,7 @@ export function SecuritySection() {
                             Don&apos;t wait for a major theft incident to realise you needed better controls. Start protecting your business right now — free.
                         </p>
                     </div>
-                    <div 
+                    <div
                         className="mobile-full-width"
                         style={{ display: "flex", flexDirection: "column", gap: "12px", position: "relative", zIndex: 1, minWidth: "200px" }}
                     >

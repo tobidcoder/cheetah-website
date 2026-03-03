@@ -185,26 +185,6 @@ export function Features() {
               </p>
             </div>
 
-            {/* Image */}
-            <div style={{ marginTop: "auto", overflow: "hidden", maxHeight: "260px" }}>
-              <img
-                src={feature.image}
-                alt={feature.title}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "block",
-                  objectFit: "cover",
-                  transition: "transform 0.5s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.transform = "scale(1.03)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.transform = "scale(1)";
-                }}
-              />
-            </div>
           </div>
         ))}
       </div>
@@ -235,7 +215,7 @@ export function Features() {
         <div style={{ padding: "clamp(40px, 8vw, 64px) 24px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
           <div className="section-tag" style={{ display: "inline-flex", marginBottom: "20px" }}>
             <span className="dot" />
-            Point of Sale
+            Lightning Fast POS
           </div>
           <h2
             style={{
@@ -248,7 +228,7 @@ export function Features() {
               lineHeight: 1.15,
             }}
           >
-            Tailored POS for your unique store
+            Built for speed. Built for scale.
           </h2>
           <p
             style={{
@@ -259,9 +239,9 @@ export function Features() {
               lineHeight: 1.65,
             }}
           >
-            Free to get started with Cheetah Point of Sale. No setup fees, Get started in minutes.
+            Keep lines moving, easily handle multi-item carts, and manage retail operations securely across multiple branches with our tailored Point of Sale.
           </p>
-          <div 
+          <div
             className="mobile-stack"
             style={{ display: "flex", gap: "16px", justifyContent: "center", marginBottom: "40px", flexWrap: "wrap" }}
           >
@@ -280,15 +260,16 @@ export function Features() {
             </a>
           </div>
         </div>
-        <div style={{ overflow: "hidden", maxHeight: "500px" }}>
+        <div style={{ overflow: "hidden", maxHeight: "600px", borderTop: "1px solid rgba(178,217,59,0.15)" }}>
           <img
-            src="/images/pos.png"
-            alt="Cheetah POS System"
+            src="/images/pos-screenshot.png"
+            alt="Cheetah Point of Sale"
             style={{
               width: "100%",
               height: "auto",
               display: "block",
               objectFit: "cover",
+              objectPosition: "top"
             }}
           />
         </div>

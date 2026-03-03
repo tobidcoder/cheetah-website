@@ -316,8 +316,52 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Big Animated CHEETAH Text */}
+        <div
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            marginTop: "40px",
+            position: "relative",
+            userSelect: "none",
+            pointerEvents: "none",
+            display: "flex",
+          }}
+        >
+          <div className="marquee-container">
+            <div className="marquee-text">CHEETAH</div>
+            <div className="marquee-text">CHEETAH</div>
+            <div className="marquee-text">CHEETAH</div>
+            <div className="marquee-text">CHEETAH</div>
+          </div>
+        </div>
+
         <style>{`
           /* Custom footer styles if needed */
+          @keyframes panText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .marquee-container {
+            display: flex;
+            animation: panText 40s linear infinite;
+            will-change: transform;
+          }
+          .marquee-text {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(80px, 20vw, 300px);
+            font-weight: 900;
+            line-height: 0.8;
+            padding-right: 5vw;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(178,217,59,0.15);
+            white-space: nowrap;
+          }
+          @media (max-width: 768px) {
+            .marquee-text {
+              -webkit-text-stroke: 1px rgba(178,217,59,0.25);
+            }
+          }
         `}</style>
       </footer>
 

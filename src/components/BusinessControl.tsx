@@ -61,7 +61,7 @@ export function BusinessControl() {
     }, []);
 
     return (
-        <section 
+        <section
             ref={ref}
             className="section-padding"
             style={{
@@ -110,9 +110,9 @@ export function BusinessControl() {
                     }}>
                         Running a business with multiple branches is hard. Ensuring your staff follows your pricing and doesn&apos;t &quot;re-negotiate&quot; behind your back is harder. Cheetah gives you back your peace of mind.
                     </p>
-                    
+
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
-                        <a 
+                        <a
                             href="https://back-office.usecheetah.com/signup"
                             style={{
                                 background: "#b2d93b",
@@ -130,7 +130,7 @@ export function BusinessControl() {
                         >
                             Sign Up Now
                         </a>
-                        <a 
+                        <a
                             href="https://calendly.com/cheetahdemo/30min"
                             style={{
                                 border: "1px solid rgba(253,253,253,0.2)",
@@ -156,7 +156,7 @@ export function BusinessControl() {
                     gap: "20px"
                 }}>
                     {controls.map((control, i) => (
-                        <div 
+                        <div
                             key={i}
                             style={{
                                 background: "rgba(253,253,253,0.03)",
@@ -209,6 +209,46 @@ export function BusinessControl() {
                     ))}
                 </div>
             </div>
+
+            {/* Price Logs Audit */}
+          
+                <div style={{
+                    marginBottom: "80px",
+                    borderRadius: "24px",
+                    overflow: "hidden",
+                    border: "1px solid rgba(178,217,59,0.15)",
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateY(0)" : "translateY(20px)",
+                    transition: "all 0.8s ease 0.2s",
+                }}>
+                    <div style={{
+                        background: "rgba(10,61,36,0.6)",
+                        padding: "20px 24px",
+                        borderBottom: "1px solid rgba(178,217,59,0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                    }}>
+                        <div style={{ display: "flex", gap: "6px" }}>
+                            <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#ef4444" }} />
+                            <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#f59e0b" }} />
+                            <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#10b981" }} />
+                        </div>
+                        <span style={{ fontSize: "14px", color: "rgba(253,253,253,0.5)", fontWeight: 600 }}>
+                            Live Price Logs Audit
+                        </span>
+                    </div>
+                    <img
+                        src="/images/price-logs.png"
+                        alt="Live sales monitoring list"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            display: "block",
+                        }}
+                    />
+                </div>
         </section>
     );
 }

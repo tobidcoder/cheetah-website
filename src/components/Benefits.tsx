@@ -38,7 +38,7 @@ const featuresList = [
     subtitle: "Smart inventory reordering",
     description:
       "Our solution provides actionable insights to optimize operations by minimizing on-hand inventory and accurately forecasting reordering needs. Never over-order or under-order again.",
-    image: "/images/forecast.jpg",
+    image: "/images/hourly-patterns.png",
     badge: "Forecasting",
   },
   {
@@ -46,7 +46,7 @@ const featuresList = [
     subtitle: "NooS technology",
     description:
       "We assist brands maintaining optimal inventory levels to align with actual customer demand and prevent stockouts. Real-time alerts keep you one step ahead.",
-    image: "/images/forecast2.jpg",
+    image: "/images/customer-insights.png",
     badge: "Availability",
   },
 ];
@@ -201,113 +201,141 @@ export function Benefits() {
       {/* Divider */}
       <div className="gradient-divider" style={{ marginBottom: "80px" }} />
 
-      {/* Features Pair */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "24px",
-        }}
-      >
-        {featuresList.map((feature) => (
-          <div
-            key={feature.title}
-            className="glass-card"
-            style={{
-              overflow: "hidden",
-              transition: "all 0.35s ease",
-              position: "relative",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(-6px)";
-              el.style.borderColor = "rgba(178,217,59,0.3)";
-              el.style.boxShadow = "0 30px 80px rgba(0,0,0,0.3)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(0)";
-              el.style.borderColor = "rgba(178,217,59,0.12)";
-              el.style.boxShadow = "none";
-            }}
-          >
-            {/* Image */}
-            <div style={{ overflow: "hidden", maxHeight: "280px" }}>
-              <img
-                src={feature.image}
-                alt={feature.title}
+      {/* Features Pair Restructured */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "100px" }}>
+        {featuresList.map((feature, i) => {
+          const isEven = i % 2 === 0;
+          return (
+            <div
+              key={feature.title}
+              className={`feature-row`}
+              style={{
+                display: "flex",
+                flexDirection: isEven ? "row" : "row-reverse",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "clamp(40px, 6vw, 80px)",
+              }}
+            >
+              {/* Content */}
+              <div
+                className="feature-content"
                 style={{
-                  width: "100%",
-                  height: "260px",
-                  objectFit: "cover",
-                  display: "block",
-                  transition: "transform 0.5s ease",
+                  flex: "1",
+                  minWidth: "300px",
+                }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    background: "rgba(178,217,59,0.12)",
+                    border: "1px solid rgba(178,217,59,0.25)",
+                    borderRadius: "50px",
+                    padding: "4px 14px",
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    color: "#b2d93b",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {feature.badge}
+                </span>
+                <h3
+                  style={{
+                    fontFamily: "Syne, sans-serif",
+                    fontSize: "clamp(28px, 4vw, 36px)",
+                    fontWeight: 700,
+                    color: "#fdfdfd",
+                    marginBottom: "8px",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {feature.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    color: "#b2d93b",
+                    fontWeight: 600,
+                    marginBottom: "18px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  {feature.subtitle}
+                </p>
+                <p
+                  style={{
+                    fontSize: "16px",
+                    color: "rgba(253,253,253,0.65)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {feature.description}
+                </p>
+              </div>
+
+              {/* Image */}
+              <div
+                className="feature-img-container glass-card"
+                style={{
+                  flex: "1.4",
+                  minWidth: "320px",
+                  overflow: "hidden",
+                  padding: "0",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  border: "1px solid rgba(178,217,59,0.15)",
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.transform = "scale(1.04)";
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = "translateY(-6px)";
+                  el.style.borderColor = "rgba(178,217,59,0.3)";
+                  el.style.boxShadow = "0 30px 80px rgba(0,0,0,0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.transform = "scale(1)";
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = "translateY(0)";
+                  el.style.borderColor = "rgba(178,217,59,0.15)";
+                  el.style.boxShadow = "none";
                 }}
-              />
+              >
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                    objectFit: "contain",
+                    transition: "transform 0.5s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.target as HTMLElement).style.transform = "scale(1.02)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.target as HTMLElement).style.transform = "scale(1)";
+                  }}
+                />
+              </div>
             </div>
-
-            {/* Content */}
-            <div style={{ padding: "32px" }}>
-              <span
-                style={{
-                  display: "inline-block",
-                  background: "rgba(178,217,59,0.12)",
-                  border: "1px solid rgba(178,217,59,0.25)",
-                  borderRadius: "50px",
-                  padding: "4px 14px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#b2d93b",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  marginBottom: "16px",
-                }}
-              >
-                {feature.badge}
-              </span>
-              <h3
-                style={{
-                  fontFamily: "Syne, sans-serif",
-                  fontSize: "26px",
-                  fontWeight: 700,
-                  color: "#fdfdfd",
-                  marginBottom: "8px",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {feature.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: "#b2d93b",
-                  fontWeight: 600,
-                  marginBottom: "14px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                {feature.subtitle}
-              </p>
-              <p
-                style={{
-                  fontSize: "15px",
-                  color: "rgba(253,253,253,0.6)",
-                  lineHeight: 1.65,
-                }}
-              >
-                {feature.description}
-              </p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .feature-row {
+            flex-direction: column !important;
+            text-align: center;
+          }
+          .feature-content, .feature-img-container {
+            width: 100% !important;
+            min-width: unset !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

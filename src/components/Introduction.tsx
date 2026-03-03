@@ -113,7 +113,7 @@ export function Introduction() {
             <strong style={{ color: "#fdfdfd", fontWeight: 600 }}>
               supermarkets, pharmacies, restaurants, retail, and beauty
             </strong>{" "}
-             businesses — powered by AI.
+            businesses — powered by AI.
           </p>
 
           {/* CTA Buttons */}
@@ -128,9 +128,9 @@ export function Introduction() {
               width: "100%",
             }}
           >
-            <a 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://back-office.usecheetah.com/"
               className="mobile-full-width"
             >
@@ -289,7 +289,7 @@ export function Introduction() {
             }}
           >
             <Image
-              src="/images/cheetah.png"
+              src="/images/dashboard-overview.png"
               alt="Cheetah Dashboard"
               width={1100}
               height={620}
