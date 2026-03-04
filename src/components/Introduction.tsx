@@ -392,7 +392,7 @@ export function Introduction() {
       >
         <iframe
           style={{ minHeight: "60dvh", height: "100%", width: "100%", borderRadius: "12px" }}
-          src="https://www.youtube.com/embed/mZ2eh3nMxH0?si=qwU6or1JXPfcZ6x3&autoplay=1"
+          src="https://www.youtube.com/embed/yyKnT1jRbr8?si=NKEQKtAEs4i6gL4M&autoplay=1"
           title="Cheetah POS Demo"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
