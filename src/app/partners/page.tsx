@@ -142,7 +142,7 @@ export default function PartnersPage() {
                         Build <span style={{ color: "#b2d93b" }}>Recurring Wealth.</span>
                     </Title>
                     <Text size="xl" c="rgba(253, 253, 253, 0.6)" style={{ maxWidth: rem(800), lineHeight: 1.5, fontSize: rem(22) }}>
-                        Join the retail revolution. Help businesses across Africa scale with Cheetah's AI—and secure a lifetime of recurring commissions.
+                        Join the retail revolution. Help businesses across Africa scale with Cheetah&apos;s AI—and secure a lifetime of recurring commissions.
                     </Text>
                     <Group gap="lg" wrap="wrap" justify="center" mt="xl">
                         <Button component={Link} href="/partners/apply" size="xl" radius="xl" className="btn-primary" style={{ height: rem(80), padding: "0 60px", fontSize: rem(20) }}>
@@ -158,7 +158,7 @@ export default function PartnersPage() {
             {/* Trust Banner */}
             <Box py={50} style={{ borderY: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)" }}>
                 <Container size="lg">
-                    <Text ta="center" size="xs" fw={800} c="rgba(253,253,253,0.3)" mb="xl" style={{ textTransform: "uppercase", letterSpacing: "3px" }}>Trusted by Africa's Market Leaders</Text>
+                    <Text ta="center" size="xs" fw={800} c="rgba(253,253,253,0.3)" mb="xl" style={{ textTransform: "uppercase", letterSpacing: "3px" }}>Trusted by Africa&apos;s Market Leaders</Text>
                     <Group justify="center" gap={60} opacity={0.4}>
                         <Text size="xl" fw={900}>PRINCE EBEANO</Text>
                         <Text size="xl" fw={900}>FOODCO</Text>
@@ -363,7 +363,7 @@ export default function PartnersPage() {
                                 </Title>
                             </Box>
                             <Text size="lg" c="rgba(253, 253, 253, 0.5)" style={{ lineHeight: 1.8, fontSize: rem(18) }}>
-                                We don't just provide a platform; we provide a dedicated success ecosystem. Your growth is our primary metric.
+                                We don&apos;t just provide a platform; we provide a dedicated success ecosystem. Your growth is our primary metric.
                             </Text>
                             <List
                                 spacing="lg"
@@ -418,7 +418,7 @@ export default function PartnersPage() {
                                 </Title>
                             </Box>
                             <Text size="lg" c="rgba(253, 253, 253, 0.5)" style={{ lineHeight: 1.8, fontSize: rem(18) }}>
-                                We've engineered a frictionless boarding process to take you from applicant to your first recurring commission in record time.
+                                We&apos;ve engineered a frictionless boarding process to take you from applicant to your first recurring commission in record time.
                             </Text>
                         </Stack>
 
@@ -462,11 +462,11 @@ export default function PartnersPage() {
                     </Accordion.Item>
                     <Accordion.Item value="duration">
                         <Accordion.Control>How long does the recurring commission last?</Accordion.Control>
-                        <Accordion.Panel>You earn commission for the first 24 months of every business's active subscription. After this period, you can renew your partner status based on portfolio performance.</Accordion.Panel>
+                        <Accordion.Panel>You earn commission for the first 24 months of every business&apos;s active subscription. After this period, you can renew your partner status based on portfolio performance.</Accordion.Panel>
                     </Accordion.Item>
                     <Accordion.Item value="commitment">
                         <Accordion.Control>Is there a minimum quota I must meet?</Accordion.Control>
-                        <Accordion.Panel>We don't impose rigid quotas, but we prioritize partners who show consistent activity. Gold and Platinum levels require specific portfolio sizes.</Accordion.Panel>
+                        <Accordion.Panel>We don&apos;t impose rigid quotas, but we prioritize partners who show consistent activity. Gold and Platinum levels require specific portfolio sizes.</Accordion.Panel>
                     </Accordion.Item>
                 </Accordion>
             </Container>
@@ -482,7 +482,7 @@ export default function PartnersPage() {
                             Built on Feedback. <br />Driven by <span style={{ color: "#b2d93b" }}>Real Growth.</span>
                         </Title>
                         <Text size="xl" c="rgba(253, 253, 253, 0.5)" style={{ maxWidth: 800, lineHeight: 1.6 }}>
-                            We release new features and updates every two weeks, directly influenced by the businesses our partners serve. We're not just building software; we're building the No. 1 OS for business globally.
+                            We release new features and updates every two weeks, directly influenced by the businesses our partners serve. We&apos;re not just building software; we&apos;re building the No. 1 OS for business globally.
                         </Text>
 
                         <SimpleGrid cols={{ base: 1, sm: 3 }} spacing={40} mt={60} style={{ width: "100%" }}>

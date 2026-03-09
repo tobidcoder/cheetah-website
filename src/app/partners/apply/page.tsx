@@ -135,7 +135,7 @@ export default function PartnerApplyPage() {
                             {/* <IconRocket size={32} color="rgba(178,217,59,0.2)" /> */}
 
                             <Text size={isMobile ? "sm" : "md"} c="rgba(253, 253, 253, 0.5)" style={{ lineHeight: 1.6, maxWidth: 750 }}>
-                                Join the elite network building Africa's retail future. Provide your strategic profile below for priority vetting.
+                                Join the elite network building Africa&apos;s retail future. Provide your strategic profile below for priority vetting.
                             </Text>
                         </Box>
 
