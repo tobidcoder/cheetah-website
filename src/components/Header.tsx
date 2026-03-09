@@ -62,7 +62,7 @@ export function Header() {
             alt="Cheetah"
             width={130}
             height={36}
-            style={{ 
+            style={{
               objectFit: "contain",
               width: "clamp(100px, 12vw, 130px)",
               height: "auto"
@@ -86,6 +86,7 @@ export function Header() {
             { label: "Home", href: "/" },
             { label: "Pricing", href: "/pricing" },
             { label: "Blog", href: "/blog" },
+            { label: "Partners", href: "/partners" },
             // { label: "Marketplace", href: "/marketplace" },
           ].map((item) => (
             <Link

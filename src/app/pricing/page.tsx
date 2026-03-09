@@ -108,7 +108,7 @@ const enterprisePerks = [
 ];
 
 const tableRows: { feature: string; pro: boolean | string; premium: boolean | string; enterprise: boolean | string }[] = [
-  { feature: "Unlimited staff",                   pro: true,          premium: true,          enterprise: true },
+  { feature: "Per staff",                   pro: true,          premium: true,          enterprise: true },
   { feature: "Unlimited branches",                pro: true,          premium: true,          enterprise: true },
   { feature: "Unlimited products",                pro: true,          premium: true,          enterprise: true },
   { feature: "Unlimited orders/sales",            pro: true,          premium: true,          enterprise: true },

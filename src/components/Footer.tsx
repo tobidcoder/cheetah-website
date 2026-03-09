@@ -17,6 +17,7 @@ const footerLinks: Record<string, FooterLink[]> = {
     { label: "Pricing", href: "/#pricing" },
     // { label: "Marketplace", href: "/marketplace" },
     { label: "Blog", href: "/blog" },
+    { label: "Partner", href: "/partners" },
   ],
   Company: [
     { label: "About Us", href: "/#about" },
@@ -353,13 +354,14 @@ export function Footer() {
             font-weight: 900;
             line-height: 0.8;
             padding-right: 5vw;
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(178,217,59,0.15);
+            color: rgba(178, 217, 59, 0.02);
+            -webkit-text-stroke: 1.5px rgba(178, 217, 59, 0.25);
             white-space: nowrap;
+            text-shadow: 0 0 30px rgba(178, 217, 59, 0.05);
           }
           @media (max-width: 768px) {
             .marquee-text {
-              -webkit-text-stroke: 1px rgba(178,217,59,0.25);
+              -webkit-text-stroke: 1px rgba(178, 217, 59, 0.35);
             }
           }
         `}</style>
