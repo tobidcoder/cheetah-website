@@ -613,6 +613,17 @@ export function Introduction() {
         .stat-card:hover {
             box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(178,217,59,0.05);
         }
+
+        @media (max-width: 768px) {
+            .hero-container { margin-bottom: 80px !important; }
+            .velocity-card { padding: 60px 24px !important; border-radius: 32px !important; }
+            .dashboard-reveal { margin-top: 40px; }
+            .dashboard-reveal > div:first-child { inset: -20px !important; }
+            .animate-actions { flex-direction: column; width: 100%; gap: 16px !important; }
+            .animate-actions button { width: 100%; justify-content: center; }
+            .play-trigger { width: 70px !important; height: 70px !important; }
+            .play-trigger svg { width: 28px !important; height: 28px !important; }
+        }
       `}</style>
 
       {/* Modern Video Interface */}

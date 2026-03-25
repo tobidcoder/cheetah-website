@@ -257,6 +257,13 @@ export function Benefits() {
         }
         @media (max-width: 1024px) {
             .mobile-grid-1 { grid-template-columns: 1fr !important; }
+            .mobile-grid-1 > div { order: 1 !important; border: none !important; }
+            .mobile-grid-1 > div:last-child { order: 0 !important; }
+        }
+        @media (max-width: 768px) {
+            .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
+            .benefit-stat-card { padding: 32px 24px !important; border-radius: 32px !important; }
+            .mobile-grid-1 > div { padding: 40px 24px !important; border-radius: 32px !important; }
         }
       `}</style>
     </section>

@@ -460,8 +460,13 @@ export function SecuritySection() {
                 @media (max-width: 1024px) {
                     .mobile-grid-1 { grid-template-columns: repeat(2, 1fr) !important; }
                 }
-                @media (max-width: 640px) {
+                @media (max-width: 768px) {
                     .mobile-grid-1 { grid-template-columns: 1fr !important; }
+                    .mobile-text-center { text-align: center !important; justify-content: center !important; }
+                    .mobile-full-width { width: 100% !important; min-width: 0 !important; }
+                    .security-item-card { padding: 32px 24px !important; }
+                    .pain-card { padding: 32px 24px !important; }
+                    .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
                 }
             `}</style>
         </section>

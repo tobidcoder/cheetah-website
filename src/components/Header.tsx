@@ -197,7 +197,7 @@ export function Header() {
                 { label: "Home", href: "/" },
                 { label: "Pricing", href: "/pricing" },
                 { label: "Blog", href: "/blog" },
-                { label: "Partner Program", href: "/partners" },
+                { label: "Partner with us", href: "/partners" },
             ].map((item) => (
               <Link
                 key={item.label}
@@ -248,6 +248,8 @@ export function Header() {
             .desktop-nav { display: none !important; }
             .mobile-burger { display: flex !important; }
             .desktop-cta { display: none !important; }
+        @media (max-width: 768px) {
+            header { padding: 0 16px !important; }
         }
       `}</style>
     </>

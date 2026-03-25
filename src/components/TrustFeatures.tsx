@@ -288,7 +288,13 @@ export function TrustFeatures() {
                 }
                 @media (max-width: 1100px) {
                     .trust-panel-grid { grid-template-columns: 1fr !important; border-radius: 40px !important; }
-                    .trust-panel-grid > div { border: none !important; }
+                    .trust-panel-grid > div { border: none !important; order: 1 !important; }
+                    .trust-panel-grid > div:last-child { order: 0 !important; } /* Stat/Visual first on mobile */
+                }
+                @media (max-width: 768px) {
+                    .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
+                    .trust-panel-grid { border-radius: 32px !important; }
+                    .trust-panel-grid > div { padding: 48px 24px !important; }
                 }
             `}</style>
         </section>

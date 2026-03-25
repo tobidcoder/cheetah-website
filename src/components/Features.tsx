@@ -305,9 +305,12 @@ export function Features() {
           .feature-bento-card:nth-child(1), .feature-bento-card:nth-child(5) { grid-column: span 2 !important; }
         }
         @media (max-width: 768px) {
+          .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
           .bento-grid-layout { grid-template-columns: 1fr !important; }
-          .feature-bento-card { grid-column: span 1 !important; padding: 32px 24px !important; }
+          .feature-bento-card { grid-column: span 1 !important; padding: 32px 24px !important; border-radius: 32px !important; }
           .feature-bento-card:nth-child(1), .feature-bento-card:nth-child(5) { grid-column: span 1 !important; }
+          .mobile-stack { flex-direction: column !important; width: 100% !important; gap: 16px !important; }
+          .mobile-stack a, .mobile-stack button { width: 100% !important; justify-content: center !important; }
         }
         .feature-bento-card:hover {
             background: rgba(10, 61, 36, 0.45) !important;

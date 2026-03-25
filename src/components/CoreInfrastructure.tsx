@@ -111,7 +111,7 @@ export function CoreInfrastructure() {
             Real-time neural processing of stock movements and market volatility. Cheetah AI anticipates demand cycles before they materialize, eliminating stockouts.
           </p>
           
-          <div style={{ display: "flex", gap: "clamp(32px, 6vw, 84px)" }}>
+          <div className="infra-stats-row" style={{ display: "flex", gap: "clamp(32px, 6vw, 84px)" }}>
             <div>
               <div style={{ fontSize: "max(44px, 4vw)", fontWeight: 800, color: "#00ff87", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>99.9%</div>
               <div style={{ fontSize: "12px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "12px" }}>Accuracy Rating</div>
@@ -262,7 +262,7 @@ export function CoreInfrastructure() {
 
         {/* Row 3: Inventory Autopilot (2/4) + Integrations (1/4) + Logistics (1/4) */}
         <div 
-            className="infra-card"
+            className="infra-card infra-flex-row"
             style={{
             gridColumn: "span 2",
             padding: "48px",
@@ -432,6 +432,9 @@ export function CoreInfrastructure() {
           .core-infra-grid { grid-template-columns: 1fr !important; }
           .infra-card, .standout-card, .security-annoucement-bar { grid-column: span 1 !important; padding: 40px 24px !important; }
           .security-annoucement-bar { border-radius: 32px; flex-direction: column; gap: 20px; text-align: center; }
+          .infra-stats-row { flex-direction: column; gap: 32px !important; }
+          .infra-flex-row { flex-direction: column; gap: 40px !important; text-align: center; }
+          .infra-flex-row > div { width: 100%; display: flex; flex-direction: column; alignItems: center; }
         }
       `}</style>
     </section>

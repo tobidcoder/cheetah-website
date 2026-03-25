@@ -52,6 +52,7 @@ export function News() {
     >
       {/* Section Header */}
       <div
+        className="news-header"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -353,6 +354,12 @@ export function News() {
         @keyframes pulse-tag {
             0%, 100% { opacity: 0.8; }
             50% { opacity: 0.4; }
+        }
+        @media (max-width: 768px) {
+            .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
+            .news-header { flex-direction: column !important; align-items: flex-start !important; gap: 32px !important; }
+            .blog-all-btn { width: 100% !important; justify-content: center !important; }
+            .blog-card-modern { height: auto !important; min-height: 560px !important; border-radius: 32px !important; }
         }
       `}</style>
     </section>

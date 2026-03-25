@@ -141,9 +141,10 @@ export function Feedback() {
           style={{ position: "relative", marginBottom: "80px" }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          className="slider-container"
         >
           {/* Controls — Refined Desktop Controls */}
-          <div style={{ position: "absolute", bottom: "-60px", right: "24px", display: "flex", gap: "12px", zIndex: 10 }}>
+          <div className="slider-controls" style={{ position: "absolute", bottom: "-60px", right: "24px", display: "flex", gap: "12px", zIndex: 10 }}>
             <button 
               onClick={() => scrollTo((activeIndex - 1 + testimonials.length) % testimonials.length)}
               style={{ width: "60px", height: "60px", borderRadius: "50%", background: "rgba(253,253,253,0.03)", border: "1px solid rgba(253,253,253,0.1)", color: "#fdfdfd", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)" }}
@@ -187,6 +188,7 @@ export function Feedback() {
                   overflow: "hidden",
                   boxShadow: "0 40px 100px rgba(0,0,0,0.4)"
                 }}
+                className="testimonial-card"
               >
                 {/* Visual Glass Accent */}
                 <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(circle at top right, ${t.color}10 0%, transparent 70%)`, pointerEvents: "none", filter: "blur(40px)" }} />
@@ -202,7 +204,7 @@ export function Feedback() {
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
 
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "40px", paddingTop: "56px", borderTop: "1px solid rgba(253,253,253,0.12)" }}>
+                  <div className="testimonial-footer" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "40px", paddingTop: "56px", borderTop: "1px solid rgba(253,253,253,0.12)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
                       <div style={{ width: "84px", height: "84px", borderRadius: "24px", background: `${t.color}15`, border: `2px solid ${t.color}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: t.color, fontFamily: "Syne, sans-serif" }}>
                         {t.initials}
@@ -213,7 +215,7 @@ export function Feedback() {
                       </div>
                     </div>
                     
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "12px" }}>
+                    <div className="testimonial-stat-block" style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "12px" }}>
                       <div style={{ display: "flex", gap: "6px" }}>
                         {[...Array(t.stars)].map((_, starI) => (
                           <svg key={starI} width="20" height="20" viewBox="0 0 24 24" fill={t.color}><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" /></svg>
@@ -251,7 +253,7 @@ export function Feedback() {
         </div>
 
         {/* Brand Reveal — Cinematic Brand Wall */}
-        <div style={{ background: "rgba(253,253,253,0.02)", borderRadius: "48px", padding: "64px 40px", border: "1px solid rgba(253,253,253,0.08)", backdropFilter: "blur(10px)" }}>
+        <div className="brand-wall" style={{ background: "rgba(253,253,253,0.02)", borderRadius: "48px", padding: "64px 40px", border: "1px solid rgba(253,253,253,0.08)", backdropFilter: "blur(10px)" }}>
           <p style={{ fontSize: "14px", color: "rgba(253,253,253,0.3)", fontWeight: 800, letterSpacing: "0.25em", textTransform: "uppercase", textAlign: "center", marginBottom: "48px" }}>
             The Gold Standard for Nigeria&apos;s Retail Elite
           </p>
@@ -314,6 +316,17 @@ export function Feedback() {
             transform: translateY(-3px);
             box-shadow: 0 20px 50px rgba(178,217,59,0.6) !important;
             filter: brightness(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
+            .testimonial-card { padding: 48px 24px !important; border-radius: 32px !important; }
+            .testimonial-footer { flex-direction: column !important; align-items: flex-start !important; gap: 32px !important; }
+            .testimonial-stat-block { align-items: flex-start !important; width: 100% !important; }
+            .brand-wall { border-radius: 32px !important; padding: 48px 20px !important; }
+            .slider-nav-btn { width: 50px !important; height: 50px !important; }
+            .slider-controls { right: 50% !important; transform: translateX(50%) !important; bottom: -80px !important; }
+            .slider-container { margin-bottom: 120px !important; }
         }
       `}</style>
     </section>

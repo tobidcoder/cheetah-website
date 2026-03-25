@@ -256,6 +256,15 @@ export function BusinessControl() {
                     filter: brightness(1.1);
                     box-shadow: 0 15px 40px rgba(178,217,59,0.5) !important;
                 }
+                @media (max-width: 1024px) {
+                    .mobile-grid-1 { grid-template-columns: 1fr !important; gap: 32px !important; }
+                }
+                @media (max-width: 768px) {
+                    section { margin-top: 0 !important; margin-bottom: 80px !important; }
+                    .control-card { padding: 32px 24px !important; }
+                    .btn-glow-primary { width: 100%; justify-content: center; }
+                    button { width: 100%; margin-bottom: 12px; }
+                }
             `}</style>
         </section>
     );

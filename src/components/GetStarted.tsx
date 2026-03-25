@@ -42,6 +42,7 @@ export function GetStarted() {
           transform: visible ? "translateY(0)" : "translateY(40px)",
           transition: "all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1)",
         }}
+        className="get-started-box"
       >
         {/* Cinematic Background Orbs */}
         <div
@@ -161,6 +162,7 @@ export function GetStarted() {
 
           {/* Trust Indicators — Modern Cards */}
           <div
+            className="trust-indicator-container"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -213,6 +215,15 @@ export function GetStarted() {
             border-color: rgba(253,253,253,0.2) !important;
             color: #fdfdfd !important;
             transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
+            .get-started-box { border-radius: 40px !important; padding: 80px 20px !important; }
+            .mobile-stack { flex-direction: column !important; width: 100% !important; gap: 16px !important; }
+            .mobile-stack a, .mobile-stack button { width: 100% !important; justify-content: center !important; }
+            .trust-indicator-container { flex-direction: column !important; align-items: center !important; }
+            .trust-pill { width: 100% !important; justify-content: center !important; }
         }
       `}</style>
     </section>
