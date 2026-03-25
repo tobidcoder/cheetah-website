@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import { IconBox, IconTrendingUp, IconDollarSign, IconZap } from "@/components/Icons";
 
 const stats = [
@@ -14,7 +15,7 @@ const stats = [
     label: "Sell-Through Increase",
     description: "Minimize overstock while maximizing full-price sales.",
     icon: <IconTrendingUp size={24} />,
-    color: "#8fb22e",
+    color: "#00ff87",
   },
   {
     value: "+35%",
@@ -25,7 +26,7 @@ const stats = [
   },
   {
     value: "10x",
-    label: "Return on Investment",
+    label: "ROI",
     description: "Revamp your inventory strategy to achieve outstanding ROI.",
     icon: <IconZap size={24} />,
     color: "#c8e85f",
@@ -40,6 +41,7 @@ const featuresList = [
       "Our solution provides actionable insights to optimize operations by minimizing on-hand inventory and accurately forecasting reordering needs. Never over-order or under-order again.",
     image: "/images/hourly-patterns.png",
     badge: "Forecasting",
+    color: "#b2d93b"
   },
   {
     title: "Never Out of Stock",
@@ -48,54 +50,59 @@ const featuresList = [
       "We assist brands maintaining optimal inventory levels to align with actual customer demand and prevent stockouts. Real-time alerts keep you one step ahead.",
     image: "/images/customer-insights.png",
     badge: "Availability",
+    color: "#00ff87"
   },
 ];
 
 export function Benefits() {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={ref}
       className="section-padding"
       style={{
-        maxWidth: "1200px",
+        maxWidth: "1350px",
         margin: "0 auto",
         position: "relative",
       }}
     >
+      {/* Background Orbs */}
+      <div style={{ position: "absolute", top: "20%", right: "-10%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(178,217,59,0.05) 0%, transparent 70%)", filter: "blur(60px)", pointerEvents: "none" }} />
+
       {/* Section Header */}
-      <div style={{ textAlign: "center", marginBottom: "80px" }}>
-        <div className="section-tag" style={{ display: "inline-flex", marginBottom: "20px" }}>
+      <div style={{ textAlign: "center", marginBottom: "100px", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(30px)", transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
+        <div className="section-tag" style={{ display: "inline-flex", marginBottom: "28px", backdropFilter: "blur(10px)" }}>
           <span className="dot" />
-          Proven Results
+          Measured Impact
         </div>
         <h2
           style={{
-            fontFamily: "Syne, Inter, sans-serif",
-            fontSize: "clamp(32px, 5vw, 60px)",
+            fontFamily: "Syne, sans-serif",
+            fontSize: "clamp(42px, 6vw, 76px)",
             fontWeight: 800,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.1,
+            letterSpacing: "-0.05em",
+            lineHeight: 0.95,
             color: "#fdfdfd",
-            maxWidth: "700px",
-            margin: "0 auto 20px",
+            maxWidth: "800px",
+            margin: "0 auto 28px",
           }}
         >
           Data science meets{" "}
-          <span
-            style={{
-              background: "linear-gradient(135deg, #b2d93b, #8fb22e)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            retail excellence
-          </span>
+          <span style={{ color: "rgba(253,253,253,0.3)", fontStyle: "italic", fontWeight: 500 }}>retail excellence.</span>
         </h2>
         <p
           style={{
             color: "rgba(253,253,253,0.55)",
-            fontSize: "18px",
-            maxWidth: "560px",
+            fontSize: "20px",
+            maxWidth: "680px",
             margin: "0 auto",
             lineHeight: 1.6,
           }}
@@ -104,219 +111,129 @@ export function Benefits() {
         </p>
       </div>
 
-      {/* Stats Grid */}
+      {/* Stats Grid — Modernized */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-          gap: "16px",
-          marginBottom: "80px",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "24px",
+          marginBottom: "120px",
         }}
+        className="mobile-grid-1"
       >
-        {stats.map((stat) => (
+        {stats.map((stat, i) => (
           <div
             key={stat.label}
-            className="glass-card"
+            className="benefit-stat-card"
             style={{
-              padding: "28px 20px",
-              transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
-              cursor: "default",
-              position: "relative",
-              overflow: "hidden",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(-6px)";
-              el.style.borderColor = "rgba(178,217,59,0.35)";
-              el.style.boxShadow = "0 20px 60px rgba(178,217,59,0.12)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(0)";
-              el.style.borderColor = "rgba(178,217,59,0.12)";
-              el.style.boxShadow = "none";
+              padding: "48px 32px",
+              background: "rgba(10,61,36,0.3)",
+              border: "1px solid rgba(178,217,59,0.12)",
+              borderRadius: "40px",
+              transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(30px)",
+              transitionDelay: `${i * 0.1 + 0.3}s`,
             }}
           >
-            {/* Background glow */}
-            <div
-              style={{
-                position: "absolute",
-                top: "-20px",
-                right: "-20px",
-                width: "100px",
-                height: "100px",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(178,217,59,0.06) 0%, transparent 70%)",
-                pointerEvents: "none",
-              }}
-            />
             <div style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "10px",
-              background: `${stat.color}18`,
+              width: "56px",
+              height: "56px",
+              borderRadius: "18px",
+              background: `${stat.color}15`,
               border: `1px solid ${stat.color}30`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               color: stat.color,
-              marginBottom: "16px",
+              marginBottom: "32px",
             }}>{stat.icon}</div>
             <div
               style={{
-                fontSize: "clamp(32px, 5vw, 56px)",
+                fontSize: "clamp(48px, 4vw, 64px)",
                 fontWeight: 800,
                 color: stat.color,
-                letterSpacing: "-0.04em",
+                letterSpacing: "-0.05em",
                 fontFamily: "Syne, sans-serif",
                 lineHeight: 1,
-                marginBottom: "10px",
+                marginBottom: "16px",
               }}
             >
               {stat.value}
             </div>
-            <div
-              style={{
-                fontSize: "14px",
-                fontWeight: 700,
-                color: "#fdfdfd",
-                marginBottom: "8px",
-              }}
-            >
-              {stat.label}
-            </div>
-            <div
-              style={{
-                fontSize: "13px",
-                color: "rgba(253,253,253,0.5)",
-                lineHeight: 1.5,
-              }}
-            >
-              {stat.description}
-            </div>
+            <div style={{ fontSize: "18px", fontWeight: 800, color: "#fdfdfd", marginBottom: "12px", letterSpacing: "-0.01em" }}>{stat.label}</div>
+            <p style={{ fontSize: "14px", color: "rgba(253,253,253,0.45)", lineHeight: 1.6 }}>{stat.description}</p>
           </div>
         ))}
       </div>
 
-      {/* Divider */}
-      <div className="gradient-divider" style={{ marginBottom: "80px" }} />
-
-      {/* Features Pair Restructured */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "100px" }}>
+      {/* Features Pair Restructured — Cinematic Blocks */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
         {featuresList.map((feature, i) => {
           const isEven = i % 2 === 0;
           return (
             <div
               key={feature.title}
-              className={`feature-row`}
               style={{
-                display: "flex",
-                flexDirection: isEven ? "row" : "row-reverse",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "clamp(40px, 6vw, 80px)",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "0",
+                background: "rgba(10,61,36,0.2)",
+                border: "1px solid rgba(178,217,59,0.15)",
+                borderRadius: "56px",
+                overflow: "hidden",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(40px)",
+                transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                transitionDelay: `${i * 0.2 + 0.6}s`,
               }}
+              className="mobile-grid-1"
             >
-              {/* Content */}
               <div
-                className="feature-content"
                 style={{
-                  flex: "1",
-                  minWidth: "300px",
+                  padding: "clamp(48px, 8vw, 100px) clamp(32px, 6vw, 64px)",
+                  order: isEven ? 0 : 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center"
                 }}
               >
-                <span
-                  style={{
-                    display: "inline-block",
-                    background: "rgba(178,217,59,0.12)",
-                    border: "1px solid rgba(178,217,59,0.25)",
-                    borderRadius: "50px",
-                    padding: "4px 14px",
-                    fontSize: "12px",
-                    fontWeight: 600,
-                    color: "#b2d93b",
-                    letterSpacing: "0.05em",
-                    textTransform: "uppercase",
-                    marginBottom: "16px",
-                  }}
-                >
-                  {feature.badge}
-                </span>
+                <div style={{ display: "inline-flex", background: `${feature.color}15`, border: `1px solid ${feature.color}30`, borderRadius: "100px", padding: "8px 20px", marginBottom: "32px", width: "fit-content" }}>
+                   <span style={{ fontSize: "12px", fontWeight: 900, color: feature.color, letterSpacing: "0.2em", textTransform: "uppercase" }}>{feature.badge}</span>
+                </div>
                 <h3
                   style={{
                     fontFamily: "Syne, sans-serif",
-                    fontSize: "clamp(28px, 4vw, 36px)",
-                    fontWeight: 700,
+                    fontSize: "clamp(32px, 4vw, 48px)",
+                    fontWeight: 800,
                     color: "#fdfdfd",
-                    marginBottom: "8px",
-                    letterSpacing: "-0.02em",
+                    marginBottom: "16px",
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1
                   }}
                 >
                   {feature.title}
                 </h3>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "#b2d93b",
-                    fontWeight: 600,
-                    marginBottom: "18px",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  {feature.subtitle}
-                </p>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: "rgba(253,253,253,0.65)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {feature.description}
-                </p>
+                <p style={{ fontSize: "16px", fontWeight: 800, color: feature.color, marginBottom: "28px", textTransform: "uppercase", letterSpacing: "0.1em" }}>{feature.subtitle}</p>
+                <p style={{ fontSize: "18px", color: "rgba(253,253,253,0.55)", lineHeight: 1.65 }}>{feature.description}</p>
               </div>
 
-              {/* Image */}
-              <div
-                className="feature-img-container glass-card"
-                style={{
-                  flex: "1.4",
-                  minWidth: "320px",
-                  overflow: "hidden",
-                  padding: "0",
-                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                  border: "1px solid rgba(178,217,59,0.15)",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.transform = "translateY(-6px)";
-                  el.style.borderColor = "rgba(178,217,59,0.3)";
-                  el.style.boxShadow = "0 30px 80px rgba(0,0,0,0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.transform = "translateY(0)";
-                  el.style.borderColor = "rgba(178,217,59,0.15)";
-                  el.style.boxShadow = "none";
-                }}
-              >
-                <img
+              <div style={{ order: isEven ? 1 : 0, background: "rgba(5,35,21,0.4)", position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px", borderLeft: isEven ? "1px solid rgba(178,217,59,0.1)" : "none", borderRight: !isEven ? "1px solid rgba(178,217,59,0.1)" : "none" }}>
+                 <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle, ${feature.color}08 0%, transparent 70%)`, filter: "blur(40px)" }} />
+                 <img
                   src={feature.image}
                   alt={feature.title}
                   style={{
                     width: "100%",
                     height: "auto",
-                    display: "block",
-                    objectFit: "contain",
-                    transition: "transform 0.5s ease",
+                    borderRadius: "32px",
+                    border: "1px solid rgba(253,253,253,0.1)",
+                    boxShadow: "0 40px 100px rgba(0,0,0,0.5)",
+                    position: "relative",
+                    zIndex: 1,
+                    transition: "transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)"
                   }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.transform = "scale(1.02)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.transform = "scale(1)";
-                  }}
+                  className="benefit-img"
                 />
               </div>
             </div>
@@ -325,15 +242,18 @@ export function Benefits() {
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .feature-row {
-            flex-direction: column !important;
-            text-align: center;
-          }
-          .feature-content, .feature-img-container {
-            width: 100% !important;
-            min-width: unset !important;
-          }
+        .benefit-stat-card:hover {
+            background: rgba(10,61,36,0.5) !important;
+            border-color: rgba(178,217,59,0.4) !important;
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+        .benefit-img:hover {
+            transform: scale(1.03) translateY(-5px) !important;
+            box-shadow: 0 60px 120px rgba(0,0,0,0.7) !important;
+        }
+        @media (max-width: 1024px) {
+            .mobile-grid-1 { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

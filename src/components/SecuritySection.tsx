@@ -5,7 +5,7 @@ import { IconDollarSign, IconSlash, IconPackage, IconBuilding, IconShield } from
 const painPoints = [
     {
         problem: "Cashiers pocketing cash",
-        solution: "Every transaction is logged, timestamped, and tied to a named staff member — forever.",
+        solution: "Every transaction is logged, timestamped, and tied to a named staff member, forever.",
         icon: <IconDollarSign size={24} color="#f4a261" />,
     },
     {
@@ -15,7 +15,7 @@ const painPoints = [
     },
     {
         problem: "Inventory shrinkage (theft)",
-        solution: "Every stock movement — sale, transfer, adjustment — creates an uneditable audit trail.",
+        solution: "Every stock movement, sale, transfer, adjustment, creates an uneditable audit trail.",
         icon: <IconPackage size={24} color="#f4a261" />,
     },
     {
@@ -28,11 +28,9 @@ const painPoints = [
 const securityFeatures = [
     {
         icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
         ),
         title: "Role-Based Staff Access",
@@ -41,61 +39,55 @@ const securityFeatures = [
     },
     {
         icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
         ),
         title: "Live Sales Monitoring",
-        desc: "Track every sale, void, discount, and return in real time — from your phone, wherever you are.",
-        accent: "#60c6f0",
+        desc: "Track every sale, void, discount, and return in real time, from your phone, wherever you are.",
+        accent: "#00ff87",
     },
     {
         icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-                <polyline points="10 9 9 9 8 9" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
             </svg>
         ),
         title: "Tamper-Proof Audit Logs",
         desc: "Every action in Cheetah creates a permanent, immutable log. Deleted records leave a trace. Nothing disappears.",
-        accent: "#f4a261",
+        accent: "#60c6f0",
     },
     {
         icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
         ),
         title: "Fraud Anomaly Alerts",
         desc: "Unusual discount patterns, late-shift voids, or off-hours access? Cheetah flags it and alerts you instantly.",
-        accent: "#a78bfa",
+        accent: "#f4a261",
     },
     {
         icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
+                <line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
             </svg>
         ),
         title: "Back-Office Security",
-        desc: "Your back-office portal is protected by 2FA, session timeouts, and encrypted login tokens — no backdoors.",
-        accent: "#f59e0b",
+        desc: "Your back-office portal is protected by 2FA, session timeouts, and encrypted login tokens, no backdoors.",
+        accent: "#b2d93b",
     },
     {
         icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
         ),
         title: "End-to-End Encryption",
-        desc: "From the cashier's keypad to your cloud database — every byte is encrypted in transit and at rest with AES-256.",
-        accent: "#b2d93b",
+        desc: "From the cashier's keypad to your cloud database, every byte is encrypted in transit and at rest with AES-256.",
+        accent: "#00ff87",
     },
 ];
 
@@ -106,7 +98,7 @@ export function SecuritySection() {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([e]) => { if (e.isIntersecting) setVisible(true); },
-            { threshold: 0.08 }
+            { threshold: 0.1 }
         );
         if (ref.current) observer.observe(ref.current);
         return () => observer.disconnect();
@@ -119,45 +111,47 @@ export function SecuritySection() {
             style={{
                 position: "relative",
                 overflow: "hidden",
+                background: "#052315"
             }}
         >
-            {/* Full-width background band */}
+            {/* Cinematic Background Grid System */}
             <div
                 style={{
                     position: "absolute",
                     inset: 0,
-                    background: "linear-gradient(180deg, rgba(10,61,36,0.0) 0%, rgba(10,61,36,0.5) 30%, rgba(10,61,36,0.5) 70%, rgba(10,61,36,0.0) 100%)",
+                    background: "radial-gradient(circle at 50% 50%, rgba(10,61,36,0.3) 0%, transparent 80%)",
                     pointerEvents: "none",
                 }}
             />
             <div
-                className="grid-pattern"
                 style={{
                     position: "absolute",
                     inset: 0,
-                    opacity: 0.5,
+                    background: `linear-gradient(rgba(178,217,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(178,217,59,0.03) 1px, transparent 1px)`,
+                    backgroundSize: "60px 60px",
+                    opacity: 0.4,
                     pointerEvents: "none",
                 }}
             />
 
-            <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+            <div style={{ maxWidth: "1350px", margin: "0 auto", position: "relative", zIndex: 1 }}>
 
-                {/* Section Header */}
-                <div style={{ textAlign: "center", marginBottom: "80px" }}>
-                    <div className="section-tag" style={{ display: "inline-flex", marginBottom: "20px" }}>
+                {/* Section Header — Dramatic Typography */}
+                <div style={{ textAlign: "center", marginBottom: "100px", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(40px)", transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
+                    <div className="section-tag" style={{ display: "inline-flex", marginBottom: "28px", background: "rgba(244,162,95,0.1)", border: "1px solid rgba(244,162,95,0.3)", color: "#f4a261" }}>
                         <span className="dot" style={{ background: "#f4a261" }} />
-                        <span style={{ color: "#f4a261" }}>Fraud & Security</span>
+                        Fraud & Security Command
                     </div>
                     <h2
                         style={{
                             fontFamily: "Syne, Inter, sans-serif",
-                            fontSize: "clamp(34px, 5.5vw, 62px)",
+                            fontSize: "clamp(38px, 6vw, 76px)",
                             fontWeight: 800,
-                            letterSpacing: "-0.04em",
-                            lineHeight: 1.06,
+                            letterSpacing: "-0.05em",
+                            lineHeight: 0.95,
                             color: "#fdfdfd",
-                            maxWidth: "820px",
-                            margin: "0 auto 24px",
+                            maxWidth: "920px",
+                            margin: "0 auto 28px",
                         }}
                     >
                         African retail loses{" "}
@@ -171,69 +165,60 @@ export function SecuritySection() {
                         >
                             billions to fraud
                         </span>{" "}
-                        every year.
-                        <br />
-                        <span style={{ color: "#b2d93b" }}>Cheetah ends that.</span>
+                        every year. <br />
+                        <span style={{ color: "#b2d93b", fontStyle: "italic", fontWeight: 500 }}>Cheetah ends that.</span>
                     </h2>
                     <p
                         style={{
                             color: "rgba(253,253,253,0.55)",
-                            fontSize: "18px",
-                            maxWidth: "640px",
+                            fontSize: "20px",
+                            maxWidth: "720px",
                             margin: "0 auto",
-                            lineHeight: 1.7,
+                            lineHeight: 1.6,
                         }}
                     >
-                        Staff theft, ghost sales, fake refunds, inventory shrinkage — these are not just problems, they are silent killers for SMEs. Cheetah gives you the visibility and control to stop them before they start.
+                        Staff theft, ghost sales, fake refunds, inventory shrinkage, these are not just problems, they are silent killers. Cheetah gives you the visibility and control to stop them completely.
                     </p>
                 </div>
 
-                {/* Pain Points → Solutions Strip */}
+                {/* Pain Points Strip — High Fidelity Cards */}
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                        gap: "16px",
-                        marginBottom: "80px",
-                        opacity: visible ? 1 : 0,
-                        transition: "opacity 0.8s ease 0.1s",
+                        gridTemplateColumns: "repeat(4, 1fr)",
+                        gap: "24px",
+                        marginBottom: "120px",
                     }}
+                    className="mobile-grid-1"
                 >
                     {painPoints.map((item, i) => (
                         <div
                             key={item.problem}
                             style={{
-                                background: "rgba(10,61,36,0.4)",
-                                border: "1px solid rgba(178,217,59,0.1)",
-                                borderRadius: "16px",
-                                padding: "28px 24px",
-                                transition: "all 0.3s ease",
+                                background: "rgba(10,61,36,0.3)",
+                                border: "1px solid rgba(244,162,97,0.15)",
+                                borderRadius: "32px",
+                                padding: "40px 32px",
+                                transition: "all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)",
                                 cursor: "default",
+                                opacity: visible ? 1 : 0,
+                                transform: visible ? "translateY(0)" : "translateY(30px)",
+                                transitionDelay: `${i * 0.1 + 0.2}s`
                             }}
-                            onMouseEnter={(e) => {
-                                const el = e.currentTarget as HTMLElement;
-                                el.style.borderColor = "rgba(178,217,59,0.3)";
-                                el.style.transform = "translateY(-4px)";
-                                el.style.background = "rgba(10,61,36,0.6)";
-                            }}
-                            onMouseLeave={(e) => {
-                                const el = e.currentTarget as HTMLElement;
-                                el.style.borderColor = "rgba(178,217,59,0.1)";
-                                el.style.transform = "translateY(0)";
-                                el.style.background = "rgba(10,61,36,0.4)";
-                            }}
+                            className="pain-card"
                         >
-                            <div style={{ marginBottom: "12px", color: "#f4a261" }}>{item.icon}</div>
-                            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: "8px" }}>
-                                <IconSlash size={12} color="#f4a261" /> Problem
+                            <div style={{ marginBottom: "28px", color: "#f4a261" }}>{item.icon}</div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "11px", fontWeight: 900, color: "#f4a261", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "12px" }}>
+                                <IconSlash size={14} /> Problem
                             </div>
                             <p
                                 style={{
-                                    fontSize: "15px",
-                                    fontWeight: 700,
-                                    color: "rgba(253,253,253,0.8)",
-                                    marginBottom: "16px",
-                                    lineHeight: 1.3,
+                                    fontSize: "18px",
+                                    fontWeight: 800,
+                                    color: "#fdfdfd",
+                                    marginBottom: "24px",
+                                    lineHeight: 1.2,
+                                    letterSpacing: "-0.01em"
                                 }}
                             >
                                 {item.problem}
@@ -242,16 +227,16 @@ export function SecuritySection() {
                                 style={{
                                     height: "1px",
                                     background: "linear-gradient(90deg, rgba(178,217,59,0.3), transparent)",
-                                    marginBottom: "16px",
+                                    marginBottom: "24px",
                                 }}
                             />
-                            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: "#b2d93b", letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: "8px" }}>
-                                <IconShield size={12} color="#b2d93b" /> Cheetah&apos;s Fix
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "11px", fontWeight: 900, color: "#b2d93b", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "12px" }}>
+                                <IconShield size={14} /> Cheetah Fix
                             </div>
                             <p
                                 style={{
-                                    fontSize: "14px",
-                                    color: "rgba(253,253,253,0.6)",
+                                    fontSize: "15px",
+                                    color: "rgba(253,253,253,0.5)",
                                     lineHeight: 1.6,
                                 }}
                             >
@@ -261,116 +246,113 @@ export function SecuritySection() {
                     ))}
                 </div>
 
-                {/* Live Sales Audit Demo */}
+                {/* Audit Demo Block — Cinematic High Res Preview */}
                 <div style={{
-                    marginBottom: "80px",
-                    borderRadius: "24px",
+                    marginBottom: "120px",
+                    borderRadius: "48px",
                     overflow: "hidden",
-                    border: "1px solid rgba(178,217,59,0.15)",
-                    boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                    border: "1px solid rgba(178,217,59,0.2)",
+                    boxShadow: "0 60px 140px rgba(0,0,0,0.8)",
                     opacity: visible ? 1 : 0,
-                    transform: visible ? "translateY(0)" : "translateY(20px)",
-                    transition: "all 0.8s ease 0.2s",
+                    transform: visible ? "translateY(0)" : "translateY(40px)",
+                    transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s",
+                    background: "#0a2315"
                 }}>
                     <div style={{
-                        background: "rgba(10,61,36,0.6)",
-                        padding: "20px 24px",
-                        borderBottom: "1px solid rgba(178,217,59,0.1)",
+                        background: "rgba(10,61,36,0.8)",
+                        padding: "28px 36px",
+                        borderBottom: "1px solid rgba(178,217,59,0.15)",
                         display: "flex",
                         alignItems: "center",
-                        gap: "12px",
+                        gap: "20px",
+                        backdropFilter: "blur(20px)"
                     }}>
-                        <div style={{ display: "flex", gap: "6px" }}>
+                        <div style={{ display: "flex", gap: "8px" }}>
                             <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#ef4444" }} />
                             <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#f59e0b" }} />
                             <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#10b981" }} />
                         </div>
-                        <span style={{ fontSize: "14px", color: "rgba(253,253,253,0.5)", fontWeight: 600 }}>
-                            Live Sales Audit Trail
+                        <span style={{ fontSize: "14px", color: "rgba(253,253,253,0.6)", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                            Live Security Feed: Tamper-Proof Audit Trail
                         </span>
+                        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "10px" }}>
+                            <div style={{ width: "10px", height: "10px", background: "#ef4444", borderRadius: "50%", animation: "pulse-tag 2s infinite" }} />
+                            <span style={{ fontSize: "12px", fontWeight: 900, color: "#ef4444", letterSpacing: "0.15em" }}>LIVE MONITORING</span>
+                        </div>
                     </div>
-                    <img
-                        src="/images/sales-list.png"
-                        alt="Live sales monitoring list"
-                        style={{
-                            width: "100%",
-                            height: "auto",
-                            display: "block",
-                        }}
-                    />
+                    <div style={{ padding: "16px", background: "rgba(5,35,21,0.5)" }}>
+                        <img
+                            src="/images/sales-list.png"
+                            alt="Live sales monitoring list"
+                            style={{
+                                width: "100%",
+                                height: "auto",
+                                display: "block",
+                                borderRadius: "32px",
+                                filter: "drop-shadow(0 0 40px rgba(0,0,0,0.5))"
+                            }}
+                        />
+                    </div>
                 </div>
 
-                {/* Divider */}
-                <div className="gradient-divider" style={{ marginBottom: "80px" }} />
-
-                {/* Security Features Grid */}
-                <div style={{ marginBottom: "72px" }}>
-                    <div style={{ textAlign: "center", marginBottom: "52px" }}>
+                {/* Security Feature Grid — Refined & Interactive */}
+                <div style={{ marginBottom: "120px" }}>
+                    <div style={{ textAlign: "center", marginBottom: "64px" }}>
                         <h3
                             style={{
                                 fontFamily: "Syne, sans-serif",
-                                fontSize: "clamp(26px, 3.5vw, 42px)",
+                                fontSize: "clamp(32px, 4vw, 56px)",
                                 fontWeight: 800,
                                 color: "#fdfdfd",
-                                letterSpacing: "-0.03em",
-                                marginBottom: "12px",
+                                letterSpacing: "-0.04em",
+                                marginBottom: "16px",
+                                lineHeight: 1
                             }}
                         >
-                            Enterprise security. SME price.
+                            Enterprise security. <br />
+                            <span style={{ color: "rgba(253,253,253,0.35)", fontWeight: 500, fontStyle: "italic" }}>SME availability.</span>
                         </h3>
-                        <p style={{ color: "rgba(253,253,253,0.45)", fontSize: "17px", maxWidth: "500px", margin: "0 auto", lineHeight: 1.65 }}>
-                            You don&apos;t need a big IT department to run securely. Cheetah bakes security into every layer, automatically.
+                        <p style={{ color: "rgba(253,253,253,0.5)", fontSize: "18px", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
+                            You don&apos;t need a massive IT department to run securely. Cheetah bakes bank-grade security into every layer, automatically.
                         </p>
                     </div>
 
                     <div
                         style={{
                             display: "grid",
-                            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                            gap: "20px",
-                            opacity: visible ? 1 : 0,
-                            transition: "opacity 0.8s ease 0.3s",
+                            gridTemplateColumns: "repeat(3, 1fr)",
+                            gap: "24px",
                         }}
+                        className="mobile-grid-1"
                     >
                         {securityFeatures.map((feat, i) => (
                             <div
                                 key={feat.title}
+                                className="security-item-card"
                                 style={{
-                                    background: `${feat.accent}08`,
-                                    border: `1px solid ${feat.accent}20`,
-                                    borderRadius: "18px",
-                                    padding: "28px 28px 32px",
-                                    transition: "all 0.3s ease",
+                                    background: "rgba(253,253,253,0.02)",
+                                    border: `1px solid rgba(253,253,253,0.1)`,
+                                    borderRadius: "32px",
+                                    padding: "48px 40px",
+                                    transition: "all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)",
                                     cursor: "default",
                                     opacity: visible ? 1 : 0,
-                                    transform: visible ? "translateY(0)" : "translateY(20px)",
-                                    transitionDelay: `${0.05 * i}s`,
-                                }}
-                                onMouseEnter={(e) => {
-                                    const el = e.currentTarget as HTMLElement;
-                                    el.style.borderColor = `${feat.accent}45`;
-                                    el.style.transform = "translateY(-4px)";
-                                    el.style.boxShadow = `0 16px 48px ${feat.accent}14`;
-                                }}
-                                onMouseLeave={(e) => {
-                                    const el = e.currentTarget as HTMLElement;
-                                    el.style.borderColor = `${feat.accent}20`;
-                                    el.style.transform = "translateY(0)";
-                                    el.style.boxShadow = "none";
+                                    transform: visible ? "translateY(0)" : "translateY(30px)",
+                                    transitionDelay: `${0.05 * i + 0.6}s`,
                                 }}
                             >
                                 <div
                                     style={{
-                                        width: "48px",
-                                        height: "48px",
-                                        borderRadius: "12px",
-                                        background: `${feat.accent}18`,
+                                        width: "60px",
+                                        height: "60px",
+                                        borderRadius: "18px",
+                                        background: `${feat.accent}15`,
                                         border: `1px solid ${feat.accent}30`,
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
                                         color: feat.accent,
-                                        marginBottom: "18px",
+                                        marginBottom: "32px",
                                     }}
                                 >
                                     {feat.icon}
@@ -378,20 +360,20 @@ export function SecuritySection() {
                                 <h4
                                     style={{
                                         fontFamily: "Syne, sans-serif",
-                                        fontSize: "18px",
-                                        fontWeight: 700,
+                                        fontSize: "22px",
+                                        fontWeight: 800,
                                         color: "#fdfdfd",
-                                        marginBottom: "10px",
-                                        letterSpacing: "-0.02em",
+                                        marginBottom: "16px",
+                                        letterSpacing: "-0.01em",
                                     }}
                                 >
                                     {feat.title}
                                 </h4>
                                 <p
                                     style={{
-                                        fontSize: "14px",
+                                        fontSize: "16px",
                                         color: "rgba(253,253,253,0.55)",
-                                        lineHeight: 1.7,
+                                        lineHeight: 1.65,
                                     }}
                                 >
                                     {feat.desc}
@@ -401,76 +383,84 @@ export function SecuritySection() {
                     </div>
                 </div>
 
-                {/* Emotional CTA panel */}
+                {/* Emotional CTA Panel — Cinematic Closure */}
                 <div
-                    className="mobile-stack mobile-text-center"
                     style={{
-                        borderRadius: "24px",
-                        background: "linear-gradient(135deg, rgba(244,162,97,0.1) 0%, rgba(10,61,36,0.8) 100%)",
-                        border: "1px solid rgba(244,162,97,0.25)",
-                        padding: "clamp(40px, 8vw, 64px) clamp(24px, 5vw, 56px)",
+                        borderRadius: "56px",
+                        background: "linear-gradient(135deg, rgba(244,162,97,0.15) 0%, rgba(10,61,36,0.8) 100%)",
+                        border: "1px solid rgba(244,162,97,0.3)",
+                        padding: "clamp(60px, 8vw, 100px) clamp(32px, 6vw, 84px)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
                         flexWrap: "wrap",
-                        gap: "32px",
+                        gap: "48px",
                         position: "relative",
                         overflow: "hidden",
+                        boxShadow: "0 60px 140px rgba(0,0,0,0.6)"
                     }}
+                    className="mobile-text-center"
                 >
-                    <div
-                        style={{
-                            position: "absolute",
-                            top: "-60px",
-                            right: "-60px",
-                            width: "300px",
-                            height: "300px",
-                            borderRadius: "50%",
-                            background: "radial-gradient(circle, rgba(244,162,97,0.08) 0%, transparent 70%)",
-                            pointerEvents: "none",
-                        }}
-                    />
-                    <div style={{ maxWidth: "560px", position: "relative", zIndex: 1 }}>
-                        <p style={{ fontSize: "13px", fontWeight: 700, color: "#f4a261", letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px", justifyContent: "inherit" }}>
-                            <IconShield size={14} color="#f4a261" /> Stop losing money to fraud today
-                        </p>
+                    <div style={{ maxWidth: "640px", position: "relative", zIndex: 1 }}>
+                        <div style={{ fontSize: "14px", fontWeight: 900, color: "#f4a261", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px", display: "flex", alignItems: "center", gap: "10px", justifyContent: "inherit" }}>
+                            <IconShield size={18} /> Stop the leakage today
+                        </div>
                         <h3
                             style={{
                                 fontFamily: "Syne, sans-serif",
-                                fontSize: "clamp(22px, 3vw, 34px)",
+                                fontSize: "clamp(28px, 4vw, 48px)",
                                 fontWeight: 800,
                                 color: "#fdfdfd",
-                                letterSpacing: "-0.03em",
-                                lineHeight: 1.2,
-                                marginBottom: "14px",
+                                letterSpacing: "-0.04em",
+                                lineHeight: 1,
+                                marginBottom: "24px",
                             }}
                         >
                             Every day without Cheetah is a day your business is exposed.
                         </h3>
-                        <p style={{ fontSize: "15px", color: "rgba(253,253,253,0.5)", lineHeight: 1.6 }}>
-                            Don&apos;t wait for a major theft incident to realise you needed better controls. Start protecting your business right now — free.
+                        <p style={{ fontSize: "18px", color: "rgba(253,253,253,0.5)", lineHeight: 1.6 }}>
+                            Don&apos;t wait for a major incident to realize you needed better controls. Start protecting your business right now, free.
                         </p>
                     </div>
-                    <div
-                        className="mobile-full-width"
-                        style={{ display: "flex", flexDirection: "column", gap: "12px", position: "relative", zIndex: 1, minWidth: "200px" }}
-                    >
-                        <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/" className="mobile-full-width">
-                            <button className="btn-primary" style={{ padding: "15px 36px", fontSize: "15px", width: "100%" }}>
-                                Protect My Business — Free
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "16px", position: "relative", zIndex: 1, minWidth: "260px" }} className="mobile-full-width">
+                        <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
+                            <button className="btn-glow-primary" style={{ padding: "20px 48px", fontSize: "17px", borderRadius: "100px", background: "#b2d93b", color: "#052315", border: "none", fontWeight: 800, width: "100%", boxShadow: "0 10px 40px rgba(178,217,59,0.3)" }}>
+                                Protect My Business, Free
                             </button>
                         </a>
-                        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min" className="mobile-full-width">
-                            <button className="btn-secondary" style={{ padding: "15px 36px", fontSize: "15px", width: "100%" }}>
+                        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
+                            <button style={{ padding: "20px 48px", fontSize: "17px", borderRadius: "100px", border: "1px solid rgba(253,253,253,0.15)", background: "rgba(253,253,253,0.05)", color: "#fdfdfd", fontWeight: 700, width: "100%" }}>
                                 Book a Security Demo
                             </button>
                         </a>
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                .pain-card:hover {
+                    background: rgba(10,61,36,0.45) !important;
+                    border-color: rgba(244,162,97,0.4) !important;
+                    transform: translateY(-8px) scale(1.02) !important;
+                    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+                }
+                .security-item-card:hover {
+                    background: rgba(253,253,253,0.05) !important;
+                    border-color: rgba(178,217,59,0.2) !important;
+                    transform: translateY(-8px) !important;
+                }
+                .btn-glow-primary:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 20px 50px rgba(178,217,59,0.5) !important;
+                    filter: brightness(1.1);
+                }
+                @media (max-width: 1024px) {
+                    .mobile-grid-1 { grid-template-columns: repeat(2, 1fr) !important; }
+                }
+                @media (max-width: 640px) {
+                    .mobile-grid-1 { grid-template-columns: 1fr !important; }
+                }
+            `}</style>
         </section>
     );
 }

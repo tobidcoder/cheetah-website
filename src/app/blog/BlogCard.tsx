@@ -40,13 +40,12 @@ export function BlogCard({ blogs }: { blogs: Blog[] }) {
       {/* ── Featured post ───────────────────── */}
       <Link
         href={`/post/${featured.slug}?i=${featured.id}`}
-        passHref
         style={{ textDecoration: "none" }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "0",
             background: "rgba(10,61,36,0.35)",
             border: "1px solid rgba(178,217,59,0.12)",
@@ -67,7 +66,7 @@ export function BlogCard({ blogs }: { blogs: Blog[] }) {
           className="featured-blog-card"
         >
           {/* Image */}
-          <div style={{ position: "relative", overflow: "hidden", minHeight: "320px", background: "rgba(5,35,21,0.8)" }}>
+          <div style={{ position: "relative", overflow: "hidden", height: "100%", minHeight: "320px", background: "rgba(5,35,21,0.8)" }}>
             {featured.image_url && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
@@ -82,7 +81,7 @@ export function BlogCard({ blogs }: { blogs: Blog[] }) {
           {/* Content */}
           <div
             style={{
-              padding: "44px 40px",
+              padding: "clamp(24px, 5vw, 44px)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -143,25 +142,27 @@ export function BlogCard({ blogs }: { blogs: Blog[] }) {
             </p>
 
             {/* Author + date */}
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              {featured.created_by_profile_image ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={featured.created_by_profile_image}
-                  alt={featured.created_by}
-                  style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(178,217,59,0.25)" }}
-                />
-              ) : (
-                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(178,217,59,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: 700, color: "#b2d93b" }}>
-                  {(featured.created_by || "?")[0].toUpperCase()}
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    {featured.created_by_profile_image ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                        src={featured.created_by_profile_image}
+                        alt={featured.created_by}
+                        style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(178,217,59,0.25)" }}
+                        />
+                    ) : (
+                        <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(178,217,59,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: 700, color: "#b2d93b" }}>
+                        {(featured.created_by || "?")[0].toUpperCase()}
+                        </div>
+                    )}
+                    <div>
+                        <p style={{ fontSize: "13px", fontWeight: 600, color: "rgba(253,253,253,0.75)", margin: 0 }}>{featured.created_by}</p>
+                        {formatDate(featured.created_at) && (
+                        <p style={{ fontSize: "11px", color: "rgba(253,253,253,0.3)", margin: 0 }}>{formatDate(featured.created_at)}</p>
+                        )}
+                    </div>
                 </div>
-              )}
-              <div>
-                <p style={{ fontSize: "13px", fontWeight: 600, color: "rgba(253,253,253,0.75)", margin: 0 }}>{featured.created_by}</p>
-                {formatDate(featured.created_at) && (
-                  <p style={{ fontSize: "11px", color: "rgba(253,253,253,0.3)", margin: 0 }}>{formatDate(featured.created_at)}</p>
-                )}
-              </div>
 
               {/* Read more arrow */}
               <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "4px", fontSize: "13px", fontWeight: 700, color: "#b2d93b" }}>

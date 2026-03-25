@@ -29,17 +29,57 @@ const theme = createTheme({
 });
 
 export const metadata: Metadata = {
-  title: "Cheetah — AI-Powered Retail Inventory & POS Platform",
+  metadataBase: new URL("https://usecheetah.com"),
+  title: {
+    default: "Cheetah — AI-Powered Retail Inventory & POS Platform",
+    template: "%s | Cheetah POS",
+  },
   description:
-    "Custom-tailored inventory and point-of-sale solutions for supermarkets, pharmacies, restaurants, retail, and beauty businesses. Start free today.",
-  keywords:
-    "retail POS, inventory management, AI forecasting, point of sale, supermarket software, pharmacy POS, restaurant POS Nigeria",
+    "Custom-tailored inventory and point-of-sale solutions for supermarkets, pharmacies, restaurants, retail, and beauty businesses. Cheetah's AI forecasts demand, prevents fraud, and scales your business. Start free.",
+  applicationName: "Cheetah POS",
+  authors: [{ name: "Cheetah Team" }],
+  generator: "Next.js",
+  keywords: [
+    "retail POS",
+    "inventory management",
+    "AI forecasting",
+    "point of sale Nigeria",
+    "supermarket software",
+    "pharmacy POS",
+    "restaurant POS",
+    "business control",
+    "Africa retail OS",
+  ],
+  referrer: "origin-when-cross-origin",
+  themeColor: "#052315",
+  viewport: "width=device-width, initial-scale=1",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Cheetah — Sell smarter. Grow faster.",
     description:
-      "AI-powered retail inventory optimization and POS platform for African businesses.",
+      "AI-powered retail inventory optimization and POS platform for African businesses. Real-time insights, fraud prevention, and offline resilience.",
     type: "website",
     url: "https://usecheetah.com",
+    siteName: "Cheetah",
+    locale: "en_NG",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cheetah — AI-Powered Retail OS",
+    description: "Scale your retail business with AI-driven inventory and POS.",
+    creator: "@usecheetah",
   },
 };
 

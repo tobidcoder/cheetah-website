@@ -4,15 +4,23 @@ import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMantineTheme } from "@mantine/core";
 import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetch } from "@/app/api";
 
 export function News() {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -30,11 +38,15 @@ export function News() {
 
   return (
     <section
+      ref={ref}
       className="section-padding"
       style={{
-        maxWidth: "1200px",
+        maxWidth: "1350px",
         margin: "0 auto",
         position: "relative",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(30px)",
+        transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1)",
       }}
     >
       {/* Section Header */}
@@ -43,37 +55,38 @@ export function News() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
-          marginBottom: "48px",
+          marginBottom: "64px",
           flexWrap: "wrap",
-          gap: "16px",
+          gap: "24px",
+          padding: "0 24px"
         }}
       >
-        <div>
-          <div className="section-tag" style={{ display: "inline-flex", marginBottom: "16px" }}>
+        <div style={{ maxWidth: "600px" }}>
+          <div className="section-tag" style={{ display: "inline-flex", marginBottom: "20px", backdropFilter: "blur(10px)" }}>
             <span className="dot" />
-            Latest from Cheetah
+            Insights & Intelligence
           </div>
           <h2
             style={{
               fontFamily: "Syne, Inter, sans-serif",
-              fontSize: "clamp(28px, 4vw, 44px)",
+              fontSize: "clamp(34px, 5vw, 56px)",
               fontWeight: 800,
               color: "#fdfdfd",
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
+              letterSpacing: "-0.04em",
+              lineHeight: 1,
               margin: 0,
             }}
           >
-            Insights &{" "}
+            The Future of{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #b2d93b, #8fb22e)",
+                background: "linear-gradient(135deg, #b2d93b, #00ff87)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              Resources
+              African Retail.
             </span>
           </h2>
         </div>
@@ -82,258 +95,259 @@ export function News() {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "6px",
+            gap: "10px",
             color: "#b2d93b",
-            fontWeight: 600,
-            fontSize: "14px",
-            border: "1px solid rgba(178,217,59,0.3)",
-            borderRadius: "50px",
-            padding: "8px 20px",
-            transition: "all 0.25s ease",
+            fontWeight: 800,
+            fontSize: "15px",
+            background: "rgba(178,217,59,0.05)",
+            border: "1px solid rgba(178,217,59,0.25)",
+            borderRadius: "100px",
+            padding: "16px 32px",
+            transition: "all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)",
+            textDecoration: "none",
+            backdropFilter: "blur(10px)"
           }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(178,217,59,0.08)";
-            (e.currentTarget as HTMLElement).style.borderColor = "rgba(178,217,59,0.5)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "transparent";
-            (e.currentTarget as HTMLElement).style.borderColor = "rgba(178,217,59,0.3)";
-          }}
+          className="blog-all-btn"
         >
-          View all posts
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          Explore All Posts
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </Link>
       </div>
 
-      {loading ? (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {[1, 2, 3].map((i) => (
+      <div style={{ padding: "0 24px" }}>
+        {loading ? (
             <div
-              key={i}
-              className="glass-card"
-              style={{
-                height: "380px",
-                background:
-                  "linear-gradient(90deg, rgba(10,61,36,0.3) 25%, rgba(10,61,36,0.5) 50%, rgba(10,61,36,0.3) 75%)",
-                backgroundSize: "200% 100%",
-                animation: "shimmer 1.5s infinite",
-              }}
-            />
-          ))}
-        </div>
-      ) : blogs.length > 0 ? (
-        <Carousel
-          slideSize={{ base: "88%", sm: "50%", lg: "33.333%" }}
-          slideGap={{ base: "md", sm: "lg" }}
-          align="start"
-          slidesToScroll={mobile ? 1 : 2}
-          withControls={blogs.length > 3}
-          styles={{
-            control: {
-              background: "rgba(10,61,36,0.8)",
-              border: "1px solid rgba(178,217,59,0.3)",
-              color: "#b2d93b",
-              "&:hover": {
-                background: "rgba(178,217,59,0.15)",
-              },
-            },
-          }}
-        >
-          {blogs.map((blog: any) => (
-            <Carousel.Slide key={blog.id}>
-              <Link href={`/post/${blog.slug}?i=${blog.id}`} passHref>
+            style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "24px",
+            }}
+            >
+            {[1, 2, 3].map((i) => (
                 <div
-                  className="glass-card"
-                  style={{
-                    overflow: "hidden",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    cursor: "pointer",
-                    transition: "all 0.35s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.transform = "translateY(-5px)";
-                    el.style.borderColor = "rgba(178,217,59,0.3)";
-                    el.style.boxShadow = "0 20px 60px rgba(0,0,0,0.35)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.transform = "translateY(0)";
-                    el.style.borderColor = "rgba(178,217,59,0.12)";
-                    el.style.boxShadow = "none";
-                  }}
-                >
-                  {/* Image */}
-                  <div style={{ overflow: "hidden", height: "200px" }}>
-                    {blog.image_url ? (
-                      <img
-                        src={blog.image_url}
-                        alt={blog.title}
-                        style={{
-                          width: "100%",
-                          height: "200px",
-                          objectFit: "cover",
-                          transition: "transform 0.5s ease",
-                          display: "block",
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.target as HTMLElement).style.transform = "scale(1.05)";
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.target as HTMLElement).style.transform = "scale(1)";
-                        }}
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          height: "200px",
-                          background: "linear-gradient(135deg, rgba(178,217,59,0.1), rgba(10,61,36,0.5))",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: "40px",
-                        }}
-                      >
-                        📰
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
-                    {blog.blog_category && (
-                      <span
-                        style={{
-                          display: "inline-block",
-                          background: "rgba(178,217,59,0.1)",
-                          border: "1px solid rgba(178,217,59,0.2)",
-                          borderRadius: "50px",
-                          padding: "3px 12px",
-                          fontSize: "11px",
-                          fontWeight: 700,
-                          color: "#b2d93b",
-                          letterSpacing: "0.05em",
-                          textTransform: "uppercase",
-                          marginBottom: "14px",
-                        }}
-                      >
-                        {blog.blog_category.name}
-                      </span>
-                    )}
-                    <h3
-                      style={{
-                        fontFamily: "Syne, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "18px",
-                        color: "#fdfdfd",
-                        lineHeight: 1.35,
-                        marginBottom: "12px",
-                        letterSpacing: "-0.01em",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {blog.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        color: "rgba(253,253,253,0.5)",
-                        lineHeight: 1.6,
-                        display: "-webkit-box",
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                        flex: 1,
-                      }}
-                    >
-                      {blog.summary}
-                    </p>
-
-                    {/* Author */}
+                key={i}
+                style={{
+                    height: "480px",
+                    background: "rgba(10,61,36,0.2)",
+                    borderRadius: "40px",
+                    border: "1px solid rgba(178,217,59,0.08)",
+                    animation: "pulse-tag 2s infinite",
+                }}
+                />
+            ))}
+            </div>
+        ) : blogs.length > 0 ? (
+            <Carousel
+            slideSize={{ base: "100%", sm: "50%", lg: "33.333%" }}
+            slideGap="24"
+            align="start"
+            slidesToScroll={mobile ? 1 : 1}
+            withControls={blogs.length > (mobile ? 1 : 3)}
+            loop
+            styles={{
+                root: { paddingBottom: "40px" },
+                control: {
+                background: "rgba(10,61,36,0.9)",
+                border: "1px solid rgba(178,217,59,0.3)",
+                color: "#b2d93b",
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                transition: "all 0.3s ease",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
+                "&:hover": {
+                    background: "#b2d93b",
+                    color: "#052315",
+                    transform: "scale(1.1)",
+                },
+                },
+                indicator: {
+                    background: "rgba(178,217,59,0.2)",
+                    width: "12px",
+                    height: "6px",
+                    transition: "all 0.3s ease",
+                    "&[data-active]": {
+                        background: "#b2d93b",
+                        width: "32px"
+                    }
+                }
+            }}
+            withIndicators
+            >
+            {blogs.map((blog: any, i: number) => (
+                <Carousel.Slide key={blog.id}>
+                <Link href={`/post/${blog.slug}?i=${blog.id}`} style={{ textDecoration: "none" }}>
                     <div
-                      style={{
+                    className="blog-card-modern"
+                    style={{
+                        overflow: "hidden",
+                        height: "540px",
                         display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        marginTop: "20px",
-                        paddingTop: "16px",
-                        borderTop: "1px solid rgba(178,217,59,0.08)",
-                      }}
+                        flexDirection: "column",
+                        background: "rgba(10,61,36,0.3)",
+                        border: "1px solid rgba(178,217,59,0.12)",
+                        borderRadius: "44px",
+                        transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                        position: "relative"
+                    }}
                     >
-                      {blog.created_by_profile_image ? (
+                    {/* Image Area */}
+                    <div style={{ overflow: "hidden", height: "260px", position: "relative" }}>
+                        {blog.image_url ? (
                         <img
-                          src={blog.created_by_profile_image}
-                          alt={blog.created_by}
-                          style={{
-                            width: "28px",
-                            height: "28px",
-                            borderRadius: "50%",
+                            src={blog.image_url}
+                            alt={blog.title}
+                            style={{
+                            width: "100%",
+                            height: "100%",
                             objectFit: "cover",
-                          }}
+                            transition: "transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                            display: "block",
+                            }}
+                            className="blog-img"
                         />
-                      ) : (
+                        ) : (
                         <div
-                          style={{
-                            width: "28px",
-                            height: "28px",
-                            borderRadius: "50%",
-                            background: "rgba(178,217,59,0.2)",
+                            style={{
+                            width: "100%",
+                            height: "100%",
+                            background: "linear-gradient(135deg, rgba(178,217,59,0.1), rgba(10,61,36,0.5))",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            fontSize: "12px",
-                          }}
+                            fontSize: "64px",
+                            }}
                         >
-                          👤
+                            🐆
                         </div>
-                      )}
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          color: "rgba(253,253,253,0.4)",
-                          fontWeight: 500,
-                        }}
-                      >
-                        {blog.created_by}
-                      </span>
+                        )}
+                        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 60%, rgba(5,35,21,0.6))" }} />
                     </div>
-                  </div>
-                </div>
-              </Link>
-            </Carousel.Slide>
-          ))}
-        </Carousel>
-      ) : (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "60px 24px",
-            color: "rgba(253,253,253,0.4)",
-            fontSize: "16px",
-          }}
-        >
-          No articles found. Check back soon!
-        </div>
-      )}
+
+                    {/* Content Area */}
+                    <div style={{ padding: "40px 32px", flex: 1, display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+                            {blog.blog_category && (
+                            <span
+                                style={{
+                                background: "rgba(178,217,59,0.1)",
+                                border: "1px solid rgba(178,217,59,0.25)",
+                                borderRadius: "100px",
+                                padding: "6px 16px",
+                                fontSize: "11px",
+                                fontWeight: 900,
+                                color: "#b2d93b",
+                                letterSpacing: "0.1em",
+                                textTransform: "uppercase",
+                                }}
+                            >
+                                {blog.blog_category.name}
+                            </span>
+                            )}
+                            <span style={{ fontSize: "11px", fontWeight: 800, color: "rgba(253,253,253,0.3)", marginTop: "6px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                                {new Date(blog.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            </span>
+                        </div>
+                        
+                        <h3
+                        style={{
+                            fontFamily: "Syne, sans-serif",
+                            fontWeight: 800,
+                            fontSize: "22px",
+                            color: "#fdfdfd",
+                            lineHeight: 1.25,
+                            marginBottom: "16px",
+                            letterSpacing: "-0.01em",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                        }}
+                        >
+                        {blog.title}
+                        </h3>
+                        <p
+                        style={{
+                            fontSize: "15px",
+                            color: "rgba(253,253,253,0.5)",
+                            lineHeight: 1.6,
+                            display: "-webkit-box",
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            marginBottom: "24px"
+                        }}
+                        >
+                        {blog.summary}
+                        </p>
+
+                        <div
+                        style={{
+                            marginTop: "auto",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            paddingTop: "24px",
+                            borderTop: "1px solid rgba(253,253,253,0.1)",
+                        }}
+                        >
+                        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                            {blog.created_by_profile_image ? (
+                            <img
+                                src={blog.created_by_profile_image}
+                                alt={blog.created_by}
+                                style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover", border: "1px solid rgba(178,217,59,0.3)" }}
+                            />
+                            ) : (
+                            <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(178,217,59,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#b2d93b", fontSize: "14px", fontWeight: 800 }}>{blog.created_by?.charAt(0) || 'C'}</div>
+                            )}
+                            <span style={{ fontSize: "14px", color: "rgba(253,253,253,0.5)", fontWeight: 700 }}>
+                                {blog.created_by || 'Admin'}
+                            </span>
+                        </div>
+                        <div className="read-more-accent" style={{ color: "#b2d93b", fontWeight: 800, fontSize: "13px", display: "flex", alignItems: "center", gap: "6px" }}>
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </Link>
+                </Carousel.Slide>
+            ))}
+            </Carousel>
+        ) : (
+            <div style={{ textAlign: "center", padding: "100px 24px", color: "rgba(253,253,253,0.3)", fontSize: "18px", background: "rgba(253,253,253,0.02)", borderRadius: "40px", border: "1px solid rgba(253,253,253,0.08)" }}>
+            No articles found. Check back soon for the latest retail intelligence.
+            </div>
+        )}
+      </div>
 
       <style>{`
-        @keyframes shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
+        .blog-all-btn:hover {
+            background: #b2d93b !important;
+            color: #052315 !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(178,217,59,0.4);
+        }
+        .blog-card-modern:hover {
+            background: rgba(10,61,36,0.45) !important;
+            border-color: rgba(178,217,59,0.4) !important;
+            transform: translateY(-10px);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        }
+        .blog-card-modern:hover .blog-img {
+            transform: scale(1.08);
+        }
+        .blog-card-modern:hover .read-more-accent {
+            transform: translateX(5px);
+            opacity: 0.8;
+        }
+        @keyframes pulse-tag {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
         }
       `}</style>
     </section>

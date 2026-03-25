@@ -34,6 +34,21 @@ export const post = async (endpoint: any, formData: any) => {
   }
 };
 
+export const put = async (endpoint: any, formData: any) => {
+  try {
+    const response = await axios.put(`${baseUrl}/${endpoint}`, formData);
+    await Swal.fire({
+      title: "Success!",
+      text: response.data.message,
+      icon: "success",
+      confirmButtonColor: "#b2d93b",
+    });
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const upload = async (endpoint: any, formData: any) => {
   try {
     const response = await axios.post(`${endpoint}`, formData); // Replace with your endpoint

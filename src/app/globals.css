@@ -86,11 +86,15 @@ body {
 @media (max-width: 768px) {
   .mobile-stack {
     flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
   }
   
   .mobile-text-center {
     text-align: center !important;
     align-items: center !important;
+    justify-content: center !important;
   }
 
   .mobile-full-width {
@@ -102,13 +106,31 @@ body {
     display: none !important;
   }
 
-  .mobile-padding-sm {
-    padding: 60px 20px !important;
+  .section-padding {
+    padding: 64px 20px !important;
   }
 
-  .section-padding {
-    padding: 60px 20px !important;
+  .mobile-grid-1 {
+    grid-template-columns: 1fr !important;
   }
+
+  .mobile-small-text {
+    font-size: 14px !important;
+  }
+
+  .mobile-title-sm {
+    font-size: 28px !important;
+  }
+}
+
+/* Ensure no horizontal overflow ever */
+* {
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 @media (min-width: 769px) {

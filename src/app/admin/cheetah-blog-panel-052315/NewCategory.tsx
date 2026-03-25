@@ -1,15 +1,15 @@
 'use client'
 import {useState} from 'react'
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button,Box,Text,Input } from '@mantine/core';
+import { Modal, Button, Box, Text, Input, Group } from '@mantine/core';
 import {post} from '@/app/api'
 
 
-export default function NewCategory() {
+export default function NewCategory({ categories, onRefetch } : any) {
   const [opened, { open, close }] = useDisclosure(false);
   const [name, setName] = useState<any>();
   const [description, setDescription] = useState<any>();
-
+  const [editingId, setEditingId] = useState<number | null>(null);
 
   const handleSubmit = async (e: any) => {
     // e.preventDefault();
@@ -20,44 +20,130 @@ export default function NewCategory() {
       description:description,
     };
     
-    const data = await post('blog-categories', formData);
-    close();
-    alert('Category added successfuly');
+    if (editingId) {
+       const { put } = await import('@/app/api');
+       await put(`blog-categories/${editingId}`, formData);
+    } else {
+       await post('blog-categories', formData);
+    }
     
+    setName("");
+    setDescription("");
+    setEditingId(null);
+    if(onRefetch) onRefetch();
   };
 
-
+  const startEdit = (cat: any) => {
+     setName(cat.name);
+     setDescription(cat.description || "");
+     setEditingId(cat.id);
+  };
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Authentication">
-      <Box>
-          <Text>Name</Text>
+      <Modal 
+        opened={opened} 
+        onClose={() => {
+          close();
+          setName("");
+          setDescription("");
+          setEditingId(null);
+        }} 
+        title={<Text fw={800} fz="lg" c="#fdfdfd">Manage Categories</Text>}
+        radius="lg"
+        styles={{
+          content: { background: "#052315", border: "1px solid rgba(178,217,59,0.2)" },
+          header: { background: "#052315", borderBottom: "1px solid rgba(178,217,59,0.1)" },
+          close: { color: "#fdfdfd", '&:hover': { background: "rgba(178,217,59,0.1)" } }
+        }}
+      >
+        <Box>
+          <Text fw={700} fz="sm" mb={8} c="rgba(253,253,253,0.7)">Category Name</Text>
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
             size="lg"
             radius="lg"
-            placeholder="Name"
+            variant="filled"
+            styles={{
+              input: {
+                background: "rgba(253,253,253,0.05)",
+                border: "1px solid rgba(178,217,59,0.2)",
+                color: "#fdfdfd",
+              }
+            }}
+            placeholder="e.g., Inventory Management"
           />
-          {/* {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>} */}
-        </Box><Box>
-          <Text>Description</Text>
+        </Box>
+        <Box mt="md">
+          <Text fw={700} fz="sm" mb={8} c="rgba(253,253,253,0.7)">Description</Text>
           <Input
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             size="lg"
             radius="lg"
-            placeholder="Description"
+            variant="filled"
+            styles={{
+              input: {
+                background: "rgba(253,253,253,0.05)",
+                border: "1px solid rgba(178,217,59,0.2)",
+                color: "#fdfdfd",
+              }
+            }}
+            placeholder="Brief description of this category"
           />
-          {/* {errors.imageUrl && <Text c="red">{errors.imageUrl}</Text>} */}
         </Box>
-        <Button radius={'lg'} size="xl"
-          miw="100%" className='primary-button' onClick={(e)=>handleSubmit(e)}>Submit</Button>
+        <Group mt={32}>
+            {editingId && (
+                <Button 
+                    radius="lg" 
+                    size="lg"
+                    variant="outline"
+                    color="gray"
+                    onClick={() => {
+                        setEditingId(null);
+                        setName("");
+                        setDescription("");
+                    }}
+                >
+                    Cancel
+                </Button>
+            )}
+            <Button 
+            radius="lg" 
+            size="lg"
+            flex={1}
+            style={{ background: "#b2d93b", color: "#052315", fontWeight: 700 }}
+            onClick={(e) => handleSubmit(e)}
+            >
+            {editingId ? "Update Category" : "Add Category"}
+            </Button>
+        </Group>
+
+        <Box mt="xl">
+            <Text fw={700} fz="sm" mb={8} c="rgba(253,253,253,0.7)">Existing Categories</Text>
+            {categories?.map((cat: any) => (
+                <Group key={cat.id} justify="space-between" p="sm" style={{ borderBottom: "1px solid rgba(178,217,59,0.1)" }}>
+                    <Text size="sm" c="#fdfdfd">{cat.name}</Text>
+                    <Button size="xs" variant="subtle" color="teal" onClick={() => startEdit(cat)}>Edit</Button>
+                </Group>
+            ))}
+        </Box>
       </Modal>
 
-      <Button radius={'lg'} size="xl"
-          miw="100%" className='primary-button' onClick={open}>Add New Category</Button>
+      <Button 
+        radius="lg" 
+        size="lg"
+        variant="outline"
+        style={{ 
+          borderColor: "rgba(178,217,59,0.5)", 
+          color: "#b2d93b",
+          background: "transparent"
+        }}
+        onClick={open}
+      >
+        Manage Categories
+      </Button>
     </>
   );
 }

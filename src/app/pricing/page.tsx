@@ -1,599 +1,533 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   IconUsers, IconBuilding, IconBox, IconShoppingCart, IconReceipt,
   IconActivity, IconSmartphone, IconLock, IconCloud, IconWifi,
-  IconCpu, IconBookOpen, IconGlobe, IconLink, IconPosTerminal,
-  IconTrendingDown, IconShieldCheck, IconFileText, IconBell,
-  IconPieChart, IconMap, IconMessageCircle, IconGift, IconStar,
-  IconArrowRight, IconRefreshCw, IconServer,
+  IconTrendingDown, IconShieldCheck, IconGlobe, IconLink, 
+  IconMessageCircle, IconGift, IconArrowRight, IconRefreshCw, 
+  IconCheck, IconX, IconChevronDown
 } from "@/components/Icons";
+import axios from "axios";
+import { environment } from "@/components/environment";
 
 /* ─────────────────────────────────────────────
    TYPES
 ───────────────────────────────────────────── */
 type Currency = "NGN" | "USD";
 
+interface Plan {
+  id: number;
+  name: string;
+  amount_monthly: number;
+  description: string;
+  has_trial: boolean;
+  trial_days: number;
+  is_most_popular: boolean;
+  currency: Currency;
+  active: boolean;
+  discount_3_months_percentage: number;
+  discount_6_months_percentage: number;
+  discount_1_year_percentage: number;
+  discount_2_years_percentage: number;
+  plan_modules: {
+    rank: number;
+    support: string;
+    branches: number;
+    total_users: number;
+    product_limit: number;
+    ai_forecasting: string;
+    store_sales_fee: string;
+    accounting: string;
+    security: string;
+    pos_inventory: string;
+    marketplace_sync_label: string;
+    total_users_label: string;
+    product_limit_label: string;
+    branches_label: string;
+    online_payment_gateway: string;
+    custom_domain?: boolean;
+    store_design?: string;
+    sales_history_label?: string;
+    sales_history?: string;
+    business_loan_label?: string;
+    business_loan?: string;
+  };
+}
+
 /* ─────────────────────────────────────────────
-   DATA
+   CONFIG
 ───────────────────────────────────────────── */
 const billingOptions = [
-  { label: "Monthly",  key: "1M", discount: 0 },
-  { label: "3 Months", key: "3M", discount: 0.05 },
-  { label: "6 Months", key: "6M", discount: 0.10 },
-  { label: "1 Year",   key: "1Y", discount: 0.20 },
-  { label: "2 Years",  key: "2Y", discount: 0.30 },
+  { label: "Monthly",  key: "1M" },
+  { label: "Quarterly", key: "3M" },
+  { label: "Bi-Annual", key: "6M" },
+  { label: "Yearly",   key: "1Y" },
+  { label: "2-Year",  key: "2Y" },
 ];
 
 const universalFeatures = [
-  { icon: <IconUsers size={14} />,       label: "Unlimited staff accounts" },
-  { icon: <IconBuilding size={14} />,    label: "Unlimited branches & locations" },
-  { icon: <IconBox size={14} />,         label: "Unlimited products & variants" },
-  { icon: <IconShoppingCart size={14}/>, label: "Online store included" },
-  { icon: <IconReceipt size={14} />,     label: "Unlimited sales & orders" },
-  { icon: <IconActivity size={14} />,    label: "Real-time sales dashboard" },
-  { icon: <IconSmartphone size={14} />,  label: "Mobile & desktop access" },
-  { icon: <IconLock size={14} />,        label: "AES-256 encryption" },
-  { icon: <IconCloud size={14} />,       label: "Secure cloud backup" },
-  { icon: <IconWifi size={14} />,        label: "Advanced offline mode" },
+  { icon: <IconUsers size={16} />, label: "Unlimited staff accounts" },
+  { icon: <IconBuilding size={16} />, label: "Unlimited branches & locations" },
+  { icon: <IconBox size={16} />, label: "Unlimited products & variants" },
+  { icon: <IconShoppingCart size={16}/>, label: "Online store included" },
+  { icon: <IconReceipt size={16} />, label: "Unlimited sales & orders" },
+  { icon: <IconActivity size={16} />, label: "Real-time sales dashboard" },
+  { icon: <IconSmartphone size={16} />, label: "Mobile & desktop access" },
+  { icon: <IconLock size={16} />, label: "AES-256 encryption" },
+  { icon: <IconCloud size={16} />, label: "Secure cloud backup" },
+  { icon: <IconWifi size={16} />, label: "Advanced offline mode" },
 ];
 
-// Shared features for both Pro and Premium
-const sharedFeatures = [
-  { icon: <IconGlobe size={14} />,       label: "Online Store" },
-  { icon: <IconPosTerminal size={14} />, label: "Front Desk POS" },
-  { icon: <IconBuilding size={14} />,    label: "Back Office & Inventory" },
-  { icon: <IconTrendingDown size={14} />,label: "Advanced AI Forecasting" },
-  { icon: <IconMap size={14} />,         label: "Multi-location HQ Dashboard" },
-  { icon: <IconPieChart size={14} />,    label: "Advanced Analytics & Reports" },
-  { icon: <IconShieldCheck size={14} />, label: "Role-based access control" },
-  { icon: <IconFileText size={14} />,    label: "Tamper-proof audit logs" },
-  { icon: <IconBell size={14} />,        label: "Fraud anomaly alerts" },
-];
-
-const plans = [
-  {
-    key: "pro",
-    name: "Pro",
-    tagline: "Everything you need to run and grow your business — packed into one plan.",
-    basePriceNGN: 10000,
-    basePriceUSD: 10,
-    badge: null as string | null,
-    accent: "#b2d93b",
-    accentBg: "rgba(178,217,59,0.06)",
-    accentBorder: "rgba(178,217,59,0.2)",
-    cta: "Get Started — 14 Days Free",
-    ctaHref: "https://back-office.usecheetah.com/",
-    features: [
-      { icon: <IconCpu size={14} />,          label: "50 AI Credits / month" },
-      ...sharedFeatures,
-      { icon: <IconMessageCircle size={14} />, label: "Standard Support" },
-    ],
-  },
-  {
-    key: "premium",
-    name: "Premium",
-    tagline: "Full Cheetah power with more AI credits and priority support for scaling businesses.",
-    basePriceNGN: 15000,
-    basePriceUSD: 15,
-    badge: "Most Popular",
-    accent: "#a78bfa",
-    accentBg: "rgba(167,139,250,0.08)",
-    accentBorder: "rgba(167,139,250,0.25)",
-    cta: "Start Premium Free — 14 Days",
-    ctaHref: "https://back-office.usecheetah.com/",
-    features: [
-      { icon: <IconCpu size={14} />,          label: "100 AI Credits / month" },
-      ...sharedFeatures,
-      { icon: <IconMessageCircle size={14} />, label: "Priority 24/7 Support" },
-    ],
-  },
-];
-
-const enterprisePerks = [
-  { icon: <IconCpu size={14} />,          label: "Unlimited AI Credits" },
-  { icon: <IconBookOpen size={14} />,     label: "Accounting module" },
-  { icon: <IconGlobe size={14} />,        label: "Online Store + Custom domain" },
-  { icon: <IconPosTerminal size={14} />,  label: "Front Desk POS" },
-  { icon: <IconBuilding size={14} />,     label: "Back Office & Inventory" },
-  { icon: <IconTrendingDown size={14} />, label: "Advanced AI Forecasting" },
-  { icon: <IconMap size={14} />,          label: "Multi-location HQ Dashboard" },
-  { icon: <IconPieChart size={14} />,     label: "Advanced Analytics & Reports" },
-  { icon: <IconShieldCheck size={14} />,  label: "Role-based access & Audit logs" },
-  { icon: <IconServer size={14} />,       label: "Custom integrations & API access" },
-  { icon: <IconUsers size={14} />,        label: "Dedicated Account Manager" },
-  { icon: <IconRefreshCw size={14} />,    label: "On-site training & onboarding" },
-  { icon: <IconMessageCircle size={14} />,label: "24/7 Dedicated Support + SLA" },
-  { icon: <IconActivity size={14} />,     label: "White-label options available" },
-];
-
-const tableRows: { feature: string; pro: boolean | string; premium: boolean | string; enterprise: boolean | string }[] = [
-  { feature: "Per staff",                   pro: true,          premium: true,          enterprise: true },
-  { feature: "Unlimited branches",                pro: true,          premium: true,          enterprise: true },
-  { feature: "Unlimited products",                pro: true,          premium: true,          enterprise: true },
-  { feature: "Unlimited orders/sales",            pro: true,          premium: true,          enterprise: true },
-  { feature: "Front Desk POS",                    pro: true,          premium: true,          enterprise: true },
-  { feature: "Back Office & Inventory",           pro: true,          premium: true,          enterprise: true },
-  { feature: "Online Store",                      pro: true,          premium: true,          enterprise: true },
-  { feature: "Offline Mode",                      pro: true,          premium: true,          enterprise: true },
-  { feature: "AES-256 Encryption",                pro: true,          premium: true,          enterprise: true },
-  { feature: "Cloud Backup",                      pro: true,          premium: true,          enterprise: true },
-  { feature: "Audit Logs & Fraud Alerts",         pro: true,          premium: true,          enterprise: true },
-  { feature: "Advanced AI Forecasting",           pro: true,          premium: true,          enterprise: true },
-  { feature: "Multi-location HQ Dashboard",       pro: true,          premium: true,          enterprise: true },
-  { feature: "Advanced Analytics & Reports",      pro: true,          premium: true,          enterprise: true },
-  { feature: "AI Credits",                        pro: "50 / month",  premium: "100 / month", enterprise: "Unlimited" },
-  { feature: "Support",                           pro: "Standard",    premium: "Priority 24/7", enterprise: "Dedicated + SLA" },
-  { feature: "Accounting Module",                 pro: false,         premium: true,          enterprise: true },
-  { feature: "Custom Domain",                     pro: false,         premium: false,         enterprise: true },
-  { feature: "Custom Integrations & API",         pro: false,         premium: false,         enterprise: true },
-  { feature: "Dedicated Account Manager",         pro: false,         premium: false,         enterprise: true },
-  { feature: "On-site Training & Onboarding",     pro: false,         premium: false,         enterprise: true },
-  { feature: "White-Label Options",               pro: false,         premium: false,         enterprise: true },
-];
+const planConfigs: Record<string, any> = {
+  "Free Forever": { accent: "#94a3b8", color: "slate", btnTheme: "outline" },
+  "Starter": { accent: "#60c6f0", color: "sky", btnTheme: "secondary" },
+  "Pro": { accent: "#b2d93b", color: "cheetah", btnTheme: "primary" },
+  "Premium": { accent: "#a78bfa", color: "violet", btnTheme: "primary" },
+  "Enterprise": { accent: "#f472b6", color: "pink", btnTheme: "secondary" }
+};
 
 const faqs = [
-  { q: "Do I need a credit card to sign up?", a: "No. You can register with just your email and start your 14-day Premium trial immediately — zero credit card required. You only pay when you're ready to continue." },
-  { q: "What happens after the 14-day trial?", a: "After your trial, you can choose the Pro or Premium plan based on your needs. If you don't subscribe, you'll simply move to a read-only view of your data — nothing is deleted." },
-  { q: "Does 'unlimited' really mean unlimited?", a: "Yes. There are no caps on staff, branches, products, or orders. We built Cheetah for ambitious businesses and we don't punish growth with extra fees." },
-  { q: "What's included in the Online Store?", a: "Every plan includes a fully functional online store connected to your inventory in real time. Your customers can browse, order, and pay online — and your stock updates automatically." },
+  { q: "Do I need a credit card to sign up?", a: "No. You can register with just your email and start your 14-day Pro trial immediately \u2014 zero credit card required. You only pay when you're ready to continue." },
+  { q: "What happens after the 14-day trial?", a: "After your trial, you can choose any paid plan based on your needs. If you don't subscribe, your account will move to a read-only state. No data is ever deleted." },
+  { q: "Are there any per-Store Sales Fee?", a: "Only on the Free Forever plan (3.5%). All paid plans have significantly lower or zero Store Sales Fee for online payments, while offline sales are always fee-free." },
+  { q: "Does 'unlimited' really mean unlimited?", a: "Yes. For our Pro, Premium, and Enterprise plans, we do not cap the number of products, sales, or orders you can process. We scale as you scale." },
   { q: "Can I use Cheetah offline?", a: "Absolutely. Cheetah's advanced offline engine lets you make sales, manage stock, and print receipts with zero internet. Everything syncs automatically when you're back online." },
-  { q: "How are billing discounts calculated?", a: "When you pay for 3, 6, 12, or 24 months upfront, you receive a 5%, 10%, 20%, or 30% discount respectively. The price shown is always per user per month before the discount." },
-  { q: "What are AI Credits used for?", a: "AI credits power demand forecasting, automatic reorder suggestions, sales trend predictions, and smart reports. Pro gets 50/month; Premium gets 100/month; Enterprise is unlimited." },
-  { q: "Is my business data safe?", a: "Every byte of your data is encrypted with AES-256 — at rest and in transit. We store backups across multiple regions, so your data is always safe, always available." },
-  { q: "What currencies do you accept?", a: "We accept Nigerian Naira (₦) for businesses in Nigeria and US Dollars ($) for international customers. Prices are shown based on your detected region automatically." },
+  { q: "How are annual discounts calculated?", a: "When you pay for 1 or 2 years upfront, you receive up to 30% off our monthly rates. This is the most cost-effective way to run your retail operations." },
 ];
 
 /* ─────────────────────────────────────────────
    HELPERS
 ───────────────────────────────────────────── */
 function formatPrice(amount: number, currency: Currency) {
-  if (currency === "USD") return `$${amount.toLocaleString("en-US")}`;
-  return `₦${amount.toLocaleString("en-NG")}`;
+  if (amount === 0) return currency === "USD" ? "$0.00" : "\u20A60.00";
+  const actual = amount / 100;
+  return currency === "USD" ? `$${actual.toLocaleString("en-US")}` : `\u20A6${actual.toLocaleString("en-NG")}`;
 }
 
-function formatTotal(base: number, discount: number, months: number, currency: Currency) {
-  const total = Math.round(base * (1 - discount) * months);
-  return currency === "USD"
-    ? `$${total.toLocaleString("en-US")}`
-    : `₦${total.toLocaleString("en-NG")}`;
+function formatTotalBilled(amount: number, discount: number, months: number, currency: Currency) {
+  const base = amount / 100;
+  const total = Math.round(base * (1 - (discount / 100)) * months);
+  return currency === "USD" ? `$${total.toLocaleString("en-US")}` : `\u20A6${total.toLocaleString("en-NG")}`;
 }
-
-/* Column accent colours (for table) */
-const colAccents = ["#b2d93b", "#a78bfa", "#60c6f0"];
 
 /* ─────────────────────────────────────────────
    COMPONENT
 ───────────────────────────────────────────── */
 export default function PricingPage() {
-  const [billing, setBilling]   = useState("6M");
+  const [billing, setBilling]   = useState("3M");
   const [openFaq, setOpenFaq]   = useState<number | null>(null);
   const [currency, setCurrency] = useState<Currency>("NGN");
+  const [plans, setPlans]       = useState<Plan[]>([]);
+  const [loading, setLoading]   = useState(true);
+  const [visible, setVisible]   = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  // Auto-detect currency via ip-api.com (free, no key needed)
   useEffect(() => {
-    fetch("http://ip-api.com/json?fields=countryCode")
+    axios.get(`${environment.URL}/billing/plans`)
+      .then(res => { if (res.data?.success) setPlans(res.data.data); })
+      .catch(err => console.error("Error fetching plans:", err))
+      .finally(() => setLoading(false));
+
+    const observer = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.05 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    fetch("https://ip-api.com/json?fields=countryCode")
       .then((r) => r.json())
-      .then((data) => {
-        if (data?.countryCode && data.countryCode !== "NG") {
-          setCurrency("USD");
-        }
-      })
+      .then((data) => { if (data?.countryCode && data.countryCode !== "NG") setCurrency("USD"); })
       .catch(() => {
-        // Fallback: timezone heuristic if ip-api fails
         try {
           const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          if (!tz.toLowerCase().includes("lagos") && !tz.toLowerCase().includes("africa")) {
-            setCurrency("USD");
-          }
+          if (!tz.toLowerCase().includes("lagos") && !tz.toLowerCase().includes("africa")) setCurrency("USD");
         } catch {}
       });
   }, []);
 
-  const selectedBilling = billingOptions.find((b) => b.key === billing)!;
+  const filteredPlans = plans
+    .filter(p => p.currency === currency && p.active)
+    .sort((a,b) => (a.plan_modules.rank || 0) - (b.plan_modules.rank || 0));
 
-  const getPrice = (plan: typeof plans[0]) => {
-    const base = currency === "USD" ? plan.basePriceUSD : plan.basePriceNGN;
-    return formatPrice(Math.round(base * (1 - selectedBilling.discount)), currency);
+  const getDiscountedRate = (plan: Plan) => {
+    if (plan.amount_monthly === 0) return 0;
+    const discountMap: Record<string, number> = {
+        "1M": 0, "3M": plan.discount_3_months_percentage, "6M": plan.discount_6_months_percentage, "1Y": plan.discount_1_year_percentage, "2Y": plan.discount_2_years_percentage,
+    };
+    return (plan.amount_monthly * (1 - ((discountMap[billing] || 0) / 100)));
   };
 
-  const getOriginalPrice = (plan: typeof plans[0]) =>
-    formatPrice(currency === "USD" ? plan.basePriceUSD : plan.basePriceNGN, currency);
-
-  const getTotalLabel = (plan: typeof plans[0]) => {
+  const getBillingLabel = (plan: Plan) => {
     const months = billing === "1M" ? 1 : billing === "3M" ? 3 : billing === "6M" ? 6 : billing === "1Y" ? 12 : 24;
-    if (months === 1) return null;
-    const base = currency === "USD" ? plan.basePriceUSD : plan.basePriceNGN;
-    const label = months < 12 ? `${months} months` : months === 12 ? "year" : "2 years";
-    return `Billed ${formatTotal(base, selectedBilling.discount, months, currency)} every ${label}`;
-  };
-
-  /* Value badge renderer for comparison table */
-  const renderVal = (val: boolean | string, colIdx: number) => {
-    if (typeof val === "string") {
-      const c = colAccents[colIdx];
-      return (
-        <span style={{ fontSize: "12px", fontWeight: 700, color: c, background: `${c}14`, border: `1px solid ${c}28`, borderRadius: "50px", padding: "3px 10px", whiteSpace: "nowrap" }}>
-          {val}
-        </span>
-      );
-    }
-    if (val) {
-      return (
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b2d93b" strokeWidth="2.5">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-      );
-    }
-    return (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(253,253,253,0.18)" strokeWidth="2">
-        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
-    );
+    if (months === 1 || plan.amount_monthly === 0) return null;
+    const discountMap: Record<string, number> = {
+        "1M": 0, "3M": plan.discount_3_months_percentage, "6M": plan.discount_6_months_percentage, "1Y": plan.discount_1_year_percentage, "2Y": plan.discount_2_years_percentage,
+    };
+    const totalStr = formatTotalBilled(plan.amount_monthly, discountMap[billing] || 0, months, currency);
+    return `Billed ${totalStr} upfront`;
   };
 
   return (
-    <main style={{ background: "#052315", minHeight: "100vh", overflowX: "hidden" }}>
+    <main className="pricing-root" ref={ref}>
+      {/* Cinematic Background Elements */}
+      <div className="bg-glow orb-1" />
+      <div className="bg-glow orb-2" />
+      <div className="grid-overlay" />
 
-      {/* ─── HERO ─────────────────────────────── */}
-      <section style={{ padding: "100px 24px 60px", textAlign: "center", position: "relative", overflow: "hidden" }} className="grid-pattern">
-        <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "700px", height: "400px", background: "radial-gradient(ellipse, rgba(178,217,59,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-        {/* Hero badge + currency indicator */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap", marginBottom: "24px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)", borderRadius: "50px", padding: "7px 18px", fontSize: "13px", fontWeight: 700, color: "#a78bfa", letterSpacing: "0.04em" }}>
-            <IconGift size={14} color="#a78bfa" /> Register today — get 14 days Premium FREE
+      {/* ─── MODERN HERO SECTION ──────────────── */}
+      <section className="hero-section">
+        <div className="container relative z-10">
+          <div className={`hero-badge-wrapper ${visible ? 'animate' : ''}`}>
+            <span className="hero-badge">
+             <IconGift size={14} className="mr-2" /> 
+             Limited Offer: 14 Days Free Pro Trial
+            </span>
           </div>
-          {/* Currency switcher */}
-          <div style={{ display: "inline-flex", background: "rgba(10,61,36,0.6)", border: "1px solid rgba(178,217,59,0.15)", borderRadius: "50px", padding: "3px", gap: "2px" }}>
-            {(["NGN", "USD"] as Currency[]).map((c) => (
-              <button key={c} onClick={() => setCurrency(c)} style={{ background: currency === c ? "#b2d93b" : "transparent", color: currency === c ? "#052315" : "rgba(253,253,253,0.5)", border: "none", borderRadius: "50px", padding: "5px 14px", fontSize: "12px", fontWeight: 700, cursor: "pointer", transition: "all 0.2s ease" }}>
-                {c === "NGN" ? "₦ NGN" : "$ USD"}
-              </button>
-            ))}
-          </div>
-        </div>
 
-        <h1 style={{ fontFamily: "Syne, Inter, sans-serif", fontSize: "clamp(40px, 7vw, 80px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.06, color: "#fdfdfd", maxWidth: "820px", margin: "0 auto 20px" }}>
-          Simple pricing.{" "}
-          <span style={{ background: "linear-gradient(135deg, #b2d93b, #8fb22e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-            No surprises.
-          </span>
-        </h1>
-        <p style={{ fontSize: "clamp(16px, 2.2vw, 20px)", color: "rgba(253,253,253,0.55)", maxWidth: "580px", margin: "0 auto 48px", lineHeight: 1.7 }}>
-          One flat price per user. Every plan includes unlimited staff, branches, products, and orders — plus accounting, AI forecasting, and analytics. Grow without fear.
-        </p>
-
-        {/* Billing toggle */}
-        <div style={{ display: "inline-flex", background: "rgba(10,61,36,0.6)", border: "1px solid rgba(178,217,59,0.15)", borderRadius: "50px", padding: "4px", gap: "4px", flexWrap: "wrap", justifyContent: "center" }}>
-          {billingOptions.map((opt) => (
-            <button key={opt.key} onClick={() => setBilling(opt.key)} style={{ background: billing === opt.key ? "#b2d93b" : "transparent", color: billing === opt.key ? "#052315" : "rgba(253,253,253,0.55)", border: "none", borderRadius: "50px", padding: "9px 20px", fontSize: "13px", fontWeight: 700, cursor: "pointer", transition: "all 0.25s ease", display: "flex", alignItems: "center", gap: "6px", whiteSpace: "nowrap" }}>
-              {opt.label}
-              {opt.discount > 0 && (
-                <span style={{ fontSize: "10px", fontWeight: 800, background: billing === opt.key ? "rgba(5,35,21,0.2)" : "rgba(178,217,59,0.15)", color: billing === opt.key ? "#052315" : "#b2d93b", borderRadius: "50px", padding: "2px 7px" }}>
-                  -{Math.round(opt.discount * 100)}%
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── PLAN CARDS (ROWS) ─────────────────── */}
-      <section style={{ padding: "20px 24px 20px", maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-
-          {/* ── Pro & Premium ── */}
-          {plans.map((plan) => (
-            <div
-              key={plan.key}
-              style={{
-                background: plan.accentBg,
-                border: `1px solid ${plan.accentBorder}`,
-                borderRadius: "28px",
-                overflow: "hidden",
-                position: "relative",
-                transition: "all 0.3s ease",
-                display: "flex",
-                flexDirection: "column",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 24px 72px ${plan.accent}12`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}
-            >
-              {plan.badge && (
-                <div style={{ background: plan.accent, color: "#052315", textAlign: "center", padding: "8px", fontSize: "12px", fontWeight: 800, letterSpacing: "0.06em", textTransform: "uppercase" }}>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
-                    <IconStar size={12} color="#052315" /> {plan.badge}
-                  </div>
-                </div>
-              )}
-
-              {/* Responsive Row Layout */}
-              <div
-                style={{
-                  padding: "48px 40px",
-                  display: "grid",
-                  gridTemplateColumns: "minmax(250px, 300px) 1fr minmax(280px, 300px)",
-                  gap: "48px",
-                  alignItems: "center",
-                }}
-                className="plan-row-container"
-              >
-                {/* Left: Name & Price */}
-                <div>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: `${plan.accent}15`, border: `1px solid ${plan.accent}30`, borderRadius: "50px", padding: "5px 14px", fontSize: "11px", fontWeight: 700, color: plan.accent, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "16px" }}>
-                    {plan.name}
-                  </div>
-                  <div style={{ marginBottom: "12px" }}>
-                    <div style={{ display: "flex", alignItems: "flex-end", gap: "4px" }}>
-                      <span style={{ fontFamily: "Syne, sans-serif", fontSize: "52px", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.05em", lineHeight: 1 }}>
-                        {getPrice(plan)}
-                      </span>
-                      <span style={{ fontSize: "14px", color: "rgba(253,253,253,0.4)", fontWeight: 500, paddingBottom: "8px" }}>/user/mo</span>
-                    </div>
-                  </div>
-                  <p style={{ fontSize: "13px", color: "rgba(253,253,253,0.5)", lineHeight: 1.6, margin: 0 }}>{plan.tagline}</p>
-                </div>
-
-                {/* Center: Key Features Checklist */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 24px" }}>
-                  {plan.features.slice(0, 8).map((feat, fi) => (
-                    <div key={fi} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "rgba(253,253,253,0.7)", fontWeight: 500 }}>
-                      <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "16px", flexShrink: 0, color: plan.accent }}>{feat.icon}</span>
-                      {feat.label}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Right: CTA */}
-                <div>
-                  <a target="_blank" rel="noopener noreferrer" href={plan.ctaHref} style={{ display: "block" }}>
-                    <button
-                      style={{ width: "100%", background: plan.accent, color: "#052315", border: `2px solid ${plan.accent}`, borderRadius: "50px", padding: "16px", fontSize: "15px", fontWeight: 800, cursor: "pointer", transition: "all 0.3s ease", fontFamily: "Inter, sans-serif" }}
-                      onMouseEnter={(e) => { const el = e.currentTarget as HTMLButtonElement; el.style.background = "transparent"; el.style.color = plan.accent; }}
-                      onMouseLeave={(e) => { const el = e.currentTarget as HTMLButtonElement; el.style.background = plan.accent; el.style.color = "#052315"; }}
-                    >
-                      {plan.cta}
-                    </button>
-                  </a>
-                  <p style={{ textAlign: "center", fontSize: "12px", color: "rgba(253,253,253,0.3)", marginTop: "16px" }}>
-                    14-day free trial &nbsp;·&nbsp; No credit card
-                  </p>
-                  {getTotalLabel(plan) && (
-                    <p style={{ textAlign: "center", fontSize: "11px", color: "rgba(253,253,253,0.2)", marginTop: "8px" }}>{getTotalLabel(plan)}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {/* ── Enterprise Card — Row Layout ── */}
-          <div
-            style={{
-              background: "rgba(96,198,240,0.05)",
-              border: "1px solid rgba(96,198,240,0.2)",
-              borderRadius: "28px",
-              overflow: "hidden",
-              position: "relative",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 24px 72px rgba(96,198,240,0.08)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
-            }}
-          >
-            <div style={{ height: "3px", background: "linear-gradient(90deg, #60c6f0, #a78bfa, #b2d93b)" }} />
-
-            <div
-              style={{
-                padding: "48px 40px",
-                display: "grid",
-                gridTemplateColumns: "minmax(250px, 300px) 1fr minmax(280px, 300px)",
-                gap: "48px",
-                alignItems: "center",
-              }}
-              className="plan-row-container"
-            >
-              {/* Left */}
-              <div>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(96,198,240,0.12)", border: "1px solid rgba(96,198,240,0.25)", borderRadius: "50px", padding: "5px 14px", fontSize: "11px", fontWeight: 700, color: "#60c6f0", letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "16px" }}>
-                  Enterprise
-                </div>
-                <div style={{ marginBottom: "12px" }}>
-                  <span style={{ fontFamily: "Syne, sans-serif", fontSize: "52px", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.04em", lineHeight: 1 }}>
-                    Custom
-                  </span>
-                </div>
-                <p style={{ fontSize: "13px", color: "rgba(253,253,253,0.5)", lineHeight: 1.6, margin: 0 }}>
-                  Tailored for retail chains, malls, and organisations with unique requirements.
-                </p>
-              </div>
-
-              {/* Center */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 24px" }}>
-                {enterprisePerks.slice(0, 8).map((feat, fi) => (
-                  <div key={fi} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "rgba(253,253,253,0.7)", fontWeight: 500 }}>
-                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "16px", flexShrink: 0, color: "#60c6f0" }}>{feat.icon}</span>
-                    {feat.label}
-                  </div>
-                ))}
-              </div>
-
-              {/* Right */}
-              <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min" style={{ display: "block" }}>
-                  <button
-                    style={{ width: "100%", background: "transparent", color: "#60c6f0", border: "2px solid rgba(96,198,240,0.4)", borderRadius: "50px", padding: "16px", fontSize: "15px", fontWeight: 800, cursor: "pointer", transition: "all 0.3s ease", fontFamily: "Inter, sans-serif" }}
-                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLButtonElement; el.style.background = "rgba(96,198,240,0.1)"; el.style.borderColor = "#60c6f0"; }}
-                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLButtonElement; el.style.background = "transparent"; el.style.borderColor = "rgba(96,198,240,0.4)"; }}
-                  >
-                    Contact Sales — Book Demo
-                  </button>
-                </a>
-                <p style={{ textAlign: "center", fontSize: "12px", color: "rgba(253,253,253,0.3)", marginTop: "16px" }}>
-                  Dedicated support & onboarding
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ─── UNIVERSAL FEATURES STRIP ─────────── */}
-        <div style={{ marginTop: "56px", background: "rgba(10,61,36,0.35)", border: "1px solid rgba(178,217,59,0.12)", borderRadius: "20px", padding: "40px 40px 36px" }}>
-          <div style={{ textAlign: "center", marginBottom: "32px" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, color: "rgba(253,253,253,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "10px" }}>Every Plan Includes</p>
-            <h3 style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(22px, 3vw, 30px)", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.03em" }}>
-              Everything. Unlimited. Always.
-            </h3>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "14px" }}>
-            {universalFeatures.map((f, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "14px", color: "rgba(253,253,253,0.65)", fontWeight: 500 }}>
-                <div style={{ width: "28px", height: "28px", borderRadius: "8px", background: "rgba(178,217,59,0.1)", border: "1px solid rgba(178,217,59,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#b2d93b", flexShrink: 0 }}>
-                  {f.icon}
-                </div>
-                {f.label}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── COMPARISON TABLE ─────────────────── */}
-        <div style={{ marginTop: "80px" }}>
-          <h2 style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.03em", textAlign: "center", marginBottom: "12px" }}>
-            Compare all plans
-          </h2>
-          <p style={{ textAlign: "center", fontSize: "15px", color: "rgba(253,253,253,0.4)", marginBottom: "40px" }}>
-            Pro vs Premium vs Enterprise
+          <h1 className={`hero-title ${visible ? 'animate' : ''}`}>
+            The SME command center.<br />
+            <span className="text-gradient">Engineered for velocity.</span>
+          </h1>
+          <p className={`hero-subtitle ${visible ? 'animate' : ''}`}>
+            Cheetah is the high-performance operating system for modern retail. Choose the plan that fuels your ambition.
           </p>
-
-          <div style={{ borderRadius: "20px", border: "1px solid rgba(178,217,59,0.12)", overflow: "hidden" }}>
-            {/* Table header */}
-            <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", background: "rgba(10,61,36,0.7)", borderBottom: "1px solid rgba(178,217,59,0.1)" }}>
-              <div style={{ padding: "20px 24px", fontSize: "12px", fontWeight: 700, color: "rgba(253,253,253,0.35)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Feature</div>
-              {[
-                { name: "Pro", price: getPrice(plans[0]), accent: "#b2d93b" },
-                { name: "Premium", price: getPrice(plans[1]), accent: "#a78bfa" },
-                { name: "Enterprise", price: "Custom", accent: "#60c6f0" },
-              ].map((col) => (
-                <div key={col.name} style={{ padding: "20px 16px", textAlign: "center", borderLeft: "1px solid rgba(178,217,59,0.08)" }}>
-                  <div style={{ fontSize: "13px", fontWeight: 800, color: col.accent, fontFamily: "Syne, sans-serif" }}>{col.name}</div>
-                  <div style={{ fontSize: "11px", color: "rgba(253,253,253,0.3)", marginTop: "3px" }}>{col.price}{col.name !== "Enterprise" ? "/user/mo" : ""}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Rows */}
-            {tableRows.map((row, i) => (
-              <div
-                key={row.feature}
-                style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", borderBottom: i < tableRows.length - 1 ? "1px solid rgba(178,217,59,0.05)" : "none", background: i % 2 === 0 ? "rgba(10,61,36,0.12)" : "transparent", transition: "background 0.2s ease" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(10,61,36,0.3)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = i % 2 === 0 ? "rgba(10,61,36,0.12)" : "transparent"; }}
-              >
-                <div style={{ padding: "14px 24px", fontSize: "13px", color: "rgba(253,253,253,0.6)", fontWeight: 500, display: "flex", alignItems: "center" }}>{row.feature}</div>
-                {[row.pro, row.premium, row.enterprise].map((val, j) => (
-                  <div key={j} style={{ padding: "14px 16px", textAlign: "center", borderLeft: "1px solid rgba(178,217,59,0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {renderVal(val, j)}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── FAQ ──────────────────────────────── */}
-        <div style={{ marginTop: "100px" }}>
-          <div style={{ textAlign: "center", marginBottom: "52px" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "16px" }}>
-              <span className="dot" /> FAQ
-            </div>
-            <h2 style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.03em" }}>
-              Frequently asked questions
-            </h2>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxWidth: "800px", margin: "0 auto" }}>
-            {faqs.map((faq, i) => (
-              <div key={i} style={{ background: openFaq === i ? "rgba(10,61,36,0.55)" : "rgba(10,61,36,0.25)", border: `1px solid ${openFaq === i ? "rgba(178,217,59,0.25)" : "rgba(178,217,59,0.1)"}`, borderRadius: "16px", overflow: "hidden", transition: "all 0.25s ease" }}>
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  style={{ width: "100%", background: "transparent", border: "none", padding: "22px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", gap: "16px", textAlign: "left" }}
-                >
-                  <span style={{ fontSize: "15px", fontWeight: 600, color: openFaq === i ? "#fdfdfd" : "rgba(253,253,253,0.75)", lineHeight: 1.4 }}>{faq.q}</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b2d93b" strokeWidth="2.5" style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.25s ease", flexShrink: 0 }}>
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </button>
-                {openFaq === i && (
-                  <div style={{ padding: "0 28px 24px" }}>
-                    <p style={{ fontSize: "15px", color: "rgba(253,253,253,0.55)", lineHeight: 1.75, margin: 0 }}>{faq.a}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── FINAL CTA ────────────────────────── */}
-        <div style={{ marginTop: "100px", marginBottom: "80px", borderRadius: "28px", background: "linear-gradient(135deg, rgba(178,217,59,0.08) 0%, rgba(10,61,36,0.7) 100%)", border: "1px solid rgba(178,217,59,0.2)", padding: "80px 48px", textAlign: "center", position: "relative", overflow: "hidden" }} className="grid-pattern">
-          <div style={{ position: "absolute", top: "-100px", left: "50%", transform: "translateX(-50%)", width: "600px", height: "300px", background: "radial-gradient(ellipse, rgba(178,217,59,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)", borderRadius: "50px", padding: "6px 16px", fontSize: "12px", fontWeight: 700, color: "#a78bfa", marginBottom: "24px" }}>
-              <IconGift size={13} color="#a78bfa" /> 14 days Premium, on us
-            </div>
-            <h2 style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.04em", lineHeight: 1.08, marginBottom: "16px" }}>
-              Start free. Scale with{" "}
-              <span style={{ background: "linear-gradient(135deg, #b2d93b, #8fb22e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                confidence.
-              </span>
-            </h2>
-            <p style={{ fontSize: "18px", color: "rgba(253,253,253,0.5)", maxWidth: "500px", margin: "0 auto 48px", lineHeight: 1.65 }}>
-              No credit card. No setup fee. Register in 2 minutes and unlock 14 days of full Premium — no limits, no restrictions.
-            </p>
-            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-              <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
-                <button className="btn-primary" style={{ fontSize: "17px", padding: "18px 48px" }}>
-                  Create Free Account
-                  <IconArrowRight size={16} />
-                </button>
-              </a>
-              <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
-                <button className="btn-secondary" style={{ fontSize: "17px", padding: "18px 48px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <IconArrowRight size={15} /> Book a Demo First
-                </button>
-              </a>
-            </div>
-            <p style={{ fontSize: "13px", color: "rgba(253,253,253,0.25)", marginTop: "20px" }}>
-              Trusted by Prince Ebeano Supermarket, FoodCo, Market Square, Grand Square & more.
-            </p>
-          </div>
         </div>
       </section>
 
-      <style>{`
-        @media (max-width: 900px) {
-          #compare-table { font-size: 12px !important; }
-          .plan-row-container {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-            padding: 32px 24px !important;
-            text-align: center;
-          }
-          .plan-row-container > div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
+      {/* ─── FLOATING CONTROLS ───────────────── */}
+      <div className={`floating-controls-wrapper ${visible ? 'animate' : ''}`}>
+          <div className="controls-container">
+              <div className="segmented-control currency-control">
+                {(["NGN", "USD"] as Currency[]).map(c => (
+                  <button key={c} onClick={() => setCurrency(c)} className={`control-btn ${currency === c ? 'active' : ''}`}>{c}</button>
+                ))}
+              </div>
+              <div className="control-divider" />
+              <div className="segmented-control billing-control">
+                {billingOptions.map(opt => (
+                    <button key={opt.key} onClick={() => setBilling(opt.key)} className={`control-btn ${billing === opt.key ? 'active' : ''}`}>{opt.label}</button>
+                ))}
+              </div>
+          </div>
+      </div>
+
+      {/* ─── PRICING GRID ─────────────────────── */}
+      <section className="plans-section container">
+        {loading ? (
+             <div className="loading-state">
+                <IconRefreshCw size={48} className="animate-spin text-cheetah" />
+                <p>Syncing retail infrastructure...</p>
+             </div>
+        ) : (
+            <div className="pricing-grid">
+               {filteredPlans.map((plan, idx) => {
+                   const isEnterprise = plan.name.toLowerCase().includes("enterprise");
+                   const config = planConfigs[plan.name] || planConfigs["Pro"];
+                   const modules = plan.plan_modules;
+                   const discountedMonthly = getDiscountedRate(plan);
+
+                   return (
+                       <div 
+                         key={plan.id} 
+                         className={`plan-card-modern ${plan.is_most_popular ? 'most-popular' : ''} theme-${config.color} ${visible ? 'animate' : ''}`}
+                         style={{ transitionDelay: `${idx * 0.15}s` }}
+                        >
+                           {plan.is_most_popular && <div className="popular-tag">Most Popular</div>}
+
+                           <div className="card-header">
+                               <div className="plan-name-badge">{plan.name}</div>
+                               <div className="price-display">
+                                   {!isEnterprise ? (
+                                       <>
+                                           <span className="currency-symbol">{formatPrice(discountedMonthly, currency).charAt(0)}</span>
+                                           <span className="amount">{formatPrice(discountedMonthly, currency).substring(1)}</span>
+                                           <span className="period">/month</span>
+                                       </>
+                                   ) : (
+                                       <span className="amount custom-enterprise">Custom</span>
+                                   )}
+                               </div>
+                               <p className="description">{plan.description}</p>
+                           </div>
+
+                           <div className="feature-list">
+                               <div className="feature-item highlight"><IconUsers size={18} /> <span>{modules.total_users_label}</span></div>
+                               <div className="feature-item highlight"><IconBuilding size={18} /> <span>{modules.branches_label}</span></div>
+                               <div className="feature-item"><IconBox size={18} /> <span>{modules.product_limit_label}</span></div>
+                               <div className="feature-item"><IconTrendingDown size={18} /> <span>AI: {modules.ai_forecasting}</span></div>
+                               <div className="feature-item"><IconLink size={18} /> <span>{modules.marketplace_sync_label}</span></div>
+                               <div className="feature-item"><IconActivity size={18} /> <span dangerouslySetInnerHTML={{ __html: modules.business_loan_label || "" }} /></div>
+                               <div className="feature-item"><IconShieldCheck size={18} /> <span>{modules.accounting} module</span></div>
+                               <div className="feature-item security"><IconLock size={16} /> <span>Zero-Trust Security included</span></div>
+                           </div>
+
+                           <div className="card-footer">
+                               <a 
+                                  href={isEnterprise ? "https://calendly.com/cheetahdemo/30min" : "https://back-office.usecheetah.com/register"} 
+                                  className={`cta-button ${config.btnTheme}`}
+                               >
+                                   {isEnterprise ? 'Contact Us' : (plan.amount_monthly === 0 ? 'Start Free' : plan.has_trial ? 'Start Free Trial' : 'Get Started')}
+                                   <IconArrowRight size={18} className="ml-2 icon-move" />
+                               </a>
+                               <div className="billing-summary">
+                                   {!isEnterprise ? (plan.amount_monthly === 0 ? "Free forever" : (getBillingLabel(plan) || (plan.has_trial ? `${plan.trial_days} days trial included` : "No credit card required"))) : "Tailored infrastructure for scale"}
+                               </div>
+                           </div>
+                       </div>
+                   )
+               })}
+            </div>
+        )}
+      </section>
+
+      {/* ─── UNIFIED FEATURE SECTION ───────────── */}
+      <section className={`features-strip py-24 ${visible ? 'animate' : ''}`}>
+          <div className="container">
+              <div className="strip-inner">
+                 <div className="strip-header">
+                     <span className="section-subtitle">Universal Core</span>
+                     <h2 className="section-title">Built-in Performance</h2>
+                 </div>
+                 <div className="features-flex">
+                     {universalFeatures.map((f, i) => (
+                         <div key={i} className="feature-bubble" style={{ transitionDelay: `${i * 0.05}s` }}>
+                            <div className="icon-box">{f.icon}</div>
+                            <span className="label">{f.label}</span>
+                         </div>
+                     ))}
+                 </div>
+              </div>
+          </div>
+      </section>
+
+      {/* ─── DETAILED COMPARISON TABLE ─────────── */}
+      <section className={`comparison-section container py-32 ${visible ? 'animate' : ''}`}>
+          <div className="section-head text-center mb-16">
+              <h2 className="section-title-large">Feature Matrix</h2>
+              <p className="section-desc">Transparent comparison for precise retail decision making.</p>
+          </div>
+
+          <div className="table-container-modern shadow-premium">
+              <table className="comparison-table">
+                  <thead>
+                      <tr>
+                          <th className="feature-col">Modules</th>
+                          {filteredPlans.map(p => (
+                              <th key={p.id} className={`plan-col ${p.name.toLowerCase().includes('enterprise') ? 'enterprise' : ''}`}>
+                                  <span className="col-name">{p.name}</span>
+                              </th>
+                          ))}
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {[
+                          { label: "Branches", key: "branches_label", icon: <IconBuilding size={14} /> },
+                          { label: "Staff Seats", key: "total_users_label", icon: <IconUsers size={14} /> },
+                          { label: "Product Inventory", key: "product_limit_label", icon: <IconBox size={14} /> },
+                          { label: "AI Forecast Credits", key: "ai_forecasting", icon: <IconTrendingDown size={14} /> },
+                          { label: "Business Loan", key: "business_loan", icon: <IconActivity size={14} /> },
+                          { label: "Store Sales Fee", key: "store_sales_fee", icon: <IconReceipt size={14} /> },
+                          { label: "Support Level", key: "support", icon: <IconMessageCircle size={14} /> },
+                          { label: "Marketplace Sync", key: "marketplace_sync_label", icon: <IconLink size={14} /> },
+                      ].map((row, i) => (
+                          <tr key={row.key} className={i % 2 === 0 ? 'even' : 'odd'}>
+                              <td className="row-label">
+                                  <div className="flex items-center gap-2">{row.icon}{row.label}</div>
+                              </td>
+                              {filteredPlans.map(p => (
+                                  <td key={p.id} className={`val-cell ${p.name === 'Enterprise' ? 'master' : ''}`}>
+                                      {p.name === 'Enterprise' && row.key !== 'business_loan' && row.key !== 'store_sales_fee' && row.key !== 'support' ? "Custom Scaling" : <span dangerouslySetInnerHTML={{ __html: p.plan_modules[row.key as keyof typeof p.plan_modules]?.toString() || "" }} />}
+                                  </td>
+                              ))}
+                          </tr>
+                      ))}
+                      <tr>
+                          <td className="row-label"><div className="flex items-center gap-2"><IconGlobe size={14} /> Store Custom Domain</div></td>
+                          {filteredPlans.map(p => (
+                              <td key={p.id} className={`val-cell ${p.name === 'Enterprise' ? 'master' : ''}`}>
+                                  {p.plan_modules.custom_domain || p.name === 'Premium' || p.name === 'Enterprise' ? <IconCheck className={p.name === 'Enterprise' ? "text-pink-400" : "text-cheetah"} /> : <IconX className="text-muted" />}
+                              </td>
+                          ))}
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </section>
+
+      {/* ─── FAQ ──────────────────────────────── */}
+      <section className={`faq-section container pb-40 ${visible ? 'animate' : ''}`}>
+          <h2 className="faq-title">Retail Intelligence FAQ</h2>
+          <div className="faq-grid">
+              {faqs.map((faq, i) => (
+                  <div key={i} className={`faq-item ${openFaq === i ? 'active' : ''}`} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                      <div className="faq-question">
+                          <h3>{faq.q}</h3>
+                          <div className="faq-icon-wrapper"><IconChevronDown size={16} /></div>
+                      </div>
+                      <div className="faq-answer"><p>{faq.a}</p></div>
+                  </div>
+              ))}
+          </div>
+      </section>
+
+      {/* ─── FINAL ACTION ─────────────────────── */}
+      <section className={`cta-final container ${visible ? 'animate' : ''}`}>
+          <div className="cta-box shadow-glow">
+              <div className="cta-content">
+                  <h2 className="cta-title">Scale with zero friction.</h2>
+                  <p className="cta-desc">14 days of Pro access. No credit card required. No setup fees.</p>
+                  <div className="cta-actions">
+                      <a href="https://back-office.usecheetah.com/register" className="btn-main primary">Get Started Now <IconArrowRight size={20} className="ml-2" /></a>
+                      <a href="https://calendly.com/cheetahdemo/30min" className="btn-main secondary">Talk to Sales</a>
+                  </div>
+              </div>
+              <div className="cta-visual"><div className="floating-circle c1" /><div className="floating-circle c2" /></div>
+          </div>
+      </section>
+
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
+        :root { --cheetah: #b2d93b; --cheetah-glow: rgba(178, 217, 59, 0.4); --bg-deep: #052315; --text-main: #fdfdfd; --text-muted: rgba(253, 253, 253, 0.5); --violet: #a78bfa; --sky: #60c6f0; --pink: #f472b6; --slate: #94a3b8; }
+        * { box-sizing: border-box; }
+        .pricing-root { background-color: var(--bg-deep); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; position: relative; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; }
+        .bg-glow { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0.6; }
+        .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(178, 217, 59, 0.1) 0%, transparent 70%); top: -100px; left: -100px; }
+        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 255, 135, 0.08) 0%, transparent 70%); top: 40%; right: -100px; }
+        .grid-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background-image: radial-gradient(rgba(178, 217, 59, 0.03) 1.5px, transparent 1.5px); background-size: 40px 40px; pointer-events: none; z-index: 1; }
+        .hero-section { padding: 180px 0 80px; text-align: center; position: relative; }
+        .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(48px, 10vw, 102px); font-weight: 800; line-height: 0.88; letter-spacing: -0.05em; margin-bottom: 32px; opacity: 0; transform: translateY(40px); }
+        .hero-title.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+        .text-gradient { background: linear-gradient(135deg, var(--cheetah) 0%, #00ff87 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 22px; color: var(--text-muted); max-width: 720px; margin: 0 auto 56px; line-height: 1.5; opacity: 0; transform: translateY(30px); }
+        .hero-subtitle.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) 0.1s forwards; }
+        .hero-badge-wrapper { display: inline-flex; margin-bottom: 32px; opacity: 0; transform: translateY(20px); }
+        .hero-badge-wrapper.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+        .hero-badge { background: rgba(178, 217, 59, 0.1); border: 1px solid rgba(178, 217, 59, 0.15); color: var(--cheetah); padding: 8px 18px; border-radius: 100px; font-size: 14px; font-weight: 800; display: flex; align-items: center; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .floating-controls-wrapper {
+          position: sticky;
+          top: 32px;
+          z-index: 100;
+          margin-bottom: 80px;
+          opacity: 0;
+          transform: translateY(20px);
+          pointer-events: none;
+        }
+        .floating-controls-wrapper.animate { 
+          animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) 0.3s forwards; 
+          pointer-events: auto;
+        }
+        
+        .controls-container { 
+          display: flex; 
+          flex-direction: row; 
+          gap: 8px; 
+          align-items: center; 
+          margin: 0 auto;
+          background: rgba(10, 35, 21, 0.7);
+          backdrop-filter: blur(24px);
+          border: 1px solid rgba(178, 217, 59, 0.2);
+          padding: 8px;
+          border-radius: 100px;
+          width: fit-content;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 20px rgba(178, 217, 59, 0.05);
+          transition: all 0.4s ease;
+        }
+        .controls-container:hover {
+          border-color: rgba(178, 217, 59, 0.4);
+          transform: scale(1.02);
+        }
+        .control-divider {
+          width: 1px;
+          height: 24px;
+          background: rgba(253, 253, 253, 0.15);
+          margin: 0 8px;
+        }
+        .segmented-control { display: flex; gap: 4px; }
+        .control-btn { background: transparent; border: none; color: var(--text-muted); padding: 10px 22px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+        .control-btn:hover { color: #fff; background: rgba(253, 253, 253, 0.05); }
+        .control-btn.active { background: var(--cheetah); color: var(--bg-deep); box-shadow: 0 4px 15px var(--cheetah-glow); }
+        .pricing-grid { display: flex; flex-direction: column; gap: 32px; margin-top: 60px; padding-bottom: 80px; align-items: center; }
+        .plan-card-modern { width: 100%; max-width: 1150px; background: rgba(253, 253, 253, 0.02); backdrop-filter: blur(30px); border: 1px solid rgba(253, 253, 253, 0.06); border-radius: 48px; padding: 50px 60px; display: flex; align-items: center; gap: 60px; text-align: left; opacity: 0; transform: translateY(50px); }
+        .plan-card-modern.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+        .plan-card-modern:hover { transform: translateY(-8px); background: rgba(253, 253, 253, 0.04); border-color: rgba(178, 217, 59, 0.25); box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+        .plan-card-modern.most-popular { border: 2.5px solid var(--cheetah); background: rgba(178, 217, 59, 0.03); transform: scale(1.02); }
+        .popular-tag { position: absolute; top: 32px; right: 32px; background: var(--cheetah); color: var(--bg-deep); padding: 6px 18px; border-radius: 99px; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; }
+        .card-header { flex: 0 0 320px; }
+        .plan-name-badge { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; }
+        .theme-slate .plan-name-badge { color: var(--slate); } .theme-sky .plan-name-badge { color: var(--sky); } .theme-cheetah .plan-name-badge { color: var(--cheetah); } .theme-violet .plan-name-badge { color: var(--violet); } .theme-pink .plan-name-badge { color: var(--pink); }
+        .price-display { display: flex; align-items: baseline; gap: 4px; margin-bottom: 16px; font-family: 'Syne', sans-serif; }
+        .amount { font-size: 64px; font-weight: 800; letter-spacing: -0.04em; }
+        .amount.custom-enterprise { font-size: 44px; }
+        .period { font-size: 15px; color: var(--text-muted); font-weight: 700; }
+        .description { font-size: 16px; color: var(--text-muted); font-weight: 500; line-height: 1.6; }
+        .feature-list { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 48px; }
+        .feature-item { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 600; color: rgba(253,253,253,0.8); }
+        .feature-item.highlight { color: #fff; font-weight: 700; }
+        .feature-item.security { grid-column: span 2; padding: 10px 20px; background: rgba(178,217,59,0.06); border: 1px solid rgba(178,217,59,0.1); border-radius: 14px; color: var(--cheetah); font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; width: fit-content; }
+        .card-footer { flex: 0 0 280px; }
+        .cta-button { display: flex; align-items: center; justify-content: center; width: 100%; padding: 20px; border-radius: 20px; font-size: 16px; font-weight: 900; transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1); margin-bottom: 16px; text-decoration: none; }
+        .cta-button.primary { background: var(--cheetah); color: var(--bg-deep); box-shadow: 0 10px 30px var(--cheetah-glow); }
+        .cta-button.secondary { background: rgba(253,253,253,0.08); color: #fff; border: 1px solid rgba(253,253,253,0.1); }
+        .cta-button.outline { background: transparent; color: #fff; border: 1px solid rgba(253,253,253,0.2); }
+        .cta-button:hover { transform: translateY(-4px); filter: brightness(1.1); }
+        .cta-button:hover .icon-move { transform: translateX(8px); }
+        .billing-summary { font-size: 13px; text-align: center; color: var(--text-muted); font-weight: 600; }
+        .strip-header { text-align: center; margin-bottom: 64px; }
+        .section-subtitle { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; color: var(--cheetah); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+        .section-title { font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+        .features-flex { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .feature-bubble { background: rgba(253,253,253,0.03); border: 1px solid rgba(253,253,253,0.06); padding: 14px 28px; border-radius: 99px; display: flex; align-items: center; gap: 14px; transition: all 0.4s ease; opacity: 0; transform: translateY(20px); }
+        .features-strip.animate .feature-bubble { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+        .feature-bubble:hover { transform: translateY(-4px); background: rgba(178,217,59,0.1); border-color: rgba(178,217,59,0.2); }
+        .icon-box { width: 36px; height: 36px; background: rgba(178,217,59,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--cheetah); }
+        .section-title-large { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; }
+        .section-desc { font-size: 18px; color: var(--text-muted); margin-bottom: 64px; max-width: 600px; margin-inline: auto; font-weight: 500; }
+        .table-container-modern { border-radius: 40px; border: 1px solid rgba(253,253,253,0.08); background: rgba(253,253,253,0.01); backdrop-filter: blur(40px); overflow: hidden; }
+        .comparison-table { width: 100%; border-collapse: collapse; }
+        .comparison-table th { padding: 40px 24px; background: rgba(253,253,253,0.02); text-align: center; border-bottom: 1px solid rgba(253,253,253,0.08); }
+        .comparison-table td { padding: 24px; border-bottom: 1px solid rgba(253,253,253,0.04); text-align: center; font-weight: 600; font-size: 15px; color: rgba(253,253,253,0.7); }
+        .col-name { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
+        .row-label { text-align: left !important; padding-left: 40px !important; color: #fff; font-weight: 700; }
+        .val-cell.master { color: #fff; font-weight: 800; }
+        .faq-title { font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800; text-align: center; margin-bottom: 64px; }
+        .faq-grid { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .faq-item { background: rgba(253,253,253,0.02); border: 1px solid rgba(253,253,253,0.05); border-radius: 28px; padding: 28px 40px; cursor: pointer; transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1); }
+        .faq-item.active { background: rgba(178,217,59,0.05); border-color: rgba(178,217,59,0.3); }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; }
+        .faq-question h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+        .faq-icon-wrapper { transition: transform 0.4s ease; color: var(--text-muted); }
+        .faq-item.active .faq-icon-wrapper { transform: rotate(180deg); color: var(--cheetah); }
+        .faq-answer { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s cubic-bezier(0.2, 1, 0.2, 1); }
+        .faq-item.active .faq-answer { max-height: 300px; opacity: 1; padding-top: 20px; }
+        .cta-box { background: linear-gradient(135deg, #0a3d24 0%, #052315 100%); border: 1px solid rgba(178, 217, 59, 0.2); border-radius: 64px; padding: 120px 80px; position: relative; overflow: hidden; text-align: center; }
+        .cta-title { font-family: 'Syne', sans-serif; font-size: clamp(36px, 6vw, 84px); font-weight: 800; line-height: 0.9; letter-spacing: -0.05em; margin-bottom: 32px; color: #fff; }
+        .cta-desc { font-size: 22px; color: var(--text-muted); margin-bottom: 60px; max-width: 600px; margin-inline: auto; }
+        .btn-main { padding: 22px 56px; border-radius: 100px; font-size: 18px; font-weight: 900; transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1); text-decoration: none; display: inline-flex; align-items: center; }
+        .btn-main.primary { background: var(--cheetah); color: var(--bg-deep); box-shadow: 0 15px 40px var(--cheetah-glow); }
+        .btn-main.secondary { background: rgba(253, 253, 253, 0.1); color: #fff; border: 1px solid rgba(253,253,253,0.1); backdrop-filter: blur(20px); }
+        .btn-main:hover { transform: translateY(-4px) scale(1.02); filter: brightness(1.1); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 1024px) { 
+          .plan-card-modern { flex-direction: column; text-align: center; padding: 40px; border-radius: 36px; } 
+          .card-header, .feature-list, .card-footer { flex: none; width: 100%; }
+          .feature-list { grid-template-columns: 1fr; gap: 16px; text-align: left; }
+          .price-display { justify-content: center; }
+          .feature-item { justify-content: flex-start; }
+          .feature-item.security { margin-inline: auto; }
+        }
+        @media (max-width: 768px) {
+          .floating-controls-wrapper { top: 16px; margin-bottom: 40px; padding: 0 16px; }
+          .controls-container { flex-direction: column; border-radius: 24px; padding: 12px; width: 100%; max-width: 400px; gap: 12px; }
+          .control-divider { display: none; }
+          .segmented-control { width: 100%; justify-content: center; flex-wrap: wrap; }
+          .control-btn { flex: 1; padding: 10px 12px; font-size: 11px; }
+          .section-title-large { font-size: 40px; }
+          .cta-box { border-radius: 40px; padding: 60px 24px; }
+          .cta-actions { flex-direction: column; gap: 16px; }
+          .btn-main { width: 100%; justify-content: center; }
+          .hero-section { padding-top: 140px; }
         }
       `}</style>
     </main>

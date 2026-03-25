@@ -1,59 +1,13 @@
 "use client";
 
 import {
-    Container,
-    Title,
-    Text,
-    Button,
-    SimpleGrid,
-    Card,
-    ThemeIcon,
-    List,
-    Modal,
-    TextInput,
-    Select,
-    Textarea,
-    Group,
-    Stack,
-    Box,
-    rem,
-    Divider,
-    Slider,
-    SegmentedControl,
-    Timeline,
-    Accordion,
-    Badge,
+    Container, Title, Text, Button, SimpleGrid, Card, ThemeIcon, List, Modal, Group, Stack, Box, rem, Divider, Slider, SegmentedControl, Accordion,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import {
-    IconCheck,
-    IconRocket,
-    IconChartBar,
-    IconShieldLock,
-    IconCloudUpload,
-    IconUsers,
-    IconChartPie,
-    IconDeviceAnalytics,
-    IconBrain,
-    IconMapPin,
-    IconBrandLinkedin,
-    IconCalculator,
-    IconCoin,
-    IconTrendingUp,
-    IconArrowRight,
-    IconGlobe,
-    IconAward,
-    IconSchool,
-    IconVolume,
-    IconHeartHandshake,
-    IconSearch,
-    IconUserPlus,
-    IconCashBanknote,
-    IconCircleCheck,
-    IconStar,
-    IconExternalLink,
+    IconRocket, IconShieldLock, IconCloudUpload, IconUsers, IconDeviceAnalytics, IconBrain, IconBrandLinkedin, IconCoin, IconTrendingUp, IconArrowRight, IconGlobe, IconAward, IconCircleCheck,
 } from "@tabler/icons-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { post, fetch as apiFetch } from "../api";
@@ -61,541 +15,219 @@ import { post, fetch as apiFetch } from "../api";
 export default function PartnersPage() {
     const [opened, { open, close }] = useDisclosure(false);
     const isMobile = useMediaQuery("(max-width: 768px)");
+    const [visible, setVisible] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
 
     // Calculator State
-    const [numBusinesses, setNumBusinesses] = useState(10);
-    const [staffPerBranch, setStaffPerBranch] = useState(5);
+    const [numBusinesses, setNumBusinesses] = useState(100);
     const [selectedPlan, setSelectedPlan] = useState("Premium");
     const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
 
-    // Auto-detect currency via IP
     useEffect(() => {
-        fetch("https://ipapi.co/json/")
+        const observer = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, []);
+
+    // Auto-detect currency
+    useEffect(() => {
+        fetch("https://ip-api.com/json?fields=countryCode")
             .then((r) => r.json())
-            .then((data) => {
-                if (data?.country_code && data.country_code !== "NG") {
-                    setCurrency("USD");
-                }
-            })
+            .then((data) => { if (data?.countryCode && data.countryCode !== "NG") setCurrency("USD"); })
             .catch(() => {
                 try {
                     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                    if (!tz.toLowerCase().includes("lagos") && !tz.toLowerCase().includes("africa")) {
-                        setCurrency("USD");
-                    }
+                    if (!tz.toLowerCase().includes("lagos") && !tz.toLowerCase().includes("africa")) setCurrency("USD");
                 } catch { }
             });
     }, []);
 
-    // Auto-detect currency via IP
-
-    // Calculator Logic
-    const planPrice = selectedPlan === "Pro"
-        ? (currency === "NGN" ? 10000 : 10)
-        : (currency === "NGN" ? 15000 : 15);
-
-    const monthlyCommission = planPrice * staffPerBranch * 0.2 * numBusinesses;
+    const planPrice = selectedPlan === "Pro" ? (currency === "NGN" ? 20000 : 20) : (currency === "NGN" ? 50000 : 50);
+    const monthlyCommission = planPrice * numBusinesses * 0.25;
     const twoYearEarnings = monthlyCommission * 24;
 
     const formatValue = (val: number) => {
         if (currency === "USD") return `$${val.toLocaleString("en-US")}`;
-        // More compact formatting for millions to prevent overflow
-        if (val >= 1000000) {
-            return `₦${(val / 1000000).toFixed(1)}M`;
-        }
+        if (val >= 1000000) return `₦${(val / 1000000).toFixed(1)}M`;
         return `₦${val.toLocaleString("en-NG")}`;
     };
 
     return (
-        <main style={{ minHeight: "100vh", background: "#052315", paddingTop: rem(100), paddingBottom: rem(100) }}>
-            {/* Hero Section */}
-            <Container size="lg">
-                <Stack align="center" gap="xl" style={{ textAlign: "center", marginBottom: rem(120) }}>
-                    <Box
-                        style={{
-                            padding: "10px 28px",
-                            background: "rgba(178, 217, 59, 0.15)",
-                            borderRadius: "50px",
-                            border: "1px solid rgba(178, 217, 59, 0.3)",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: rem(10),
-                        }}
-                    >
+        <main ref={ref} style={{ minHeight: "100vh", background: "#052315", paddingTop: isMobile ? rem(120) : rem(180), paddingBottom: rem(100), position: "relative", overflow: "hidden" }}>
+            {/* Background Aesthetics */}
+            <div style={{ position: "absolute", top: "-100px", left: "-100px", width: rem(600), height: rem(600), background: "radial-gradient(circle, rgba(178, 217, 59, 0.08) 0%, transparent 70%)", filter: "blur(100px)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", top: "20%", right: "-100px", width: rem(500), height: rem(500), background: "radial-gradient(circle, rgba(0, 255, 135, 0.06) 0%, transparent 70%)", filter: "blur(80px)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundImage: "radial-gradient(rgba(178, 217, 59, 0.03) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
+
+            <Container size="lg" style={{ position: "relative", zIndex: 1 }}>
+                {/* Hero Section */}
+                <Stack align="center" gap="xl" style={{ textAlign: "center", marginBottom: isMobile ? rem(80) : rem(140) }}>
+                    <Box className={`hero-badge-partner ${visible ? 'animate' : ''}`}>
                         <IconGlobe size={18} color="#b2d93b" />
-                        <Text size="xs" fw={900} c="#b2d93b" style={{ letterSpacing: "2px", textTransform: "uppercase" }}>
-                            Global Expansion Program
-                        </Text>
+                        <Text size="xs" fw={900} c="#b2d93b" style={{ letterSpacing: "2px", textTransform: "uppercase" }}>Global Expansion Program</Text>
                     </Box>
-                    <Title
-                        order={1}
-                        style={{
-                            fontSize: "clamp(40px, 8vw, 102px)",
-                            lineHeight: 0.9,
-                            fontWeight: 900,
-                            maxWidth: rem(1200),
-                            color: "#fdfdfd",
-                            letterSpacing: "-0.06em",
-                        }}
-                    >
+                    <Title order={1} className={`partners-hero-title ${visible ? 'animate' : ''}`}>
                         Empower Retail. <br />
                         Build <span style={{ color: "#b2d93b" }}>Recurring Wealth.</span>
                     </Title>
-                    <Text size="xl" c="rgba(253, 253, 253, 0.6)" style={{ maxWidth: rem(800), lineHeight: 1.5, fontSize: rem(22) }}>
-                        Join the retail revolution. Help businesses across Africa scale with Cheetah&apos;s AI—and secure a lifetime of recurring commissions.
+                    <Text size="xl" className={`partners-hero-subtitle ${visible ? 'animate' : ''}`}>
+                        Join the retail revolution. Help businesses across Africa scale with Cheetah’s AI, and secure a lifetime of recurring commissions.
                     </Text>
-                    <Group gap="lg" wrap="wrap" justify="center" mt="xl">
-                        <Button component={Link} href="/partners/apply" size="xl" radius="xl" className="btn-primary" style={{ height: rem(80), padding: "0 60px", fontSize: rem(20) }}>
-                            Join the Program
-                        </Button>
-                        <Button onClick={open} variant="outline" size="xl" radius="xl" color="green" style={{ height: rem(80), padding: "0 60px", border: "1.5px solid rgba(178, 217, 59, 0.4)", color: "#b2d93b", fontSize: rem(20), background: "rgba(178, 217, 59, 0.03)" }}>
-                            Watch Demo
-                        </Button>
+                    <Group gap="lg" mt="xl" className={`partners-hero-actions ${visible ? 'animate' : ''}`}>
+                        <Button component="a" href="https://back-office.usecheetah.com/register-partner" size="xl" radius="xl" className="btn-modern-primary">Join the Program</Button>
+                        <Button onClick={open} variant="outline" size="xl" radius="xl" className="btn-modern-outline">Watch Demo</Button>
                     </Group>
                 </Stack>
-            </Container>
 
-            {/* Trust Banner */}
-            <Box py={50} style={{ borderY: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)" }}>
-                <Container size="lg">
-                    <Text ta="center" size="xs" fw={800} c="rgba(253,253,253,0.3)" mb="xl" style={{ textTransform: "uppercase", letterSpacing: "3px" }}>Trusted by Africa&apos;s Market Leaders</Text>
-                    <Group justify="center" gap={60} opacity={0.4}>
-                        <Text size="xl" fw={900}>PRINCE EBEANO</Text>
-                        <Text size="xl" fw={900}>FOODCO</Text>
-                        <Text size="xl" fw={900}>MARKET SQUARE</Text>
-                        <Text size="xl" fw={900}>GRAND SQUARE</Text>
+                {/* Trust Banner */}
+                <Box py={50} mb={100} style={{ borderRadius: "40px", background: "rgba(253, 253, 253, 0.02)", border: "1px solid rgba(253, 253, 253, 0.05)", backdropFilter: "blur(20px)" }} className={visible ? 'animate-fade' : ''}>
+                    <Text ta="center" size="xs" fw={900} c="rgba(253,253,253,0.3)" mb="xl" style={{ textTransform: "uppercase", letterSpacing: "4px" }}>Engineering The Future of Retail</Text>
+                    <Group justify="center" gap={isMobile ? 30 : 80} opacity={0.5}>
+                        {["COMPRAMART", "YOUMART", "GRAND SQUARE", "MARKET SQUARE"].map(brand => (
+                            <Text key={brand} size={isMobile ? rem(14) : rem(24)} fw={900} style={{ fontFamily: "Syne, sans-serif", letterSpacing: "-0.04em" }}>{brand}</Text>
+                        ))}
                     </Group>
-                </Container>
-            </Box>
+                </Box>
 
-            {/* Strengths Grid */}
-            <Container size="lg" py={120}>
+                {/* Strengths Grid */}
                 <Stack align="center" mb={60}>
-                    <Text fw={800} c="#b2d93b" size="xs" style={{ letterSpacing: "2px", textTransform: "uppercase" }}>Technology Edge</Text>
-                    <Title order={2} ta="center" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 900 }}>Why Retailers <span style={{ color: "#b2d93b" }}>Choose Cheetah</span></Title>
+                    <Text fw={900} c="#b2d93b" size="xs" style={{ letterSpacing: "3px", textTransform: "uppercase" }}>The Cheetah Edge</Text>
+                    <Title order={2} ta="center" className="syne-title" style={{ fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 800 }}>Why Retailers <span style={{ color: "#b2d93b" }}>Choose Us</span></Title>
                 </Stack>
-                <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing={32}>
+                <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing={40} mb={160}>
                     {[
-                        { title: "Offline Resilience", desc: "Our proprietary engine handles power and internet outages without losing a single transaction.", icon: IconShieldLock },
-                        { title: "AI Demand Forecasting", desc: "Automated inventory management that predicts stockouts before they happen.", icon: IconBrain },
-                        { title: "Multi-Currency HQ", desc: "Unified dashboards for chains operating across borders with real-time conversion.", icon: IconDeviceAnalytics },
-                        { title: "Revenue Leakage Guard", desc: "Real-time fraud detection AI identifies internal theft instantly.", icon: IconShieldLock },
-                        { title: "Bank-Grade Security", desc: "AES-256 encryption. Zero data loss. Secure backups and automated cloud sync.", icon: IconCloudUpload },
-                        { title: "Priority Support", desc: "24/7 technical priority for businesses signed by our strategic partners.", icon: IconAward },
+                        { title: "Offline Resilience", desc: "Our tactical offline engine handles power outages without losing a single transaction.", icon: IconShieldLock },
+                        { title: "AI Forecasting", desc: "Predict stockouts before they happen. Real-time JIT inventory triggers.", icon: IconBrain },
+                        { title: "Global Multi-Currency", desc: "Unified dashboards for chains operating across borders with zero friction.", icon: IconDeviceAnalytics },
+                        { title: "Fraud Elimination", desc: "Real-time AI monitoring detects revenue leakage and theft instantly.", icon: IconShieldLock },
+                        { title: "Military-Grade Security", desc: "AES-256 encryption. Automated cloud-backups and zero-trust parity.", icon: IconCloudUpload },
+                        { title: "High-Priority Success", desc: "Direct 24/7 technical concierge for businesses signed by elite partners.", icon: IconAward },
                     ].map((feature, i) => (
-                        <Card
-                            key={i}
-                            padding="xl"
-                            radius="32px"
-                            style={{
-                                background: "rgba(255, 255, 255, 0.02)",
-                                border: "1px solid rgba(255, 255, 255, 0.05)",
-                                transition: "all 0.5s cubic-bezier(0.19, 1, 0.22, 1)",
-                            }}
-                            className="strength-card"
-                        >
-                            <ThemeIcon size={56} radius="xl" variant="light" color="green" mb="xl" style={{ background: "rgba(178, 217, 59, 0.1)" }}>
-                                <feature.icon size={28} />
+                        <Card key={i} className={`partners-feature-card ${visible ? 'animate' : ''}`} style={{ transitionDelay: `${i * 0.1}s` }}>
+                            <ThemeIcon size={64} radius="20px" variant="light" color="green" mb={24} style={{ background: "rgba(178, 217, 59, 0.1)" }}>
+                                <feature.icon size={32} />
                             </ThemeIcon>
-                            <Text fw={800} size="lg" mb="sm" c="#fdfdfd" style={{ letterSpacing: "-0.02em" }}>{feature.title}</Text>
-                            <Text size="sm" c="rgba(253, 253, 253, 0.45)" style={{ lineHeight: 1.6 }}>{feature.desc}</Text>
+                            <Text fw={800} size="xl" mb="sm" c="#fdfdfd" style={{ fontFamily: "Syne, sans-serif" }}>{feature.title}</Text>
+                            <Text size="md" c="rgba(253, 253, 253, 0.5)" style={{ lineHeight: 1.6, fontWeight: 500 }}>{feature.desc}</Text>
                         </Card>
                     ))}
                 </SimpleGrid>
-            </Container>
 
-            <Box id="calculator" style={{ background: "rgba(178, 217, 59, 0.02)", padding: rem(140) + " 0", borderY: "1px solid rgba(255, 255, 255, 0.05)" }} className="grid-pattern">
-                <Container size="lg">
+                {/* Forecaster */}
+                <Box id="calculator" className={`forecaster-section ${visible ? 'animate' : ''}`} style={{ marginBottom: rem(160) }}>
                     <SimpleGrid cols={{ base: 1, lg: 2 }} spacing={80} style={{ alignItems: "center" }}>
                         <Stack gap={60}>
                             <Box>
-                                <Title order={2} mb="md" style={{ fontSize: rem(48), fontWeight: 900, color: "#fdfdfd" }}>Revenue <span style={{ color: "#b2d93b" }}>Forecaster</span></Title>
-                                <Text size="lg" c="rgba(253,253,253,0.5)" style={{ maxWidth: 500 }}>Calculate your potential passive income based on your client portfolio size and staff strength.</Text>
+                                <Title order={2} className="syne-title" mb="md" style={{ fontSize: rem(56), fontWeight: 800, color: "#fdfdfd" }}>Forecasting <span style={{ color: "#b2d93b" }}>Wealth</span></Title>
+                                <Text size="xl" c="rgba(253,253,253,0.5)" fw={500}>Strategic income projections based on your anticipated retail portfolio and plan distribution.</Text>
                             </Box>
 
-                            <Stack gap={40}>
+                            <Stack gap={48}>
                                 <Box>
                                     <Group justify="space-between" mb="lg">
-                                        <Text fw={800} c="#fdfdfd" size="sm" style={{ textTransform: "uppercase", letterSpacing: "1px" }}>1. Portfolio Size (Businesses)</Text>
-                                        <Text fw={900} c="#b2d93b" style={{ fontSize: rem(32) }}>{numBusinesses}</Text>
+                                        <Text fw={900} c="rgba(253, 253, 253, 0.4)" size="xs" style={{ textTransform: "uppercase", letterSpacing: "2px" }}>Active Retailers</Text>
+                                        <Text fw={900} c="#b2d93b" style={{ fontSize: rem(48), fontFamily: "Syne, sans-serif" }}>{numBusinesses}</Text>
                                     </Group>
-                                    <Slider
-                                        size="xl"
-                                        min={1}
-                                        max={100}
-                                        step={1}
-                                        label={null}
-                                        value={numBusinesses}
-                                        onChange={setNumBusinesses}
-                                        color="green"
-                                        styles={{
-                                            track: { background: "rgba(255, 255, 255, 0.08)", height: rem(10) },
-                                            thumb: { border: "6px solid #b2d93b", background: "#052315", width: rem(28), height: rem(28) },
-                                            bar: { background: "#b2d93b" }
-                                        }}
-                                    />
-                                </Box>
-
-                                <Box>
-                                    <Group justify="space-between" mb="lg">
-                                        <Text fw={800} c="#fdfdfd" size="sm" style={{ textTransform: "uppercase", letterSpacing: "1px" }}>2. Avg Staff Strength</Text>
-                                        <Text fw={900} c="#b2d93b" style={{ fontSize: rem(32) }}>{staffPerBranch}</Text>
-                                    </Group>
-                                    <Slider
-                                        size="xl"
-                                        min={1}
-                                        max={50}
-                                        step={1}
-                                        label={null}
-                                        value={staffPerBranch}
-                                        onChange={setStaffPerBranch}
-                                        color="green"
-                                        styles={{
-                                            track: { background: "rgba(255, 255, 255, 0.08)", height: rem(10) },
-                                            thumb: { border: "6px solid #b2d93b", background: "#052315", width: rem(28), height: rem(28) },
-                                            bar: { background: "#b2d93b" }
-                                        }}
-                                    />
+                                    <Slider size="xl" min={1} max={500} label={null} value={numBusinesses} onChange={setNumBusinesses} color="green" styles={{ track: { background: "rgba(255, 255, 255, 0.08)", height: rem(12) }, thumb: { border: "8px solid #b2d93b", background: "#052315", width: rem(36), height: rem(36) }, bar: { background: "#b2d93b" } }} />
                                 </Box>
 
                                 <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xl">
                                     <Box>
-                                        <Text size="xs" fw={900} mb={14} c="rgba(253, 253, 253, 0.4)" style={{ letterSpacing: "1.5px", textTransform: "uppercase" }}>Plan Tier</Text>
-                                        <SegmentedControl
-                                            fullWidth
-                                            data={["Pro", "Premium"]}
-                                            value={selectedPlan}
-                                            onChange={setSelectedPlan}
-                                            color="green"
-                                            radius="xl"
-                                            styles={{
-                                                root: { background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", padding: rem(5) },
-                                                control: { border: "none" },
-                                                label: { fontWeight: 900, fontSize: rem(14), padding: "10px 0" }
-                                            }}
-                                        />
+                                        <Text size="xs" fw={900} mb={16} c="rgba(253, 253, 253, 0.4)" style={{ letterSpacing: "2px", textTransform: "uppercase" }}>Plan Tier</Text>
+                                        <SegmentedControl fullWidth data={["Pro", "Premium"]} value={selectedPlan} onChange={setSelectedPlan} color="green" radius="xl" styles={{ root: { background: "rgba(253, 253, 253, 0.03)", border: "1px solid rgba(253, 253, 253, 0.08)" }, control: { fontWeight: 900 } }} />
                                     </Box>
                                     <Box>
-                                        <Text size="xs" fw={900} mb={14} c="rgba(253, 253, 253, 0.4)" style={{ letterSpacing: "1.5px", textTransform: "uppercase" }}>Base Currency</Text>
-                                        <SegmentedControl
-                                            fullWidth
-                                            data={["NGN", "USD"]}
-                                            value={currency}
-                                            onChange={(v: any) => setCurrency(v)}
-                                            color="green"
-                                            radius="xl"
-                                            styles={{
-                                                root: { background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", padding: rem(5) },
-                                                control: { border: "none" },
-                                                label: { fontWeight: 900, fontSize: rem(14), padding: "10px 0" }
-                                            }}
-                                        />
+                                        <Text size="xs" fw={900} mb={16} c="rgba(253, 253, 253, 0.4)" style={{ letterSpacing: "2px", textTransform: "uppercase" }}>Currency</Text>
+                                        <SegmentedControl fullWidth data={["NGN", "USD"]} value={currency} onChange={(v: any) => setCurrency(v)} color="green" radius="xl" styles={{ root: { background: "rgba(253, 253, 253, 0.03)", border: "1px solid rgba(253, 253, 253, 0.08)" }, control: { fontWeight: 900 } }} />
                                     </Box>
                                 </SimpleGrid>
                             </Stack>
                         </Stack>
 
-                        <Card padding={isMobile ? "xl" : rem(50)} radius="40px" style={{ background: "linear-gradient(165deg, rgba(178, 217, 59, 0.15) 0%, rgba(5, 35, 21, 1) 100%)", border: "1.5px solid rgba(178, 217, 59, 0.3)", boxShadow: "0 60px 120px rgba(0,0,0,0.6)" }}>
-                            <Stack gap={40}>
+                        <Card padding={60} radius="64px" className="forecaster-card-premium">
+                            <Stack gap={60}>
                                 <Box>
                                     <Group justify="space-between" mb="xs">
-                                        <Text fw={900} size="xs" c="#b2d93b" style={{ letterSpacing: "2.5px", textTransform: "uppercase" }}>Monthly Commission</Text>
-                                        <ThemeIcon color="green" radius="xl" variant="light" size="sm" style={{ background: "rgba(178, 217, 59, 0.1)" }}><IconCoin size={16} /></ThemeIcon>
+                                        <Text fw={900} size="xs" c="#b2d93b" style={{ letterSpacing: "3px", textTransform: "uppercase" }}>Daily Accrual Rank</Text>
+                                        <IconCoin size={20} color="#b2d93b" />
                                     </Group>
-                                    <Title order={3} style={{ fontSize: "clamp(36px, 6vw, 68px)", color: "#fdfdfd", fontWeight: 900, letterSpacing: "-0.05em", wordBreak: "break-word" }}>{formatValue(monthlyCommission)}</Title>
+                                    <Title order={3} style={{ fontSize: rem(72), color: "#fdfdfd", fontWeight: 800, letterSpacing: "-0.05em", fontFamily: "Syne, sans-serif" }}>{formatValue(monthlyCommission)}</Title>
+                                    <Text c="rgba(253,253,253,0.4)" fw={600}>Estimated Monthly Recurring Commission</Text>
                                 </Box>
-
                                 <Divider color="rgba(178, 217, 59, 0.15)" />
-
                                 <Box>
                                     <Group justify="space-between" mb="xs">
-                                        <Text fw={900} size="xs" c="#b2d93b" style={{ letterSpacing: "2.5px", textTransform: "uppercase" }}>2-Year Asset Value</Text>
-                                        <ThemeIcon color="green" radius="xl" variant="light" size="sm" style={{ background: "rgba(178, 217, 59, 0.1)" }}><IconTrendingUp size={16} /></ThemeIcon>
+                                        <Text fw={900} size="xs" c="#00ff87" style={{ letterSpacing: "3px", textTransform: "uppercase" }}>24-Month Projection</Text>
+                                        <IconTrendingUp size={20} color="#00ff87" />
                                     </Group>
-                                    <Title order={3} style={{ fontSize: "clamp(28px, 4vw, 44px)", color: "#fdfdfd", fontWeight: 800, letterSpacing: "-0.04em", wordBreak: "break-word" }}>{formatValue(twoYearEarnings)}</Title>
+                                    <Title order={3} style={{ fontSize: rem(44), color: "#fdfdfd", fontWeight: 800, letterSpacing: "-0.04em", fontFamily: "Syne, sans-serif" }}>{formatValue(twoYearEarnings)}</Title>
                                 </Box>
-
-                                <Button component={Link} href="/partners/apply" size="xl" radius="xl" className="btn-primary" fullWidth style={{ height: rem(76), fontSize: rem(18), marginTop: rem(20) }}>
-                                    Join the Elite Circle
-                                </Button>
+                                <Button component="a" href="https://back-office.usecheetah.com/register-partner" size="xl" radius="xl" className="btn-modern-primary" fullWidth style={{ height: rem(60), fontSize: rem(15) }}>Start Earning Now</Button>
                             </Stack>
                         </Card>
                     </SimpleGrid>
-                </Container>
-            </Box>
+                </Box>
 
-            {/* Partner Levels / Tiers */}
-            <Container size="lg" py={120}>
-                <Stack align="center" mb={60}>
-                    <Text fw={800} c="#b2d93b" size="xs" style={{ letterSpacing: "2px", textTransform: "uppercase" }}>Elite Progression</Text>
-                    <Title order={2} ta="center" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 900 }}>Scale Your <span style={{ color: "#b2d93b" }}>Ambition</span></Title>
-                </Stack>
-                <SimpleGrid cols={{ base: 1, md: 3 }} spacing={24}>
-                    {[
-                        { name: "Silver Partner", businesses: "1-20 Branches", perk: "20% Base Commission", color: "#C0C0C0" },
-                        { name: "Gold Partner", businesses: "21-100 Branches", perk: "20% + Marketing Support", color: "#FFD700" },
-                        { name: "Platinum Global", businesses: "100+ Branches", perk: "Equity & Revenue Share Options", color: "#E5E4E2" },
-                    ].map((tier, i) => (
-                        <Card key={i} padding="xl" radius="32px" style={{ background: "rgba(255,255,255,0.01)", border: `1px solid rgba(255,255,255,0.05)`, textAlign: "center", transition: "all 0.3s ease" }}>
-                            <Box mb="md">
-                                <ThemeIcon variant="light" color="gray" size={54} radius="xl" mb="md" style={{ background: `${tier.color}11`, border: `1px solid ${tier.color}22`, margin: "0 auto" }}>
-                                    <IconStar size={24} color={tier.color} />
-                                </ThemeIcon>
-                                <Text fw={900} size="xl" c="#fdfdfd" mb="xs">{tier.name}</Text>
-                                <Badge variant="dot" color="green" size="lg" mb="xl" styles={{ root: { padding: "0 12px" } }}>{tier.businesses}</Badge>
-                                <Text size="sm" c="rgba(253,253,253,0.4)" fw={500}>{tier.perk}</Text>
-                            </Box>
-                        </Card>
-                    ))}
-                </SimpleGrid>
-            </Container>
-
-            {/* Benefits Section */}
-            <Box py={160} style={{ position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: "20%", left: "-10%", width: "40%", height: "60%", background: "radial-gradient(circle, rgba(178, 217, 59, 0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
-                <Container size="lg">
-                    <SimpleGrid cols={{ base: 1, md: 2 }} spacing={120} style={{ alignItems: "center" }}>
-                        <Stack gap={40}>
-                            <Box>
-                                <Text fw={800} c="#b2d93b" size="xs" mb="md" style={{ letterSpacing: "2.5px", textTransform: "uppercase" }}>Partner Support</Text>
-                                <Title order={2} style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 900, lineHeight: 1.1, color: "#fdfdfd" }}>
-                                    Infrastructure that <br /><span style={{ color: "#b2d93b" }}>Fuels Your Success.</span>
-                                </Title>
-                            </Box>
-                            <Text size="lg" c="rgba(253, 253, 253, 0.5)" style={{ lineHeight: 1.8, fontSize: rem(18) }}>
-                                We don&apos;t just provide a platform; we provide a dedicated success ecosystem. Your growth is our primary metric.
-                            </Text>
-                            <List
-                                spacing="lg"
-                                size="md"
-                                center
-                                icon={<ThemeIcon color="green" size={24} radius="xl" variant="light" style={{ background: "rgba(178, 217, 59, 0.1)" }}><IconCircleCheck size={16} /></ThemeIcon>}
-                                styles={{ item: { color: "rgba(253, 253, 253, 0.7)", fontWeight: 500, borderLeft: "none" } }}
-                            >
-                                <List.Item>Dedicated Partner Success Manager</List.Item>
-                                <List.Item>Whitelabel Marketing & Sales Assets</List.Item>
-                                <List.Item>Direct Technical Priority for Your Clients</List.Item>
-                                <List.Item>Quarterly Strategic Masterclasses</List.Item>
-                            </List>
-                        </Stack>
-                        <Box style={{ position: "relative" }}>
-                            <Box style={{ transform: "perspective(1000px) rotateY(-5deg)", transition: "transform 0.5s ease" }} className="hover-tilt">
-                                <Image
-                                    src="/images/hero-pos.png"
-                                    alt="Cheetah App"
-                                    width={640}
-                                    height={440}
-                                    style={{
-                                        objectFit: "contain",
-                                        borderRadius: "40px",
-                                        border: "1px solid rgba(178,217,59,0.15)",
-                                        boxShadow: "0 40px 100px rgba(0,0,0,0.5)",
-                                        background: "rgba(255,255,255,0.01)"
-                                    }}
-                                />
-                            </Box>
-                            <Card radius="24px" padding="xl" style={{ position: "absolute", bottom: -30, left: -20, background: "#052315", border: "1.5px solid rgba(178,217,59,0.4)", maxWidth: "280px", boxShadow: "0 20px 40px rgba(0,0,0,0.4)" }}>
-                                <Group gap="sm" mb={10}>
-                                    <ThemeIcon color="green" size="md" radius="sm" variant="filled" style={{ background: "#b2d93b" }}><IconHeartHandshake size={18} color="#052315" /></ThemeIcon>
-                                    <Text fw={900} size="sm" c="#fdfdfd">Strategic Concierge</Text>
-                                </Group>
-                                <Text size="xs" c="rgba(253,253,253,0.5)" style={{ lineHeight: 1.5 }}>Our engineering team handles the complex migrations while you focus on the relationship.</Text>
-                            </Card>
-                        </Box>
-                    </SimpleGrid>
-                </Container>
-            </Box>
-
-            {/* Step by Step Journey */}
-            <Box py={160} style={{ background: "rgba(178, 217, 59, 0.01)", borderY: "1px solid rgba(255, 255, 255, 0.04)" }}>
-                <Container size="lg">
-                    <SimpleGrid cols={{ base: 1, md: 2 }} spacing={120} style={{ alignItems: "center" }}>
-                        <Stack gap={40}>
-                            <Box>
-                                <Text fw={800} c="#b2d93b" size="xs" mb="md" style={{ letterSpacing: "2.5px", textTransform: "uppercase" }}>The Roadmap</Text>
-                                <Title order={2} style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 900, lineHeight: 1.1, color: "#fdfdfd" }}>
-                                    How to Join the <br /><span style={{ color: "#b2d93b" }}>Next Frontier</span>
-                                </Title>
-                            </Box>
-                            <Text size="lg" c="rgba(253, 253, 253, 0.5)" style={{ lineHeight: 1.8, fontSize: rem(18) }}>
-                                We&apos;ve engineered a frictionless boarding process to take you from applicant to your first recurring commission in record time.
-                            </Text>
-                        </Stack>
-
-                        <Timeline active={-1} bulletSize={54} lineWidth={2} color="green" styles={{
-                            itemTitle: { fontWeight: 900, color: "#fdfdfd", fontSize: rem(22), marginBottom: 8 },
-                            itemBullet: { background: "#052315", border: "2px solid #b2d93b", color: "#b2d93b", boxShadow: "0 0 20px rgba(178, 217, 59, 0.2)" },
-                            itemBody: { color: "rgba(253, 253, 253, 0.45)", fontSize: rem(16), lineHeight: 1.7 },
-                            item: { paddingBottom: rem(48) }
-                        }}>
-                            <Timeline.Item bullet={<IconSearch size={22} />} title="01. Strategic Review">
-                                Submit your professional footprint. We evaluate your network density and market alignment within 48 hours.
-                            </Timeline.Item>
-                            <Timeline.Item bullet={<IconSchool size={22} />} title="02. Elite Certification">
-                                Master the Cheetah AI engine. Gain access to your personalized enablement vault and whitelabel assets.
-                            </Timeline.Item>
-                            <Timeline.Item bullet={<IconUserPlus size={22} />} title="03. First Modernization">
-                                Execute your first branch activation. Our tech team provides direct concierge support for a flawless launch.
-                            </Timeline.Item>
-                            <Timeline.Item bullet={<IconCashBanknote size={22} />} title="04. Recurring Harvest">
-                                Monitor your portfolio in real-time. Secure your 20% commission every single month, automatically.
-                            </Timeline.Item>
-                        </Timeline>
-                    </SimpleGrid>
-                </Container>
-            </Box>
-
-            {/* FAQ Section */}
-            <Container size="sm" py={100}>
-                <Stack align="center" mb={60}>
-                    <Title order={2} ta="center" style={{ fontSize: "42px", fontWeight: 900 }}>Common Questions</Title>
-                </Stack>
-                <Accordion variant="separated" styles={{
-                    item: { background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: rem(16), marginBottom: rem(16) },
-                    control: { color: "#fdfdfd", fontWeight: 700, padding: rem(24) },
-                    content: { color: "rgba(253,253,253,0.5)", lineHeight: 1.7, padding: rem(24) },
-                    chevron: { color: "#b2d93b" }
-                }}>
-                    <Accordion.Item value="payment">
-                        <Accordion.Control>How and when do I get paid?</Accordion.Control>
-                        <Accordion.Panel>Commissions are calculated daily and paid out on the 1st of every month. We support bank transfers across Nigeria, Ghana, Kenya, and Uganda.</Accordion.Panel>
-                    </Accordion.Item>
-                    <Accordion.Item value="duration">
-                        <Accordion.Control>How long does the recurring commission last?</Accordion.Control>
-                        <Accordion.Panel>You earn commission for the first 24 months of every business&apos;s active subscription. After this period, you can renew your partner status based on portfolio performance.</Accordion.Panel>
-                    </Accordion.Item>
-                    <Accordion.Item value="commitment">
-                        <Accordion.Control>Is there a minimum quota I must meet?</Accordion.Control>
-                        <Accordion.Panel>We don&apos;t impose rigid quotas, but we prioritize partners who show consistent activity. Gold and Platinum levels require specific portfolio sizes.</Accordion.Panel>
-                    </Accordion.Item>
-                </Accordion>
-            </Container>
-
-            {/* Velocity Section */}
-            <Box py={140} style={{ background: "rgba(5, 35, 21, 0.2)", position: "relative" }}>
-                <Container size="lg">
-                    <Stack align="center" gap="xl" style={{ textAlign: "center" }}>
-                        <div style={{ display: "inline-flex", padding: "8px 20px", background: "rgba(178, 217, 59, 0.1)", borderRadius: "50px", color: "#b2d93b", fontWeight: 800, fontSize: rem(13), letterSpacing: "1px", textTransform: "uppercase" }}>
-                            Product Velocity
-                        </div>
-                        <Title order={2} style={{ fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 900, color: "#fdfdfd", maxWidth: 900 }}>
-                            Built on Feedback. <br />Driven by <span style={{ color: "#b2d93b" }}>Real Growth.</span>
-                        </Title>
-                        <Text size="xl" c="rgba(253, 253, 253, 0.5)" style={{ maxWidth: 800, lineHeight: 1.6 }}>
-                            We release new features and updates every two weeks, directly influenced by the businesses our partners serve. We&apos;re not just building software; we&apos;re building the No. 1 OS for business globally.
-                        </Text>
-
-                        <SimpleGrid cols={{ base: 1, sm: 3 }} spacing={40} mt={60} style={{ width: "100%" }}>
-                            <Box style={{ padding: "40px", background: "rgba(255,255,255,0.02)", borderRadius: "32px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                                <ThemeIcon size={48} radius="xl" color="green" variant="light" mb="md" style={{ background: "rgba(178,217,59,0.1)" }}><IconRocket size={24} /></ThemeIcon>
-                                <Text fw={900} size="xl" c="#fdfdfd" mb="xs">14-Day Sprint</Text>
-                                <Text size="sm" c="rgba(253,253,253,0.4)">Continuous innovation cycle with updates pushed every fortnight.</Text>
-                            </Box>
-                            <Box style={{ padding: "40px", background: "rgba(255,255,255,0.02)", borderRadius: "32px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                                <ThemeIcon size={48} radius="xl" color="green" variant="light" mb="md" style={{ background: "rgba(178,217,59,0.1)" }}><IconUsers size={24} /></ThemeIcon>
-                                <Text fw={900} size="xl" c="#fdfdfd" mb="xs">Business-First</Text>
-                                <Text size="sm" c="rgba(253,253,253,0.4)">Our roadmap is 100% determined by partner and business feedback.</Text>
-                            </Box>
-                            <Box style={{ padding: "40px", background: "rgba(255,255,255,0.02)", borderRadius: "32px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                                <ThemeIcon size={48} radius="xl" color="green" variant="light" mb="md" style={{ background: "rgba(178,217,59,0.1)" }}><IconGlobe size={24} /></ThemeIcon>
-                                <Text fw={900} size="xl" c="#fdfdfd" mb="xs">Global Vision</Text>
-                                <Text size="sm" c="rgba(253,253,253,0.4)">Architected to be the unified operating system for retail worldwide.</Text>
-                            </Box>
-                        </SimpleGrid>
+                {/* FAQ */}
+                <Box py={120}>
+                    <Stack align="center" mb={64}>
+                        <Title order={2} className="syne-title" style={{ fontSize: rem(48), fontWeight: 800 }}>Clarifying <span style={{ color: "#b2d93b" }}>The Vision</span></Title>
                     </Stack>
-                </Container>
-            </Box>
+                    <Accordion variant="separated" styles={{
+                        item: { background: "rgba(253, 253, 253, 0.02)", border: "1px solid rgba(253, 253, 253, 0.05)", borderRadius: rem(24), marginBottom: rem(20), padding: rem(10) },
+                        control: { fontSize: rem(18), fontWeight: 800, color: "#fff", fontFamily: "Syne, sans-serif" },
+                        content: { color: "rgba(253,253,253,0.5)", lineHeight: 1.8, fontSize: rem(16), fontWeight: 500 },
+                        chevron: { color: "#b2d93b" }
+                    }}>
+                        <Accordion.Item value="commission"><Accordion.Control>How is commission calculated?</Accordion.Control><Accordion.Panel>Elite partners earn a **25% recurring commission** on every paid subscription for life. Commissions are calculated in real-time and paid out monthly with zero withdrawal minimums.</Accordion.Panel></Accordion.Item>
+                        <Accordion.Item value="regions"><Accordion.Control>Which regions are supported?</Accordion.Control><Accordion.Panel>Cheetah is built for the global retail market. While our core infrastructure is optimized for Nigeria, Kenya, and Ghana, we support retailers and payouts globally via bank transfer and SWIFT.</Accordion.Panel></Accordion.Item>
+                        <Accordion.Item value="training"><Accordion.Control>Is there technical training provided?</Accordion.Control><Accordion.Panel>Yes. Every partner receives access to the **Cheetah Certification Vault**, including Sales Playbooks, POS Setup Guides, and directo concierge support for enterprise deals.</Accordion.Panel></Accordion.Item>
+                        <Accordion.Item value="support"><Accordion.Control>What priority support do clients get?</Accordion.Control><Accordion.Panel>Clients signed by Strategic Partners receive **Platinum Tier Support**, including a 30-minute SLA for mission-critical POS and inventory issues.</Accordion.Panel></Accordion.Item>
+                    </Accordion>
+                </Box>
+            </Container>
 
             {/* Final CTA Section */}
-            <Box style={{ background: "rgba(178, 217, 59, 0.05)", padding: "140px 24px", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: "-250px", right: "-250px", width: "700px", height: "700px", background: "radial-gradient(circle, rgba(178, 217, 59, 0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
-                <Container size="sm" style={{ position: "relative", zIndex: 1 }}>
+            <Box style={{ background: "rgba(178, 217, 59, 0.05)", padding: rem(140) + " 24px", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", bottom: "-300px", left: "50%", transform: "translateX(-50%)", width: "1200px", height: "1200px", background: "radial-gradient(circle, rgba(178, 217, 59, 0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
+                <Container size="sm" style={{ position: "relative", zIndex: 2 }}>
                     <Stack align="center" gap={48} style={{ textAlign: "center" }}>
-                        <Title order={2} style={{ fontSize: "clamp(34px, 6vw, 76px)", fontWeight: 900, letterSpacing: "-0.05em", lineHeight: 0.95 }}> Ready to own the <br /><span style={{ color: "#b2d93b" }}>Retail Frontier?</span></Title>
-                        <Text size="xl" c="rgba(253, 253, 253, 0.7)" style={{ maxWidth: rem(650), lineHeight: 1.6 }}>
-                            Join the elite circle of Cheetah Partners today. Scale the digitial transformation and build your recurring high-yield engine.
-                        </Text>
-                        <Button component={Link} href="/partners/apply" size="xl" radius="xl" className="btn-primary" style={{ height: rem(84), padding: "0 92px", fontSize: rem(22) }} rightSection={<IconArrowRight size={28} />}>
-                            Start Certification Now
-                        </Button>
-                        <Group gap="sm" opacity={0.6}>
-                            <IconCheck size={16} color="#b2d93b" />
-                            <Text size="xs" fw={700}>Free Certification included for a limited time.</Text>
-                        </Group>
+                        <Title order={2} className="syne-title" style={{ fontSize: "clamp(32px, 8vw, 84px)", fontWeight: 800, lineHeight: 0.9, letterSpacing: "-0.05em" }}> own the retail <br /><span style={{ color: "#b2d93b" }}>frontier.</span></Title>
+                        <Text size="xl" c="rgba(253, 253, 253, 0.6)" fw={500}>Join the elite circle of digital transformers. Scale African retail and secure your high-yield recurring future today.</Text>
+                        <Button component="a" href="https://back-office.usecheetah.com/register-partner" size="xl" radius="xl" className="btn-modern-primary" style={{ height: rem(88), padding: "0 80px", fontSize: rem(22) }} rightSection={<IconArrowRight size={28} />}>Start Earning Today</Button>
                     </Stack>
                 </Container>
             </Box>
 
-
-            <Modal
-                opened={opened}
-                onClose={close}
-                size="70%"
-                padding={0}
-                radius="xl"
-                centered
-                withCloseButton={false}
-                styles={{
-                    content: { background: "black", overflow: "hidden" },
-                    body: { padding: 0 }
-                }}
-            >
-                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-                    <iframe
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                        title="Cheetah Demo"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                        }}
-                    ></iframe>
-                </div>
+            <Modal opened={opened} onClose={close} size="70%" radius="32px" centered withCloseButton={false} styles={{ content: { background: "#000", overflow: "hidden" }, body: { padding: 0 } }}>
+                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}><iframe src="https://www.youtube.com/embed/yyKnT1jRbr8?autoplay=1" title="Cheetah Demo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}></iframe></div>
             </Modal>
 
-            <style dangerouslySetInnerHTML={{
-                __html: `
-        .btn-primary {
-          background: #b2d93b !important;
-          color: #031600 !important;
-          font-weight: 950 !important;
-          transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-          border: none !important;
-        }
-        .btn-primary:hover {
-          transform: translateY(-8px) scale(1.03) !important;
-          box-shadow: 0 35px 70px rgba(178, 217, 59, 0.4) !important;
-          background: #c3e65a !important;
-        }
-        .strength-card {
-           cursor: pointer;
-        }
-        .strength-card:hover {
-          transform: translateY(-10px);
-          border-color: rgba(178, 217, 59, 0.3) !important;
-          background: rgba(178, 217, 59, 0.05) !important;
-          box-shadow: 0 40px 80px rgba(0,0,0,0.4) !important;
-        }
-        .hover-tilt:hover {
-          transform: perspective(1000px) rotateY(0deg) scale(1.02) !important;
-        }
-        .grid-pattern {
-          background-image: 
-            linear-gradient(rgba(178, 217, 59, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(178, 217, 59, 0.03) 1px, transparent 1px);
-          background-size: 50px 50px;
-        }
-        
-        /* Smooth Transitions */
-        * {
-          transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-            ` }} />
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
+                .syne-title { font-family: 'Syne', sans-serif; letter-spacing: -0.04em; }
+                .hero-badge-partner { background: rgba(178, 217, 59, 0.1); border: 1px solid rgba(178, 217, 59, 0.2); border-radius: 99px; padding: 10px 24px; display: inline-flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(20px); }
+                .hero-badge-partner.animate { animation: fadeInUp 0.8s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+                .partners-hero-title { font-size: clamp(48px, 10vw, 102px); font-weight: 800; font-family: 'Syne', sans-serif; line-height: 0.9; letter-spacing: -0.05em; color: #fff; opacity: 0; transform: translateY(30px); }
+                .partners-hero-title.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) 0.1s forwards; }
+                .partners-hero-subtitle { font-size: 22px; color: rgba(253, 253, 253, 0.5); font-weight: 500; max-width: 800px; opacity: 0; transform: translateY(20px); }
+                .partners-hero-subtitle.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) 0.2s forwards; }
+                .partners-hero-actions { opacity: 0; transform: translateY(20px); }
+                .partners-hero-actions.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) 0.3s forwards; }
+                .btn-modern-primary { background: #b2d93b !important; color: #052315 !important; font-weight: 900 !important; font-family: 'Syne', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.4s ease !important; border: none !important; }
+                .btn-modern-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(178, 217, 59, 0.3); }
+                .btn-modern-outline { background: rgba(253, 253, 253, 0.03) !important; color: #fff !important; border: 1.5px solid rgba(253, 253, 253, 0.1) !important; font-weight: 800 !important; transition: all 0.4s ease !important; backdrop-filter: blur(10px); }
+                .btn-modern-outline:hover { background: rgba(253, 253, 253, 0.06) !important; border-color: rgba(253, 253, 253, 0.3) !important; transform: translateY(-3px); }
+                .partners-feature-card { background: rgba(253, 253, 253, 0.02) !important; border: 1px solid rgba(253, 253, 253, 0.06) !important; padding: 40px !important; border-radius: 40px !important; backdrop-filter: blur(20px); transition: all 0.5s ease; opacity: 0; transform: translateY(30px); }
+                .partners-feature-card.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+                .partners-feature-card:hover { transform: translateY(-10px); background: rgba(178, 217, 59, 0.04) !important; border-color: rgba(178, 217, 59, 0.2) !important; }
+                .forecaster-card-premium { background: linear-gradient(165deg, rgba(178, 217, 59, 0.1) 0%, rgba(5, 35, 21, 1) 100%) !important; border: 1.5px solid rgba(178, 217, 59, 0.2) !important; backdrop-filter: blur(20px); box-shadow: 0 60px 120px rgba(0,0,0,0.5) !important; }
+                .forecaster-section { opacity: 0; transform: translateY(40px); }
+                .forecaster-section.animate { animation: fadeInUp 1s cubic-bezier(0.2, 1, 0.2, 1) forwards; }
+                .animate-fade { animation: fadeIn 2s ease forwards; }
+                @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            `}</style>
         </main>
     );
 }
