@@ -24,58 +24,86 @@ export function Introduction() {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          padding: "120px 24px 80px",
+          padding: "160px 24px 100px",
           overflow: "hidden",
           background: "#052315",
         }}
       >
-        {/* Advanced Dynamic Background */}
+        {/* Cinematic Dynamic Background */}
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+            {/* Base Glow — Dynamic Pulse */}
             <div
                 style={{
                 position: "absolute",
-                top: "-20%",
+                top: "-10%",
                 left: "50%",
                 transform: "translateX(-50%)",
-                width: "140vw",
-                height: "120vh",
-                background: "radial-gradient(ellipse at center, rgba(178,217,59,0.07) 0%, transparent 70%)",
+                width: "160vw",
+                height: "140vh",
+                background: "radial-gradient(ellipse at center, rgba(178,217,59,0.08) 0%, transparent 70%)",
                 zIndex: 0,
+                animation: "pulseGlow 15s infinite alternate ease-in-out"
                 }}
             />
-            <div style={{
+            {/* Animated Floating Orbs */}
+            <div className="bg-orb orb-green-top" style={{
                 position: "absolute",
-                top: "10%",
-                left: "10%",
+                top: "5%",
+                left: "5%",
+                width: "700px",
+                height: "700px",
+                background: "radial-gradient(circle, rgba(0,255,135,0.06) 0%, transparent 70%)",
+                borderRadius: "50%",
+                filter: "blur(100px)",
+                animation: "orbFloat 25s infinite alternate ease-in-out"
+            }} />
+             <div className="bg-orb orb-violet-bottom" style={{
+                position: "absolute",
+                bottom: "-5%",
+                right: "0%",
                 width: "600px",
                 height: "600px",
-                background: "radial-gradient(circle, rgba(0,255,135,0.05) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%)",
                 borderRadius: "50%",
-                filter: "blur(80px)"
+                filter: "blur(120px)",
+                animation: "orbFloat 35s infinite alternate-reverse ease-in-out"
             }} />
-             <div style={{
+            <div className="bg-orb orb-sky-mid" style={{
                 position: "absolute",
-                bottom: "5%",
-                right: "5%",
+                top: "40%",
+                right: "10%",
                 width: "500px",
                 height: "500px",
-                background: "radial-gradient(circle, rgba(167,139,250,0.04) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(96,198,240,0.04) 0%, transparent 70%)",
                 borderRadius: "50%",
-                filter: "blur(100px)"
+                filter: "blur(90px)",
+                animation: "orbFloat 30s infinite alternate ease-in-out"
             }} />
+            
+            {/* Refined Grid System — Slow Scroll */}
             <div
                 style={{
                 position: "absolute",
-                inset: 0,
-                backgroundImage: `linear-gradient(rgba(178,217,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(178,217,59,0.03) 1px, transparent 1px)`,
-                backgroundSize: "60px 60px",
-                maskImage: "radial-gradient(circle at 50% 50%, black, transparent 80%)",
-                opacity: 0.5,
+                inset: "-100%",
+                backgroundImage: `linear-gradient(rgba(178,217,59,0.02) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(178,217,59,0.02) 1.5px, transparent 1.5px)`,
+                backgroundSize: "80px 80px",
+                maskImage: "radial-gradient(circle at 50% 50%, black, transparent 90%)",
+                opacity: 0.6,
+                animation: "gridScroll 60s linear infinite"
                 }}
             />
+            
+            {/* Noise/Grain Overlay */}
+            <div className="noise-overlay" />
+            
+            {/* Light Streak */}
+            <div className="light-streak" />
+
+            {/* Floating Particles */}
+            <div className="floating-particles" />
         </div>
 
-        {/* Hero Section — Modernized */}
+        {/* Hero Section — Premium Typography */}
         <div
           className="hero-container"
           style={{
@@ -83,10 +111,10 @@ export function Introduction() {
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            maxWidth: "1000px",
+            maxWidth: "1100px",
             zIndex: 1,
             position: "relative",
-            marginBottom: "120px"
+            marginBottom: "140px"
           }}
         >
           <div 
@@ -94,13 +122,14 @@ export function Introduction() {
             style={{ 
                 display: "inline-flex", 
                 alignItems: "center", 
-                gap: "10px", 
-                background: "rgba(178,217,59,0.08)",
-                border: "1px solid rgba(178,217,59,0.2)",
-                padding: "8px 20px",
+                gap: "12px", 
+                background: "rgba(178,217,59,0.1)",
+                border: "1px solid rgba(178,217,59,0.15)",
+                padding: "10px 24px",
                 borderRadius: "100px",
-                marginBottom: "32px",
-                backdropFilter: "blur(10px)"
+                marginBottom: "40px",
+                backdropFilter: "blur(12px)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
             }}
           >
             <span style={{ width: "6px", height: "6px", background: "#b2d93b", borderRadius: "50%", display: "block", animation: "pulse-tag 2s infinite" }} />
@@ -113,11 +142,11 @@ export function Introduction() {
             className="animate-headline"
             style={{
               fontFamily: "Syne, sans-serif",
-              fontSize: "clamp(52px, 10vw, 100px)",
+              fontSize: "clamp(56px, 11vw, 112px)",
               fontWeight: 800,
-              lineHeight: 0.95,
-              letterSpacing: "-0.05em",
-              marginBottom: "32px",
+              lineHeight: 0.88,
+              letterSpacing: "-0.055em",
+              marginBottom: "40px",
               color: "#fdfdfd",
             }}
           >
@@ -128,7 +157,8 @@ export function Introduction() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-                paddingBottom: "10px"
+                paddingBottom: "12px",
+                display: "inline-block"
               }}
             >
               Grow faster.
@@ -138,19 +168,20 @@ export function Introduction() {
           <p
             className="animate-subline"
             style={{
-              fontSize: "clamp(18px, 2.8vw, 22px)",
-              color: "rgba(253,253,253,0.6)",
-              lineHeight: 1.5,
-              maxWidth: "700px",
-              marginBottom: "52px",
+              fontSize: "clamp(20px, 3.2vw, 26px)",
+              color: "rgba(253,253,253,0.55)",
+              lineHeight: 1.4,
+              maxWidth: "800px",
+              marginBottom: "64px",
               fontWeight: 400,
+              letterSpacing: "-0.01em"
             }}
           >
             Custom-tailored inventory & POS solutions for{" "}
-            <strong style={{ color: "#fdfdfd", fontWeight: 600 }}>
+            <strong style={{ color: "rgba(253,253,253,0.9)", fontWeight: 600 }}>
               supermarkets, pharmacies, restaurants, retail, and beauty
             </strong>{" "}
-            businesses, powered by AI.
+            businesses — powered by AI.
           </p>
 
           <div
@@ -467,44 +498,120 @@ export function Introduction() {
       </section>
 
       <style>{`
-        .animate-tag { animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-        .animate-headline { animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both; }
-        .animate-subline { animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
-        .animate-actions { animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both; }
-        .animate-trust { animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s both; }
-        .dashboard-reveal { animation: dashboardReveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+        .animate-tag { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        .animate-headline { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both; }
+        .animate-subline { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both; }
+        .animate-actions { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s both; }
+        .animate-trust { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+        .dashboard-reveal { animation: dashboardReveal 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s both; }
+
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            filter: contrast(170%) brightness(1000%);
+        }
+
+        .floating-particles {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(178,217,59,0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+            animation: particleFloat 40s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(5deg); opacity: 0.6; }
+            100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+        }
+
+        @keyframes gridScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(80px); }
+        }
+
+        .light-streak {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(178, 217, 59, 0.04) 50%,
+                transparent 100%
+            );
+            transform: rotate(-45deg);
+            z-index: 1;
+            animation: streakMove 15s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes streakMove {
+            0% { transform: translate(-100%, -100%) rotate(-45deg); }
+            100% { transform: translate(100%, 100%) rotate(-45deg); }
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); filter: blur(100px); }
+            33% { transform: translate(60px, 40px) scale(1.1); filter: blur(120px); }
+            66% { transform: translate(-40px, 60px) scale(0.9); filter: blur(110px); }
+            100% { transform: translate(0, 0) scale(1); filter: blur(100px); }
+        }
 
         @keyframes dashboardReveal {
-            from { opacity: 0; transform: translateY(100px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(120px) scale(0.92); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
         @keyframes float-stat {
             from { transform: translateY(0px); }
-            to { transform: translateY(-15px); }
+            to { transform: translateY(-20px); }
         }
 
         @keyframes glow-pulse {
-            0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(0,255,135,0.4)); }
-            50% { opacity: 0.8; filter: drop-shadow(0 0 25px rgba(0,255,135,0.8)); }
+            0%, 100% { opacity: 1; filter: drop-shadow(0 0 15px rgba(0,255,135,0.3)); }
+            50% { opacity: 0.8; filter: drop-shadow(0 0 30px rgba(0,255,135,0.7)); }
         }
 
         @keyframes pulse-tag {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.6); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(178,217,59,0.4); }
+            50% { transform: scale(1.4); opacity: 0.6; box-shadow: 0 0 0 10px rgba(178,217,59,0); }
+            100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(178,217,59,0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
         .play-trigger:hover {
             transform: scale(1.15);
             background: #b2d93b;
-            box-shadow: 0 0 0 25px rgba(178,217,59,0.25) !important;
+            box-shadow: 0 0 0 30px rgba(178,217,59,0.2) !important;
         }
 
         .btn-glow-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(178,217,59,0.5) !important;
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px rgba(178,217,59,0.4) !important;
             filter: brightness(1.1);
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(178,217,59,0.05);
         }
       `}</style>
 
