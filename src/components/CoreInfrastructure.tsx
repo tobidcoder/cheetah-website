@@ -54,7 +54,7 @@ export function CoreInfrastructure() {
                 Built for <span style={{ color: "#00ff87", animation: "glow-pulse 3s infinite" }}>Offline Resilience</span> & Unified Control
             </h1>
             <p style={{ color: "rgba(253,253,253,0.55)", fontSize: "20px", maxWidth: "680px", margin: "0 auto", lineHeight: 1.6 }}>
-                The core engine that powers Africa's fastest-growing retail chains. From Lagos to Nairobi, we keep you moving.
+                The core engine that powers Africa&apos;s fastest-growing retail chains. From Lagos to Nairobi, we keep you moving.
             </p>
         </div>
 

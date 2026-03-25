@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { IconBarChart, IconTarget, IconUsers, IconClipboard, IconCpu } from "@/components/Icons";
 
 const features = [
@@ -278,9 +279,11 @@ export function Features() {
           </div>
         </div>
         <div style={{ overflow: "hidden", maxHeight: "800px", borderTop: "1px solid rgba(178,217,59,0.2)", position: "relative", zIndex: 1 }}>
-          <img
+          <Image
             src="/images/pos-screenshot.png"
             alt="Cheetah Point of Sale"
+            width={1400}
+            height={900}
             style={{
               width: "100%",
               height: "auto",

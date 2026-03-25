@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { IconDollarSign, IconSlash, IconPackage, IconBuilding, IconShield } from "@/components/Icons";
 
 const painPoints = [
@@ -281,9 +282,11 @@ export function SecuritySection() {
                         </div>
                     </div>
                     <div style={{ padding: "16px", background: "rgba(5,35,21,0.5)" }}>
-                        <img
+                        <Image
                             src="/images/sales-list.png"
                             alt="Live sales monitoring list"
+                            width={1200}
+                            height={700}
                             style={{
                                 width: "100%",
                                 height: "auto",

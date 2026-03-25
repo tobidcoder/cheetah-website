@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const controls = [
     {
@@ -228,9 +229,11 @@ export function BusinessControl() {
                     </div>
                 </div>
                 <div style={{ padding: "12px", background: "rgba(5,35,21,0.5)" }}>
-                    <img
+                    <Image
                         src="/images/price-logs.png"
                         alt="Live sales monitoring list"
+                        width={1200}
+                        height={600}
                         style={{
                             width: "100%",
                             height: "auto",

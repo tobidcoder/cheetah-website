@@ -98,7 +98,7 @@ function CategoryContent() {
       // 3. Fetch blogs for current state
       fetchData();
     })();
-  }, [activeTab, currentPage, categories.length]);
+  }, [activeTab, currentPage, categories.length, currentCategory, fetchData]);
 
   // ── Category tab handler ───────────────────
   const handleTab = useCallback(

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { IconBox, IconTrendingUp, IconDollarSign, IconZap } from "@/components/Icons";
 
 const stats = [
@@ -220,9 +221,11 @@ export function Benefits() {
 
               <div style={{ order: isEven ? 1 : 0, background: "rgba(5,35,21,0.4)", position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px", borderLeft: isEven ? "1px solid rgba(178,217,59,0.1)" : "none", borderRight: !isEven ? "1px solid rgba(178,217,59,0.1)" : "none" }}>
                  <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle, ${feature.color}08 0%, transparent 70%)`, filter: "blur(40px)" }} />
-                 <img
+                  <Image
                   src={feature.image}
                   alt={feature.title}
+                  width={1200}
+                  height={800}
                   style={{
                     width: "100%",
                     height: "auto",

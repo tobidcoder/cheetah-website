@@ -5,6 +5,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { useMantineTheme } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { fetch } from "@/app/api";
 
 export function News() {
@@ -196,9 +197,11 @@ export function News() {
                     {/* Image Area */}
                     <div style={{ overflow: "hidden", height: "260px", position: "relative" }}>
                         {blog.image_url ? (
-                        <img
+                        <Image
                             src={blog.image_url}
                             alt={blog.title}
+                            width={600}
+                            height={400}
                             style={{
                             width: "100%",
                             height: "100%",
@@ -295,9 +298,11 @@ export function News() {
                         >
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                             {blog.created_by_profile_image ? (
-                            <img
+                            <Image
                                 src={blog.created_by_profile_image}
                                 alt={blog.created_by}
+                                width={32}
+                                height={32}
                                 style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover", border: "1px solid rgba(178,217,59,0.3)" }}
                             />
                             ) : (

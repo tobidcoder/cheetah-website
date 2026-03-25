@@ -6,11 +6,24 @@ import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+import { Inter, Syne } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
+});
+
 const theme = createTheme({
-  fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+  fontFamily: `${inter.style.fontFamily}, -apple-system, BlinkMacSystemFont, sans-serif`,
   primaryColor: "green",
   colors: {
     green: [
@@ -89,15 +102,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ background: "#052315" }}>
+    <html lang="en" style={{ background: "#052315" }} className={`${inter.variable} ${syne.variable}`}>
       <head>
         <ColorSchemeScript forceColorScheme="dark" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
       </head>
       <body style={{ background: "#052315", color: "#fdfdfd" }}>
         <MantineProvider theme={theme} forceColorScheme="dark">
