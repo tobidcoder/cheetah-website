@@ -16,13 +16,13 @@ const painPoints = [
     },
     {
         problem: "Inventory shrinkage (theft)",
-        solution: "Every stock movement, sale, transfer, adjustment, creates an uneditable audit trail.",
+        solution: "High-accuracy stock tracking stops shelf-theft in supermarkets and drug-diversion in pharmacies.",
         icon: <IconPackage size={24} color="#f4a261" />,
     },
     {
-        problem: "No visibility across branches",
-        solution: "Live dashboards show sales, voids, and discounts across every location in real time.",
-        icon: <IconBuilding size={24} color="#f4a261" />,
+        problem: "Regulatory Non-Compliance",
+        solution: "Automated logging that meets strict PCN standards for pharmacies and tax regulations for retail.",
+        icon: <IconShield size={24} color="#f4a261" />,
     },
 ];
 
@@ -55,8 +55,8 @@ const securityFeatures = [
                 <line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
             </svg>
         ),
-        title: "Tamper-Proof Audit Logs",
-        desc: "Every action in Cheetah creates a permanent, immutable log. Deleted records leave a trace. Nothing disappears.",
+        title: "PCN & Audit Compliance",
+        desc: "Cheetah's immutable logs are designed to survive the strictest PCN & NAFDAC inspections. Records can't be deleted, only reconciled.",
         accent: "#60c6f0",
     },
     {
@@ -186,7 +186,7 @@ export function SecuritySection() {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(4, 1fr)",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                         gap: "24px",
                         marginBottom: "120px",
                     }}

@@ -1,12 +1,17 @@
 "use client";
-import { useState } from "react";
-import { Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+
 
 export function Introduction() {
-  const [opened, { open, close }] = useDisclosure(false);
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [segmentIndex, setSegmentIndex] = useState(0);
+  const segments = ["Supermarkets", "Pharmacies"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSegmentIndex((prev) => (prev + 1) % segments.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   const floatingStats = [
     { value: "80%", label: "Less Stockouts" },
@@ -24,7 +29,7 @@ export function Introduction() {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          padding: "160px 24px 100px",
+          padding: "160px 24px 10px",
           overflow: "hidden",
           background: "#052315",
         }}
@@ -80,16 +85,16 @@ export function Introduction() {
                 animation: "orbFloat 30s infinite alternate ease-in-out"
             }} />
             
-            {/* Refined Grid System — Slow Scroll */}
+            {/* Refined Grid System — Slow Scroll & Shimmer */}
             <div
                 style={{
                 position: "absolute",
                 inset: "-100%",
-                backgroundImage: `linear-gradient(rgba(178,217,59,0.02) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(178,217,59,0.02) 1.5px, transparent 1.5px)`,
+                backgroundImage: `linear-gradient(rgba(178,217,59,0.03) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(178,217,59,0.03) 1.5px, transparent 1.5px)`,
                 backgroundSize: "80px 80px",
                 maskImage: "radial-gradient(circle at 50% 50%, black, transparent 90%)",
                 opacity: 0.6,
-                animation: "gridScroll 60s linear infinite"
+                animation: "gridScroll 40s linear infinite, gridShimmer 10s infinite alternate-reverse"
                 }}
             />
             
@@ -103,180 +108,124 @@ export function Introduction() {
             <div className="floating-particles" />
         </div>
 
-        {/* Hero Section — Premium Typography */}
+        {/* Hero Section — Premium Typography Layout */}
         <div
-          className="hero-container"
+          className="hero-grid"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            maxWidth: "1100px",
+            width: "100%",
+            maxWidth: "1160px",
             zIndex: 1,
             position: "relative",
-            marginBottom: "140px"
+            marginBottom: "140px",
+            padding: "0 10px"
           }}
         >
-          <div 
-            className="animate-tag"
-            style={{ 
-                display: "inline-flex", 
-                alignItems: "center", 
-                gap: "12px", 
-                background: "rgba(178,217,59,0.1)",
-                border: "1px solid rgba(178,217,59,0.15)",
-                padding: "10px 24px",
-                borderRadius: "100px",
-                marginBottom: "40px",
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
-            }}
-          >
-            <span style={{ width: "6px", height: "6px", background: "#b2d93b", borderRadius: "50%", display: "block", animation: "pulse-tag 2s infinite" }} />
-            <span style={{ fontSize: "12px", fontWeight: 800, color: "#b2d93b", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-              AI-Powered Retail Intelligence
-            </span>
-          </div>
-
-          <h1
-            className="animate-headline"
-            style={{
-              fontFamily: "Syne, sans-serif",
-              fontSize: "clamp(56px, 11vw, 112px)",
-              fontWeight: 800,
-              lineHeight: 0.88,
-              letterSpacing: "-0.055em",
-              marginBottom: "40px",
-              color: "#fdfdfd",
-            }}
-          >
-            Sell smarter. <br />
-            <span
-              style={{
-                background: "linear-gradient(135deg, #b2d93b 0%, #00ff87 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                paddingBottom: "12px",
-                display: "inline-block"
+          {/* Main Content */}
+          <div style={{ textAlign: "left", width: "100%" }}>
+            <div 
+              className="animate-tag hero-tag-pill"
+              style={{ 
+                  display: "inline-flex", 
+                  alignItems: "center", 
+                  gap: "10px", 
+                  background: "rgba(178,217,59,0.06)",
+                  border: "1px solid rgba(178,217,59,0.2)",
+                  padding: "10px 22px",
+                  borderRadius: "100px",
+                  marginBottom: "36px",
+                  backdropFilter: "blur(16px)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(178,217,59,0.05)"
               }}
             >
-              Grow faster.
-            </span>
-          </h1>
-
-          <p
-            className="animate-subline"
-            style={{
-              fontSize: "clamp(20px, 3.2vw, 26px)",
-              color: "rgba(253,253,253,0.55)",
-              lineHeight: 1.4,
-              maxWidth: "800px",
-              marginBottom: "64px",
-              fontWeight: 400,
-              letterSpacing: "-0.01em"
-            }}
-          >
-            Custom-tailored inventory & POS solutions for{" "}
-            <strong style={{ color: "rgba(253,253,253,0.9)", fontWeight: 600 }}>
-              supermarkets, pharmacies, restaurants, retail, and beauty
-            </strong>{" "}
-            businesses — powered by AI.
-          </p>
-
-          <div
-            className="animate-actions"
-            style={{
-              display: "flex",
-              gap: "20px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              marginBottom: "80px",
-              width: "100%",
-            }}
-          >
-            <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/" style={{ textDecoration: "none" }}>
-              <button
-                className="btn-glow-primary"
-                style={{ 
-                    fontSize: "17px", 
-                    padding: "20px 48px", 
-                    background: "#b2d93b", 
-                    color: "#052315",
-                    border: "none",
-                    borderRadius: "100px",
-                    fontWeight: 800,
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
-                    boxShadow: "0 10px 30px rgba(178,217,59,0.3)"
-                }}
-              >
-                Get Started, It&apos;s Free
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
-            </a>
-            <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min" style={{ textDecoration: "none" }}>
-              <button
-                style={{ 
-                    fontSize: "17px", 
-                    padding: "20px 44px", 
-                    background: "rgba(253,253,253,0.05)", 
-                    color: "#fdfdfd",
-                    border: "1px solid rgba(253,253,253,0.15)",
-                    borderRadius: "100px",
-                    fontWeight: 700,
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    backdropFilter: "blur(10px)"
-                }}
-                onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = "rgba(253,253,253,0.1)";
-                    el.style.borderColor = "rgba(253,253,253,0.3)";
-                }}
-                onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = "rgba(253,253,253,0.05)";
-                    el.style.borderColor = "rgba(253,253,253,0.15)";
-                }}
-              >
-                Book a Demo
-              </button>
-            </a>
-          </div>
-
-          <div
-            className="animate-trust"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "32px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
-            {[
-              "✓ Free 14-day trial",
-              "✓ No credit card needed",
-              "✓ Setup in minutes",
-            ].map((text) => (
-              <span
-                key={text}
-                style={{
-                  fontSize: "14px",
-                  color: "rgba(253,253,253,0.45)",
-                  fontWeight: 500,
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {text}
+              <span style={{ width: "8px", height: "8px", background: "#b2d93b", borderRadius: "50%", display: "block", animation: "pulse-tag 2s infinite", boxShadow: "0 0 8px rgba(178,217,59,0.6)" }} />
+              <span style={{ fontSize: "11px", fontWeight: 700, color: "rgba(178,217,59,0.9)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
+                Industry-First: Supermarket & Pharmacy OS
               </span>
-            ))}
+            </div>
+
+            <h1
+              className="animate-headline"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 850,
+                letterSpacing: "-0.06em",
+                marginBottom: "20px",
+                color: "#e2e8e0",
+                lineHeight: 0.95,
+                fontSize: "clamp(42px, 7vw, 92px)"
+              }}
+            >
+              The only <span style={{ color: "#b2d93b" }}>OS</span> that <span style={{ color: "#FF6B6B" }}>stops theft</span> <br />
+              and handles <span style={{ color: "#b2d93b" }}>PCN, NAFDAC & Tax</span> compliance <br />
+              <div style={{ display: "flex", alignItems: "baseline", gap: "20px", marginTop: "16px", justifyContent: "inherit" }}>
+                <span style={{ 
+                    fontSize: "clamp(32px, 5vw, 70px)", 
+                    color: "rgba(178,217,59,0.4)", 
+                    fontWeight: 700,
+                    letterSpacing: "-0.04em",
+                    fontFamily: "Syne, sans-serif"
+                }}>
+                  for
+                </span>
+                <span 
+                    key={segmentIndex} 
+                    className="text-interchange"
+                    style={{ 
+                        fontSize: "clamp(42px, 7.5vw, 105px)", 
+                        color: "#b9d565ff", 
+                        lineHeight: 1,
+                        letterSpacing: "-0.04em",
+                        fontFamily: "Syne, sans-serif",
+                        display: "inline-block"
+                    }}
+                >
+                  {segments[segmentIndex]}
+                </span>
+              </div>
+            </h1>
+
+            <p
+              className="animate-subline"
+              style={{
+                fontSize: "18px",
+                color: "rgba(226,232,224,0.5)",
+                lineHeight: 1.6,
+                maxWidth: "720px",
+                marginBottom: "48px",
+                fontWeight: 500,
+                letterSpacing: "-0.01em"
+              }}
+            >
+              The ultimate OS for high-growth retail. Scale across branches with offline-first POS, AI inventory autopilot, and real-time syncing while fully automating your PCN, NAFDAC, and Tax compliance under AES-256 military-grade protection.
+            </p>
+
+            <div
+              className="animate-actions"
+              style={{
+                display: "flex",
+                gap: "16px",
+                flexWrap: "wrap",
+                marginBottom: "48px"
+              }}
+            >
+              <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/" style={{ textDecoration: "none" }}>
+                <button className="btn-glow-primary" style={{ fontSize: "16px", padding: "18px 40px", background: "#b2d93b", color: "#052315", border: "none", borderRadius: "100px", fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", gap: "10px", transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)", boxShadow: "0 10px 30px rgba(178,217,59,0.3)" }}>
+                  Get Started, Free
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </a>
+              <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min" style={{ textDecoration: "none" }}>
+                <button style={{ fontSize: "16px", padding: "18px 40px", background: "rgba(253,253,253,0.05)", color: "#fdfdfd", border: "1px solid rgba(253,253,253,0.15)", borderRadius: "100px", fontWeight: 700, cursor: "pointer", transition: "all 0.3s ease", backdropFilter: "blur(10px)" }}>Book Demo</button>
+              </a>
+            </div>
+
+            <div className="animate-trust" style={{ display: "flex", gap: "24px", opacity: 0.6 }}>
+              {["✓ 14-day trial", "✓ No card", "✓ Instant setup"].map((text) => (
+                <span key={text} style={{ fontSize: "13px", fontWeight: 600, color: "#fdfdfd", letterSpacing: "0.02em" }}>{text}</span>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -410,91 +359,6 @@ export function Introduction() {
           ))}
         </div>
 
-        {/* Dashboard Preview — Cinematic Reveal */}
-        <div
-          className="dashboard-reveal"
-          style={{
-            position: "relative",
-            width: "100%",
-            maxWidth: "1200px",
-            zIndex: 1,
-            cursor: "pointer",
-          }}
-          onClick={open}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: "-40px",
-              background: "radial-gradient(ellipse, rgba(178,217,59,0.15) 0%, transparent 70%)",
-              borderRadius: "50px",
-              zIndex: 0,
-            }}
-          />
-
-          <div
-            style={{
-              position: "relative",
-              borderRadius: "40px",
-              overflow: "hidden",
-              border: "1px solid rgba(178,217,59,0.2)",
-              boxShadow: "0 80px 180px rgba(0,0,0,0.8), 0 0 80px rgba(178,217,59,0.07)",
-              zIndex: 1,
-              background: "rgba(10,35,21,0.6)",
-              padding: "16px"
-            }}
-          >
-            <div style={{ borderRadius: "26px", overflow: "hidden", position: "relative" }}>
-                <Image
-                src="/images/dashboard-overview.png"
-                alt="Cheetah Terminal Interface"
-                width={1200}
-                height={680}
-                style={{
-                    width: "100%",
-                    height: "auto",
-                    display: "block",
-                    opacity: imgLoaded ? 1 : 0,
-                    transition: "opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1)",
-                    transform: imgLoaded ? "scale(1)" : "scale(1.05)",
-                }}
-                onLoad={() => setImgLoaded(true)}
-                priority
-                />
-                
-                <div
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        background: "rgba(5,35,21,0.15)",
-                        transition: "background 0.5s ease"
-                    }}
-                >
-                    <div
-                        className="play-trigger"
-                        style={{
-                        width: "100px",
-                        height: "100px",
-                        borderRadius: "50%",
-                        background: "rgba(178,217,59,0.95)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        boxShadow: "0 0 0 0 rgba(178,217,59,0.5)",
-                        transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
-                        }}
-                    >
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#052315" style={{ marginLeft: "5px" }}>
-                            <polygon points="5,3 19,12 5,21" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       <style>{`
@@ -503,25 +367,120 @@ export function Introduction() {
         .animate-subline { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both; }
         .animate-actions { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s both; }
         .animate-trust { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
-        .dashboard-reveal { animation: dashboardReveal 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s both; }
+        .animate-segments { animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.75s both; }
+
+        .illust-card {
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: default;
+        }
+        .illust-card:hover {
+            transform: translateY(-4px) translateX(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .illust-card:nth-child(2) { animation-delay: 0.1s; }
+        .illust-card:nth-child(3) { animation-delay: 0.2s; }
+        .illust-card:nth-child(4) { animation-delay: 0.3s; }
+        .illust-card:nth-child(5) { animation-delay: 0.4s; }
+
+        .text-interchange {
+            animation: slideUpIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes slideUpIn {
+            from { opacity: 0; transform: translateY(20px) rotateX(-15deg); filter: blur(8px); }
+            to { opacity: 1; transform: translateY(0) rotateX(0deg); filter: blur(0); }
+        }
+
+        .hero-tag-pill {
+            transition: all 0.4s ease;
+        }
+        .hero-tag-pill:hover {
+            background: rgba(178,217,59,0.1) !important;
+            box-shadow: 0 4px 24px rgba(178,217,59,0.15), inset 0 0 0 1px rgba(178,217,59,0.1) !important;
+        }
+
+        .segment-card {
+            background: rgba(253,253,253,0.03);
+            border: 1px solid rgba(253,253,253,0.08);
+            border-radius: 32px;
+            padding: 40px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: default;
+        }
+        .segment-card:hover {
+            background: rgba(253,253,253,0.06);
+            border-color: rgba(178,217,59,0.3);
+            transform: translateY(-8px);
+        }
+        .segment-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: rgba(178,217,59,0.1);
+            color: #b2d93b;
+            display: flex;
+            alignItems: center;
+            justifyContent: center;
+            margin-bottom: 24px;
+        }
+        .segment-title {
+            font-family: "Syne", sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #fdfdfd;
+            margin-bottom: 12px;
+        }
+        .segment-desc {
+            font-size: 16px;
+            color: rgba(253,253,253,0.5);
+            line-height: 1.5;
+            max-width: 300px;
+        }
+        .segment-glow {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            filter: blur(40px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .segment-card:hover .segment-glow { opacity: 0.3; }
+        .s-supermarket { background: #b2d93b; }
+        .s-pharmacy { background: #00ff87; }
 
         .noise-overlay {
             position: absolute;
             inset: 0;
             z-index: 1;
-            opacity: 0.04;
+            opacity: 0.06;
             pointer-events: none;
             background-image: url("https://grainy-gradients.vercel.app/noise.svg");
             filter: contrast(170%) brightness(1000%);
         }
 
+        .bg-orb {
+            transition: all 1s ease;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); filter: blur(100px); }
+            33% { transform: translate(100px, 60px) scale(1.2) rotate(10deg); filter: blur(140px); }
+            66% { transform: translate(-60px, 100px) scale(0.8) rotate(-10deg); filter: blur(120px); }
+            100% { transform: translate(0, 0) scale(1) rotate(0deg); filter: blur(100px); }
+        }
+
         .floating-particles {
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(circle at 2px 2px, rgba(178,217,59,0.15) 1px, transparent 0);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-            animation: particleFloat 40s linear infinite;
+            background-image: radial-gradient(circle at 2px 2px, rgba(178,217,59,0.2) 1px, transparent 0);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
+            animation: particleFloat 30s linear infinite;
             z-index: 1;
         }
 
@@ -540,6 +499,12 @@ export function Introduction() {
         @keyframes gridScroll {
             0% { transform: translateY(0); }
             100% { transform: translateY(80px); }
+        }
+
+        @keyframes gridShimmer {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
         }
 
         .light-streak {
@@ -614,75 +579,22 @@ export function Introduction() {
             box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(178,217,59,0.05);
         }
 
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; text-align: center !important; }
+            .hero-grid > div { text-align: center !important; }
+            .animate-actions { justify-content: center !important; }
+            .animate-trust { justify-content: center !important; }
+        }
         @media (max-width: 768px) {
-            .hero-container { margin-bottom: 80px !important; }
+            .hero-grid { margin-bottom: 80px !important; padding: 0 16px !important; }
             .velocity-card { padding: 60px 24px !important; border-radius: 32px !important; }
-            .dashboard-reveal { margin-top: 40px; }
-            .dashboard-reveal > div:first-child { inset: -20px !important; }
             .animate-actions { flex-direction: column; width: 100%; gap: 16px !important; }
             .animate-actions button { width: 100%; justify-content: center; }
-            .play-trigger { width: 70px !important; height: 70px !important; }
-            .play-trigger svg { width: 28px !important; height: 28px !important; }
+            .illust-card { margin-left: 0 !important; padding: 20px 22px !important; }
+            .animate-segments { grid-template-columns: 1fr !important; gap: 16px !important; }
+            .segment-card { padding: 32px 24px !important; }
         }
       `}</style>
-
-      {/* Modern Video Interface */}
-      <Modal
-        opened={opened}
-        onClose={close}
-        size="calc(100vw - 40px)"
-        centered
-        padding={0}
-        withCloseButton={false}
-        styles={{
-          content: {
-            background: "transparent",
-            boxShadow: "none",
-            maxWidth: "1280px",
-            borderRadius: "32px",
-            overflow: "hidden"
-          },
-          body: { padding: 0 }
-        }}
-      >
-        <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", background: "#000", borderRadius: "32px", overflow: "hidden", border: "1px solid rgba(178,217,59,0.3)" }}>
-           <button 
-                onClick={close}
-                style={{ 
-                    position: "absolute", 
-                    top: "32px", 
-                    right: "32px", 
-                    zIndex: 10, 
-                    width: "52px", 
-                    height: "52px", 
-                    borderRadius: "50%", 
-                    background: "rgba(0,0,0,0.7)", 
-                    border: "1px solid rgba(255,255,255,0.2)", 
-                    color: "#fff", 
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backdropFilter: "blur(12px)",
-                    transition: "all 0.3s ease"
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(0,0,0,0.9)")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(0,0,0,0.7)")}
-            >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-            <iframe
-                style={{ height: "90%", width: "90%", border: "none" }}
-                src="https://www.youtube.com/embed/yyKnT1jRbr8?si=NKEQKtAEs4i6gL4M&autoplay=1"
-                title="Cheetah OS Masterclass"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-            />
-        </div>
-      </Modal>
     </>
   );
 }

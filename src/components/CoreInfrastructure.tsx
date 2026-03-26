@@ -108,7 +108,7 @@ export function CoreInfrastructure() {
             Advanced Analysis & <span style={{ color: "rgba(253,253,253,0.35)", fontWeight: 500, fontStyle: "italic" }}>AI Forecasting</span>
           </h3>
           <p style={{ fontSize: "18px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6, maxWidth: "620px", marginBottom: "48px" }}>
-            Real-time neural processing of stock movements and market volatility. Cheetah AI anticipates demand cycles before they materialize, eliminating stockouts.
+            Real-time neural processing designed for the high-volume needs of <strong>Supermarkets</strong> and the strict regulatory tracking required for <strong>Pharmacies</strong>. Cheetah AI anticipates demand cycles before they materialize.
           </p>
           
           <div className="infra-stats-row" style={{ display: "flex", gap: "clamp(32px, 6vw, 84px)" }}>
@@ -284,7 +284,7 @@ export function CoreInfrastructure() {
               Inventory Autopilot
             </h4>
             <p style={{ fontSize: "16px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6 }}>
-              Intelligent restocking algorithms ensure you never lose a sale. No more time wasting on manual stock updates.
+              Intelligent restocking for Supermarkets and automated <span style={{ color: "#00ff87" }}>PCN-compliant</span> expiry management for Pharmacies. Never lose a sale or fail an audit.
             </p>
           </div>
           <div style={{ 
