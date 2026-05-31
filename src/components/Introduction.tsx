@@ -398,7 +398,7 @@ export function Introduction() {
                 ))}
               </div>
               <p style={{ fontSize: "15px", color: "rgba(253,253,253,0.65)", fontWeight: 600, margin: 0 }}>
-                <strong style={{ color: "#b2d93b" }}>500+ stores</strong> already running on Cheetah — for free
+                <strong style={{ color: "#b2d93b" }}>5000+ stores</strong> already running on Cheetah — for free
               </p>
             </div>
 
