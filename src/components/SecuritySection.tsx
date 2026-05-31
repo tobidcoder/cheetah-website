@@ -115,25 +115,35 @@ export function SecuritySection() {
                 background: "#052315"
             }}
         >
-            {/* Cinematic Background Grid System */}
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "radial-gradient(circle at 50% 50%, rgba(10,61,36,0.3) 0%, transparent 80%)",
-                    pointerEvents: "none",
-                }}
-            />
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: `linear-gradient(rgba(178,217,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(178,217,59,0.03) 1px, transparent 1px)`,
-                    backgroundSize: "60px 60px",
-                    opacity: 0.4,
-                    pointerEvents: "none",
-                }}
-            />
+            {/* Background Video */}
+            <video autoPlay muted loop playsInline style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                opacity: 0.07,
+                zIndex: 0,
+                pointerEvents: "none"
+            }}>
+                <source src="https://www.pexels.com/download/video/28671131/" type="video/mp4" />
+            </video>
+            <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "radial-gradient(circle at 50% 50%, rgba(10,61,36,0.3) 0%, transparent 80%)",
+                pointerEvents: "none",
+                zIndex: 0
+            }} />
+            <div style={{
+                position: "absolute",
+                inset: 0,
+                background: `linear-gradient(rgba(178,217,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(178,217,59,0.03) 1px, transparent 1px)`,
+                backgroundSize: "60px 60px",
+                opacity: 0.4,
+                pointerEvents: "none",
+                zIndex: 0
+            }} />
 
             <div style={{ maxWidth: "1350px", margin: "0 auto", position: "relative", zIndex: 1 }}>
 
@@ -143,8 +153,7 @@ export function SecuritySection() {
                         <span className="dot" style={{ background: "#f4a261" }} />
                         Fraud & Security Command
                     </div>
-                    <h2
-                        style={{
+                    <h2 style={{
                             fontFamily: "Syne, Inter, sans-serif",
                             fontSize: "clamp(38px, 6vw, 76px)",
                             fontWeight: 800,
@@ -152,33 +161,18 @@ export function SecuritySection() {
                             lineHeight: 0.95,
                             color: "#fdfdfd",
                             maxWidth: "920px",
-                            margin: "0 auto 28px",
+                            margin: "0 auto 24px",
                         }}
                     >
                         African retail loses{" "}
-                        <span
-                            style={{
-                                background: "linear-gradient(135deg, #f4a261, #e76f51)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                backgroundClip: "text",
-                            }}
-                        >
+                        <span style={{ background: "linear-gradient(135deg, #f4a261, #e76f51)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                             billions to fraud
                         </span>{" "}
                         every year. <br />
                         <span style={{ color: "#b2d93b", fontStyle: "italic", fontWeight: 500 }}>Cheetah ends that.</span>
                     </h2>
-                    <p
-                        style={{
-                            color: "rgba(253,253,253,0.55)",
-                            fontSize: "20px",
-                            maxWidth: "720px",
-                            margin: "0 auto",
-                            lineHeight: 1.6,
-                        }}
-                    >
-                        Staff theft, ghost sales, fake refunds, inventory shrinkage, these are not just problems, they are silent killers. Cheetah gives you the visibility and control to stop them completely.
+                    <p style={{ color: "rgba(253,253,253,0.55)", fontSize: "18px", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
+                        Staff theft, ghost sales, fake refunds — Cheetah gives you full visibility and control.
                     </p>
                 </div>
 
@@ -248,7 +242,7 @@ export function SecuritySection() {
                 </div>
 
                 {/* Audit Demo Block — Cinematic High Res Preview */}
-                <div style={{
+                {/* <div style={{
                     marginBottom: "120px",
                     borderRadius: "48px",
                     overflow: "hidden",
@@ -296,7 +290,7 @@ export function SecuritySection() {
                             }}
                         />
                     </div>
-                </div>
+                </div> */}
 
                 {/* Security Feature Grid — Refined & Interactive */}
                 <div style={{ marginBottom: "120px" }}>
@@ -386,58 +380,7 @@ export function SecuritySection() {
                     </div>
                 </div>
 
-                {/* Emotional CTA Panel — Cinematic Closure */}
-                <div
-                    style={{
-                        borderRadius: "56px",
-                        background: "linear-gradient(135deg, rgba(244,162,97,0.15) 0%, rgba(10,61,36,0.8) 100%)",
-                        border: "1px solid rgba(244,162,97,0.3)",
-                        padding: "clamp(60px, 8vw, 100px) clamp(32px, 6vw, 84px)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                        gap: "48px",
-                        position: "relative",
-                        overflow: "hidden",
-                        boxShadow: "0 60px 140px rgba(0,0,0,0.6)"
-                    }}
-                    className="mobile-text-center"
-                >
-                    <div style={{ maxWidth: "640px", position: "relative", zIndex: 1 }}>
-                        <div style={{ fontSize: "14px", fontWeight: 900, color: "#f4a261", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px", display: "flex", alignItems: "center", gap: "10px", justifyContent: "inherit" }}>
-                            <IconShield size={18} /> Stop the leakage today
-                        </div>
-                        <h3
-                            style={{
-                                fontFamily: "Syne, sans-serif",
-                                fontSize: "clamp(28px, 4vw, 48px)",
-                                fontWeight: 800,
-                                color: "#fdfdfd",
-                                letterSpacing: "-0.04em",
-                                lineHeight: 1,
-                                marginBottom: "24px",
-                            }}
-                        >
-                            Every day without Cheetah is a day your business is exposed.
-                        </h3>
-                        <p style={{ fontSize: "18px", color: "rgba(253,253,253,0.5)", lineHeight: 1.6 }}>
-                            Don&apos;t wait for a major incident to realize you needed better controls. Start protecting your business right now, free.
-                        </p>
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "16px", position: "relative", zIndex: 1, minWidth: "260px" }} className="mobile-full-width">
-                        <a target="_blank" rel="noopener noreferrer" href="https://back-office.usecheetah.com/">
-                            <button className="btn-glow-primary" style={{ padding: "20px 48px", fontSize: "17px", borderRadius: "100px", background: "#b2d93b", color: "#052315", border: "none", fontWeight: 800, width: "100%", boxShadow: "0 10px 40px rgba(178,217,59,0.3)" }}>
-                                Protect My Business, Free
-                            </button>
-                        </a>
-                        <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/cheetahdemo/30min">
-                            <button style={{ padding: "20px 48px", fontSize: "17px", borderRadius: "100px", border: "1px solid rgba(253,253,253,0.15)", background: "rgba(253,253,253,0.05)", color: "#fdfdfd", fontWeight: 700, width: "100%" }}>
-                                Book a Security Demo
-                            </button>
-                        </a>
-                    </div>
-                </div>
+
             </div>
 
             <style>{`
@@ -458,15 +401,16 @@ export function SecuritySection() {
                     filter: brightness(1.1);
                 }
                 @media (max-width: 1024px) {
-                    .mobile-grid-1 { grid-template-columns: repeat(2, 1fr) !important; }
+                    .mobile-grid-1 { 
+                        grid-template-columns: repeat(2, 1fr) !important; 
+                        gap: 24px !important;
+                    }
                 }
                 @media (max-width: 768px) {
-                    .mobile-grid-1 { grid-template-columns: 1fr !important; }
-                    .mobile-text-center { text-align: center !important; justify-content: center !important; }
-                    .mobile-full-width { width: 100% !important; min-width: 0 !important; }
-                    .security-item-card { padding: 32px 24px !important; }
-                    .pain-card { padding: 32px 24px !important; }
                     .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
+                    .mobile-grid-1 { grid-template-columns: 1fr !important; }
+                    .security-item-card { padding: 32px 24px !important; border-radius: 24px !important; }
+                    .pain-card { padding: 32px 24px !important; border-radius: 24px !important; }
                 }
             `}</style>
         </section>

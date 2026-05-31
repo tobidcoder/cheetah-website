@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         next: { revalidate: 3600 } // revalidate every hour
     });
     const blogsData = await res.json();
-    const blogs = blogsData?.data || blogsData || [];
+    const blogs = Array.isArray(blogsData?.data) ? blogsData.data : (Array.isArray(blogsData) ? blogsData : []);
 
     const blogRoutes = blogs.map((post: any) => ({
       url: `${baseUrl}/post/${post.slug}`,

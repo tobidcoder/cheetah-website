@@ -202,8 +202,33 @@ export function Features() {
         ))}
       </div>
 
+      {/* Image Gallery — Real Retailers */}
+      <div style={{ marginBottom: "48px" }}>
+        <p style={{ fontSize: "12px", fontWeight: 800, color: "rgba(253,253,253,0.3)", letterSpacing: "0.2em", textTransform: "uppercase", textAlign: "center", marginBottom: "20px" }}>Built for real stores. Used by real people.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }} className="gallery-grid">
+          {[
+            { src: "https://images.unsplash.com/photo-1739303987882-230db3156099?w=900&auto=format&fit=crop&q=60", label: "Grocery Checkout" },
+            { src: "https://images.unsplash.com/photo-1739300293398-468ba82fd418?w=900&auto=format&fit=crop&q=60", label: "Store Management" },
+            { src: "https://plus.unsplash.com/premium_photo-1661380997331-2ec5dfb769b7?w=900&auto=format&fit=crop&q=60", label: "Retail Operations" }
+          ].map((item, i) => (
+            <div key={i} style={{ borderRadius: "24px", overflow: "hidden", height: "220px", border: "1px solid rgba(178,217,59,0.12)", position: "relative" }}>
+              <Image
+                src={item.src}
+                alt={item.label}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover", transition: "transform 0.6s ease" }}
+                className="gallery-img"
+                loading="lazy"
+              />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "12px 16px", background: "linear-gradient(to top, rgba(5,35,21,0.8) 0%, transparent 100%)", fontSize: "13px", fontWeight: 700, color: "rgba(253,253,253,0.7)", letterSpacing: "0.05em", zIndex: 1 }}>{item.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* POS Section — High Impact */}
-      <div
+      {/* <div
         style={{
           borderRadius: "56px",
           background: "linear-gradient(135deg, rgba(10,61,36,0.6) 0%, rgba(5,35,21,0.4) 100%)",
@@ -295,10 +320,16 @@ export function Features() {
             }}
           />
         </div>
-      </div>
+      </div> */}
 
       {/* Responsive overrides */}
       <style>{`
+        .gallery-img:hover {
+            transform: scale(1.06);
+        }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: 1fr !important; }
+        }
         @media (max-width: 1100px) {
           .bento-grid-layout { grid-template-columns: repeat(2, 1fr) !important; }
           .feature-bento-card { grid-column: span 1 !important; }
@@ -306,11 +337,19 @@ export function Features() {
         }
         @media (max-width: 768px) {
           .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
-          .bento-grid-layout { grid-template-columns: 1fr !important; }
-          .feature-bento-card { grid-column: span 1 !important; padding: 32px 24px !important; border-radius: 32px !important; }
+          .bento-grid-layout { 
+              grid-template-columns: 1fr !important; 
+              gap: 16px !important;
+          }
+          .feature-bento-card { 
+              grid-column: span 1 !important; 
+              padding: 40px 24px !important; 
+              border-radius: 32px !important; 
+          }
           .feature-bento-card:nth-child(1), .feature-bento-card:nth-child(5) { grid-column: span 1 !important; }
           .mobile-stack { flex-direction: column !important; width: 100% !important; gap: 16px !important; }
           .mobile-stack a, .mobile-stack button { width: 100% !important; justify-content: center !important; }
+          .mobile-stack button { padding: 18px 32px !important; font-size: 16px !important; }
         }
         .feature-bento-card:hover {
             background: rgba(10, 61, 36, 0.45) !important;

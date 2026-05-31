@@ -6,24 +6,11 @@ import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
-import { Inter, Syne } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-inter",
-});
-
-const syne = Syne({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-syne",
-});
-
 const theme = createTheme({
-  fontFamily: `${inter.style.fontFamily}, -apple-system, BlinkMacSystemFont, sans-serif`,
+  fontFamily: `Inter, -apple-system, BlinkMacSystemFont, sans-serif`,
   primaryColor: "green",
   colors: {
     green: [
@@ -40,6 +27,12 @@ const theme = createTheme({
     ],
   },
 });
+
+export const viewport = {
+  themeColor: "#052315",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://usecheetah.com"),
@@ -64,8 +57,6 @@ export const metadata: Metadata = {
     "Africa retail OS",
   ],
   referrer: "origin-when-cross-origin",
-  themeColor: "#052315",
-  viewport: "width=device-width, initial-scale=1",
   robots: {
     index: true,
     follow: true,
@@ -102,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ background: "#052315" }} className={`${inter.variable} ${syne.variable}`}>
+    <html lang="en" style={{ background: "#052315" }}>
       <head>
         <ColorSchemeScript forceColorScheme="dark" />
       </head>

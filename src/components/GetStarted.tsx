@@ -210,6 +210,7 @@ export function GetStarted() {
             filter: brightness(1.1);
             box-shadow: 0 25px 60px rgba(178,217,59,0.6) !important;
         }
+        .gs-img:hover { transform: scale(1.05); }
         .trust-pill:hover {
             background: rgba(253,253,253,0.06) !important;
             border-color: rgba(253,253,253,0.2) !important;
@@ -219,11 +220,24 @@ export function GetStarted() {
 
         @media (max-width: 768px) {
             .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
-            .get-started-box { border-radius: 40px !important; padding: 80px 20px !important; }
-            .mobile-stack { flex-direction: column !important; width: 100% !important; gap: 16px !important; }
+            .get-started-box { 
+                border-radius: 40px !important; 
+                padding: 60px 20px !important; 
+            }
+            .get-started-box h2 {
+                font-size: clamp(32px, 10vw, 48px) !important;
+                line-height: 1.1 !important;
+            }
+            .get-started-box p {
+                font-size: 17px !important;
+                margin-bottom: 40px !important;
+            }
+            .mobile-stack { flex-direction: column !important; width: 100% !important; gap: 12px !important; }
             .mobile-stack a, .mobile-stack button { width: 100% !important; justify-content: center !important; }
-            .trust-indicator-container { flex-direction: column !important; align-items: center !important; }
-            .trust-pill { width: 100% !important; justify-content: center !important; }
+            .mobile-stack button { padding: 18px 24px !important; font-size: 16px !important; }
+            .trust-indicator-container { flex-direction: column !important; align-items: center !important; gap: 10px !important; }
+            .trust-pill { width: 100% !important; justify-content: center !important; padding: 10px 20px !important; font-size: 14px !important; }
+            .gs-collage { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

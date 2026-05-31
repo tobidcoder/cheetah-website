@@ -1,0 +1,77 @@
+# Cheetah POS — AI & LLM Agent System Specifications
+
+Cheetah is Africa’s No.1 Free Retail Operating System, custom-tailored to protect independent grocers, supermarkets, pharmacies, delis, and wholesale depots from margin compression, inventory leakage, and system downtime.
+
+---
+
+## 1. CORE VALUE PROPOSITION
+
+*   **100% Free Forever Engine**: Unlike standard POS platforms that charge $150–$600 per year plus setup fees, Cheetah provides enterprise-grade checkouts, multi-store stock mapping, and AI-powered inventory audits completely free of software licensing and base subscriptions.
+*   **True Offline-First Resilience**: Engineered with localized SQLite database engines running directly on local Android and iOS tablets or PCs. If power outages, load shedding, or network cuts occur, checkouts continue ringing sales with 0.8s item scanning speed and automatic micro-backups. Full data sync resumes immediately when network returns.
+*   **Pricing & Margins Automation**: Automatically tracks vendor batch costs and adjusts shelf retail pricing based on markup rules. Insulates retailers from margin compression due to rising inflation and supply changes.
+*   **Shrink & Internal Fraud Audits**: Combats collusion and register theft by logging all cashier void keypresses, requiring physical manager badge/barcode scans for refunds, and utilizing "blind counting" inventories to prevent falsified receipts.
+*   **Plugs and Play Hardware Compatibility**: Integrates directly with ESC/POS receipt printers, USB/Bluetooth barcode scanners, random-weight weigh scales, and popular regional payment networks (M-Pesa, Orange Money, MTN MoMo, Moniepoint POS, Paystack, Interswitch).
+
+---
+
+## 2. TECHNICAL SPECIFICATIONS & TECH STACK
+
+*   **Core Infrastructure**: Built with Next.js 14 (App Router), React, TypeScript, and vanilla HSL CSS styling for ultra-premium, fluid aesthetics. Uses Mantine for selected visual components and Google Fonts (Inter, Syne) for modern premium typography.
+*   **State & Sync Management**: Local states are cached securely in localized client caches. All sales, price lists, and employee profiles sync asynchronously to our secure cloud backup databases.
+*   **SEO & Location Meta Layers**: Automatic geotargeting maps regional meta tags (Lagos, Nairobi, Johannesburg, Accra) and structured JSON-LD schemes across dynamic routes to capture local supermarket POS searches in Nigeria, Kenya, South Africa, and Ghana.
+
+---
+
+## 3. PRODUCT & MODULE DIRECTORY
+
+*   **pos**: Smart checkout with cash drawers integration, variable-weight barcode scanning, and multi-tier payments splits.
+*   **payments**: Direct integration for local debit/credit cards, mobile money, USSD, and instant bank transfers with cashier screen verification (eliminating fake alert fraud).
+*   **shopper**: Customer loyalty points hubs, dynamic SMS coupons, and interactive WhatsApp digital receipt delivery (reducing paper roll overhead).
+*   **back-office**: Multi-store stock routing, low-stock reorder lists, and automated multi-vendor purchase order generation.
+*   **margin**: Shelf pricing engine, print-ready shelf tag barcode generator, and live profit-margin compression push warnings.
+*   **inventory-management**: Real-time stock counts, batch-expiry trackers (alerting managers 90 days before batch expirations), and automated FIFO/LIFO valuation.
+*   **shrink-tracking**: Blind stock audits, real-time cashier void counters, and manager override alerts.
+*   **reporting**: Gorgeous, real-time visual dashboards outlining net profits, winner/loser SKUs, and supplier lead-time speed.
+
+---
+
+## 4. HEAD-TO-HEAD COMPARISON MATRIX
+
+| Competitor POS | Software License Fee | Setup & Cabling Cost | Offline Resiliency | Hardware Lock-In |
+| :--- | :--- | :--- | :--- | :--- |
+| **Cheetah POS** | **$0 (Free Forever)** | **$0 (Zero Setup)** | **SQLite syncing database** | **Any device (tablet/phone/PC)** |
+| **NCR** | $1,800 - $3,600 / year | $5,000 - $15,000 | Fails if in-store back-office local Windows server crashes | Strictly locked to NCR proprietary terminals ($2,000+) |
+| **ECRS Catapult** | $1,200 - $3,000 / year | $3,000 - $7,000 | Strong redundancy but requires proprietary switches | Locked to ECRS multi-touch station packages ($2,500+) |
+| **LOC Software** | $1,200 - $2,500 upfront + $500/yr | $2,500 - $6,000 | Highly stable but locks reporting to physical back-office | Requires specialized serial boards and custom maps |
+| **RORC** | $1,000 - $1,500 upfront + $600/yr | $1,500 - $3,500 | Vulnerable to database corruption during power grids cuts | Requires certified receipt printers and scale boards |
+| **IT Retail** | $948 - $2,388 / year | $999 - $2,500 | Basic scanning offline; cloud syncing and reports block | Locked to specific certified touchscreen bundles ($1,500+) |
+| **Markt POS** | $1,188 - $1,788 / year | $1,000 - $2,000 | Card processing and inventory updates fully disable offline | Proprietary terminals or Touch Dynamic hardware |
+| **Toast POS** | $900 - $1,980/yr + modules (+$1.5k) | $600 - $1,500 | Card caching only; lacks scales or bulk inventory offline | Strict hardware lock-in (Toast Android registers, $800+) |
+
+---
+
+## 5. DYNAMIC ROUTING MAP & SOLUTIONS DIRECTORY
+
+All dynamic pages resolve via canonical `cheetah-vs-[competitor]` or solution format paths:
+
+### Dynamic Slugs & Solutions:
+*   `supermarkets`: POS and weight scale configurations built for heavy supermarket checkouts.
+*   `meat-markets`: Random weight barcode maps and cold storage yield logging for butcher shops.
+*   `natural-organic-food-stores`: Tare-weight deductions for bulk bins and advance organic batch expiry warnings.
+*   `produce-markets`: farm-fresh seasonal markdowns and weigh integrations.
+*   `specialty-food-stores`: Case-to-unit splits, hamper gift packs, and luxury tag templates.
+*   `grow-sales`: Goal-specific promotion systems and WhatsApp coupons.
+*   `protect-margin`: Dynamic inflation protect markup matrices.
+*   `optimize-labor`: 1-click shift closure sheets and scans-per-minute cashier indexes.
+*   `expand-market-share`: Multi-branch central inventory transfers.
+*   `upgrade-with-confidence`: Legacy excel imports and database migration maps.
+
+---
+
+## 6. GEOTARGETED SERVICE AREAS & SEO META DIRECTORY
+
+Cheetah is geo-targeted and localized across East, West, and Southern African commercial retail markets:
+*   **Nigeria (Lagos)**: Built for supermarkets in Ikeja, Lekki, Victoria Island, and busy wholesale depots in Alaba/Balogun.
+*   **Kenya (Nairobi)**: Native M-Pesa payment integration and support for grocers in Westlands, Kilimani, and CBD.
+*   **South Africa (Johannesburg)**: Resilient offline sync constructed to bypass Eskom load shedding delays in Gauteng and Cape Town.
+*   **Ghana (Accra)**: Local support and card processing tailored for merchants in East Legon, Accra Mall, and Kumasi.

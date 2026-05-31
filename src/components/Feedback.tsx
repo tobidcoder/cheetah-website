@@ -70,7 +70,7 @@ const testimonials = [
   },
 ];
 
-const logos = [
+export const logos = [
   { name: "COMPRAMART", icon: <IconStore size={18} />,        type: "Lagos" },
   { name: "YOUMART",            icon: <IconShoppingCart size={18} />,  type: "Lagos & Abeokuta" },
   { name: "Market Square",             icon: <IconBuilding size={18} />,      type: "Lagos" },
@@ -319,14 +319,35 @@ export function Feedback() {
         }
 
         @media (max-width: 768px) {
-            .section-padding { padding-top: 80px !important; padding-bottom: 80px !important; }
-            .testimonial-card { padding: 48px 24px !important; border-radius: 32px !important; }
-            .testimonial-footer { flex-direction: column !important; align-items: flex-start !important; gap: 32px !important; }
-            .testimonial-stat-block { align-items: flex-start !important; width: 100% !important; }
-            .brand-wall { border-radius: 32px !important; padding: 48px 20px !important; }
-            .slider-nav-btn { width: 50px !important; height: 50px !important; }
-            .slider-controls { right: 50% !important; transform: translateX(50%) !important; bottom: -80px !important; }
-            .slider-container { margin-bottom: 120px !important; }
+            .section-padding { padding-top: 64px !important; padding-bottom: 64px !important; }
+            h2 { letter-spacing: -0.03em !important; }
+            .testimonial-card { padding: 40px 24px !important; border-radius: 32px !important; }
+            .testimonial-card blockquote { 
+                font-size: clamp(20px, 5vw, 24px) !important; 
+                margin-bottom: 40px !important; 
+                line-height: 1.2 !important;
+            }
+            .testimonial-footer { 
+                flex-direction: column !important; 
+                align-items: center !important; 
+                text-align: center !important;
+                gap: 24px !important; 
+                padding-top: 40px !important;
+            }
+            .testimonial-footer > div { flex-direction: column !important; gap: 12px !important; }
+            .testimonial-stat-block { align-items: center !important; width: 100% !important; }
+            .brand-wall { border-radius: 32px !important; padding: 40px 16px !important; }
+            .brand-card-modern { width: 100% !important; justify-content: center !important; padding: 12px 20px !important; }
+            .slider-nav-btn { width: 44px !important; height: 44px !important; }
+            .slider-controls { 
+                position: relative !important; 
+                bottom: 0 !important; 
+                right: 0 !important; 
+                margin-top: 40px !important;
+                justify-content: center !important;
+                transform: none !important;
+            }
+            .slider-container { margin-bottom: 60px !important; }
         }
       `}</style>
     </section>

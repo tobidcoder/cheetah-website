@@ -35,13 +35,13 @@ export function CoreInfrastructure() {
         position: "relative",
       }}
     >
-        {/* Section Header — Refined Typography */}
+        {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "80px", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(30px)", transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "24px", backdropFilter: "blur(10px)" }}>
                 <span className="dot" />
                 Hyper-Scale Architecture
             </div>
-            <h1 style={{
+            <h2 style={{
                 fontFamily: "Syne, sans-serif",
                 fontSize: "clamp(38px, 6vw, 68px)",
                 fontWeight: 800,
@@ -49,27 +49,26 @@ export function CoreInfrastructure() {
                 letterSpacing: "-0.05em",
                 lineHeight: 1,
                 maxWidth: "900px",
-                margin: "0 auto 28px"
+                margin: "0 auto 24px"
             }}>
-                Built for <span style={{ color: "#00ff87", animation: "glow-pulse 3s infinite" }}>Offline Resilience</span> & Unified Control
-            </h1>
-            <p style={{ color: "rgba(253,253,253,0.55)", fontSize: "20px", maxWidth: "680px", margin: "0 auto", lineHeight: 1.6 }}>
-                The core engine that powers Africa&apos;s fastest-growing retail chains. From Lagos to Nairobi, we keep you moving.
+                Built for <span style={{ color: "#00ff87" }}>Offline Resilience</span> & Unified Control
+            </h2>
+            <p style={{ color: "rgba(253,253,253,0.55)", fontSize: "18px", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
+                The engine powering independent grocers across the country.
             </p>
         </div>
 
       <div className="core-infra-grid" style={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: "repeat(10, 1fr)",
         gap: "24px",
       }}>
         
-        {/* Row 1: Advanced Analysis (3/4) + Fraud Lockdown (1/4) */}
+        {/* Row 1: Advanced Analysis (60%) + Fraud Lockdown (40%) */}
         <div 
             className="infra-card"
             style={{
-            gridColumn: "span 3",
-            padding: "clamp(40px, 6vw, 64px)",
+            gridColumn: "span 6",
             background: "linear-gradient(135deg, rgba(10, 61, 36, 0.5) 0%, rgba(5, 35, 21, 0.2) 100%)",
             border: "1px solid rgba(178, 217, 59, 0.18)",
             borderRadius: "40px",
@@ -78,107 +77,147 @@ export function CoreInfrastructure() {
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(40px)",
             transition: "all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            minHeight: "400px"
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "40px" }}>
-            <div style={{ 
-              width: "40px", 
-              height: "40px", 
-              borderRadius: "12px", 
-              background: "rgba(178, 217, 59, 0.15)", 
-              display: "flex", 
-              alignItems: "center", 
-              justifyContent: "center",
-              border: "1px solid rgba(178, 217, 59, 0.2)"
+          {/* Text side */}
+          <div style={{ padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "32px" }}>
+              <div style={{ 
+                width: "40px", height: "40px", borderRadius: "12px", 
+                background: "rgba(178, 217, 59, 0.15)", display: "flex", 
+                alignItems: "center", justifyContent: "center",
+                border: "1px solid rgba(178, 217, 59, 0.2)"
+              }}>
+                  <IconBarChart size={20} color="#b2d93b" />
+              </div>
+              <span style={{ fontSize: "12px", fontWeight: 800, color: "rgba(178, 217, 59, 0.7)", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                Predictive AI Engine
+              </span>
+            </div>
+            <h3 style={{ 
+              fontFamily: "Syne, sans-serif", 
+              fontSize: "clamp(26px, 3.5vw, 42px)", 
+              fontWeight: 800, color: "#fdfdfd", 
+              marginBottom: "16px", lineHeight: 1.05, letterSpacing: "-0.04em"
             }}>
-                <IconBarChart size={20} color="#b2d93b" />
-            </div>
-            <span style={{ fontSize: "12px", fontWeight: 800, color: "rgba(178, 217, 59, 0.7)", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-              Predictive AI Engine
-            </span>
-          </div>
-          <h3 style={{ 
-            fontFamily: "Syne, sans-serif", 
-            fontSize: "clamp(32px, 4.5vw, 52px)", 
-            fontWeight: 800, 
-            color: "#fdfdfd", 
-            marginBottom: "24px",
-            lineHeight: 1,
-            letterSpacing: "-0.04em"
-          }}>
-            Advanced Analysis & <span style={{ color: "rgba(253,253,253,0.35)", fontWeight: 500, fontStyle: "italic" }}>AI Forecasting</span>
-          </h3>
-          <p style={{ fontSize: "18px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6, maxWidth: "620px", marginBottom: "48px" }}>
-            Real-time neural processing designed for the high-volume needs of <strong>Supermarkets</strong> and the strict regulatory tracking required for <strong>Pharmacies</strong>. Cheetah AI anticipates demand cycles before they materialize.
-          </p>
-          
-          <div className="infra-stats-row" style={{ display: "flex", gap: "clamp(32px, 6vw, 84px)" }}>
-            <div>
-              <div style={{ fontSize: "max(44px, 4vw)", fontWeight: 800, color: "#00ff87", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>99.9%</div>
-              <div style={{ fontSize: "12px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "12px" }}>Accuracy Rating</div>
-            </div>
-            <div>
-              <div style={{ fontSize: "max(44px, 4vw)", fontWeight: 800, color: "#a78bfa", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>&lt;2s</div>
-              <div style={{ fontSize: "12px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "12px" }}>Sync Latency</div>
+              Advanced Analysis & <span style={{ color: "rgba(253,253,253,0.35)", fontWeight: 500, fontStyle: "italic" }}>AI Forecasting</span>
+            </h3>
+            <p style={{ fontSize: "16px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6, marginBottom: "32px" }}>
+              Cheetah AI anticipates demand cycles before they materialize — for supermarkets and pharmacies alike.
+            </p>
+            <div style={{ display: "flex", gap: "48px" }}>
+              <div>
+                <div style={{ fontSize: "36px", fontWeight: 800, color: "#00ff87", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>99.9%</div>
+                <div style={{ fontSize: "11px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "8px" }}>Accuracy</div>
+              </div>
+              <div>
+                <div style={{ fontSize: "36px", fontWeight: 800, color: "#a78bfa", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>&lt;2s</div>
+                <div style={{ fontSize: "11px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "8px" }}>Sync Latency</div>
+              </div>
             </div>
           </div>
-
-          <div style={{ 
-            position: "absolute", 
-            bottom: "-10%", 
-            right: "-5%", 
-            width: "50%", 
-            height: "80%", 
-            background: "radial-gradient(circle, rgba(178, 217, 59, 0.1) 0%, transparent 70%)",
-            pointerEvents: "none",
-            filter: "blur(60px)"
-          }} />
+          {/* Video side */}
+          <div style={{ position: "relative", overflow: "hidden", borderLeft: "1px solid rgba(178,217,59,0.1)" }}>
+            <video autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}>
+              <source src="https://www.pexels.com/download/video/14936143/" type="video/mp4" />
+            </video>
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(5,35,21,0.5) 0%, transparent 40%)" }} />
+          </div>
         </div>
 
         <div 
             className="infra-card"
             style={{
-            gridColumn: "span 1",
-            padding: "44px",
-            background: "rgba(255, 107, 107, 0.03)",
-            border: "1px solid rgba(255, 107, 107, 0.15)",
+            gridColumn: "span 4",
+            padding: "40px",
+            background: "linear-gradient(135deg, rgba(255, 107, 107, 0.04) 0%, rgba(5, 35, 21, 0.4) 100%)",
+            border: "1px solid rgba(255, 107, 107, 0.18)",
             borderRadius: "40px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            overflow: "hidden",
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(40px)",
             transition: "all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s",
         }}>
-          <div style={{ marginBottom: "auto" }}>
-            <div style={{ 
-              width: "56px", 
-              height: "56px", 
-              borderRadius: "16px", 
-              background: "rgba(255, 107, 107, 0.1)", 
-              display: "flex", 
-              alignItems: "center", 
-              justifyContent: "center",
-              border: "1px solid rgba(255, 107, 107, 0.25)",
-              marginBottom: "40px"
-            }}>
-                <IconShield size={28} color="#ff6b6b" />
+          {/* Subtle Hazard Pattern Background */}
+          <div style={{ position: "absolute", top: 0, right: 0, width: "100px", height: "100px", opacity: 0.05, background: "repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 10px, transparent 10px, transparent 20px)", pointerEvents: "none" }} />
+
+          <div style={{ marginBottom: "28px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%", marginBottom: "32px" }}>
+                <div style={{ 
+                width: "56px", 
+                height: "56px", 
+                borderRadius: "16px", 
+                background: "rgba(255, 107, 107, 0.12)", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center",
+                border: "1px solid rgba(255, 107, 107, 0.25)"
+                }}>
+                    <IconShield size={28} color="#ff6b6b" />
+                </div>
+                <div style={{ 
+                    padding: "6px 14px", 
+                    background: "rgba(255, 107, 107, 0.08)", 
+                    borderRadius: "100px", 
+                    border: "1px solid rgba(255,107,107,0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px"
+                }}>
+                    <div style={{ width: "6px", height: "6px", background: "#ff6b6b", borderRadius: "50%", animation: "pulse-dot 2s infinite" }} />
+                    <span style={{ fontSize: "10px", fontWeight: 800, color: "#ff6b6b", textTransform: "uppercase", letterSpacing: "0.15em" }}>Threat Level: Zero</span>
+                </div>
             </div>
-            <h4 style={{ fontFamily: "Syne, sans-serif", fontSize: "24px", fontWeight: 800, color: "#fdfdfd", marginBottom: "18px", letterSpacing: "-0.03em" }}>
-              Fraud Lockdown
+            <h4 style={{ fontFamily: "Syne, sans-serif", fontSize: "28px", fontWeight: 800, color: "#fdfdfd", marginBottom: "16px", letterSpacing: "-0.04em" }}>
+              Eliminate Fraud
             </h4>
-            <p style={{ fontSize: "16px", color: "rgba(253,253,253,0.5)", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "15px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6, marginBottom: "32px" }}>
               Zero-trust biometric verification and instant transaction auditing. Zero leakage policy across every terminal.
             </p>
+
+            {/* Live Audit Stream Widget */}
+            <div style={{ 
+                background: "rgba(0,0,0,0.2)", 
+                borderRadius: "20px", 
+                padding: "20px", 
+                border: "1px solid rgba(255,107,107,0.08)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px"
+            }}>
+                {[
+                    { label: "Biometric Verified", time: "Just now", status: "match" },
+                    { label: "Terminal 04 Audited", time: "2s ago", status: "match" },
+                    { label: "Stock Reconciled", time: "14s ago", status: "match" }
+                ].map((audit, i) => (
+                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "11px", opacity: 1 - (i * 0.25) }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#00ff87" }} />
+                            <span style={{ color: "rgba(253,253,253,0.8)", fontWeight: 700 }}>{audit.label}</span>
+                        </div>
+                        <span style={{ color: "rgba(253,253,253,0.4)", fontWeight: 600 }}>{audit.time}</span>
+                    </div>
+                ))}
+            </div>
           </div>
+          
           <div style={{ 
-            marginTop: "40px", 
+            marginTop: "auto", 
             paddingTop: "24px", 
             borderTop: "1px solid rgba(255,107,107,0.1)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between"
           }}>
-            <span style={{ fontSize: "11px", fontWeight: 800, color: "rgba(255,107,107,0.5)", textTransform: "uppercase", letterSpacing: "0.2em" }}>Active Defense</span>
-            <div style={{ width: "8px", height: "8px", background: "#ff6b6b", borderRadius: "50%", animation: "pulse-dot 2s infinite" }} />
+            <span style={{ fontSize: "11px", fontWeight: 800, color: "rgba(255,107,107,0.5)", textTransform: "uppercase", letterSpacing: "0.2em" }}>Active Defense Enabled</span>
+            <div style={{ display: "flex", gap: "4px" }}>
+                {[1,2,3].map(i => <div key={i} style={{ width: "12px", height: "2px", background: "#ff6b6b", opacity: 0.3 + (i * 0.2) }} />)}
+            </div>
           </div>
         </div>
 
@@ -186,7 +225,7 @@ export function CoreInfrastructure() {
         <div 
             className="infra-card"
             style={{
-            gridColumn: "span 1",
+            gridColumn: "span 3",
             padding: "44px",
             background: "rgba(253, 253, 253, 0.02)",
             border: "1px solid rgba(253, 253, 253, 0.08)",
@@ -207,7 +246,7 @@ export function CoreInfrastructure() {
         </div>
 
         <div className="standout-card" style={{
-          gridColumn: "span 2",
+          gridColumn: "span 4",
           padding: "48px 56px",
           background: "linear-gradient(135deg, #00ff87 0%, #00d16c 100%)",
           borderRadius: "40px",
@@ -240,7 +279,7 @@ export function CoreInfrastructure() {
         <div 
             className="infra-card"
             style={{
-            gridColumn: "span 1",
+            gridColumn: "span 3",
             padding: "44px",
             background: "rgba(253, 253, 253, 0.02)",
             border: "1px solid rgba(253, 253, 253, 0.08)",
@@ -264,7 +303,7 @@ export function CoreInfrastructure() {
         <div 
             className="infra-card infra-flex-row"
             style={{
-            gridColumn: "span 2",
+            gridColumn: "span 5",
             padding: "48px",
             background: "rgba(10, 61, 36, 0.35)",
             border: "1px solid rgba(178, 217, 59, 0.15)",
@@ -308,7 +347,7 @@ export function CoreInfrastructure() {
         <div 
             className="infra-card"
             style={{
-            gridColumn: "span 1",
+            gridColumn: "span 3",
             padding: "44px",
             background: "rgba(253, 253, 253, 0.02)",
             border: "1px solid rgba(253, 253, 253, 0.08)",
@@ -344,7 +383,7 @@ export function CoreInfrastructure() {
         <div 
             className="infra-card"
             style={{
-            gridColumn: "span 1",
+            gridColumn: "span 2",
             padding: "44px",
             background: "rgba(253, 253, 253, 0.02)",
             border: "1px solid rgba(253, 253, 253, 0.08)",
@@ -362,40 +401,8 @@ export function CoreInfrastructure() {
           </p>
         </div>
 
-        {/* Full width bottom bar — Cyber Security Aesthetics */}
-        <div 
-            className="security-annoucement-bar"
-            style={{
-            gridColumn: "span 4",
-            padding: "24px 48px",
-            background: "rgba(10, 61, 36, 0.7)",
-            border: "1px solid rgba(178, 217, 59, 0.3)",
-            borderRadius: "100px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "24px",
-            position: "relative",
-            overflow: "hidden",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.4)",
-            opacity: visible ? 1 : 0,
-            transform: visible ? "scale(1)" : "scale(0.95)",
-            transition: "all 1s cubic-bezier(0.2, 0.8, 0.2, 1) 1s",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "20px", position: "relative", zIndex: 1 }}>
-            <IconLock size={20} color="#b2d93b" />
-            <span style={{ fontSize: "14px", fontWeight: 900, color: "#b2d93b", textTransform: "uppercase", letterSpacing: "0.25em" }}>
-                <span style={{ opacity: 0.5 }}>VAULT STATUS:</span> MILITARY GRADE AES-256 ENCRYPTION ACTIVE
-            </span>
-          </div>
-          <div style={{ display: "flex", gap: "12px", position: "relative", zIndex: 1 }}>
-            <div style={{ width: "12px", height: "4px", background: "#b2d93b", borderRadius: "2px" }} />
-            <div style={{ width: "12px", height: "4px", background: "#b2d93b", borderRadius: "2px" }} />
-            <div style={{ width: "12px", height: "4px", background: "#b2d93b", borderRadius: "2px", opacity: 0.3 }} />
-          </div>
-          <div style={{ position: "absolute", top: 0, left: "-100%", width: "200%", height: "100%", background: "linear-gradient(90deg, transparent, rgba(178,217,59,0.05), transparent)", animation: "scan 4s linear infinite" }} />
-        </div>
-
+      {/* Full width bottom bar — Cyber Security Aesthetics */}
+      
       </div>
 
       <style>{`
@@ -425,16 +432,58 @@ export function CoreInfrastructure() {
             100% { transform: translateX(50%); }
         }
         @media (max-width: 1100px) {
-          .core-infra-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .infra-card, .standout-card, .security-annoucement-bar { grid-column: span 2 !important; }
+          .core-infra-grid { 
+            grid-template-columns: repeat(2, 1fr) !important; 
+            gap: 20px !important;
+          }
+          .infra-card, .standout-card, .security-annoucement-bar { 
+            grid-column: span 2 !important; 
+            padding: 40px !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .infra-stats-row { 
+            flex-direction: column; 
+            gap: 32px !important; 
+          }
+          .security-annoucement-bar {
+            padding: 24px !important;
+            border-radius: 40px !important;
+          }
+          .security-annoucement-bar span {
+            font-size: 11px !important;
+            letter-spacing: 0.15em !important;
+          }
         }
         @media (max-width: 640px) {
-          .core-infra-grid { grid-template-columns: 1fr !important; }
-          .infra-card, .standout-card, .security-annoucement-bar { grid-column: span 1 !important; padding: 40px 24px !important; }
-          .security-annoucement-bar { border-radius: 32px; flex-direction: column; gap: 20px; text-align: center; }
-          .infra-stats-row { flex-direction: column; gap: 32px !important; }
-          .infra-flex-row { flex-direction: column; gap: 40px !important; text-align: center; }
-          .infra-flex-row > div { width: 100%; display: flex; flex-direction: column; alignItems: center; }
+          .core-infra-grid { 
+            grid-template-columns: 1fr !important; 
+            gap: 16px !important;
+          }
+          .infra-card, .standout-card, .security-annoucement-bar { 
+            grid-column: span 1 !important; 
+            padding: 40px 24px !important; 
+          }
+          .security-annoucement-bar { 
+            border-radius: 32px; 
+            flex-direction: column; 
+            gap: 20px; 
+            text-align: center; 
+          }
+          .infra-flex-row { 
+            flex-direction: column; 
+            gap: 32px !important; 
+            text-align: center; 
+          }
+          .infra-flex-row > div { 
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+          }
+          .header-text-container p {
+            font-size: 17px !important;
+          }
         }
       `}</style>
     </section>

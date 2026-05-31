@@ -206,7 +206,9 @@ export function BusinessControl() {
                     background: "#0a2315"
                 }}
             >
-                <div style={{
+                <div 
+                    className="price-logs-header"
+                    style={{
                     background: "rgba(10,61,36,0.8)",
                     padding: "24px 32px",
                     borderBottom: "1px solid rgba(178,217,59,0.15)",
@@ -257,13 +259,17 @@ export function BusinessControl() {
                     box-shadow: 0 15px 40px rgba(178,217,59,0.5) !important;
                 }
                 @media (max-width: 1024px) {
-                    .mobile-grid-1 { grid-template-columns: 1fr !important; gap: 32px !important; }
+                    .mobile-grid-1 { grid-template-columns: 1fr !important; gap: 40px !important; }
+                    .mobile-grid-1 > div:first-child { text-align: center !important; }
+                    .mobile-grid-1 > div:first-child p { margin-left: auto !important; margin-right: auto !important; }
+                    .mobile-grid-1 > div:first-child div { justify-content: center !important; }
                 }
                 @media (max-width: 768px) {
-                    section { margin-top: 0 !important; margin-bottom: 80px !important; }
-                    .control-card { padding: 32px 24px !important; }
-                    .btn-glow-primary { width: 100%; justify-content: center; }
-                    button { width: 100%; margin-bottom: 12px; }
+                    section { margin-top: 0 !important; margin-bottom: 60px !important; }
+                    .control-card { padding: 32px 24px !important; border-radius: 24px !important; }
+                    button { width: 100% !important; margin-bottom: 0 !important; }
+                    .mobile-grid-1 div div { flex-direction: column !important; width: 100% !important; gap: 12px !important; }
+                    .price-logs-header { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
                 }
             `}</style>
         </section>
