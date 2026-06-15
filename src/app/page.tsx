@@ -9,7 +9,7 @@ import { GetStarted } from "@/components/GetStarted";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Cheetah — Sell smarter. Grow faster with Africa's No.1 Retail OS",
+  title: "Cheetah — First 100% FREE POS system built to protect margins and grow sales",
   description: "Cheetah is an AI-powered retail operating system offering POS, inventory management, bookkeeping, and demand forecasting for supermarkets, pharmacies, and restaurants in Nigeria, Kenya, South Africa, and Ghana.",
   alternates: {
     canonical: "https://usecheetah.com",

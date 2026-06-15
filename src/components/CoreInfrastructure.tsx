@@ -93,7 +93,7 @@ export function CoreInfrastructure() {
                   <IconBarChart size={20} color="#b2d93b" />
               </div>
               <span style={{ fontSize: "12px", fontWeight: 800, color: "rgba(178, 217, 59, 0.7)", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                Predictive AI Engine
+                Supplier Network
               </span>
             </div>
             <h3 style={{ 
@@ -102,15 +102,15 @@ export function CoreInfrastructure() {
               fontWeight: 800, color: "#fdfdfd", 
               marginBottom: "16px", lineHeight: 1.05, letterSpacing: "-0.04em"
             }}>
-              Advanced Analysis & <span style={{ color: "rgba(253,253,253,0.35)", fontWeight: 500, fontStyle: "italic" }}>AI Forecasting</span>
+              Direct Access to <span style={{ color: "rgba(253,253,253,0.35)", fontWeight: 500, fontStyle: "italic" }}>Manufacturer Pricing</span>
             </h3>
             <p style={{ fontSize: "16px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6, marginBottom: "32px" }}>
-              Cheetah AI anticipates demand cycles before they materialize — for supermarkets and pharmacies alike.
+              Skip the middlemen. Order directly from top manufacturers right from your POS and enjoy wholesale pricing.
             </p>
             <div style={{ display: "flex", gap: "48px" }}>
               <div>
-                <div style={{ fontSize: "36px", fontWeight: 800, color: "#00ff87", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>99.9%</div>
-                <div style={{ fontSize: "11px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "8px" }}>Accuracy</div>
+                <div style={{ fontSize: "36px", fontWeight: 800, color: "#00ff87", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>Direct</div>
+                <div style={{ fontSize: "11px", fontWeight: 800, color: "rgba(253,253,253,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "8px" }}>Connection</div>
               </div>
               <div>
                 <div style={{ fontSize: "36px", fontWeight: 800, color: "#a78bfa", fontFamily: "Syne, sans-serif", lineHeight: 1 }}>&lt;2s</div>
@@ -174,10 +174,10 @@ export function CoreInfrastructure() {
                 </div>
             </div>
             <h4 style={{ fontFamily: "Syne, sans-serif", fontSize: "28px", fontWeight: 800, color: "#fdfdfd", marginBottom: "16px", letterSpacing: "-0.04em" }}>
-              Eliminate Fraud
+              Protect Margins
             </h4>
             <p style={{ fontSize: "15px", color: "rgba(253,253,253,0.55)", lineHeight: 1.6, marginBottom: "32px" }}>
-              Zero-trust biometric verification and instant transaction auditing. Zero leakage policy across every terminal.
+              Real-time auditing and role-based permissions to ensure strict zero leakage policy across every terminal.
             </p>
 
             {/* Live Audit Stream Widget */}
@@ -191,7 +191,7 @@ export function CoreInfrastructure() {
                 gap: "12px"
             }}>
                 {[
-                    { label: "Biometric Verified", time: "Just now", status: "match" },
+                    { label: "Manager Override", time: "Just now", status: "match" },
                     { label: "Terminal 04 Audited", time: "2s ago", status: "match" },
                     { label: "Stock Reconciled", time: "14s ago", status: "match" }
                 ].map((audit, i) => (
@@ -397,7 +397,7 @@ export function CoreInfrastructure() {
             <span style={{ fontSize: "12px", fontWeight: 800, color: "#fdfdfd", textTransform: "uppercase", letterSpacing: "0.15em" }}>Logistics</span>
           </div>
           <p style={{ fontSize: "13px", fontWeight: 700, color: "rgba(253,253,253,0.45)", lineHeight: 1.6, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-            Native <span style={{ color: "#b2d93b" }}>GIG Logistics</span> node integration active for instant deliveries.
+            Direct <span style={{ color: "#b2d93b" }}>Stock Replenishment</span> integration active for instant wholesale deliveries.
           </p>
         </div>
 

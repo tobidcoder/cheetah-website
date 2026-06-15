@@ -40,6 +40,8 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           { icon: IconPackage, label: "Inventory Management", desc: "Know what's in stock", href: "/inventory-management" },
           { icon: IconTrendingDown, label: "Shrink Tracking", desc: "Track loss early", href: "/shrink-tracking" },
           { icon: IconBarChart, label: "Reporting & Insights", desc: "See what's working", href: "/reporting" },
+          { icon: IconBuilding, label: "Inventory Financing", desc: "Stock more, pay later", href: "/financing" },
+          { icon: IconShoppingBag, label: "B2B Marketplace", desc: "Source directly from brands", href: "/marketplace" },
         ],
       },
     ],

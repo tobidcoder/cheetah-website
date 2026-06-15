@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { logos } from "./Feedback";
 import { 
   IconReceipt, IconPackage, IconBarChart, IconGift, 
   IconClipboard, IconLock, IconWifi, IconCloud, IconUsers, 
@@ -162,60 +161,22 @@ export function Introduction() {
         zIndex: 1,
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         borderTop: "1px solid rgba(253,253,253,0.1)",
-        paddingTop: "40px",
-        flexWrap: "wrap",
-        gap: "40px"
+        paddingTop: "40px"
       }}>
-        <div className="trusted-text" style={{ maxWidth: "260px" }}>
-          <p style={{
-            fontSize: "15px",
-            color: "rgba(253, 253, 253, 0.6)",
-            lineHeight: 1.5,
-            fontWeight: 500
-          }}>
-            Trusted by leading independent grocers across the country
-          </p>
-        </div>
-
-        <div className="trusted-logos marquee-container" style={{
-          flex: 1,
-          overflow: "hidden",
-          position: "relative",
-          maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-          WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
+        <p style={{
+          fontSize: "16px",
+          color: "rgba(253, 253, 253, 0.7)",
+          lineHeight: 1.5,
+          fontWeight: 600,
+          textAlign: "center"
         }}>
-          <div className="marquee-content" style={{
-            display: "flex",
-            gap: "64px",
-            width: "max-content",
-            alignItems: "center"
-          }}>
-            {[...logos, ...logos].map((logo, index) => (
-              <div key={index} className="logo-item" style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "8px",
-                opacity: 0.5,
-                transition: "all 0.3s ease",
-                cursor: "default",
-                minWidth: "100px"
-              }}>
-                <div style={{ color: "#fdfdfd" }}>
-                  {logo.icon}
-                </div>
-                <span style={{ fontSize: "14px", color: "#fdfdfd", fontWeight: 700, textAlign: "center", letterSpacing: "-0.01em" }}>
-                  {logo.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+          Powering 5,000+ independent grocers and pharmacies across West & East Africa
+        </p>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(24px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -269,7 +230,7 @@ export function Introduction() {
           .trusted-text { max-width: 100% !important; margin: 0 auto !important; }
           .trusted-logos { justify-content: center !important; gap: 24px !important; }
         }
-      `}</style>
+      `}} />
     </section>
 
     {/* ── 100% FREE Value Proposition Section ── */}
@@ -295,11 +256,11 @@ export function Introduction() {
             <h2 style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(42px, 6vw, 84px)", fontWeight: 800, color: "#fdfdfd", letterSpacing: "-0.05em", lineHeight: 0.92, margin: "0 auto 32px", maxWidth: "900px" }}>
               No subscriptions.<br />
               <span style={{ background: "linear-gradient(135deg, #b2d93b, #00ff87)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>No setup fees.</span><br />
-              <span style={{ color: "rgba(253,253,253,0.28)", fontStyle: "italic", fontWeight: 500 }}>No catch. Ever.</span>
             </h2>
             <p style={{ fontSize: "clamp(17px, 2vw, 21px)", color: "rgba(253,253,253,0.55)", maxWidth: "680px", margin: "0 auto", lineHeight: 1.65 }}>
-              While other POS systems charge $150–$600/year, Cheetah gives every African small business the same enterprise-grade tools —{" "}
-              <h3><strong style={{ color: "#b2d93b" }}>completely free, forever.</strong></h3>
+              While other POS systems charge $150–$600/year, Cheetah gives you enterprise-grade tools completely free. 
+              <br/><br/>
+              <strong style={{ color: "#b2d93b" }}>Why? Because we partner directly with suppliers to bring you better prices and stock financing.</strong>
             </p>
           </div>
         </ScrollReveal>
@@ -310,7 +271,7 @@ export function Introduction() {
             {/* Competitors column */}
             <div style={{ background: "rgba(255,60,60,0.05)", border: "1px solid rgba(255,80,80,0.18)", borderRadius: "32px", padding: "40px 32px" }}>
               <p style={{ fontSize: "11px", fontWeight: 900, color: "rgba(255,100,100,0.6)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "28px", display: "flex", alignItems: "center", gap: "6px" }}>
-                <IconX size={12} color="#ff6060" strokeWidth={3} /> Other POS Systems
+                <IconX size={12} color="#ff6060" strokeWidth={3} /> Legacy POS (NCR, Toast)
               </p>
               {[
                 ["Monthly Subscription", "$25+/mo"],
@@ -421,11 +382,20 @@ export function Introduction() {
         {(() => {
           const sections = [
             {
-              label: "Grow Sales",
-              headline: "Deliver an experience shoppers come back for",
-              body: "Sales growth comes from repeat visits and bigger baskets. Cheetah helps you create the kind of store experience that earns both — with loyalty programmes, smart promotions, and real-time insights.",
-              cta: "Bring Shoppers Back",
-              tags: ["POS", "Customer Loyalty", "Reporting & Insights"],
+              label: "Supplier Network",
+              headline: "Direct access to manufacturer pricing",
+              body: "Skip the middlemen. Cheetah connects you directly to major manufacturers so you can restock at better wholesale prices. Lower your COGS and instantly improve your margins on every item sold.",
+              cta: "Order Directly",
+              tags: ["Wholesale Network", "Lower COGS", "Better Margins"],
+              image: "https://plus.unsplash.com/premium_photo-1664300137035-d5f2d3d54cd3?w=900&auto=format&fit=crop&q=60",
+              accent: "#a78bfa",
+            },
+            {
+              label: "Stock Financing",
+              headline: "Stock more shelves without cash strain",
+              body: "Don't let a lack of upfront cash hold back your sales. Cheetah uses your POS sales history to unlock direct inventory financing, so you can buy more stock and pay later.",
+              cta: "Access Capital",
+              tags: ["Inventory Credit", "Flexible Terms", "Zero Cash Strain"],
               image: "https://images.unsplash.com/photo-1739303987882-230db3156099?w=900&auto=format&fit=crop&q=60",
               accent: "#b2d93b",
             },
@@ -434,7 +404,7 @@ export function Introduction() {
               headline: "Stop margin leaks before they add up",
               body: "Dollar by dollar, losses slip through pricing errors, spoilage, and staff theft. Cheetah catches every leak early, before it quietly eats into your profit.",
               cta: "Protect Your Margins",
-              tags: ["Pricing Automation", "Order Management", "Reporting & Insights"],
+              tags: ["Pricing Automation", "Fraud Audits", "Reporting & Insights"],
               image: "https://images.unsplash.com/photo-1739300293398-468ba82fd418?w=900&auto=format&fit=crop&q=60",
               accent: "#f4a261",
             },
@@ -443,18 +413,9 @@ export function Introduction() {
               headline: "Get more done with the same team",
               body: "Labor is tight. Time is even tighter. Cheetah helps your team spend less time on manual work and more time with customers — through automation, scan-and-go receiving, and smart task routing.",
               cta: "Maximize Every Hour",
-              tags: ["Order Management", "Inventory Management", "Reporting & Insights"],
+              tags: ["Offline Sync", "Inventory Management", "Quick Checkout"],
               image: "https://plus.unsplash.com/premium_photo-1661380997331-2ec5dfb769b7?w=900&auto=format&fit=crop&q=60",
               accent: "#60c6f0",
-            },
-            {
-              label: "Expand Market",
-              headline: "Launch new locations with confidence",
-              body: "When your store runs on a strong foundation, expansion becomes inevitable. Cheetah standardises your operations so growth doesn’t multiply stress — just revenue.",
-              cta: "Build What’s Next",
-              tags: ["Multi-Branch Sync", "Cloud Backup", "The full Cheetah system"],
-              image: "https://plus.unsplash.com/premium_photo-1664300137035-d5f2d3d54cd3?w=900&auto=format&fit=crop&q=60",
-              accent: "#a78bfa",
             },
           ];
 
@@ -547,7 +508,7 @@ export function Introduction() {
         })()}
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes pulse-free-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.5; transform: scale(0.75); }
@@ -608,7 +569,7 @@ export function Introduction() {
             .free-pill { padding: 10px 18px !important; }
             .free-cta-btn { padding: 18px 32px !important; font-size: 17px !important; width: 100%; justify-content: center !important; }
         }
-      `}</style>
+      `}} />
     </section>
 
     {/* ── Sticky Mobile CTA Bar ── */}

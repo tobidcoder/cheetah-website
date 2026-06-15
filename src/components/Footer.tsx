@@ -42,6 +42,8 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
       { label: "Inventory Management", href: "/inventory-management" },
       { label: "Shrink Tracking", href: "/shrink-tracking" },
       { label: "Reporting & Insights", href: "/reporting" },
+      { label: "Inventory Financing", href: "/financing" },
+      { label: "B2B Marketplace", href: "/marketplace" },
     ],
   },
   {

@@ -4,30 +4,30 @@ import { IconBox, IconTrendingUp, IconDollarSign, IconZap } from "@/components/I
 
 const stats = [
   {
-    value: "80%",
-    label: "Less Stockouts",
-    description: "Guarantee product availability through AI-powered forecasting.",
+    value: "0%",
+    label: "Upfront Capital",
+    description: "Access inventory financing based directly on your POS sales history.",
     icon: <IconBox size={24} />,
     color: "#b2d93b",
   },
   {
-    value: "20%",
-    label: "Sell-Through Increase",
-    description: "Minimize overstock while maximizing full-price sales.",
+    value: "Direct",
+    label: "Supplier Access",
+    description: "Skip the middlemen and order directly from major manufacturers.",
     icon: <IconTrendingUp size={24} />,
     color: "#00ff87",
   },
   {
-    value: "+35%",
-    label: "Revenue Growth",
-    description: "Increase revenue by seizing more sales opportunities.",
+    value: "24hr",
+    label: "Credit Approval",
+    description: "Get approved for stock credit lines within 24 hours of consistent POS use.",
     icon: <IconDollarSign size={24} />,
     color: "#b2d93b",
   },
   {
-    value: "10x",
-    label: "ROI",
-    description: "Revamp your inventory strategy to achieve outstanding ROI.",
+    value: "100%",
+    label: "Margin Protection",
+    description: "Stop pricing leaks and staff theft with zero-trust role-based permissions.",
     icon: <IconZap size={24} />,
     color: "#c8e85f",
   },
@@ -80,7 +80,7 @@ export function Benefits() {
             Real results. <span style={{ color: "rgba(253,253,253,0.4)", fontStyle: "italic", fontWeight: 500 }}>Real retailers.</span>
           </h2>
           <p style={{ color: "rgba(253,253,253,0.65)", fontSize: "18px", maxWidth: "560px", lineHeight: 1.5 }}>
-            AI-driven forecasting delivering measurable ROI from day one.
+            Direct supplier pricing and flexible inventory financing from day one.
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { IconBarChart, IconTarget, IconUsers, IconClipboard, IconCpu } from "@/components/Icons";
+import { IconBarChart, IconTarget, IconUsers, IconClipboard, IconCpu, IconBox, IconDollarSign } from "@/components/Icons";
 
 const features = [
   {
@@ -14,21 +14,21 @@ const features = [
     accent: "#b2d93b"
   },
   {
-    title: "Sales Pipeline Tracking",
-    description: "Monitor and optimize your sales pipeline with powerful end-to-end visibility.",
+    title: "Supplier Network",
+    description: "Order directly from major manufacturers without leaving your POS. Secure wholesale pricing and protect your margins.",
     image: "/images/sales.png",
     span: "auto / span 1",
-    icon: <IconTarget size={20} />,
-    tag: "Sales",
+    icon: <IconBox size={20} />,
+    tag: "Sourcing",
     accent: "#00ff87"
   },
   {
-    title: "Customer Management",
-    description: "Centralize every customer interaction, preference, and history in one place.",
+    title: "Stock Financing",
+    description: "Access instant inventory credit lines based on your Cheetah POS sales history. Stock up without draining cash.",
     image: "/images/customers.png",
     span: "auto / span 1",
-    icon: <IconUsers size={20} />,
-    tag: "CRM",
+    icon: <IconDollarSign size={20} />,
+    tag: "Capital",
     accent: "#60c6f0"
   },
   {

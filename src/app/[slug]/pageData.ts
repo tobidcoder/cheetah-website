@@ -285,6 +285,66 @@ export const pageRegistry: Record<string, PageData> = {
       { q: "Can these reports be exported?", a: "Yes, you can export any report into Excel, CSV, or print-ready PDF formats with one tap." }
     ]
   },
+  financing: {
+    slug: "financing",
+    type: "product",
+    tag: "GROWTH & CAPITAL",
+    title: "Inventory Financing & Supplier Network — Cheetah Retail OS",
+    metaDesc: "Connect directly with suppliers for better margins and access inventory financing to scale your supermarket or pharmacy without cash strain.",
+    heading: "Stock more. Pay later. Grow faster.",
+    subheading: "Cheetah isn't just a POS. We connect you directly to major manufacturers for better wholesale prices and provide the inventory financing you need to keep your shelves full.",
+    heroMedia: { type: "image", url: "https://images.unsplash.com/photo-1739300293398-468ba82fd418?w=900&auto=format&fit=crop&q=60" },
+    stats: [
+      { value: "0%", label: "Upfront capital required for stock" },
+      { value: "Direct", label: "Manufacturer pricing" },
+      { value: "24hr", label: "Approval based on POS sales" }
+    ],
+    features: [
+      { icon: "building", title: "Direct Supplier Network", desc: "Order directly from manufacturers through your POS. Eliminate middlemen and protect your margins with wholesale pricing." },
+      { icon: "creditcard", title: "Inventory Financing", desc: "Get access to credit lines based on your actual sales data. Stock up for peak seasons without draining your cash flow." },
+      { icon: "package", title: "Automated Restocking", desc: "When stock runs low, Cheetah automatically generates purchase orders to your approved suppliers. Just approve and receive." }
+    ],
+    testimonial: {
+      quote: "The ability to order stock on credit directly through Cheetah changed my business. I can stock up for the holidays without emptying my bank account, and the direct supplier prices mean my margins are better than ever.",
+      author: "Chinedu Okafor",
+      role: "Owner, Prime Choice Supermarket",
+      image: "https://plus.unsplash.com/premium_photo-1664300137035-d5f2d3d54cd3?w=300&auto=format&fit=crop&q=60"
+    },
+    faqs: [
+      { q: "How do I qualify for inventory financing?", a: "Qualification is based on your sales history within the Cheetah POS. The more you use Cheetah to process transactions, the larger the credit line you can access." },
+      { q: "Which suppliers are in the network?", a: "We partner with major FMCG manufacturers and distributors across Nigeria, Kenya, South Africa, and Ghana. The list is constantly growing." }
+    ]
+  },
+  marketplace: {
+    slug: "marketplace",
+    type: "product",
+    tag: "SUPPLIER NETWORK",
+    title: "B2B Marketplace & Direct Manufacturer Access — Cheetah",
+    metaDesc: "Bypass middlemen and source inventory directly from major FMCG manufacturers at the best wholesale prices on the Cheetah B2B Marketplace.",
+    heading: "Source directly from the manufacturer",
+    subheading: "Stop overpaying for inventory. The Cheetah Marketplace connects your store directly to verified distributors and major FMCG brands for seamless ordering and better margins.",
+    heroMedia: { type: "image", url: "https://plus.unsplash.com/premium_photo-1661380997331-2ec5dfb769b7?w=900&auto=format&fit=crop&q=60" },
+    stats: [
+      { value: "100%", label: "Direct manufacturer pricing" },
+      { value: "1,000+", label: "Verified distributors" },
+      { value: "Next-day", label: "Average delivery time" }
+    ],
+    features: [
+      { icon: "shoppingcart", title: "Unified Ordering Dashboard", desc: "Browse thousands of SKUs from multiple suppliers and build a single, unified purchase order in minutes." },
+      { icon: "trendingup", title: "Transparent Pricing Matrices", desc: "See the exact wholesale price and instantly calculate your retail margin before confirming any order." },
+      { icon: "truck", title: "Automated Logistics Tracking", desc: "Track your incoming stock deliveries in real-time, from the distributor's warehouse to your store's back door." }
+    ],
+    testimonial: {
+      quote: "Before the Cheetah Marketplace, I had to negotiate with five different middlemen just to stock my shelves. Now, I order directly from the brands and my margins have improved by over 12%.",
+      author: "Grace Mwangi",
+      role: "Director, Apex Wholesalers",
+      image: "https://plus.unsplash.com/premium_photo-1661380997331-2ec5dfb769b7?w=300&auto=format&fit=crop&q=60"
+    },
+    faqs: [
+      { q: "Is the marketplace available in my region?", a: "We are currently connecting retailers with distributors in major metropolitan areas across Nigeria, Kenya, and South Africa, with more regions opening soon." },
+      { q: "Can I use my inventory financing on the marketplace?", a: "Yes. Any approved credit lines from Cheetah can be applied directly to purchases made on the B2B Marketplace at checkout." }
+    ]
+  },
 
   // ─── SOLUTIONS BY GOAL ───
   "grow-sales": {

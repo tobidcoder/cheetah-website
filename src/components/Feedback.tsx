@@ -4,32 +4,6 @@ import { IconStore, IconShoppingCart, IconBuilding, IconShoppingBag, IconSparkle
 
 const testimonials = [
   {
-    initials: "TA",
-    name: "Tunde Adeola",
-    role: "Co-founder",
-    company: "COMPRAMART",
-    location: "Lagos, Nigeria",
-    category: "Multi-Branch Supermarket",
-    stars: 5,
-    stat: "80% fewer stockouts",
-    color: "#b2d93b",
-    quote:
-      "Before Cheetah, tracking stock across all our branches was a full-time job,and we still got it wrong half the time. Stockouts on peak weekends were killing us. Now, with the AI forecasting, we reorder before we even feel the pressure. Our customers notice it. Our team breathes easier.",
-  },
-  {
-    initials: "OA",
-    name: "Olumide Adeoye",
-    role: "Director",
-    company: "YOUMART",
-    location: "Lagos & Abeokuta",
-    category: "Supermarket Chain",
-    stars: 5,
-    stat: "+28% sell-through rate",
-    color: "#00ff87",
-    quote:
-      "The moment I could see all my YOUMART branches in one dashboard,live,was the moment everything changed. We caught three discrepancies that weekend alone. The audit logs are unbeatable. We've reduced staff-related losses by over 40% since onboarding Cheetah. That alone justified the investment.",
-  },
-  {
     initials: "BV",
     name: "Bassay Victoria",
     role: "Owner",
@@ -71,8 +45,6 @@ const testimonials = [
 ];
 
 export const logos = [
-  { name: "COMPRAMART", icon: <IconStore size={18} />,        type: "Lagos" },
-  { name: "YOUMART",            icon: <IconShoppingCart size={18} />,  type: "Lagos & Abeokuta" },
   { name: "Market Square",             icon: <IconBuilding size={18} />,      type: "Lagos" },
   { name: "Grand Square",              icon: <IconBuilding size={18} />,      type: "Abuja" },
   { name: "Addide Stores",             icon: <IconShoppingBag size={18} />,   type: "Lagos" },
